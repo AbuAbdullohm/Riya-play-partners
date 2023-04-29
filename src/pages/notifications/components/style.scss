@@ -1,0 +1,25 @@
+.notification-view {
+	&-inner {
+		font-size: 15px;
+		&_info {
+			margin-top: 10px;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			background-color: #f7fafc;
+			padding: 10px;
+			font-weight: bold;
+			font-size: 16px;
+		}
+	}
+}
+
+html.dark {
+	.notification-view {
+		&-inner {
+			&_info {
+				border: 1px solid #ccc;
+				background-color: transparent;
+			}
+		}
+	}
+}

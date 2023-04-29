@@ -1,0 +1,124 @@
+.newDataPicker {
+	position: relative;
+	width: 100%;
+	min-width: 220px;
+	border-radius: 4px;
+	// border: 1px solid #ccc;
+	input {
+		padding: 0.5rem 0.75rem;
+		width: 100%;
+		outline: none;
+		border-radius: 4px;
+		border-width: 1px;
+		&:focus {
+			outline: 2px solid transparent;
+			outline-offset: 2px;
+			box-shadow: 0 0 0 1.2px rgb(38, 132, 255);
+		}
+	}
+
+	.react-datepicker {
+		box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+		border: none;
+
+		.react-datepicker__triangle {
+			&::after {
+				left: -12px;
+			}
+			&::before {
+				left: -12px;
+			}
+		}
+
+		button {
+			outline: none;
+		}
+
+		.react-datepicker__navigation--previous {
+			outline: none;
+			.react-datepicker__navigation-icon--previous {
+			}
+		}
+		.react-datepicker__today-button {
+			background-color: #1d5d90;
+			color: #fff;
+			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: 4px;
+		}
+
+		.react-datepicker__month-container {
+			.newDataPicker_inner {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+				margin: 3px 0;
+				button {
+					padding: 3px 7px;
+					border-radius: 50%;
+					outline: none;
+					font-size: 20px;
+				}
+
+				select {
+					padding: 4px 7px;
+					border-radius: 5px;
+				}
+			}
+			.react-datepicker__header {
+				.react-datepicker__current-month--hasMonthDropdown {
+					margin-bottom: 5px;
+					position: relative;
+					color: transparent !important;
+				}
+				.react-datepicker__header__dropdown--select {
+					position: absolute;
+
+					top: 7px;
+					left: 38px;
+					.react-datepicker__month-dropdown-container--select {
+						.react-datepicker__month-select {
+							border-radius: 5px;
+							padding: 3px 5px;
+						}
+					}
+
+					.react-datepicker__year-dropdown-container--select {
+						.react-datepicker__year-select {
+							padding: 3px 5px;
+							border-radius: 5px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.react-datepicker-wrapper {
+		.react-datepicker__input-container {
+			.react-datepicker__close-icon {
+				display: none;
+			}
+		}
+	}
+}
+
+html.dark {
+	.newDataPicker {
+		width: 100%;
+		input {
+			background-color: #232a3b;
+		}
+	}
+	.react-datepicker__day--disabled {
+		color: rgb(172, 169, 169) !important;
+	}
+}
+
+.datepickerClose {
+	position: absolute;
+	right: 20px;
+	top: 8px;
+	cursor: pointer;
+	padding: 1px 5px;
+	font-size: 20px;
+}

@@ -1,0 +1,360 @@
+foreignObject {
+	display: none;
+}
+.title_header {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 32px;
+}
+
+.dashboard_title {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 20px;
+	color: #8f95b2;
+	margin-top: 16px;
+}
+.dashboard_result {
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 32px;
+	margin-top: 8px;
+	color: #081735;
+}
+
+.dashboard_table {
+	height: 200px;
+	overflow: auto;
+	// width: 100%;
+	min-width: 255px;
+	border-radius: 24px;
+	padding: 10px 10px;
+	box-shadow: 0px 8px 28px rgba(24, 39, 75, 0.12);
+	.table {
+		tbody {
+			tr {
+				// &:not(:last-child) {
+				// 	border-bottom: 1px solid red;
+				// }
+
+				& ~ tr {
+					border-top: 1px solid #e5e5e5;
+				}
+				td {
+					width: 150px;
+					font-style: normal;
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 14px;
+					color: #081735;
+					&:first-child {
+						width: 190px;
+						display: flex;
+						align-items: center;
+						.contact {
+							display: flex;
+							&_inner {
+								display: flex;
+								flex-direction: column;
+								justify-content: space-around;
+							}
+						}
+					}
+
+					.span {
+						background-color: #aab3ce;
+						width: 15px;
+						height: 15px;
+						border-radius: 50%;
+						margin-right: 5px;
+					}
+					.blue {
+						background-color: #3f8cff;
+					}
+					.pie {
+						background-color: #8263cc;
+					}
+					.orange {
+						background-color: #eda430;
+					}
+					.green {
+						background-color: #147d43;
+					}
+					.brown {
+						background-color: rgb(165, 42, 42);
+					}
+
+					.lightInfo {
+						background-color: rgb(132, 197, 178);
+					}
+					.blue2 {
+						background-color: rgb(23, 56, 243);
+					}
+					.darkbluedark {
+						background-color: #2b4285;
+					}
+					.violet {
+						background-color: #bc75d0;
+					}
+					.greenWhite {
+						background-color: #0df721;
+					}
+					.orangeWhite {
+						background-color: #ffd000;
+					}
+
+					.payme {
+						background-color: #33cccc;
+					}
+					.apelsin {
+						background-color: #f25f2e;
+					}
+					.paynet {
+						background-color: #00b427;
+					}
+					.click {
+						background-color: #3f8cff;
+					}
+					.apelsin_frame {
+						background-color: #83190b;
+					}
+				}
+			}
+		}
+	}
+}
+
+.dashboard {
+	padding: 20px 0;
+	overflow-x: auto;
+	&_header {
+		display: flex;
+		justify-content: space-between;
+
+		&_right {
+			form {
+				.newDataPicker {
+					width: 250px;
+				}
+			}
+		}
+	}
+
+	&_main {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-template-rows: auto auto;
+		gap: 10px;
+		overflow: auto;
+		&_left {
+			z-index: 1;
+			&_card {
+				display: grid;
+				gap: 10px;
+				grid-template-columns: auto auto;
+				grid-template-rows: auto auto;
+
+				.dashboard_cardBox {
+					max-height: 164px;
+					border-radius: 24px;
+					min-width: 210px;
+				}
+			}
+			&_table {
+				border-radius: 24px;
+
+				.preview {
+					.dashboard_table {
+						height: 265px;
+						box-shadow: none;
+						.table {
+							tbody {
+								tr {
+									td {
+										&:first-child {
+											padding: 0.75rem;
+											// width: 180px;
+										}
+										&:last-child {
+											text-align: right;
+											font-size: 12px;
+											color: green;
+										}
+										padding: 0.75rem;
+
+										// width: 270px;
+										.contact {
+											&_inner {
+												margin-left: 5px;
+												&_id {
+													font-style: normal;
+													font-weight: 600;
+													font-size: 12px;
+													line-height: 24px;
+													color: #040415;
+												}
+												.dashboard_title {
+													margin: 0;
+												}
+											}
+										}
+										&.dashboard_time {
+											font-size: 12px;
+											text-align: center;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		&_right {
+			height: 340px;
+			border-radius: 24px;
+			&.payment_info {
+				height: 335px;
+				.preview {
+					.payment_info_inner {
+						&_header {
+							&_title {
+								margin-top: 0;
+							}
+							&_summ {
+								font-style: normal;
+								font-weight: 700;
+								font-size: 24px;
+								line-height: 32px;
+								color: #081735;
+								margin-bottom: 10px;
+							}
+						}
+
+						.dashboard_table {
+							height: 190px;
+							.table {
+								tbody {
+									tr {
+										td {
+											// &:first-child {
+											// 	width: 150px;
+											// }
+											&.text-green {
+												color: #83bf6e;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			&.rates_payment_info {
+				.rates_payment_info_inner {
+					&_header {
+						&_title {
+							margin-top: 0;
+						}
+						&_summ {
+							font-style: normal;
+							font-weight: 700;
+							font-size: 24px;
+							line-height: 32px;
+							color: #081735;
+							margin-bottom: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// body {
+// 	min-width: 1200px;
+// }
+
+html.dark {
+	.dashboard {
+		&_main {
+			&_left {
+				.dashboard_main_left_table {
+					.dashboard_table {
+						.table {
+							tbody {
+								tr {
+									td {
+										color: #fff;
+										&:first-child {
+											.contact {
+												&_inner {
+													&_id {
+														color: #fff;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				&_card {
+					.dashboard_cardBox {
+						.dashboard_result {
+							color: #fff;
+						}
+					}
+				}
+			}
+			&_right {
+				.dashboard_table {
+					box-shadow: 0 2px 15px #ccc;
+					.table {
+						tbody {
+							tr {
+								td {
+									color: #fff;
+								}
+							}
+						}
+					}
+				}
+				&.payment_info {
+					.payment_info_inner {
+						&_header {
+							&_summ {
+								color: #fff;
+							}
+						}
+					}
+				}
+
+				.rates_payment_info_inner_header_summ {
+					color: #fff;
+				}
+			}
+		}
+	}
+}
+
+#dashboard_table::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+#dashboard_table::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+#dashboard_table::-webkit-scrollbar-thumb {
+	border-radius: 60px;
+	background: #bcc3d5;
+}

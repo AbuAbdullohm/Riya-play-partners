@@ -1,0 +1,568 @@
+$white: #fff;
+$white-darker: rgba(247, 249, 250, 1);
+$lightblue: rgba(30, 114, 231, 0.6);
+$dark: #000;
+$lightdark: rgba(23, 31, 38, 0.7);
+$red: rgba(255, 0, 0, 1);
+
+input:disabled {
+	background-color: #e0e0e0;
+}
+
+.maskInput {
+	//General
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+		position: relative;
+		flex: 1;
+
+		//Input styles
+		.form-inputarea {
+			position: relative;
+			display: flex;
+			width: 100%;
+			border-radius: 8px;
+
+			&.error {
+				box-shadow: 0 0 1px 1px $red;
+				animation: errorAnimation 0.3s linear 2;
+			}
+
+			input[type="email"] {
+				padding-right: 40px;
+			}
+		}
+
+		.form-input {
+			background: #ffffff;
+			border: 1px solid #e1e1e1;
+			border-radius: 0.375rem;
+			padding: 8px 12px;
+			font-family: "Manrope", sans-serif;
+			font-style: normal;
+			font-weight: 500;
+			// font-size: 15px;
+			// line-height: 18px;
+			// color: #000000;
+			width: 100%;
+
+			// &:hover,
+			// &:focus {
+			// 	border: 1px solid orange;
+			// 	background-color: #fff !important;
+			// }
+
+			// &:disabled {
+			// 	background-color: #e0e0e0 !important;
+			// }
+
+			// &::placeholder {
+			// 	color: #00000030;
+			// }
+
+			// &__checked {
+			// background-color: $white-darker;
+			// }
+
+			&__big {
+				padding: 20px;
+			}
+
+			&__small {
+				padding: 11px 20px;
+			}
+
+			&__error {
+				animation: errorAnimation 0.3s 2;
+				box-shadow: 0 0 0px 1px $red;
+			}
+
+			// &__bordered {
+			// 	border: 1px solid rgba(23, 31, 38, 0.2);
+			// }
+
+			&.--touched {
+				// background-color: #f7f9fa;
+
+				&.white {
+					background-color: #fff;
+				}
+			}
+		}
+
+		//Textarea styles
+		.form-textarea {
+			width: 100%;
+			border-radius: 8px;
+			min-height: 100px;
+			padding: 10px 20px;
+			resize: none;
+			outline: none;
+			line-height: 24px;
+			font-size: 18px;
+			font-family: "Poppins", sans-serif;
+			transition: border 0.2s, box-shadow 0.2s;
+			border: none;
+			font-weight: 600;
+
+			// &.border {
+			// 	border: 1px solid rgba(23, 31, 38, 0.2);
+			// }
+
+			// &:focus {
+			// 	box-shadow: 0 0 2px 2px $lightblue;
+			// 	border: 1px solid transparent;
+			// 	background-color: #fff !important;
+			// }
+
+			&:disabled {
+				background-color: #e0e0e0;
+			}
+
+			&::placeholder {
+				line-height: 24px;
+				color: rgba(23, 31, 38, 0.4);
+				font-size: 18px;
+				font-weight: 500;
+				font-family: "Poppins", sans-serif;
+			}
+
+			// &__checked {
+			// background-color: $white-darker;
+			// }
+
+			&__big {
+				padding: 20px;
+			}
+
+			&__small {
+				padding: 10px 20px;
+			}
+
+			&.error {
+				animation: errorAnimation 0.3s 2;
+				box-shadow: 0 0 1px 1px $red;
+			}
+
+			&.--touched {
+				background-color: #f7f9fa;
+				border: none;
+
+				&.white {
+					background-color: #fff;
+				}
+			}
+		}
+
+		//Label Styles
+		// .form-label {
+		// 	margin-bottom: 6px;
+		// 	font-family: "Manrope", sans-serif;
+		// 	font-style: normal;
+		// 	font-weight: 500;
+		// 	font-size: 18px;
+		// 	line-height: 150%;
+		// 	color: #000000;
+		// 	opacity: 0.6;
+		// }
+
+		//Require star
+		.form-require {
+			position: absolute;
+			top: 0;
+			right: -10px;
+			color: $red;
+		}
+
+		//Input extra data
+		.form-extra {
+			font-size: 18px;
+			color: $lightdark;
+			position: absolute;
+			right: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+			pointer-events: none;
+		}
+
+		//Form Error
+		.form-error {
+			position: absolute;
+			top: 104%;
+			left: 0;
+			// font-size: 16px;
+			color: $red;
+			line-height: 15px;
+		}
+
+		//Form checker
+		.form-check {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 20px;
+			pointer-events: none;
+		}
+
+		//Input tooltip
+		.form-tooltip {
+			position: absolute;
+			top: -32px;
+			right: 0;
+			bottom: 100%;
+			width: 100%;
+			min-height: 50px;
+
+			img:hover + .form-tooltip__content {
+				visibility: visible;
+				transform: scale(1);
+			}
+
+			&__content:hover {
+				visibility: visible;
+				transform: scale(1);
+			}
+
+			img {
+				position: absolute;
+				right: 0;
+				top: 50%;
+				width: 30px;
+				transition: all 0.2s;
+				cursor: pointer;
+			}
+
+			&__content {
+				z-index: 10;
+				position: absolute;
+				bottom: 0;
+				border-radius: 10px;
+				padding: 15px;
+				background-color: #f58a17f2;
+				visibility: hidden;
+				transform: scale(0);
+				transition: all 0.2s;
+			}
+		}
+	}
+
+	@keyframes errorAnimation {
+		0% {
+			transform: translateX(0);
+		}
+		25% {
+			transform: translateX(-3px);
+		}
+		50% {
+			transform: translateX(0);
+		}
+		75% {
+			transform: translateX(3px);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+
+	//Simple select
+	.simple-select {
+		flex: 1;
+		position: relative;
+
+		.form-label {
+			font-family: "Manrope", sans-serif;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 150%;
+			color: #000000;
+			opacity: 0.6;
+			display: block;
+			margin-bottom: 6px;
+		}
+
+		.form-require {
+			position: absolute;
+			top: 0;
+			right: -10px;
+			color: red;
+		}
+
+		&__error {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			color: red;
+		}
+	}
+
+	.day-picker {
+		&-small {
+			.DayPickerInput {
+				height: 42px;
+			}
+		}
+
+		&-normal {
+			.DayPickerInput {
+				height: 63px;
+			}
+		}
+
+		&__container {
+			position: relative;
+
+			// input {
+			// &.border {
+			// }
+			// }
+		}
+
+		&__img {
+			position: absolute;
+			top: 50%;
+			right: 15px;
+			transform: translateY(-50%);
+			pointer-events: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.form-group {
+			.form-label {
+				font-weight: 500;
+				font-size: 14px;
+			}
+
+			.form-inputarea {
+				input {
+					padding: 12px;
+					font-size: 14px;
+					line-height: 18px;
+
+					&::placeholder {
+						font-size: 14px;
+						font-family: "Poppins", sans-serif;
+					}
+				}
+			}
+
+			.form-error {
+				font-size: 12px;
+				top: 100%;
+			}
+
+			.form-input {
+				font-size: 14px;
+
+				&__big {
+					padding: 12px;
+
+					&::placeholder {
+						font-size: 14px;
+						font-family: "Poppins", sans-serif;
+					}
+				}
+			}
+
+			.form-textarea {
+				font-size: 14px;
+				padding: 10px 16px;
+				line-height: 14px;
+
+				&::placeholder {
+					font-size: 14px;
+					line-height: 14px;
+					font-family: "Poppins", sans-serif;
+				}
+			}
+		}
+
+		.simple-select {
+			.form-label {
+				margin-bottom: 5px;
+				font-size: 14px;
+			}
+		}
+
+		.form-one__checkbox {
+			margin-bottom: 10px;
+
+			input {
+				height: 15px !important;
+				width: 15px !important;
+
+				&:checked::before {
+					width: 80% !important;
+				}
+			}
+
+			span {
+				font-size: 13px;
+			}
+		}
+
+		.DayPickerInput {
+			input {
+				padding: 16px;
+				font-size: 14px;
+
+				&::placeholder {
+					color: rgba(23, 31, 38, 0.4);
+					font-family: "Poppins", sans-serif;
+				}
+			}
+		}
+
+		.day-picker {
+			&__container {
+				width: 100%;
+			}
+
+			&-small {
+				.DayPickerInput {
+					height: 40px;
+				}
+			}
+
+			&-normal {
+				.DayPickerInput {
+					height: 45px;
+				}
+			}
+
+			&__img {
+				width: 15px;
+			}
+		}
+
+		.simple-select__error {
+			font-size: 12px;
+		}
+
+		.currency__definition {
+			font-size: 14px;
+		}
+	}
+
+	.react-datepicker {
+		* {
+			font-family: "Poppins", sans-serif;
+		}
+
+		select,
+		option {
+			outline: none;
+			border-radius: 5px !important;
+		}
+
+		&__header {
+			background-color: #fff;
+		}
+
+		&__today-button {
+			background-color: #fff;
+		}
+	}
+
+	.react-datepicker-wrapper {
+		.react-datepicker__input-container {
+			input {
+				height: 100%;
+				width: 100%;
+				border-radius: 8px;
+				outline: none;
+				padding: 20px;
+				font-size: 18px;
+				border: none;
+
+				&::placeholder {
+					font-family: "Poppins", sans-serif;
+					color: rgba(23, 31, 38, 0.4);
+				}
+
+				&.small {
+					height: 50px;
+				}
+
+				&.normal {
+					height: 63px;
+				}
+
+				// &.border {
+				// 	border: 1px solid rgba(23, 31, 38, 0.2);
+				// }
+			}
+		}
+
+		&__container {
+			position: relative;
+		}
+
+		&__img {
+			position: absolute;
+			top: 50%;
+			right: 15px;
+			transform: translateY(-50%);
+			pointer-events: none;
+		}
+	}
+}
+.react-datepicker__next,
+.react-datepicker__prev {
+	padding: 5px;
+	background-color: transparent;
+	// border: 1px solid rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s;
+
+	&:active {
+		opacity: 0.6;
+	}
+}
+
+.react-datepicker__prev {
+	margin-right: 5px;
+}
+
+.react-datepicker__next {
+	margin-left: 5px;
+}
+
+.form-group.has-error .form-input__bordered {
+	border: none;
+}
+
+.z-index-99 {
+	z-index: 99999999;
+}
+
+.border-r-5 {
+	border-radius: 5px !important;
+	overflow: hidden;
+}
+
+html.dark {
+	.maskInput {
+		.form-input__normal {
+			background-color: #232a3b;
+			border-color: #232a3b;
+			&::-webkit-input-placeholder {
+				color: #9fadbf;
+			}
+
+			&:focus {
+				outline: #365ea4;
+			}
+		}
+	}
+}

@@ -1,0 +1,150 @@
+@mixin styleText {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 16px;
+}
+
+@mixin spanStyle {
+	margin-left: 6px;
+	background: #33383f;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	// display: inline-block;
+	color: #fff;
+	text-align: center;
+}
+
+.total {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 28px;
+	line-height: 34px;
+	letter-spacing: -0.03em;
+	color: #1a1d1f;
+	@media (max-width: 991px) {
+		font-size: 23px;
+	}
+}
+
+.bugalterIcon {
+	margin-bottom: 16px;
+}
+
+.bugalter {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	gap: 20px;
+
+	@media (max-width: 1199px) {
+		grid-template-columns: auto auto auto;
+	}
+
+	.bugalter-box {
+		border-radius: 12px;
+		padding: 32px;
+		@media (max-width: 991px) {
+			padding: 25px;
+		}
+		&.color1 {
+			background: rgba(202, 189, 255, 0.25);
+		}
+		&.color2 {
+			background: rgba(177, 229, 252, 0.25);
+		}
+
+		&.color3 {
+			background: rgba(255, 188, 153, 0.25);
+		}
+
+		&.color4 {
+			padding: 20px 32px;
+			background: rgba(181, 228, 202, 0.25);
+		}
+
+		&_1 {
+			display: flex;
+			align-items: center;
+			@include styleText;
+			.bugalter-box_span {
+				@include spanStyle;
+			}
+		}
+		&_2 {
+			display: flex;
+			align-items: center;
+			@include styleText;
+			.bugalter-box_span {
+				@include spanStyle;
+			}
+		}
+		&_3 {
+			display: flex;
+			align-items: center;
+			@include styleText;
+			.bugalter-box_span {
+				@include spanStyle;
+			}
+		}
+		&_4 {
+			display: flex;
+			align-items: center;
+			font-style: normal;
+			font-weight: 600;
+			font-size: 20px;
+			margin-bottom: 15px;
+			line-height: 32px;
+			.bugalter-box_span4 {
+				width: 17px;
+				height: 36px;
+				margin-right: 16px;
+				background: #b5e4ca;
+				border-radius: 4px;
+			}
+			&_card {
+				display: flex;
+				margin-bottom: 10px;
+				justify-content: space-between;
+				align-items: center;
+
+				&_p1 {
+					color: #83bf6e;
+					font-style: normal;
+					font-weight: 700;
+					font-size: 13.73px;
+					line-height: 15px;
+				}
+				&_p2 {
+					font-style: normal;
+					font-weight: 600;
+					font-size: 13.73px;
+					line-height: 22px;
+				}
+
+				&_img {
+					width: 100px;
+				}
+			}
+		}
+	}
+}
+
+.viewDate {
+	display: inline-block;
+	padding: 8px 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	font-weight: 600;
+	font-size: 13px;
+	background: rgba(177, 229, 252, 0.25);
+}
+
+html.dark {
+	.total {
+		color: #fff;
+	}
+}
