@@ -174,30 +174,6 @@ const List = ({ history, location }) => {
 												render: value => <>{value}</>
 											},
 											{
-												title: t("Фото"),
-												dataIndex: "files",
-												className: "text-center",
-												render: value => (
-													<div className="flex justify-center">
-														<Avatar src={get(value, "[0].thumbnails.small.src")} />
-													</div>
-												)
-											},
-											{
-												title: t("Логин"),
-												dataIndex: "username",
-												render: (value, row) => (
-													<>
-														{row.is_provider === 1 && (
-															<Tag color={"blue"} className={"ml-10"}>
-																{get(row, "	.title", "-")}
-															</Tag>
-														)}
-													</>
-												)
-											},
-
-											{
 												title: t("Полное имя"),
 												dataIndex: "full_name",
 												render: value => <>{value && value}</>
@@ -246,26 +222,6 @@ const List = ({ history, location }) => {
 											// 		return <>{value ? helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
 											// 	}
 											// },
-											{
-												title: t("Завершение тарифа"),
-												dataIndex: "subscribe_date",
-												render: value => {
-													return <>{value ? helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
-												}
-											},
-
-											{
-												title: t("Завершение бан"),
-												dataIndex: "banned",
-												render: value => {
-													return (
-														<>
-															{value ? helpers.formatDate(get(value, "banned_until") * 1000, "DD.MM.YYYY / HH:mm:ss") : "Нет бан"}
-														</>
-													);
-												}
-											},
-
 											{
 												className: "w-5",
 												render: (_, row) => {
