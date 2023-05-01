@@ -2,7 +2,7 @@ import React from "react";
 import ContactUser from "assets/images/icons/icons-dashboard/contact.svg";
 import payme from "assets/images/payme.svg";
 import paynet from "assets/images/paynet.svg";
-import apelsin from "assets/images/apelsin.svg";
+import apelsin from "assets/images/uzum.svg";
 import click from "assets/images/icons/icons-dashboard/click.svg";
 import { Icon } from "components";
 export default function Table({

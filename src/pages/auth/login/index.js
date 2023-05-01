@@ -112,9 +112,6 @@ const Login = ({ history }) => {
 								www.bektv.uz
 							</a>
 						</div>
-						<a href="https://oks.uz/" rel="noreferrer noopener" target="_blank" className="oks-name">
-							Система разработан агентсвой технологии и дизайна
-						</a>
 					</div>
 				</Grid.Row>
 			</div>

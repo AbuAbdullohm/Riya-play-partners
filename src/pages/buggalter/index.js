@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 
 import Payme from "assets/images/payme.svg";
 import Paynet from "assets/images/paynet.svg";
-import Apelsin from "assets/images/apelsin.svg";
+import Apelsin from "assets/images/uzum.svg";
 import Bektv from "assets/images/bektv.svg";
 import click from "assets/images/icons/icons-dashboard/click.svg";
 

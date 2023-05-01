@@ -69,10 +69,6 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 	return (
 		<nav className="side-nav">
 			<div className="side-nav__header">
-				<a href="http://oks.uz/" target="_blank" rel="noopener noreferrer" className="-intro-x hidden md:flex items-center">
-					<img className="w-8" src={logoImage} alt="OKS" />
-					<span className="logo-text text-white ml-2">TECHNOLOGIES</span>
-				</a>
 				{/* <div className="intro-x dropdown">
 					<div className="dropdown-toggle notification notification--bullet cursor-pointer">
 						<Icon

@@ -23,6 +23,7 @@ const SeriesCreate = lazy(() => import("./pages/series/create"));
 const SeriesUpdate = lazy(() => import("./pages/series/update"));
 
 const Users = lazy(() => import("./pages/users"));
+const User = lazy(() => import("./pages/user"));
 // const UsersCreate = lazy(() => import("./pages/users/create"));
 const UsersUpdate = lazy(() => import("./pages/users/update"));
 
@@ -136,6 +137,7 @@ const routes = [
 	{ path: "/settings/update/:id", exact: true, component: SettingsUpdate, access: ["super_admin", "admin", "moderator"] },
 
 	{ path: "/users", exact: true, component: Users, access: ["super_admin", "admin", "moderator"] },
+	{ path: "/user/:id", exact: true, component: User, access: ["super_admin", "admin", "moderator"] },
 	// { path: "/users/create", exact: true, component: UsersCreate, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/users/update/:id", exact: true, component: UsersUpdate, access: ["super_admin", "admin", "moderator"] },
 

@@ -8,7 +8,7 @@ import Icon2 from "assets/images/icon2.svg";
 import Icon3 from "assets/images/icon3.svg";
 
 import Payme from "assets/images/payme.svg";
-import Apelsin from "assets/images/apelsin.svg";
+import Apelsin from "assets/images/uzum.svg";
 import Paynet from "assets/images/paynet.svg";
 import Click from "assets/images/icons/icons-dashboard/click.svg";
 import moment from "moment";
@@ -125,7 +125,9 @@ export default function BugalterComponent({ items, params }) {
 							</p>
 						</div>
 						<div className="bugalter-box_4_card">
-							<img src={Apelsin} alt="" />
+							<div className="bugalter-box_4_card_img">
+								<img src={Apelsin} alt="" />
+							</div>
 
 							<p className="bugalter-box_4_card_p2">
 								{Number(apelsin).toLocaleString("en-US", {

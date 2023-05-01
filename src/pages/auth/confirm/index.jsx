@@ -15,6 +15,7 @@ const Confirm = ({ history }) => {
 	const { t } = useTranslation();
 	const { notification } = useNotification();
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		document.body.className = "logins";
 
@@ -115,9 +116,6 @@ const Confirm = ({ history }) => {
 								www.bektv.uz
 							</a>
 						</div>
-						<a href="https://oks.uz/" rel="noreferrer noopener" target="_blank" className="oks-name">
-							Система разработан агентсвой технологии и дизайна
-						</a>
 					</div>
 				</Grid.Row>
 			</div>

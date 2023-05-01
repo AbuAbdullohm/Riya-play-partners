@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import CreateTag from "./create-tag";
 import { helpers } from "services";
+
 const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", handleSubmit }) => {
 	const { t } = useTranslation();
 	const [createModal, setCreateModal] = useState(false);
@@ -124,6 +125,18 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 									filter: { status: 1 }
 								};
 							}}
+						/>
+						<Field
+							component={Fields.Input}
+							disabled
+							name="kinopoisk_id"
+							type="number"
+							min="0"
+							step="1"
+							onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+							label={t("Кинопоиск ид")}
+							placeholder={t("Кинопоиск ид")}
+							size="large"
 						/>
 					</Panel>
 				</Grid.Column>
