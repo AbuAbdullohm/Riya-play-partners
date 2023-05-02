@@ -60,7 +60,7 @@ export const menu = [
 		access: ["admin", "super_admin"]
 	},
 
-	{ id: "posts", title: "Новости", link: "/posts", icon: "layers", lang: true, access: ["admin", "super_admin"] },
+	{ id: "posts", title: "Новости", link: "/posts", icon: "layers", lang: true, access: ["admin", "super_admin", "redactor"] },
 	// { id: "advertising", title: "Рекламы", link: "/advertising", icon: "pocket", lang: false, access: ["admin"] },
 	{ id: "pages", title: "Страницы", link: "/pages", icon: "link", lang: true, access: ["super_admin"] },
 	{ id: "notifications", title: "Уведомление", link: "/notifications", icon: "bell", lang: false, access: ["super_admin", "admin"] },

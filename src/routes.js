@@ -108,6 +108,7 @@ const VersionUpdate = lazy(() => import("./pages/version/update"));
 
 const Dashboard = lazy(() => import("./pages/dashboard2"));
 // const Dashboard2 = lazy(() => import("./pages/dashboard2"));
+const NotFound = lazy(() => import("./pages/not-found"));
 
 const routes = [
 	{ path: "/", exact: true, component: Dashboard, access: ["super_admin"] },
@@ -123,7 +124,7 @@ const routes = [
 	{ path: "/advertising/create", exact: true, component: AdvertisingCreate, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/advertising/update/:id", exact: true, component: AdvertisingUpdate, access: ["super_admin", "admin", "moderator"] },
 
-	{ path: "/posts", exact: true, component: Posts, access: ["super_admin", "admin", "moderator"] },
+	{ path: "/posts", exact: true, component: Posts, access: ["super_admin", "admin", "moderator", "redactor"] },
 	{ path: "/posts/create", exact: true, component: PostsCreate, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/posts/update/:id", exact: true, component: PostsUpdate, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/logout", exact: true, component: Logout, access: ["super_admin", "admin", "moderator", "bookkeeping", "redactor"] },
@@ -211,11 +212,12 @@ const routes = [
 	{ path: "/version/create", exact: true, component: VersionCreate, access: ["super_admin", "admin"] },
 	{ path: "/version/update/:id", exact: true, component: VersionUpdate, access: ["super_admin", "admin"] },
 
-	{ path: "/dashboard", exact: true, component: Dashboard, access: ["super_admin"] }
+	{ path: "/dashboard", exact: true, component: Dashboard, access: ["super_admin"] },
 	// { path: "/dashboard2", exact: true, component: Dashboard2, access: ["super_admin", "admin"] }
 
 	// { path: "/notifications/create", exact: true, component: NotificationsCreate },
 	// { path: "/notifications/update/:notification_id", exact: true, component: NotificationsUpdate }
+	{ path: "/404", exact: true, component: NotFound, access: ["super_admin", "admin", "bookkeeping", "redactor", "moderator"] }
 ];
 
 const super_admin = routes.filter(route => route.access.includes("super_admin"));
@@ -243,7 +245,7 @@ export default () => (
 								{getRole(get(data, "role", "moderator")).map((route, key) => (
 									<Route key={key} exact={route.exact} component={route.component} path={route.path} />
 								))}
-								{/* <Redirect to="/" /> */}
+								<Redirect to="/404" />
 							</Switch>
 						</Suspense>
 					</Layout>
