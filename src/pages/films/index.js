@@ -128,6 +128,7 @@ const List = ({ history, location }) => {
 					include: "files,company,type,genres,categories,seasons,actors",
 					extra: {
 						category_id: params.category_id,
+						company_id: params.company_id,
 						name: params.name,
 						start: (params.start || []).length > 0 ? params.start[0] : null,
 						end: (params.start || []).length > 0 ? params.start[1] : null,

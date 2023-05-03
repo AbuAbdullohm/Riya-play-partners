@@ -3,18 +3,28 @@ import { Fields, Grid, Panel, Button, Modal, Icon } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
-import CreateTag from "./create-tag";
 import { helpers, api, queryBuilder } from "services";
+
+import CreateTag from "./create-tag";
+import CreateCompany from "./create-company";
+
 const { debounce } = helpers;
 
 const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", handleSubmit, errors, setErrors }) => {
 	const { t } = useTranslation();
 	const [createModal, setCreateModal] = useState(false);
+	const [createCompanyModal, setCreateCompanyModal] = useState(false);
 
 	const createTag = e => {
 		e.preventDefault();
 		e.stopPropagation();
 		setCreateModal(prev => !prev);
+	};
+
+	const createCompany = e => {
+		e.preventDefault();
+		e.stopPropagation();
+		setCreateCompanyModal(prev => !prev);
 	};
 
 	function checkId(e) {
@@ -26,7 +36,6 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 				async () => {
 					const { data } = await api["requestv2"].get(
 						queryBuilder("/films", {
-							page: 1,
 							extra: {
 								kinopoisk_id: value
 							}
@@ -49,6 +58,10 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 		<>
 			<Modal.Default header="Добавить" toggle={createModal} setToggle={setCreateModal}>
 				<CreateTag {...{ setCreateModal }} />
+			</Modal.Default>
+
+			<Modal.Default header="Добавить" toggle={createCompanyModal} setToggle={setCreateCompanyModal}>
+				<CreateCompany setModal={setCreateCompanyModal} />
 			</Modal.Default>
 
 			<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
@@ -225,6 +238,36 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 								};
 							}}
 						/>
+						<div className="films-form-tag">
+							{!createCompanyModal && (
+								<Field
+									component={Fields.AsyncSelect}
+									name="company_id"
+									placeholder={t("Выберите компания")}
+									label={t("Компания")}
+									isClearable
+									isSearchable
+									hasMore
+									loadOptionsUrl="/company"
+									className="mb-24 mr-2"
+									optionLabel={`title`}
+									loadOptionsParams={search => {
+										return {
+											extra: { title: search }
+										};
+									}}
+								/>
+							)}
+							<Button.Outline
+								type="success"
+								buttonType="button"
+								size="sm"
+								style={{ width: createCompanyModal ? "100%" : "auto" }}
+								onClick={e => createCompany(e)}>
+								<Icon name="plus" />
+							</Button.Outline>
+						</div>
+
 						<Field
 							component={Fields.AsyncSelect}
 							name="categories"

@@ -116,6 +116,12 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => (value ? value.id : null)
 				},
 				{
+					name: "company_id",
+					required: true,
+					type: "object",
+					onSubmitValue: value => (value ? value.id : null)
+				},
+				{
 					name: "foreign_status",
 					value: true,
 					onSubmitValue: value => (value ? 1 : 0)

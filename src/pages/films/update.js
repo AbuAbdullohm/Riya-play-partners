@@ -212,6 +212,13 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => (value ? value.id : null)
 								},
 								{
+									name: "company_id",
+									required: true,
+									type: "object",
+									value: get(item, "company"),
+									onSubmitValue: value => (value ? value.id : null)
+								},
+								{
 									name: "maker_id",
 									type: "object",
 									required: false,

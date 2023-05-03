@@ -8,8 +8,10 @@ import { Fields, Grid, Button } from "components";
 import EntityActions from "modules/entity/actions";
 import { get } from "lodash";
 import { helpers } from "services";
+
 const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) => {
 	const dispatch = useDispatch();
+
 	const clearForm = () => {
 		setFilter(false);
 		history.push({
@@ -33,6 +35,7 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 			})
 		);
 	};
+
 	const loadInvoicesActors = id => {
 		dispatch(
 			EntityActions.LoadDefault.request({
@@ -49,6 +52,22 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 			})
 		);
 	};
+	const loadInvoicesCompany = id => {
+		dispatch(
+			EntityActions.LoadDefault.request({
+				url: `/company/${id}`,
+				params: {
+					filter: { type: 1 }
+				},
+				cb: {
+					success: data => {
+						setFieldValue("company_id", data);
+					},
+					error: error => console.log("error", error)
+				}
+			})
+		);
+	};
 
 	useEffect(() => {
 		if (values.category_id) {
@@ -56,6 +75,9 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 		}
 		if (values.actor_id) {
 			loadInvoicesActors(values.actor_id.id);
+		}
+		if (values.company_id) {
+			loadInvoicesCompany(values.company_id.id);
 		}
 	}, []);
 
@@ -113,6 +135,26 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 							filter: { type: 1 },
 							extra: { name }
 						})}
+					/>
+				</Grid.Column>
+				<Grid.Column xs={12} lg={12} xl={12}>
+					<Field
+						component={Fields.AsyncSelect}
+						name="company_id"
+						placeholder={t("Выберите компания")}
+						label={t("Компания")}
+						isClearable
+						isSearchable
+						hasMore
+						loadOptionsUrl="/company"
+						className="mb-24 mr-2"
+						optionLabel={`title`}
+						loadOptionsParams={search => {
+							return {
+								filter: { status: 1 },
+								extra: { title: search }
+							};
+						}}
 					/>
 				</Grid.Column>
 
@@ -251,6 +293,12 @@ const EnhancedForm = withFormik({
 					[`title_ru`]: params.category_id.split("/")[1]
 			  }
 			: null;
+		const company_id = params.company_id
+			? {
+					id: params.company_id.split("/")[0],
+					[`title`]: params.company_id.split("/")[1]
+			  }
+			: null;
 
 		const actor_id = params.actor_id
 			? {
@@ -265,6 +313,7 @@ const EnhancedForm = withFormik({
 			name: params.name || "",
 			id: params.id || "",
 			category_id,
+			company_id,
 			actor_id,
 			recommended: params.recommended || "",
 			paid: params.paid || "",
@@ -283,6 +332,7 @@ const EnhancedForm = withFormik({
 			...values,
 			id: values.id ? values.id : "",
 			category_id: values.category_id ? values.category_id.id : "",
+			company_id: values.company_id ? values.company_id.id : "",
 			actor_id: values.actor_id ? values.actor_id.id : "",
 			enabled_watermark: values.enabled_watermark === true ? 1 : "",
 			recommended: values.recommended === true ? 1 : "",
