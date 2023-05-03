@@ -70,7 +70,7 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=development react-scripts start",
 		"build": "cross-env NODE_ENV=production react-scripts build",
-		"build-develop": "cp ./.env.development .env && cross-env NODE_ENV=production CI=false react-scripts build",
+		"build-develop": "cp ./.env.develop .env && cross-env NODE_ENV=production CI=false react-scripts build",
 		"build-master": "cp ./.env.master .env && cross-env NODE_ENV=production CI=false react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"test-coverage": "react-scripts test --env=jsdom --coverage"
@@ -86,6 +86,7 @@
 		"@types/lodash": "^4.14.170",
 		"@types/node": "^15.12.2",
 		"@types/react-daterange-picker": "^2.0.4",
+		"@types/react-i18next": "^8.1.0",
 		"@typescript-eslint/parser": "^4.28.0",
 		"axios-mock-adapter": "^1.16.0",
 		"cross-env": "^5.2.0",

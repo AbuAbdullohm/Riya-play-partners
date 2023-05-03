@@ -2,7 +2,6 @@ import React, { FC, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import logoImage from "assets/images/logo.svg";
 import { menu } from "./menu";
 import { get } from "lodash";
 import Icon from "components/Icon";
@@ -40,7 +39,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 	const { isVisible, setIsVisible, ref } = useOutsideClick();
 	const dispatch = useDispatch();
 
-	const toggleSubmenu = (id: string) => {
+	const toggleSubmenu = (id: any) => {
 		if (id === isVisible) {
 			setIsVisible(null);
 		} else {
@@ -80,7 +79,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 			</div>
 
 			<ul className="mt-10" ref={ref}>
-				{getAccess(get(user, "role", "moderator")).map((m: object, i: number) => {
+				{getAccess(get(user, "role", "moderator")).map((m: any, i: number) => {
 					if (get(m, "submenu")) {
 						return (
 							<li key={get(m, "id")}>
@@ -98,7 +97,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 									</div>
 								</div>
 								<ul className={isVisible === get(m, "id") ? "side-menu__sub-open" : ""}>
-									{get(m, "submenu", []).map((sm: object) => (
+									{get(m, "submenu", []).map((sm: any) => (
 										<li key={get(sm, "id")}>
 											<NavLink
 												key={get(sm, "id")}
