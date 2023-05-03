@@ -33,9 +33,29 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 			})
 		);
 	};
+	const loadInvoicesActors = id => {
+		dispatch(
+			EntityActions.LoadDefault.request({
+				url: `/actors/${id}`,
+				params: {
+					filter: { type: 1 }
+				},
+				cb: {
+					success: data => {
+						setFieldValue("actor_id", data);
+					},
+					error: error => console.log("error", error)
+				}
+			})
+		);
+	};
+
 	useEffect(() => {
 		if (values.category_id) {
 			loadInvoices(values.category_id.id);
+		}
+		if (values.actor_id) {
+			loadInvoicesActors(values.actor_id.id);
 		}
 	}, []);
 
@@ -75,6 +95,24 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 						onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
 						placeholder="Поиск по ID"
 						label="ID"
+					/>
+				</Grid.Column>
+				<Grid.Column xs={12} lg={12} xl={12}>
+					<Field
+						component={Fields.AsyncSelect}
+						name="actor_id"
+						placeholder={t("Выберите актер")}
+						label={t("Актеры")}
+						isClearable={true}
+						isSearchable={true}
+						optionValue="id"
+						loadOptionsUrl="/actors"
+						className="mb-24"
+						optionLabel={`name_ru`}
+						loadOptionsParams={name => ({
+							filter: { type: 1 },
+							extra: { name }
+						})}
 					/>
 				</Grid.Column>
 
@@ -213,12 +251,21 @@ const EnhancedForm = withFormik({
 					[`title_ru`]: params.category_id.split("/")[1]
 			  }
 			: null;
+
+		const actor_id = params.actor_id
+			? {
+					id: params.actor_id.split("/")[0],
+					["name_ru"]: params.actor_id.split("/")[1]
+			  }
+			: null;
+
 		return {
 			type: params.type || "",
 			year: params.year || "",
 			name: params.name || "",
 			id: params.id || "",
 			category_id,
+			actor_id,
 			recommended: params.recommended || "",
 			paid: params.paid || "",
 			status: params.status || "",
@@ -236,6 +283,7 @@ const EnhancedForm = withFormik({
 			...values,
 			id: values.id ? values.id : "",
 			category_id: values.category_id ? values.category_id.id : "",
+			actor_id: values.actor_id ? values.actor_id.id : "",
 			enabled_watermark: values.enabled_watermark === true ? 1 : "",
 			recommended: values.recommended === true ? 1 : "",
 			foreign_user_can_view: values.foreign_user_can_view === true ? 1 : "",

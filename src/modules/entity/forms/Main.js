@@ -10,9 +10,9 @@ import PropTypes from "prop-types";
 // import { notification } from "antd";
 import Actions from "../actions";
 
-const Main = ({ children, handleSubmit, submitForm, values, errors, isSubmitting, setFieldValue, setFieldError, setFieldTouched, validateForm }) => (
+const Main = ({ children, handleSubmit, submitForm, values, errors, isSubmitting, setFieldValue, setFieldError, setErrors, setFieldTouched, validateForm }) => (
 	<form onSubmit={handleSubmit} autoComplete={"false"}>
-		{children({ handleSubmit, submitForm, values, isSubmitting, setFieldValue, setFieldError, setFieldTouched, errors, validateForm })}
+		{children({ handleSubmit, submitForm, values, isSubmitting, setFieldValue, setFieldError, setErrors, setFieldTouched, errors, validateForm })}
 	</form>
 );
 

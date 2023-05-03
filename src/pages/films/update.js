@@ -219,6 +219,14 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => (value ? value.id : null)
 								},
 								{
+									name: "kinopoisk_id",
+									type: "string",
+									required: true,
+									min: 4,
+									value: get(item, "kinopoisk_id"),
+									onSubmitValue: value => value
+								},
+								{
 									name: "gallery",
 									required: false,
 									value: Array.isArray(get(item, "gallery")) ? get(item, "gallery") : [],
@@ -304,18 +312,21 @@ const Update = ({ location, history }) => {
 								// extra: {_l: tabLang},
 								include: "translations,files,categories,year,actors,tags,genres,types,gallery,season"
 							}}>
-							{({ isSubmitting, values, setFieldValue, handleSubmit, errors }) => {
+							{({ isSubmitting, values, setFieldValue, handleSubmit, setFieldError, errors, setErrors }) => {
 								setSeriesValue(values);
 								return (
 									<>
 										<Form
 											{...{
+												setFieldError,
 												isFetched,
 												values,
 												setFieldValue,
 												isSubmitting,
 												isUpdate: true,
-												handleSubmit
+												handleSubmit,
+												errors,
+												setErrors
 											}}
 										/>
 									</>
@@ -363,7 +374,7 @@ const Update = ({ location, history }) => {
 									include: "translations,files,film,season,track",
 									page: page || 1
 								}}>
-								{({ items, isFetched, meta }) => (
+								{({ items, isFetched, meta, setFieldError }) => (
 									<>
 										<Header title="Серии" buttonName="Добавить" buttonClick={() => showCreateModal(true)} meta={meta}></Header>
 										<Table

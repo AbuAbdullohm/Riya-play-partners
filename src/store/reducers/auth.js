@@ -8,6 +8,7 @@ const initialState = {
 	isAuthenticated: !!token,
 	data: {},
 	token: ""
+	// token: "JWEOoc6STR0VPKZsWruK4txN6cRMbLo9" // for dev
 };
 
 export default (state = initialState, action) => {

@@ -4,9 +4,10 @@ import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import CreateTag from "./create-tag";
-import { helpers } from "services";
+import { helpers, api, queryBuilder } from "services";
+const { debounce } = helpers;
 
-const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", handleSubmit }) => {
+const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", handleSubmit, errors, setErrors }) => {
 	const { t } = useTranslation();
 	const [createModal, setCreateModal] = useState(false);
 
@@ -15,6 +16,34 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 		e.stopPropagation();
 		setCreateModal(prev => !prev);
 	};
+
+	function checkId(e) {
+		const value = e.target.value;
+		setFieldValue("kinopoisk_id", value);
+
+		if (value.length > 3) {
+			debounce(
+				async () => {
+					const { data } = await api["requestv2"].get(
+						queryBuilder("/films", {
+							page: 1,
+							extra: {
+								kinopoisk_id: value
+							}
+						})
+					);
+					if (data.data && data.data.length > 0) {
+						setErrors({ ...errors, kinopoisk_id: "Этот ИД уже был" });
+						setTimeout(() => {
+							setFieldValue("kinopoisk_id", "");
+						}, 2000);
+					}
+				},
+				"fetch",
+				1000
+			);
+		}
+	}
 
 	return (
 		<>
@@ -126,17 +155,15 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 								};
 							}}
 						/>
+
 						<Field
 							component={Fields.Input}
-							disabled
-							name="kinopoisk_id"
-							type="number"
-							min="0"
-							step="1"
-							onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
-							label={t("Кинопоиск ид")}
 							placeholder={t("Кинопоиск ид")}
 							size="large"
+							name="kinopoisk_id"
+							label={t("Кинопоиск ид")}
+							className="mb-24"
+							onChange={e => checkId(e)}
 						/>
 					</Panel>
 				</Grid.Column>

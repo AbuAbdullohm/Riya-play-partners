@@ -102,6 +102,13 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => (value ? value.id : null)
 				},
 				{
+					name: "kinopoisk_id",
+					type: "string",
+					min: 4,
+					required: true,
+					onSubmitValue: value => value
+				},
+				{
 					name: "country_id",
 					value: [],
 					required: true,
@@ -167,14 +174,14 @@ const Create = ({ history, location }) => {
 			params={{
 				include: "files,actors,tags,categories,genres,type,season"
 			}}>
-			{({ values, setFieldValue, handleSubmit }) => {
+			{({ values, setFieldValue, handleSubmit, setFieldError, errors, setErrors }) => {
 				return (
 					<Fragment>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
 							Создание фильма
 						</Typography.Heading>
 
-						<Form {...{ values, setFieldValue, isFetched: true, handleSubmit }} lang={lang} />
+						<Form {...{ values, setFieldValue, isFetched: true, handleSubmit, setFieldError, errors, setErrors }} lang={lang} />
 					</Fragment>
 				);
 			}}
