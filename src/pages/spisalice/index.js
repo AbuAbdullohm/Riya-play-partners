@@ -10,6 +10,7 @@ import { useNotification } from "hooks";
 import { Table, Pagination, Header, Tag, Avatar, Button, Icon, Modal } from "components";
 import Filter from "./components/filter";
 import DownloadXls from "./downloadXls";
+import DevicesModal from "./components/devicesModal";
 const List = ({ history, location }) => {
 	const { downloadFile } = useSelector(state => state.system);
 
@@ -23,6 +24,8 @@ const List = ({ history, location }) => {
 	const [filter, setFilter] = useState(false);
 	const [canUpdate, setCanUpdate] = useState(false);
 	const [infoModal, setInfoModal] = useState(false);
+	const [devicesModal, setDevicesModal] = useState(false);
+
 	const onChange = page => {
 		const search = { ...params, page: page + 1 };
 
@@ -64,6 +67,10 @@ const List = ({ history, location }) => {
 
 	return (
 		<>
+			<Modal.Default size="md" toggle={devicesModal} setToggle={setDevicesModal}>
+				<DevicesModal modal={devicesModal} setModal={setDevicesModal} />
+			</Modal.Default>
+
 			<Modal.Default size="md" toggle={infoModal} setToggle={setInfoModal}>
 				{infoModal && (
 					<div className="font-bold text-center">
@@ -71,6 +78,7 @@ const List = ({ history, location }) => {
 					</div>
 				)}
 			</Modal.Default>
+
 			<EntityContainer.All
 				entity="user"
 				name="user"
@@ -206,6 +214,20 @@ const List = ({ history, location }) => {
 														tooltip={t("Неактивный")}
 														onClick={() => unBanHandler(get(row, "id"), "deactivate")}>
 														<Icon name="power" />
+													</Button.Outline>
+												);
+											}
+										},
+										{
+											className: "w-5",
+											render: (_, row) => {
+												return (
+													<Button.Outline
+														onClick={() => setDevicesModal(row)}
+														className="status-btn"
+														type="success"
+														tooltip={t("Устройства")}>
+														<Icon name="smartphone" />
 													</Button.Outline>
 												);
 											}
