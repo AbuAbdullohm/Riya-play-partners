@@ -104,7 +104,8 @@ export const menu = [
 				lang: false,
 				access: ["admin", "moderator", "super_admin"]
 			},
-			{ id: "translation", title: "Переводы", link: "/translation", icon: "menu", lang: false }
+			{ id: "translation", title: "Переводы", link: "/translation", icon: "menu", lang: false },
+			{ id: "tasix", title: "TAS-IX", link: "/tas-ix", icon: "globe", lang: false, access: ["admin", "super_admin"] }
 		]
 	}
 ];

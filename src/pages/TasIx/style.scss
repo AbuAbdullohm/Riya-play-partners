@@ -1,0 +1,37 @@
+.formik-input {
+	display: flex;
+	gap: 20px;
+	justify-content: space-around;
+
+	input {
+		margin-top: 5px;
+	}
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	label {
+		font-weight: 600;
+	}
+	.reklamaBtn {
+		margin-top: 25px;
+		padding: 10px 20px;
+		border: 1px solid #ccc;
+		display: inline-block;
+	}
+}
+
+.reklamaSettingsBtn {
+	margin-top: 25px;
+	width: 100px;
+	height: 40px;
+}
+.reklamaIcon {
+	width: 40px;
+	margin-right: 10px;
+}
+.reklamaVideo {
+	width: 300px;
+	height: 300px;
+}
