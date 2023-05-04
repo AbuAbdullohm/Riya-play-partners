@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 
 const ErrorPage = () => {
 	const history = useHistory();

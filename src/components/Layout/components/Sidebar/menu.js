@@ -105,7 +105,8 @@ export const menu = [
 				access: ["admin", "moderator", "super_admin"]
 			},
 			{ id: "translation", title: "Переводы", link: "/translation", icon: "menu", lang: false },
-			{ id: "tasix", title: "TAS-IX", link: "/tas-ix", icon: "globe", lang: false, access: ["admin", "super_admin"] }
+			{ id: "tasix", title: "TAS-IX", link: "/tas-ix", icon: "globe", lang: false, access: ["admin", "super_admin"] },
+			{ id: "company", title: "Компании", link: "/company", icon: "menu", lang: false, access: ["admin", "super_admin"] }
 		]
 	}
 ];

@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { Table, Pagination, Modal, Header, Tag, Spinner } from "components";
 import EntityContainer from "modules/entity/containers";
-import "./style.scss";
 import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import qs from "query-string";
 import { useNotification } from "hooks";
-import TasIxCreateModal from "./components/TasIxCreateModal";
+import CompanyCreateModal from "./components/CompanyCreateModal";
 
-const List = ({ history, location }) => {
+const Company = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const List = ({ history, location }) => {
 
 	const { notification } = useNotification();
 	const [modal, setModal] = useState(false);
-	const [tasIxModal, setTasIxModal] = useState(false);
+	const [companyModal, setCompanyModal] = useState(false);
 	const [selected, setSelected] = useState();
 	const [loadingDelete, setLoadingDelete] = useState(false);
 
@@ -32,11 +31,11 @@ const List = ({ history, location }) => {
 		dispatch(
 			Actions.Form.request({
 				method: "delete",
-				entity: "tasix",
-				name: `tasix`,
+				entity: "company",
+				name: `company`,
 				id: id,
-				version: "v3",
-				url: `/tasix/${id}`,
+				version: "v1",
+				url: `/company/${id}`,
 				deleteData: true,
 				primaryKey: "id",
 				cb: {
@@ -70,8 +69,8 @@ const List = ({ history, location }) => {
 
 	return (
 		<>
-			<Modal.Default key={"tasix-modal"} toggle={tasIxModal} setToggle={setTasIxModal}>
-				<TasIxCreateModal modal={tasIxModal} setModal={setTasIxModal} />
+			<Modal.Default key={"tasix-modal"} toggle={companyModal} setToggle={setCompanyModal}>
+				<CompanyCreateModal modal={companyModal} setModal={setCompanyModal} />
 			</Modal.Default>
 
 			<Modal.Confirm
@@ -85,10 +84,10 @@ const List = ({ history, location }) => {
 				onOk={() => deleteAction(selected)}
 			/>
 			<EntityContainer.All
-				entity="tasix"
-				name={`tasix`}
-				url="/tasix"
-				version="v3"
+				entity="company"
+				name={`company`}
+				url="/company"
+				version="v1"
 				primaryKey="id"
 				params={{
 					sort: "-id",
@@ -101,9 +100,9 @@ const List = ({ history, location }) => {
 							{isFetched ? (
 								<div className="mt-5">
 									<Header
-										title={"Tas-ix"}
+										title={t("Компании")}
 										buttonName="Добавить"
-										buttonClick={() => setTasIxModal({ open: true, create: true })}
+										buttonClick={() => setCompanyModal({ open: true, create: true })}
 										meta={meta}
 									/>
 									<Table
@@ -113,7 +112,7 @@ const List = ({ history, location }) => {
 										className="mt-5"
 										emptyUiText="Список пусто"
 										deleteAction={value => onDeleteHandler(value.id)}
-										editAction={value => setTasIxModal({ value })}
+										editAction={value => setCompanyModal({ value })}
 										columns={[
 											{
 												title: t("ID"),
@@ -122,13 +121,13 @@ const List = ({ history, location }) => {
 												render: value => value
 											},
 											{
-												title: t("Диапазон"),
-												dataIndex: "range",
+												title: t("Название"),
+												dataIndex: "title",
 												render: value => value
 											},
 											{
-												title: t("Маска"),
-												dataIndex: "mask",
+												title: t("Ссылка"),
+												dataIndex: "slug",
 												render: value => value
 											},
 											{
@@ -156,4 +155,4 @@ const List = ({ history, location }) => {
 	);
 };
 
-export default List;
+export default Company;

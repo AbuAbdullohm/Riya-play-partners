@@ -108,6 +108,7 @@ const VersionUpdate = lazy(() => import("./pages/version/update"));
 
 const Dashboard = lazy(() => import("./pages/dashboard2"));
 const TasIX = lazy(() => import("./pages/TasIx"));
+const Company = lazy(() => import("./pages/Company"));
 // const Dashboard2 = lazy(() => import("./pages/dashboard2"));
 const NotFound = lazy(() => import("./pages/not-found"));
 
@@ -219,6 +220,7 @@ const routes = [
 	// { path: "/notifications/create", exact: true, component: NotificationsCreate },
 	// { path: "/notifications/update/:notification_id", exact: true, component: NotificationsUpdate }
 	{ path: "/tas-ix", exact: true, component: TasIX, access: ["super_admin", "admin"] },
+	{ path: "/company", exact: true, component: Company, access: ["super_admin", "admin"] },
 	{ path: "/404", exact: true, component: NotFound, access: ["super_admin", "admin", "bookkeeping", "redactor", "moderator"] }
 ];
 

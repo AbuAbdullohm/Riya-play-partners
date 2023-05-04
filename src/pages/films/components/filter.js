@@ -303,7 +303,7 @@ const EnhancedForm = withFormik({
 		const actor_id = params.actor_id
 			? {
 					id: params.actor_id.split("/")[0],
-					["name_ru"]: params.actor_id.split("/")[1]
+					name_ru: params.actor_id.split("/")[1]
 			  }
 			: null;
 
