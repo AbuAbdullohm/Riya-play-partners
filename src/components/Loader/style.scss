@@ -16,3 +16,11 @@
 		background-color: #fff;
 	}
 }
+
+.dark {
+	.loader {
+		svg {
+			fill: #fff;
+		}
+	}
+}
