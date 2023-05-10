@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Pagination, Modal, Header, Tag, Spinner } from "components";
+import { Table, Pagination, Modal, Header, Tag } from "components";
 import EntityContainer from "modules/entity/containers";
 import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";

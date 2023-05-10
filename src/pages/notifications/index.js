@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Pagination, Modal, Header, Tag, Button, Icon, Spinner } from "components";
+import { Table, Pagination, Modal, Header, Tag, Button, Icon } from "components";
 import EntityContainer from "modules/entity/containers";
 import Filter from "./components/filter";
 import Actions from "modules/entity/actions";

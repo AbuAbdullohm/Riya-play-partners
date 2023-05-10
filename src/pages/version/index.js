@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Pagination, Header, Spinner } from "components";
+import { Table, Pagination, Header } from "components";
 import EntityContainer from "modules/entity/containers";
 // import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";
