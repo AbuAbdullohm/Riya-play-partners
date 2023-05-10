@@ -128,7 +128,13 @@ export default function BugalterComponent({ items, params }) {
 						</div>
 						<div className="bugalter-box_4_card">
 							<div className="bugalter-box_4_card_img">
-								<img src={Apelsin} alt="" />
+								<img
+									src={Apelsin}
+									alt=""
+									style={{
+										width: "5rem"
+									}}
+								/>
 							</div>
 
 							<p className="bugalter-box_4_card_p2">

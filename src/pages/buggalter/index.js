@@ -112,7 +112,7 @@ const List = ({ history, location }) => {
 												} else if (value === "paynet") {
 													return <img src={Paynet} className="w-20 box-none" alt="" />;
 												} else if (value === "apelsin") {
-													return <img src={Apelsin} className="w-20 box-none" alt="" />;
+													return <img src={Apelsin} className="box-none" alt="" style={{ width: "4.2rem" }} />;
 												} else if (value === "From Api") {
 													return <img src={Bektv} className="w-20 box-none" alt="" />;
 												} else if (value === "click") {
