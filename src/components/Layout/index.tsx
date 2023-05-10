@@ -12,8 +12,8 @@ const Layout = (props: HTMLElement) => {
 		<>
 			<div className="wrapper">
 				<div className="wrapper-box">
-					<SideBar menu={menu} />
 					<Profile />
+					<SideBar menu={menu} />
 					<div className="content">{children}</div>
 				</div>
 			</div>

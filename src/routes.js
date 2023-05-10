@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { history } from "store";
-import { Layout } from "components";
+import { Layout, Loader } from "components";
 import { get } from "lodash";
 
 import App from "./App";
@@ -114,6 +114,7 @@ const Banned = lazy(() => import("./pages/Banned"));
 const NotFound = lazy(() => import("./pages/not-found"));
 
 const routes = [
+	{ path: "/*", exact: true, component: Loader, access: ["loader"] },
 	{ path: "/", exact: true, component: Dashboard, access: ["super_admin"] },
 	{ path: "/", exact: true, component: Films, access: ["admin", "moderator"] },
 	{ path: "/", exact: true, component: Review, access: ["redactor"] },
@@ -231,13 +232,15 @@ const admin = routes.filter(route => route.access.includes("admin"));
 const moderator = routes.filter(route => route.access.includes("moderator"));
 const bookkeeping = routes.filter(route => route.access.includes("bookkeeping"));
 const redactor = routes.filter(route => route.access.includes("redactor"));
+const loader = routes.filter(route => route.access.includes("loader"));
 
 const getRole = role => {
 	if (role === "admin") return admin;
 	else if (role === "super_admin") return super_admin;
 	else if (role === "bookkeeping") return bookkeeping;
 	else if (role === "redactor") return redactor;
-	else return moderator;
+	else if (role === "moderator") return moderator;
+	else return loader;
 };
 
 export default () => (
@@ -248,7 +251,7 @@ export default () => (
 					<Layout>
 						<Suspense fallback={""}>
 							<Switch>
-								{getRole(get(data, "role", "moderator")).map((route, key) => (
+								{getRole(get(data, "role", "loader")).map((route, key) => (
 									<Route key={key} exact={route.exact} component={route.component} path={route.path} />
 								))}
 								<Redirect to="/404" />

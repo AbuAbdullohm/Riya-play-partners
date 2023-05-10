@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import EntityForm from "modules/entity/forms";
 import EntityContainer from "modules/entity/containers";
-import { Typography, Spinner } from "components";
+import { Typography, Loader } from "components";
 import Form from "./components/form";
 import { useNotification } from "hooks";
 import { get } from "lodash";
 import { useTranslation } from "react-i18next";
 import qs from "query-string";
+
 const Update = ({ location, history, match }) => {
 	const { notification } = useNotification();
 	const { t } = useTranslation();
@@ -130,7 +131,7 @@ const Update = ({ location, history, match }) => {
 								}}
 							</EntityForm.Main>
 						) : (
-							<Spinner position="center" />
+							<Loader />
 						)}
 					</>
 				);

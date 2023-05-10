@@ -1,7 +1,7 @@
 import React from "react";
 import EntityForm from "modules/entity/forms";
 import EntityContainer from "modules/entity/containers";
-import { Typography, Spinner } from "../../components";
+import { Typography, Loader } from "../../components";
 import { useNotification } from "hooks";
 import { get } from "lodash";
 import { useTranslation } from "react-i18next";
@@ -11,12 +11,10 @@ import moment from "moment";
 // import qs from "query-string";
 // import { useSelector } from "react-redux";
 
-
 const Update = ({ location, history, match }) => {
 	const { notification } = useNotification();
 	const { t } = useTranslation();
 	const { id } = match.params;
-
 
 	// const changeTab = (langCode, translations) => {
 	// 	const hasLangItem = translations.filter(
@@ -39,10 +37,10 @@ const Update = ({ location, history, match }) => {
 			primaryKey="id"
 			id={id}
 			params={{
-				include: "translations,files,file_id",
+				include: "translations,files,file_id"
 			}}>
 			{({ item, isFetched }) => {
-				return isFetched ?
+				return isFetched ? (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
 							{t("Изменить реклама")}
@@ -52,7 +50,7 @@ const Update = ({ location, history, match }) => {
 							method={"put"}
 							entity="advertising"
 							name={`advertising`}
-							url={`/advertising/${get(item, 'id')}`}
+							url={`/advertising/${get(item, "id")}`}
 							updateData={true}
 							primaryKey="id"
 							normalizeData={data => data}
@@ -87,7 +85,7 @@ const Update = ({ location, history, match }) => {
 								{
 									name: "file_id",
 									value: Array.isArray(get(item, "files")) ? get(item, "files") : [get(item, "files")],
-									onSubmitValue: value => value.length ? value.reduce((prev, curr) => [...prev, curr.id], []).join(",") : ""
+									onSubmitValue: value => (value.length ? value.reduce((prev, curr) => [...prev, curr.id], []).join(",") : "")
 								},
 								{
 									name: "type",
@@ -98,7 +96,7 @@ const Update = ({ location, history, match }) => {
 								{
 									name: "expire_at",
 									value: moment.unix(get(item, "expire_at", null)),
-									onSubmitValue: value => !!value ? moment(value).unix() : "",
+									onSubmitValue: value => (!!value ? moment(value).unix() : "")
 								},
 								{
 									name: "max_views_count",
@@ -118,8 +116,7 @@ const Update = ({ location, history, match }) => {
 							params={{
 								sort: "id",
 								include: "translations,files,tracks"
-							}}
-						>
+							}}>
 							{({ isSubmitting, values, setFieldValue }) => {
 								return (
 									<>
@@ -129,14 +126,17 @@ const Update = ({ location, history, match }) => {
 												values,
 												setFieldValue,
 												isSubmitting,
-												isUpdate: true,
+												isUpdate: true
 											}}
 										/>
 									</>
 								);
 							}}
 						</EntityForm.Main>
-					</> : <Spinner position="center mt-5" />
+					</>
+				) : (
+					<Loader />
+				);
 			}}
 		</EntityContainer.One>
 	);

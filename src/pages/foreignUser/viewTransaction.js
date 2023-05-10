@@ -3,12 +3,13 @@ import { get } from "lodash";
 import EntityContainer from "modules/entity/containers";
 import { useSelector } from "react-redux";
 import { helpers } from "services";
-import { Spinner, Icon } from "components";
+import { Loader, Icon } from "components";
 
 import BektvBox from "assets/images/bektvbox.svg";
 import PaymeUser from "assets/images/paymeUser.svg";
 import ApelsinUser from "assets/images/apelsinUser.svg";
 import PaynetUser from "assets/images/paynetUser.png";
+
 const ViewTransaction = ({ idModal, viewTransaction }) => {
 	const [trnData, setTrnData] = useState();
 
@@ -166,7 +167,7 @@ const ViewTransaction = ({ idModal, viewTransaction }) => {
 													</table>
 												</>
 											) : (
-												<Spinner position="center"></Spinner>
+												<Loader />
 											)}
 										</div>
 									</>

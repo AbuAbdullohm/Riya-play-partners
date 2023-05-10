@@ -3,7 +3,7 @@ import EntityForm from "modules/entity/forms";
 import Form from "./components/form";
 import { useNotification } from "hooks";
 import { get } from "lodash";
-import { Spinner, Typography } from "../../components";
+import { Loader, Typography } from "components";
 
 const Create = ({ history }) => {
 	const { notification } = useNotification();
@@ -81,11 +81,7 @@ const Create = ({ history }) => {
 			{({ values, setFieldValue, isSubmitting, errors }) => {
 				return (
 					<>
-						{isSubmitting && (
-							<div className="spinner-overlay">
-								<Spinner tips="Загрузка..." />
-							</div>
-						)}
+						{isSubmitting && <Loader />}
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
 							Создать пользователей
 						</Typography.Heading>

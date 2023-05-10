@@ -44,6 +44,7 @@
 		"react-feather": "^2.0.9",
 		"react-i18next": "^10.2.0",
 		"react-input-mask": "^2.0.4",
+		"react-loader-spinner": "^5.3.4",
 		"react-month-picker": "^2.2.1",
 		"react-nestable": "^1.1.0",
 		"react-number-format": "^4.9.0",

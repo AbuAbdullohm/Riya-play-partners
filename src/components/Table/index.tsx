@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import "./style.scss";
-import { Icon, Spinner } from "components";
+import { Icon, Loader } from "components";
 import cx from "classnames";
 import { boolean } from "yup";
 interface IColumnProps {
@@ -53,8 +53,13 @@ const TableComponent: FC<ITableProps> = ({
 	return (
 		<>
 			<div className={classes}>
-				{!isFetched && <div className="--loading table-overlay" />}
-				{!isFetched && <Spinner />}
+				{!isFetched && (
+					<div className="--loading table-overlay">
+						<div className="table-loader">
+							<Loader />
+						</div>
+					</div>
+				)}
 
 				<table className="table table-report">
 					<thead>
@@ -73,7 +78,7 @@ const TableComponent: FC<ITableProps> = ({
 						</tr>
 					</thead>
 
-					{items.length > 0 && (
+					{isFetched && items.length > 0 && (
 						<tbody>
 							{items.map(item => {
 								return (
@@ -114,6 +119,7 @@ const TableComponent: FC<ITableProps> = ({
 						</tbody>
 					)}
 				</table>
+
 				{isFetched && items.length < 1 && <div className="text-center p-4 table__no-data">{t(emptyUiText)}</div>}
 			</div>
 		</>

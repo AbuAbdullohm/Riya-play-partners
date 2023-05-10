@@ -28,6 +28,7 @@ import FakeInputs from "./FakeInputs";
 import File from "./File";
 import Upload from "./Upload";
 import Spinner from "./Spinner";
+import Loader from "./Loader";
 import Ckeditor from "./Ckeditor";
 import Tabs from "./Tabs";
 import FileManager from "./FileManager";
@@ -67,6 +68,7 @@ export {
 	File,
 	Upload,
 	Spinner,
+	Loader,
 	Ckeditor,
 	Tabs,
 	FileManager,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Button, Header, Icon, Modal, Pagination, Table, Tag, Spinner } from "components";
+import { Avatar, Button, Header, Icon, Modal, Pagination, Table, Tag } from "components";
 import EntityContainer from "modules/entity/containers";
 import Filter from "./components/filter";
 import Actions from "modules/entity/actions";
@@ -116,6 +116,7 @@ const List = ({ history, location }) => {
 			<Modal.Default exitBtn size="xl" header={`Название фильма: ${get(film, "name_ru")}`} toggle={filmFilter} setToggle={setFilmFilter}>
 				<FilmFilter {...{ film, filmFilter }} />
 			</Modal.Default>
+
 			<EntityContainer.All
 				entity="films"
 				name={`films`}
@@ -161,127 +162,122 @@ const List = ({ history, location }) => {
 								<Filter {...{ setFilter }} />
 							</Header>
 
-							{isFetched ? (
-								<Table
-									items={items}
-									isFetched={isFetched}
-									rowKey="id"
-									className="mt-5"
-									emptyUiText="Список пусто"
-									hasDelete={isAdmin}
-									deleteAction={value => onDeleteHandler(value.id)}
-									editAction={value => history.push(`/films/update/${value.id}${page ? `?page=${page}` : ""}`)}
-									columns={[
-										{
-											title: t("ID"),
-											dataIndex: "id",
-											className: "w-4 text-center",
-											render: value => <>{value}</>
-										},
+							<Table
+								items={items}
+								isFetched={isFetched}
+								rowKey="id"
+								className="mt-5"
+								emptyUiText="Список пусто"
+								hasDelete={isAdmin}
+								deleteAction={value => onDeleteHandler(value.id)}
+								editAction={value => history.push(`/films/update/${value.id}${page ? `?page=${page}` : ""}`)}
+								columns={[
+									{
+										title: t("ID"),
+										dataIndex: "id",
+										className: "w-4 text-center",
+										render: value => <>{value}</>
+									},
 
-										{
-											title: t("Фото"),
-											dataIndex: "files",
-											className: "w-8 text-center",
-											render: value => {
-												return <Avatar isRectangle src={get(value, "[0].thumbnails.small.src")} />;
-											}
-										},
-										{
-											title: t("Название"),
-											dataIndex: "name_ru",
-											render: value => <>{value}</>
-										},
-										{
-											title: t("Год"),
-											dataIndex: "year",
-											render: value => <>{value}</>
-										},
-										{
-											title: t("Жанр"),
-											dataIndex: "genres",
-											render: genres =>
-												genres
-													? genres.reduce((prev, genre) => [...prev, genre.name_ru ? genre.name_ru : genre.name_ru], []).join(", ")
-													: ""
-										},
-										{
-											title: t("Тип"),
-											dataIndex: "type",
-											render: type => get(type, "name_ru", "")
-										},
-
-										{
-											title: t("Количество просмотров"),
-											className: "text-center",
-											dataIndex: "viewed",
-											render: value => <>{value && value}</>
-										},
-										{
-											title: t("Смотреть за границей"),
-											dataIndex: "foreign_status",
-											render: value => {
-												return <div>{value === 1 ? <Tag color={"green"}>Видно</Tag> : <Tag color={"red"}>Невидно</Tag>}</div>;
-											}
-										},
-										{
-											title: t("Статус"),
-											dataIndex: "status",
-											className: "w-8",
-											render: value => {
-												return <div>{value === 1 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</div>;
-											}
-										},
-										{
-											className: "w-5",
-											render: (_, row) => {
-												const status = get(row, "status");
-
-												return status === 0 ? (
-													<Button.Outline
-														className="status-btn"
-														type="success"
-														tooltip={t("Активный")}
-														onClick={() => {
-															setSelected(row);
-															updateAction(get(row, "id"), "activate");
-														}}>
-														<Icon name="power" />
-													</Button.Outline>
-												) : (
-													<Button.Outline
-														className="status-btn"
-														type="danger"
-														tooltip={t("Неактивный")}
-														onClick={() => updateAction(get(row, "id"), "deactivate")}>
-														<Icon name="power" />
-													</Button.Outline>
-												);
-											}
-										},
-										{
-											className: "w-5",
-											render: (_, row) => {
-												return (
-													<Button.Outline
-														className="status-btn"
-														type="success"
-														tooltip={t("Статистика фильмов")}
-														onClick={() => {
-															setFilmFilter(!filmFilter);
-															setFilm(row);
-														}}>
-														<Icon name="eye" />
-													</Button.Outline>
-												);
-											}
+									{
+										title: t("Фото"),
+										dataIndex: "files",
+										className: "w-8 text-center",
+										render: value => {
+											return <Avatar isRectangle src={get(value, "[0].thumbnails.small.src")} />;
 										}
-									]}
-								/>
-							) : (
-								<Spinner position="center" className="mt-5" />
-							)}
+									},
+									{
+										title: t("Название"),
+										dataIndex: "name_ru",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Год"),
+										dataIndex: "year",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Жанр"),
+										dataIndex: "genres",
+										render: genres =>
+											genres
+												? genres.reduce((prev, genre) => [...prev, genre.name_ru ? genre.name_ru : genre.name_ru], []).join(", ")
+												: ""
+									},
+									{
+										title: t("Тип"),
+										dataIndex: "type",
+										render: type => get(type, "name_ru", "")
+									},
 
+									{
+										title: t("Количество просмотров"),
+										className: "text-center",
+										dataIndex: "viewed",
+										render: value => <>{value && value}</>
+									},
+									{
+										title: t("Смотреть за границей"),
+										dataIndex: "foreign_status",
+										render: value => {
+											return <div>{value === 1 ? <Tag color={"green"}>Видно</Tag> : <Tag color={"red"}>Невидно</Tag>}</div>;
+										}
+									},
+									{
+										title: t("Статус"),
+										dataIndex: "status",
+										className: "w-8",
+										render: value => {
+											return <div>{value === 1 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</div>;
+										}
+									},
+									{
+										className: "w-5",
+										render: (_, row) => {
+											const status = get(row, "status");
+
+											return status === 0 ? (
+												<Button.Outline
+													className="status-btn"
+													type="success"
+													tooltip={t("Активный")}
+													onClick={() => {
+														setSelected(row);
+														updateAction(get(row, "id"), "activate");
+													}}>
+													<Icon name="power" />
+												</Button.Outline>
+											) : (
+												<Button.Outline
+													className="status-btn"
+													type="danger"
+													tooltip={t("Неактивный")}
+													onClick={() => updateAction(get(row, "id"), "deactivate")}>
+													<Icon name="power" />
+												</Button.Outline>
+											);
+										}
+									},
+									{
+										className: "w-5",
+										render: (_, row) => {
+											return (
+												<Button.Outline
+													className="status-btn"
+													type="success"
+													tooltip={t("Статистика фильмов")}
+													onClick={() => {
+														setFilmFilter(!filmFilter);
+														setFilm(row);
+													}}>
+													<Icon name="eye" />
+												</Button.Outline>
+											);
+										}
+									}
+								]}
+							/>
 							{get(meta, "pageCount", 1) > 1 && (
 								<Pagination pageCount={get(meta, "pageCount", 1)} currentPage={page ? Number(page) : 1} handlePageClick={onChange} />
 							)}

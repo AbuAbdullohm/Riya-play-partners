@@ -8,6 +8,7 @@ import { I18nextProvider } from "react-i18next";
 import { i18n, api, sentry } from "services";
 import { configure as configureStore } from "store";
 import Routes from "./routes";
+import { Loader } from "components";
 
 import "./assets/styles/app.css";
 import "./assets/styles/custom.scss";
@@ -22,7 +23,7 @@ store.subscribe(() => {
 const render = Component => {
 	ReactDOM.render(
 		<Provider {...{ store }}>
-			<Suspense fallback="">
+			<Suspense fallback={<Loader isFull={true} color="#fff" />}>
 				<I18nextProvider i18n={i18n()}>
 					<Component {...{ store }} />
 				</I18nextProvider>

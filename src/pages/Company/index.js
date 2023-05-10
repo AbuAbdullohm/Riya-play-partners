@@ -96,58 +96,47 @@ const Company = ({ history, location }) => {
 				}}>
 				{({ items, isFetched, meta }) => {
 					return (
-						<>
-							{isFetched ? (
-								<div className="mt-5">
-									<Header
-										title={t("Компании")}
-										buttonName="Добавить"
-										buttonClick={() => setCompanyModal({ open: true, create: true })}
-										meta={meta}
-									/>
-									<Table
-										items={items}
-										isFetched={isFetched}
-										rowKey="id"
-										className="mt-5"
-										emptyUiText="Список пусто"
-										deleteAction={value => onDeleteHandler(value.id)}
-										editAction={value => setCompanyModal({ value })}
-										columns={[
-											{
-												title: t("ID"),
-												dataIndex: "id",
-												className: "w-4",
-												render: value => value
-											},
-											{
-												title: t("Название"),
-												dataIndex: "title",
-												render: value => value
-											},
-											{
-												title: t("Ссылка"),
-												dataIndex: "slug",
-												render: value => value
-											},
-											{
-												title: t("Статус"),
-												className: "w-8",
-												dataIndex: "status",
-												render: value => {
-													return <div>{value === 1 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</div>;
-												}
-											}
-										]}
-									/>
-									{get(meta, "pageCount", 1) > 1 && (
-										<Pagination pageCount={get(meta, "pageCount", 1)} currentPage={page ? Number(page) : 1} handlePageClick={onChange} />
-									)}
-								</div>
-							) : (
-								<Spinner position="center" />
+						<div className="mt-5">
+							<Header title={t("Компании")} buttonName="Добавить" buttonClick={() => setCompanyModal({ open: true, create: true })} meta={meta} />
+							<Table
+								items={items}
+								isFetched={isFetched}
+								rowKey="id"
+								className="mt-5"
+								emptyUiText="Список пусто"
+								deleteAction={value => onDeleteHandler(value.id)}
+								editAction={value => setCompanyModal({ value })}
+								columns={[
+									{
+										title: t("ID"),
+										dataIndex: "id",
+										className: "w-4",
+										render: value => value
+									},
+									{
+										title: t("Название"),
+										dataIndex: "title",
+										render: value => value
+									},
+									{
+										title: t("Ссылка"),
+										dataIndex: "slug",
+										render: value => value
+									},
+									{
+										title: t("Статус"),
+										className: "w-8",
+										dataIndex: "status",
+										render: value => {
+											return <div>{value === 1 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</div>;
+										}
+									}
+								]}
+							/>
+							{get(meta, "pageCount", 1) > 1 && (
+								<Pagination pageCount={get(meta, "pageCount", 1)} currentPage={page ? Number(page) : 1} handlePageClick={onChange} />
 							)}
-						</>
+						</div>
 					);
 				}}
 			</EntityContainer.All>

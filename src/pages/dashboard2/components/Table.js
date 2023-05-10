@@ -5,6 +5,7 @@ import paynet from "assets/images/paynet.svg";
 import apelsin from "assets/images/uzum.svg";
 import click from "assets/images/icons/icons-dashboard/click.svg";
 import { Icon } from "components";
+
 export default function Table({
 	rates,
 	span,

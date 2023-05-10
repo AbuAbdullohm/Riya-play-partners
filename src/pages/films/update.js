@@ -10,12 +10,12 @@ import Actions from "modules/entity/actions";
 import StoreEntities from "store/actions/entities";
 import EntityForm from "modules/entity/forms";
 import EntityContainer from "modules/entity/containers";
-import { Avatar, Header, Modal, Pagination, Table, Tag, Typography } from "components";
+import { Avatar, Header, Modal, Pagination, Table, Tag, Typography, Button, Icon, Loader } from "components";
 
 import CreateSeriesModal from "./components/createSeriesModal";
 import UpdateSeriesModal from "./components/updateSeriesModal";
 import Form from "./components/form";
-import { Button, Icon, Spinner } from "../../components";
+
 import { useParams } from "react-router";
 
 const Update = ({ location, history }) => {
@@ -71,6 +71,7 @@ const Update = ({ location, history }) => {
 		setSelected(value);
 		showUpdateModal(true);
 	};
+
 	const deleteAction = id => {
 		dispatch(
 			Actions.Form.request({
@@ -381,7 +382,7 @@ const Update = ({ location, history }) => {
 									include: "translations,files,film,season,track",
 									page: page || 1
 								}}>
-								{({ items, isFetched, meta, setFieldError }) => (
+								{({ items, isFetched, meta }) => (
 									<>
 										<Header title="Серии" buttonName="Добавить" buttonClick={() => showCreateModal(true)} meta={meta}></Header>
 										<Table
@@ -471,7 +472,7 @@ const Update = ({ location, history }) => {
 						</>
 					</>
 				) : (
-					<Spinner position="center" className="mt-5" />
+					<Loader />
 				);
 			}}
 		</EntityContainer.One>

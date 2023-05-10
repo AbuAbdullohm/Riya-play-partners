@@ -8,6 +8,7 @@ import Icon from "components/Icon";
 
 import useOutsideClick from "hooks/useOutsideClick";
 import Actions from "store/actions/system";
+import { Loader } from "components";
 
 interface ISubmenu {
 	id: string;
@@ -62,73 +63,75 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 		else if (role === "super_admin") return super_admin;
 		else if (role === "bookkeeping") return bookkeeping;
 		else if (role === "redactor") return redactor;
-		else return moderator;
+		else if (role === "moderator") return moderator;
+		else return [];
 	};
 
 	return (
 		<nav className="side-nav">
-			<div className="side-nav__header">
-				{/* <div className="intro-x dropdown">
+			{/* <div className="side-nav__header">
+				<div className="intro-x dropdown">
 					<div className="dropdown-toggle notification notification--bullet cursor-pointer">
-						<Icon
-							name="bell"
-							className="notification__icon w-5 h-5 dark:text-gray-300"
-						/>
+						<Icon name="bell" className="notification__icon w-5 h-5 dark:text-gray-300" />
 					</div>
-				</div> */}
-			</div>
+				</div>
+			</div> */}
 
-			<ul className="mt-10 list" ref={ref}>
-				{getAccess(get(user, "role", "moderator")).map((m: any, i: number) => {
-					if (get(m, "submenu")) {
-						return (
-							<li key={get(m, "id")}>
-								<div
-									className={`side-menu cursor-pointer${"/" + currPath === get(m, "link") ? " side-menu--active" : ""}`}
-									onClick={() => toggleSubmenu(get(m, "id"))}>
-									<div className="side-menu__icon">
-										<Icon name={get(m, "icon")} />
-									</div>
-									<div className="side-menu__title">
-										{t(get(m, "title"))}
-										<div className={`side-menu__sub-icon${isVisible === get(m, "id") ? " transform rotate-180" : ""}`}>
-											<Icon name="chevron-down" />
+			{user && Object.keys(user).length === 0 ? (
+				<Loader color="#fff" />
+			) : (
+				<ul className="mt-10 list" ref={ref}>
+					{getAccess(get(user, "role", "")).map((m: any, i: number) => {
+						if (get(m, "submenu")) {
+							return (
+								<li key={get(m, "id")}>
+									<div
+										className={`side-menu cursor-pointer${"/" + currPath === get(m, "link") ? " side-menu--active" : ""}`}
+										onClick={() => toggleSubmenu(get(m, "id"))}>
+										<div className="side-menu__icon">
+											<Icon name={get(m, "icon")} />
+										</div>
+										<div className="side-menu__title">
+											{t(get(m, "title"))}
+											<div className={`side-menu__sub-icon${isVisible === get(m, "id") ? " transform rotate-180" : ""}`}>
+												<Icon name="chevron-down" />
+											</div>
 										</div>
 									</div>
-								</div>
-								<ul className={isVisible === get(m, "id") ? "side-menu__sub-open" : ""}>
-									{get(m, "submenu", []).map((sm: any) => (
-										<li key={get(sm, "id")}>
-											<NavLink
-												key={get(sm, "id")}
-												to={`${get(sm, "link")}${get(sm, "lang") ? `?lang=ru` : ""}`}
-												className={`side-menu ${pathname === get(sm, "link") ? "side-menu--active" : ""}`}>
-												<div className="side-menu__icon mr-2">
-													<Icon name={get(sm, "icon")} />
-												</div>
+									<ul className={isVisible === get(m, "id") ? "side-menu__sub-open" : ""}>
+										{get(m, "submenu", []).map((sm: any) => (
+											<li key={get(sm, "id")}>
+												<NavLink
+													key={get(sm, "id")}
+													to={`${get(sm, "link")}${get(sm, "lang") ? `?lang=ru` : ""}`}
+													className={`side-menu ${pathname === get(sm, "link") ? "side-menu--active" : ""}`}>
+													<div className="side-menu__icon mr-2">
+														<Icon name={get(sm, "icon")} />
+													</div>
 
-												<div className="side-menu__title">{t(get(sm, "title"))}</div>
-											</NavLink>
-										</li>
-									))}
-								</ul>
-							</li>
-						);
-					} else
-						return (
-							<li key={get(m, "id")}>
-								<NavLink
-									to={`${get(m, "link")}${get(m, "lang") ? `?lang=ru` : ""}` || "/films"}
-									className={`side-menu ${"/" + currPath === get(m, "link") ? "side-menu--active" : ""}`}>
-									<div className="side-menu__icon">
-										<Icon name={get(m, "icon")} />
-									</div>
-									<div className="side-menu__title">{t(get(m, "title"))}</div>
-								</NavLink>
-							</li>
-						);
-				})}
-			</ul>
+													<div className="side-menu__title">{t(get(sm, "title"))}</div>
+												</NavLink>
+											</li>
+										))}
+									</ul>
+								</li>
+							);
+						} else
+							return (
+								<li key={get(m, "id")}>
+									<NavLink
+										to={`${get(m, "link")}${get(m, "lang") ? `?lang=ru` : ""}` || "/films"}
+										className={`side-menu ${"/" + currPath === get(m, "link") ? "side-menu--active" : ""}`}>
+										<div className="side-menu__icon">
+											<Icon name={get(m, "icon")} />
+										</div>
+										<div className="side-menu__title">{t(get(m, "title"))}</div>
+									</NavLink>
+								</li>
+							);
+					})}
+				</ul>
+			)}
 		</nav>
 	);
 };

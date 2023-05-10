@@ -42,98 +42,92 @@ const List = ({ history, location }) => {
 						<>
 							<Header title="Список версий" buttonClick={() => history.push("/version/create")} buttonName="Добавить" meta={meta} />
 
-							{isFetched ? (
-								<Table
-									items={items}
-									isFetched={isFetched}
-									rowKey="id"
-									className="mt-5"
-									hasEdit={false}
-									hasDelete={false}
-									editAction={value => history.push(`/version/update/${value.id}`)}
-									emptyUiText="Список пусто"
-									// deleteAction={value => onDeleteHandler(value.notification_id)}
-									columns={[
-										{
-											title: t("ID"),
-											dataIndex: "id",
-											className: "w-4",
-											render: value => <>{value}</>
-										},
-										{
-											title: t("Загаловок"),
-											dataIndex: "type",
-											render: value => (
-												<>
-													{value === 1 ? (
-														<div className="d-flex align-center ">
-															<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={Android} alt="" />{" "}
-															ANDROID
-														</div>
-													) : value === 2 ? (
-														<div className="d-flex align-center">
-															<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={Apple} alt="" /> IOS
-														</div>
-													) : value === 3 ? (
-														<div className="d-flex align-center">
-															<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={AndroidTv} alt="" />{" "}
-															ANDROID TV
-														</div>
-													) : value === 4 ? (
-														<div className="d-flex align-center">
-															<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={AppleTv} alt="" /> IOS
-															TV
-														</div>
-													) : (
-														""
-													)}
-												</>
-											)
-										},
-										{
-											title: "Дата создания",
-											dataIndex: "created_at",
-											render: value => <>{helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss")}</>
-										},
-										{
-											title: "Версии",
-											dataIndex: "version",
-											render: value => <>{value && value}</>
-										},
-										{
-											title: "Обновленное дата",
-											dataIndex: "updated_at",
-											render: value => (
-												<>{value !== null ? helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss") : "Обновленное дата нет"}</>
-											)
-										},
-										{
-											title: t("Статус"),
-											className: "w-8 text-center",
-											dataIndex: "status",
-											render: value => {
-												if (value === 1) {
-													return (
-														<div className="spinner-version">
-															<div className="double-bounce1" />
-															<div className="double-bounce2 green" />
-														</div>
-													);
-												} else {
-													return (
-														<div className="spinner-version">
-															<div className="double-bounce1-red" />
-															<div className="double-bounce2-red" />
-														</div>
-													);
-												}
+							<Table
+								items={items}
+								isFetched={isFetched}
+								rowKey="id"
+								className="mt-5"
+								hasEdit={false}
+								hasDelete={false}
+								editAction={value => history.push(`/version/update/${value.id}`)}
+								emptyUiText="Список пусто"
+								// deleteAction={value => onDeleteHandler(value.notification_id)}
+								columns={[
+									{
+										title: t("ID"),
+										dataIndex: "id",
+										className: "w-4",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Загаловок"),
+										dataIndex: "type",
+										render: value => (
+											<>
+												{value === 1 ? (
+													<div className="d-flex align-center ">
+														<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={Android} alt="" /> ANDROID
+													</div>
+												) : value === 2 ? (
+													<div className="d-flex align-center">
+														<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={Apple} alt="" /> IOS
+													</div>
+												) : value === 3 ? (
+													<div className="d-flex align-center">
+														<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={AndroidTv} alt="" />{" "}
+														ANDROID TV
+													</div>
+												) : value === 4 ? (
+													<div className="d-flex align-center">
+														<img className="box-none" style={{ width: "30px", marginRight: "10px" }} src={AppleTv} alt="" /> IOS TV
+													</div>
+												) : (
+													""
+												)}
+											</>
+										)
+									},
+									{
+										title: "Дата создания",
+										dataIndex: "created_at",
+										render: value => <>{helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss")}</>
+									},
+									{
+										title: "Версии",
+										dataIndex: "version",
+										render: value => <>{value && value}</>
+									},
+									{
+										title: "Обновленное дата",
+										dataIndex: "updated_at",
+										render: value => (
+											<>{value !== null ? helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss") : "Обновленное дата нет"}</>
+										)
+									},
+									{
+										title: t("Статус"),
+										className: "w-8 text-center",
+										dataIndex: "status",
+										render: value => {
+											if (value === 1) {
+												return (
+													<div className="spinner-version">
+														<div className="double-bounce1" />
+														<div className="double-bounce2 green" />
+													</div>
+												);
+											} else {
+												return (
+													<div className="spinner-version">
+														<div className="double-bounce1-red" />
+														<div className="double-bounce2-red" />
+													</div>
+												);
 											}
 										}
-									]}
-								/>
-							) : (
-								<Spinner position="center" className="mt-5" />
-							)}
+									}
+								]}
+							/>
 
 							{get(meta, "pageCount", 1) > 1 && (
 								<Pagination pageCount={get(meta, "pageCount", 1)} currentPage={page ? Number(page) : 1} handlePageClick={onChange} />

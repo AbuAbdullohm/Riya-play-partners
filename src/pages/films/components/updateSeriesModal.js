@@ -2,7 +2,7 @@ import React from "react";
 import EntityForm from "modules/entity/forms";
 import ModalForm from "./formSeriesModal";
 import get from "lodash/get";
-import { Spinner } from "components";
+import { Loader } from "components";
 import { useNotification } from "hooks";
 
 const UpdateSeriesModal = ({ item, selected, showUpdateModal, updateSeries = () => {}, canUpdate, setCanUpdate }) => {
@@ -106,7 +106,7 @@ const UpdateSeriesModal = ({ item, selected, showUpdateModal, updateSeries = () 
 				include: "translations,files,track,film,season"
 			}}>
 			{({ isSubmitting, values, setFieldValue }) => {
-				return isSubmitting ? <Spinner /> : <ModalForm {...{ item, values, setFieldValue, isUpdate: true }} />;
+				return isSubmitting ? <Loader /> : <ModalForm {...{ item, values, setFieldValue, isUpdate: true }} />;
 			}}
 		</EntityForm.Main>
 	);

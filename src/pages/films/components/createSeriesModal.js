@@ -1,7 +1,7 @@
 import React from "react";
 import EntityForm from "modules/entity/forms";
 import ModalForm from "./formSeriesModal";
-import { Spinner } from "components";
+import { Loader } from "components";
 import { useNotification } from "hooks";
 import get from "lodash/get";
 import { useParams } from "react-router";
@@ -93,7 +93,7 @@ const CreateSeriesModal = ({ item, showCreateModal, updateSeries, canUpdate, set
 				include: "translations,files,track,film"
 			}}>
 			{({ isSubmitting, values, setFieldValue }) => {
-				return isSubmitting ? <Spinner /> : <ModalForm {...{ item, values, setFieldValue, isUpdate: false }} />;
+				return isSubmitting ? <Loader /> : <ModalForm {...{ item, values, setFieldValue, isUpdate: false }} />;
 			}}
 		</EntityForm.Main>
 	);

@@ -3,7 +3,7 @@ import { get } from "lodash";
 import EntityContainer from "modules/entity/containers";
 import { useSelector } from "react-redux";
 import { helpers } from "services";
-import { Spinner, Icon, Button } from "components";
+import { Loader, Icon, Button } from "components";
 
 import BektvBox from "assets/images/bektvbox.svg";
 import PaymeUser from "assets/images/paymeUser.svg";
@@ -189,7 +189,7 @@ const ViewTransaction = ({ transactionData, viewTransaction }) => {
 													)}
 												</>
 											) : (
-												<Spinner position="center"></Spinner>
+												<Loader />
 											)}
 										</div>
 									</>

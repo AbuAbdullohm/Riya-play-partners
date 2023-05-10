@@ -5,7 +5,7 @@ import qs from "qs";
 import UnLock from "./components/unLock";
 import View from "./view";
 import EntityContainer from "modules/entity/containers";
-import { Table, Pagination, Header, Tag, Modal, Avatar, Button, Icon, Spinner } from "components";
+import { Table, Pagination, Header, Tag, Modal, Avatar, Button, Icon } from "components";
 import Filter from "./components/filter";
 import BanModal from "./banModal";
 import "./style.scss";
@@ -122,269 +122,250 @@ const List = ({ history, location }) => {
 				{({ items, isFetched, meta }) => {
 					return (
 						<div className="page-container">
-							{isFetched ? (
-								<div className="pt-10">
-									<Header
-										title="Список иностранных пользователей"
-										buttonName="Добавить"
-										buttonClick={() => history.push("/foreign-user/create")}
-										hasButton={true}
-										addDay={
-											<Button.Default
-												onClick={() => {
-													if (day.length > 0) {
-														setInfoModal(!infoModal);
-													} else setAddDay(!addDay);
-												}}>
-												Добавить день
-											</Button.Default>
-										}
-										hasFilter={true}
-										textLeft={
-											<div
-												onClick={() => {
-													if (downloadFile.length > 0) {
-														setInfoModal(!infoModal);
-													}
-												}}>
-												<DownloadXls />
-											</div>
-										}
-										btnClassName={day.length > 0 && "events-none"}
-										meta={meta}
-										setFilter={setFilter}
-										filter={filter}>
-										<Filter {...{ setFilter, filter }} />
-									</Header>
-									<Table
-										// items={items.filter(item => item.id !== 17)}
-										items={items}
-										rowKey="id"
-										hasEdit={true}
-										className="mt-5"
-										hasDelete={false}
-										editAction={value => history.push(`/foreign-user/update/${value.id}`)}
-										isFetched={isFetched}
-										columns={[
-											{
-												title: t("ID"),
-												dataIndex: "id",
-												className: "w-1",
-												render: value => <>{value}</>
-											},
-											{
-												title: t("Фото"),
-												dataIndex: "files",
-												className: "text-center",
-												render: value => (
-													<div className="flex justify-center">
-														<Avatar src={get(value, "[0].thumbnails.small.src")} />
-													</div>
-												)
-											},
-											{
-												title: t("Логин"),
-												dataIndex: "username",
-												render: (value, row) => (
-													<>
-														{value}
-														{row.is_provider === 1 && (
-															<Tag color={"blue"} className={"ml-10"}>
-																{get(row, "	.title", "-")}
-															</Tag>
-														)}
-													</>
-												)
-											},
+							<div className="pt-10">
+								<Header
+									title="Список иностранных пользователей"
+									buttonName="Добавить"
+									buttonClick={() => history.push("/foreign-user/create")}
+									hasButton={true}
+									addDay={
+										<Button.Default
+											onClick={() => {
+												if (day.length > 0) {
+													setInfoModal(!infoModal);
+												} else setAddDay(!addDay);
+											}}>
+											Добавить день
+										</Button.Default>
+									}
+									hasFilter={true}
+									textLeft={
+										<div
+											onClick={() => {
+												if (downloadFile.length > 0) {
+													setInfoModal(!infoModal);
+												}
+											}}>
+											<DownloadXls />
+										</div>
+									}
+									btnClassName={day.length > 0 && "events-none"}
+									meta={meta}
+									setFilter={setFilter}
+									filter={filter}>
+									<Filter {...{ setFilter, filter }} />
+								</Header>
+								<Table
+									// items={items.filter(item => item.id !== 17)}
+									items={items}
+									rowKey="id"
+									hasEdit={true}
+									className="mt-5"
+									hasDelete={false}
+									editAction={value => history.push(`/foreign-user/update/${value.id}`)}
+									isFetched={isFetched}
+									columns={[
+										{
+											title: t("ID"),
+											dataIndex: "id",
+											className: "w-1",
+											render: value => <>{value}</>
+										},
+										{
+											title: t("Фото"),
+											dataIndex: "files",
+											className: "text-center",
+											render: value => (
+												<div className="flex justify-center">
+													<Avatar src={get(value, "[0].thumbnails.small.src")} />
+												</div>
+											)
+										},
+										{
+											title: t("Логин"),
+											dataIndex: "username",
+											render: (value, row) => (
+												<>
+													{value}
+													{row.is_provider === 1 && (
+														<Tag color={"blue"} className={"ml-10"}>
+															{get(row, "	.title", "-")}
+														</Tag>
+													)}
+												</>
+											)
+										},
 
-											{
-												title: t("Полное имя"),
-												dataIndex: "full_name",
-												render: value => <>{value}</>
-											},
+										{
+											title: t("Полное имя"),
+											dataIndex: "full_name",
+											render: value => <>{value}</>
+										},
 
-											{
-												title: t("Телефон"),
-												dataIndex: "phone",
-												render: value => <>{value}</>
-											},
-											{
-												title: t("Баланс"),
-												dataIndex: "userBalance",
-												render: value => (
-													<>
-														{value &&
-															Number(value).toLocaleString("en-US", {
-																style: "currency",
-																currency: "UZS",
-																minimumFractionDigits: 0
-															})}
-													</>
-												)
-											},
-											{
-												title: t("Тариф"),
-												dataIndex: "currentTariff",
-												render: value => {
-													const currRatesName = get(value, "ratesPrice.rate");
-													return <>{currRatesName ? currRatesName.name_ru : "Не активирован"}</>;
-												}
-											},
-											{
-												title: t("Промокод"),
-												dataIndex: "currentPromocode",
-												render: value => {
-													const currPromocodeName = get(value, "promoCode");
-													return <>{currPromocodeName ? get(currPromocodeName, "title_ru") : "Не активирован"}</>;
-												}
-											},
+										{
+											title: t("Телефон"),
+											dataIndex: "phone",
+											render: value => <>{value}</>
+										},
+										{
+											title: t("Баланс"),
+											dataIndex: "userBalance",
+											render: value => (
+												<>
+													{value &&
+														Number(value).toLocaleString("en-US", {
+															style: "currency",
+															currency: "UZS",
+															minimumFractionDigits: 0
+														})}
+												</>
+											)
+										},
+										{
+											title: t("Тариф"),
+											dataIndex: "currentTariff",
+											render: value => {
+												const currRatesName = get(value, "ratesPrice.rate");
+												return <>{currRatesName ? currRatesName.name_ru : "Не активирован"}</>;
+											}
+										},
+										{
+											title: t("Промокод"),
+											dataIndex: "currentPromocode",
+											render: value => {
+												const currPromocodeName = get(value, "promoCode");
+												return <>{currPromocodeName ? get(currPromocodeName, "title_ru") : "Не активирован"}</>;
+											}
+										},
 
-											{
-												title: t("Дата регистрации"),
-												dataIndex: "created_at",
-												render: value => {
-													return <>{helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss")}</>;
-												}
-											},
-											{
-												title: t("Завершение тарифа"),
-												dataIndex: "subscribe_date",
-												render: value => {
-													return <>{value ? helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
-												}
-											},
+										{
+											title: t("Дата регистрации"),
+											dataIndex: "created_at",
+											render: value => {
+												return <>{helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss")}</>;
+											}
+										},
+										{
+											title: t("Завершение тарифа"),
+											dataIndex: "subscribe_date",
+											render: value => {
+												return <>{value ? helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
+											}
+										},
 
-											{
-												title: t("Завершение бан"),
-												dataIndex: "banned",
-												render: value => {
-													return <>{value ? helpers.formatDate(value.banned_until * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
-												}
-											},
-											{
-												title: t("Использование"),
-												dataIndex: "status",
-												render: (_, row) => {
-													const bannedStatus = get(row, "banned.status");
+										{
+											title: t("Завершение бан"),
+											dataIndex: "banned",
+											render: value => {
+												return <>{value ? helpers.formatDate(value.banned_until * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
+											}
+										},
+										{
+											title: t("Использование"),
+											dataIndex: "status",
+											render: (_, row) => {
+												const bannedStatus = get(row, "banned.status");
+												return (
+													<>{bannedStatus === 1 ? <Tag color={"red"}>Заблокированный</Tag> : <Tag color={"green"}>Разрешено</Tag>}</>
+												);
+											}
+										},
+										{
+											title: t("Прокомментировать"),
+											render: (_, row) => {
+												const bannedStatus = get(row, "banned.status");
+												return (
+													<>{bannedStatus === 2 ? <Tag color={"red"}>Заблокированный</Tag> : <Tag color={"green"}>Разрешено</Tag>}</>
+												);
+											}
+										},
+
+										{
+											className: "w-5",
+											render: (_, row) => {
+												const status = get(row, "status");
+												const banStatus = get(row, "banned.status");
+												if (status === 3) {
 													return (
-														<>
-															{bannedStatus === 1 ? (
-																<Tag color={"red"}>Заблокированный</Tag>
-															) : (
-																<Tag color={"green"}>Разрешено</Tag>
-															)}
-														</>
-													);
-												}
-											},
-											{
-												title: t("Прокомментировать"),
-												render: (_, row) => {
-													const bannedStatus = get(row, "banned.status");
-													return (
-														<>
-															{bannedStatus === 2 ? (
-																<Tag color={"red"}>Заблокированный</Tag>
-															) : (
-																<Tag color={"green"}>Разрешено</Tag>
-															)}
-														</>
-													);
-												}
-											},
-
-											{
-												className: "w-5",
-												render: (_, row) => {
-													const status = get(row, "status");
-													const banStatus = get(row, "banned.status");
-													if (status === 3) {
-														return (
-															<Button.Outline
-																className="status-btn"
-																type="success"
-																tooltip={t("Активный")}
-																onClick={() => {
-																	setIdModal(row);
-																	setUnLock(!unLock);
-																}}>
-																<Icon name="power" />
-															</Button.Outline>
-														);
-													} else if (status === 10) {
-														if (banStatus === 2) {
-															return (
-																<Button.Outline
-																	className="status-btn"
-																	type="success"
-																	tooltip={t("Активный")}
-																	onClick={() => {
-																		setIdModal(row);
-																		setUnLock(!unLock);
-																	}}>
-																	<Icon name="power" />
-																</Button.Outline>
-															);
-														} else {
-															return (
-																<Button.Outline
-																	className="status-btn"
-																	type="danger"
-																	tooltip={t("Бан")}
-																	onClick={() => blockButton(row.id)}>
-																	<Icon name="power" />
-																</Button.Outline>
-															);
-														}
-													} else if (status === 1) {
-														return (
-															<Button.Outline
-																className="status-btn"
-																type="success"
-																tooltip={t("Активный")}
-																onClick={() => {
-																	setIdModal(row);
-																	setUnLock(!unLock);
-																}}>
-																<Icon name="power" />
-															</Button.Outline>
-														);
-													}
-												}
-											},
-											{
-												className: "w-5",
-												render: (_, row) => {
-													return (
-														<Button.Outline className="status-btn" type="success" onClick={() => onViewTransaction(row)}>
-															<Icon name="dollar-sign" />
+														<Button.Outline
+															className="status-btn"
+															type="success"
+															tooltip={t("Активный")}
+															onClick={() => {
+																setIdModal(row);
+																setUnLock(!unLock);
+															}}>
+															<Icon name="power" />
 														</Button.Outline>
 													);
-												}
-											},
-											{
-												className: "w-5",
-												render: (_, row) => {
+												} else if (status === 10) {
+													if (banStatus === 2) {
+														return (
+															<Button.Outline
+																className="status-btn"
+																type="success"
+																tooltip={t("Активный")}
+																onClick={() => {
+																	setIdModal(row);
+																	setUnLock(!unLock);
+																}}>
+																<Icon name="power" />
+															</Button.Outline>
+														);
+													} else {
+														return (
+															<Button.Outline
+																className="status-btn"
+																type="danger"
+																tooltip={t("Бан")}
+																onClick={() => blockButton(row.id)}>
+																<Icon name="power" />
+															</Button.Outline>
+														);
+													}
+												} else if (status === 1) {
 													return (
-														<Button.Outline className="status-btn" type="success" onClick={() => onView(row)}>
-															<Icon name="eye" />
+														<Button.Outline
+															className="status-btn"
+															type="success"
+															tooltip={t("Активный")}
+															onClick={() => {
+																setIdModal(row);
+																setUnLock(!unLock);
+															}}>
+															<Icon name="power" />
 														</Button.Outline>
 													);
 												}
 											}
-										]}
-										dataSource={items}
-									/>
-									{get(meta, "pageCount", 1) > 1 && (
-										<Pagination pageCount={get(meta, "pageCount", 1)} currentPage={page ? Number(page) : 1} handlePageClick={onChange} />
-									)}
-								</div>
-							) : (
-								<>
-									<Spinner position="center" />
-									<div className="table-overlay" />
-								</>
-							)}
+										},
+										{
+											className: "w-5",
+											render: (_, row) => {
+												return (
+													<Button.Outline className="status-btn" type="success" onClick={() => onViewTransaction(row)}>
+														<Icon name="dollar-sign" />
+													</Button.Outline>
+												);
+											}
+										},
+										{
+											className: "w-5",
+											render: (_, row) => {
+												return (
+													<Button.Outline className="status-btn" type="success" onClick={() => onView(row)}>
+														<Icon name="eye" />
+													</Button.Outline>
+												);
+											}
+										}
+									]}
+									dataSource={items}
+								/>
+								{get(meta, "pageCount", 1) > 1 && (
+									<Pagination pageCount={get(meta, "pageCount", 1)} currentPage={page ? Number(page) : 1} handlePageClick={onChange} />
+								)}
+							</div>
 						</div>
 					);
 				}}

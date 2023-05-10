@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNotification } from "hooks";
 import { get } from "lodash";
 import Form from "./components/form";
-import { Spinner, Typography } from "components";
+import { Loader, Typography } from "components";
 import Actions from "store/actions";
 
 const Update = ({ history, match }) => {
@@ -90,24 +90,24 @@ const Update = ({ history, match }) => {
 								setUserUpdate(values);
 								return (
 									<>
-										{(!isFetched || isSubmitting) && (
-											<div className="spinner-overlay">
-												<Spinner tips="Загрузка..." />
-											</div>
-										)}
 										<Typography.Heading type={5} className="intro-y mt-10 mb-5">
 											Изменение номер пользователя
 										</Typography.Heading>
-										<Form
-											{...{
-												isUpdate: true,
-												isFetched,
-												values,
-												setFieldValue,
-												isSubmitting,
-												item
-											}}
-										/>
+
+										{!isFetched ? (
+											<Loader />
+										) : (
+											<Form
+												{...{
+													isUpdate: true,
+													isFetched,
+													values,
+													setFieldValue,
+													isSubmitting,
+													item
+												}}
+											/>
+										)}
 									</>
 								);
 							}}

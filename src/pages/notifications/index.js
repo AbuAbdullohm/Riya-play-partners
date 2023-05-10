@@ -136,105 +136,95 @@ const List = ({ history, location }) => {
 								<Filter />
 							</Header>
 
-							{isFetched ? (
-								<Table
-									items={items}
-									isFetched={isFetched}
-									rowKey="notification_id"
-									className="mt-5"
-									hasEdit={true}
-									editAction={value => history.push(`/notifications/update/${value.id}`)}
-									emptyUiText="Список пусто"
-									deleteAction={value => onDeleteHandler(value.notification_id)}
-									columns={[
-										{
-											title: t("ID"),
-											dataIndex: "notification_id",
-											className: "w-4",
-											render: value => <>{value}</>
-										},
-										{
-											title: t("Загаловок"),
-											dataIndex: "title",
-											render: value => {
-												return <>{value}</>;
-											}
-										},
-										{
-											title: t("Тип"),
-											dataIndex: "type",
-											render: value => (
-												<>{value === 1 ? t("Новости") : value === 2 ? t("Фильмы") : value === 4 ? t("По тарифу") : t("Уведомление")}</>
-											)
-										},
-										{
-											title: t("Перенаправление"),
-											dataIndex: "model",
-											render: (value, row) => (
-												<>
-													{get(row, "type") === 1
-														? get(row, "model.title")
-														: get(row, "type") === 2
-														? get(row, "model.name_ru")
-														: "-"}
-												</>
-											)
-										},
-										{
-											title: t("Статус"),
-											className: "w-8",
-											dataIndex: "status",
-											render: value => {
-												return <>{value === 1 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</>;
-											}
-										},
-										{
-											className: "w-5",
-											render: (_, row) => {
-												const status = get(row, "status");
-												return status === 0 ? (
-													<Button.Outline
-														className="status-btn"
-														type="success"
-														tooltip={t("Активный")}
-														onClick={() => {
-															setSelected(row);
-															updateAction(get(row, "notification_id"), "activate");
-														}}>
-														<Icon name="power" />
-													</Button.Outline>
-												) : (
-													<Button.Outline
-														className="status-btn"
-														type="danger"
-														tooltip={t("Неактивный")}
-														onClick={() => updateAction(get(row, "notification_id"), "deactivate")}>
-														<Icon name="power" />
-													</Button.Outline>
-												);
-											}
-										},
-										{
-											className: "w-5",
-											render: (_, row) => {
-												return (
-													<Button.Outline
-														className="status-btn"
-														type="success"
-														onClick={() => {
-															setView(!view);
-															setViewData(row);
-														}}>
-														<Icon name="eye" />
-													</Button.Outline>
-												);
-											}
+							<Table
+								items={items}
+								isFetched={isFetched}
+								rowKey="notification_id"
+								className="mt-5"
+								hasEdit={true}
+								editAction={value => history.push(`/notifications/update/${value.id}`)}
+								emptyUiText="Список пусто"
+								deleteAction={value => onDeleteHandler(value.notification_id)}
+								columns={[
+									{
+										title: t("ID"),
+										dataIndex: "notification_id",
+										className: "w-4",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Загаловок"),
+										dataIndex: "title",
+										render: value => {
+											return <>{value}</>;
 										}
-									]}
-								/>
-							) : (
-								<Spinner position="center" className="mt-5" />
-							)}
+									},
+									{
+										title: t("Тип"),
+										dataIndex: "type",
+										render: value => (
+											<>{value === 1 ? t("Новости") : value === 2 ? t("Фильмы") : value === 4 ? t("По тарифу") : t("Уведомление")}</>
+										)
+									},
+									{
+										title: t("Перенаправление"),
+										dataIndex: "model",
+										render: (value, row) => (
+											<>{get(row, "type") === 1 ? get(row, "model.title") : get(row, "type") === 2 ? get(row, "model.name_ru") : "-"}</>
+										)
+									},
+									{
+										title: t("Статус"),
+										className: "w-8",
+										dataIndex: "status",
+										render: value => {
+											return <>{value === 1 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</>;
+										}
+									},
+									{
+										className: "w-5",
+										render: (_, row) => {
+											const status = get(row, "status");
+											return status === 0 ? (
+												<Button.Outline
+													className="status-btn"
+													type="success"
+													tooltip={t("Активный")}
+													onClick={() => {
+														setSelected(row);
+														updateAction(get(row, "notification_id"), "activate");
+													}}>
+													<Icon name="power" />
+												</Button.Outline>
+											) : (
+												<Button.Outline
+													className="status-btn"
+													type="danger"
+													tooltip={t("Неактивный")}
+													onClick={() => updateAction(get(row, "notification_id"), "deactivate")}>
+													<Icon name="power" />
+												</Button.Outline>
+											);
+										}
+									},
+									{
+										className: "w-5",
+										render: (_, row) => {
+											return (
+												<Button.Outline
+													className="status-btn"
+													type="success"
+													onClick={() => {
+														setView(!view);
+														setViewData(row);
+													}}>
+													<Icon name="eye" />
+												</Button.Outline>
+											);
+										}
+									}
+								]}
+							/>
 
 							{get(meta, "pageCount", 1) > 1 && (
 								<Pagination pageCount={get(meta, "pageCount", 1)} currentPage={page ? Number(page) : 1} handlePageClick={onChange} />

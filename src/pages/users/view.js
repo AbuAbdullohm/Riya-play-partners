@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Tag, Button, Spinner } from "components";
+import { Avatar, Tag, Button, Loader } from "components";
 import { get } from "lodash";
 import Actions from "modules/entity/actions";
 import { helpers } from "services";
 import UserInfo from "./components/userInfo";
 import EntityContainer from "modules/entity/containers";
 import { useDispatch } from "react-redux";
+
 const View = ({ viewDataModal: data, view }) => {
 	const [startRatesTime, setStartRatesTime] = useState();
 	const [button, setButton] = useState(false);
@@ -245,7 +246,7 @@ const View = ({ viewDataModal: data, view }) => {
 								</div>
 							</>
 						) : (
-							<Spinner position="center" />
+							<Loader />
 						)}
 					</>
 				);
