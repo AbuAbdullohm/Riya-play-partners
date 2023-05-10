@@ -12,6 +12,7 @@ import Apelsin from "assets/images/uzum.svg";
 import Paynet from "assets/images/paynet.svg";
 import Click from "assets/images/icons/icons-dashboard/click.svg";
 import moment from "moment";
+
 export default function BugalterComponent({ items, params }) {
 	const [statistics, setStatistics] = useState();
 	const dispatch = useDispatch();
@@ -49,6 +50,7 @@ export default function BugalterComponent({ items, params }) {
 	const payme = get(statistics, "payme");
 	const paynet = get(statistics, "paynet");
 	const click = get(statistics, "click");
+
 	return (
 		<div>
 			{params.start ? (
@@ -82,7 +84,7 @@ export default function BugalterComponent({ items, params }) {
 							Пополнение счета <span className="bugalter-box_span">i</span>
 						</h2>
 						<h1 className="total">
-							{Number(comming).toLocaleString("en-US", {
+							{Number(comming || 0).toLocaleString("en-US", {
 								style: "currency",
 								currency: "UZS",
 								minimumFractionDigits: 0
@@ -98,7 +100,7 @@ export default function BugalterComponent({ items, params }) {
 							Абонентская плата <span className="bugalter-box_span">i</span>
 						</h2>
 						<h1 className="total">
-							{Number(expanse).toLocaleString("en-US", {
+							{Number(expanse || 0).toLocaleString("en-US", {
 								style: "currency",
 								currency: "UZS",
 								minimumFractionDigits: 0
@@ -117,7 +119,7 @@ export default function BugalterComponent({ items, params }) {
 							<img src={Paynet} alt="" />
 
 							<p className="bugalter-box_4_card_p2">
-								{Number(paynet).toLocaleString("en-US", {
+								{Number(paynet || 0).toLocaleString("en-US", {
 									style: "currency",
 									currency: "UZS",
 									minimumFractionDigits: 0
@@ -130,7 +132,7 @@ export default function BugalterComponent({ items, params }) {
 							</div>
 
 							<p className="bugalter-box_4_card_p2">
-								{Number(apelsin).toLocaleString("en-US", {
+								{Number(apelsin || 0).toLocaleString("en-US", {
 									style: "currency",
 									currency: "UZS",
 									minimumFractionDigits: 0
@@ -143,7 +145,7 @@ export default function BugalterComponent({ items, params }) {
 							</div>
 
 							<p className="bugalter-box_4_card_p2">
-								{Number(payme).toLocaleString("en-US", {
+								{Number(payme || 0).toLocaleString("en-US", {
 									style: "currency",
 									currency: "UZS",
 									minimumFractionDigits: 0
@@ -156,7 +158,7 @@ export default function BugalterComponent({ items, params }) {
 							</div>
 
 							<p className="bugalter-box_4_card_p2">
-								{Number(click).toLocaleString("en-US", {
+								{Number(click || 0).toLocaleString("en-US", {
 									style: "currency",
 									currency: "UZS",
 									minimumFractionDigits: 0

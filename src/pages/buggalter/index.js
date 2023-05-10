@@ -114,7 +114,7 @@ const List = ({ history, location }) => {
 												} else if (value === "apelsin") {
 													return <img src={Apelsin} className="w-20 box-none" alt="" />;
 												} else if (value === "From Api") {
-													return <img src={Bektv} className="w-10 box-none" alt="" />;
+													return <img src={Bektv} className="w-20 box-none" alt="" />;
 												} else if (value === "click") {
 													return <img src={click} className="box-none" style={{ width: "55px" }} alt="" />;
 												} else if (value === "apelsin_frame") {
