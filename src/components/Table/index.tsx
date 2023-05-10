@@ -78,7 +78,7 @@ const TableComponent: FC<ITableProps> = ({
 						</tr>
 					</thead>
 
-					{isFetched && items.length > 0 && (
+					{items.length > 0 && (
 						<tbody>
 							{items.map(item => {
 								return (
