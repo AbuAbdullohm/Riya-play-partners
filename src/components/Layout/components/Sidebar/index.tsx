@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { menu } from "./menu";
 import { get } from "lodash";
 import Icon from "components/Icon";
-import Profile from "components/Profile";
+
 import useOutsideClick from "hooks/useOutsideClick";
 import Actions from "store/actions/system";
 
@@ -78,7 +78,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 				</div> */}
 			</div>
 
-			<ul className="mt-10" ref={ref}>
+			<ul className="mt-10 list" ref={ref}>
 				{getAccess(get(user, "role", "moderator")).map((m: any, i: number) => {
 					if (get(m, "submenu")) {
 						return (
@@ -129,7 +129,6 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 						);
 				})}
 			</ul>
-			<Profile />
 		</nav>
 	);
 };

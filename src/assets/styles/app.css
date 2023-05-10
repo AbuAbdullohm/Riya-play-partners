@@ -4600,6 +4600,7 @@ video {
 
 .content {
 	padding: 0 22px;
+	margin-top: 72px;
 	padding-bottom: 5rem;
 	height: 100vh;
 	overflow-y: auto;
@@ -4651,6 +4652,7 @@ video {
 
 @media (max-width: 767px) {
 	.content {
+		margin-top: 56px;
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
@@ -5931,12 +5933,13 @@ video {
 
 .side-nav {
 	width: 250px;
-	padding: 2rem 1.25rem 9rem;
+	padding: 2rem 1.25rem;
 	--tw-text-opacity: 1;
 	color: rgba(140, 157, 202, var(--tw-text-opacity));
 	position: relative;
 	user-select: none;
 	overflow-y: auto;
+	z-index: 1;
 }
 
 .side-nav::-webkit-scrollbar-track {
