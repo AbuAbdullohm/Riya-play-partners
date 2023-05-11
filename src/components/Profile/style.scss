@@ -11,6 +11,12 @@
 	align-items: center;
 	justify-content: flex-end;
 
+	.logo {
+		margin-right: auto;
+		svg {
+			height: calc(72px - 2rem);
+		}
+	}
 	.intro-x {
 		z-index: 45 !important;
 	}

@@ -82,7 +82,7 @@ const TableComponent: FC<ITableProps> = ({
 						<tbody>
 							{items.map(item => {
 								return (
-									<tr key={item[rowKey]} className="intro-x">
+									<tr key={item[rowKey]} className="intro-y">
 										{columns.map((col, id) => {
 											return (
 												<td

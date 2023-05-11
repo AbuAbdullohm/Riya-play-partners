@@ -7,6 +7,8 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import "./style.scss";
 import DefaultPhoto from "assets/images/user.svg";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import { ReactComponent as Logo } from "assets/images/bektv.svg";
 
 interface ILinkProps {
 	id: number;
@@ -74,6 +76,9 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 			/>
 
 			<div className="side-nav__footer">
+				<Link to={"/"} className="logo">
+					<Logo />
+				</Link>
 				<div className="profile-component intro-x dropdown w-8 h-8 cursor-pointer" ref={ref}>
 					<div className="profile-component__header" onClick={() => setIsVisible(!isVisible)}>
 						<div className="user border-theme-12 dark:border-dark-3 mr_10">
