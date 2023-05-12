@@ -33,21 +33,11 @@ export default function Donut({ items, keyword, ratesData }) {
 	const result = {
 		options: {
 			colors: getChartColor(items, keyword),
-			chart: {
-				dropShadow: {
-					enabled: true,
-					blur: 5,
-					color: "#333",
-					opacity: 0.35
-				}
-			},
 			tooltip: {
-				shared: true,
-				intersect: false,
 				y: {
 					formatter: function(y) {
 						if (typeof y !== "undefined") {
-							return `	
+							return `
 								<span>
 									${Number(y).toLocaleString("en-US", {
 										style: "currency",
@@ -63,12 +53,12 @@ export default function Donut({ items, keyword, ratesData }) {
 
 			labels: getChartLabel(keyword)
 		},
-
 		series: getChartSeries(items, keyword)
 	};
+
 	return (
 		<div className="donut">
-			<Chart options={result.options} series={result.series} type="pie" width="300" />
+			<Chart options={result.options} series={result.series} type="donut" width="300" />
 		</div>
 	);
 }

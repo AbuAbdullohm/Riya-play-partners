@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Form, Field } from "formik";
-import { Fields, Button, Panel, Loader } from "components";
-import qs from "qs";
-import CardBox from "./components/CardBox";
 import { useDispatch, useSelector } from "react-redux";
-import Actions from "modules/entity/actions";
-import { helpers } from "services";
+import { Formik, Form, Field } from "formik";
 import { get } from "lodash";
+import moment from "moment";
+import qs from "qs";
+
+import Actions from "modules/entity/actions";
+import { Fields, Button, Panel, Loader } from "components";
+import { helpers } from "services";
+import CardBox from "./components/CardBox";
 import Table from "./components/Table";
 import Chart from "./components/Chart";
+
 import "./style.scss";
 
-import MoneyTransaction from "assets/images/icons/icons-dashboard/moneyTranzaksion.svg";
-import ContactIcon from "assets/images/icons/icons-dashboard/Group 1.svg";
-import Karmang from "assets/images/icons/icons-dashboard/karman.svg";
-import Shop from "assets/images/icons/icons-dashboard/shop.svg";
-import moment from "moment";
+import { ReactComponent as ContactIcon } from "assets/images/icons/icons-dashboard/Group 1.svg";
+import { ReactComponent as MoneyTransaction } from "assets/images/icons/icons-dashboard/moneyTranzaksion.svg";
+import { ReactComponent as Karmang } from "assets/images/icons/icons-dashboard/karman.svg";
+import { ReactComponent as Shop } from "assets/images/icons/icons-dashboard/shop.svg";
 
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -114,6 +116,12 @@ const List = ({ history, location }) => {
 		);
 	}, [filterValue, location.search]);
 
+	const soledSubscriptions = helpers.formatCurrency(get(items, "expenses", []).reduce((total, count) => (total += count.id), 0));
+	const discountTransactions = helpers.formatCurrency(transaction && Number(transaction.comming) - Number(transaction.expanse));
+
+	const transactionsCount = get(items, "incomes", []).reduce((total, count) => (total += count.id), 0);
+	const usersCount = String(get(items, "usersCount", 0));
+
 	if (!loading) return <Loader />;
 
 	return (
@@ -172,46 +180,70 @@ const List = ({ history, location }) => {
 			</div>
 
 			<div className="dashboard_main">
-				<div className="dashboard_main_left">
-					<div className="dashboard_main_left_card">
-						<CardBox img={ContactIcon} total={String(get(items, "usersCount", 0))} title="Пользователи" />
-						<CardBox img={Karmang} transaction={transaction && Number(transaction.comming) - Number(transaction.expanse)} title="В кошельке" />
-						<CardBox
-							img={MoneyTransaction}
-							total={get(items, "incomes", []).reduce((total, count) => (total += count.id), 0)}
-							title="Количество транзакций"
-						/>
-						<CardBox img={Shop} total={get(items, "expenses", []).reduce((total, count) => (total += count.id), 0)} title="Купленные тарифы" />
+				<Panel className="dashboard_main_left">
+					<div className="title_header d-flex align-items-center mb-3">
+						<span className="mr-2">Клиенты</span>
+						<Karmang width={40} height={40} className="mr-2 ml-auto" /> {discountTransactions}
 					</div>
+					<CardBox Icon={ContactIcon} total={usersCount} title="Пользователи" />
+					<CardBox Icon={MoneyTransaction} total={transactionsCount} title="Количество транзакций" />
+					<CardBox Icon={Shop} total={soledSubscriptions} title="Купленные тарифы" />
+				</Panel>
 
-					<Panel className="dashboard_main_left_table mt-5">
-						<h1 className="title_header">Топ оплаты</h1>
+				<div style={{ zIndex: "1" }}>
+					<Panel className="dashboard_main_right payment_info">
+						<div className="d-flex justify-between">
+							<div>
+								<div className="title_header mb-3 d-flex align-items-center">
+									Пополнение счета <Karmang width={40} height={40} className="ml-2" />
+								</div>
 
-						<div className="dashboard_table" id="dashboard_table">
-							<table className="table">
-								<tbody>
-									{items &&
-										get(items, "topTransactions", []).map((item, idx) => (
-											<Table
-												key={idx}
-												contact
-												contactId={item.transaction_id}
-												contactPhone={item.user}
-												summ={item.amount}
-												time={moment.unix(item.created_at).format("DD.MM.YYYY / HH:mm:ss")}
-											/>
-										))}
-								</tbody>
-							</table>
+								<Chart keyword="chart2" items={items} />
+							</div>
+							<div className="payment_info_inner">
+								<div className="payment_info_inner_header">
+									<h1 className="payment_info_inner_header_title dashboard_title">Общая сумма</h1>
+									<p className="payment_info_inner_header_summ">
+										{Number(allSumm).toLocaleString("en-US", {
+											style: "currency",
+											currency: "UZS",
+											minimumFractionDigits: 0
+										})}
+									</p>
+								</div>
+								<div className="dashboard_table" id="dashboard_table">
+									<table className="table">
+										<tbody>
+											{items &&
+												get(items, "incomes", []).map((item, idx) => (
+													<Table
+														key={idx}
+														span
+														transactionDownIcon
+														spanColor={item.payment_method}
+														paymentProcent={item.procent}
+														paymentLogo={item.payment_method}
+														transaction={item.id}
+														summ={item.amount}
+													/>
+												))}
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</Panel>
-				</div>
-				<div style={{ zIndex: "1" }}>
-					<Panel className="dashboard_main_right rates_payment_info">
-						<h1 className="title_header mb-3">Купленные тарифы</h1>
 
+					<Panel className="dashboard_main_right rates_payment_info mt-5">
 						<div className="d-flex justify-between">
-							<Chart keyword="chart1" items={items} ratesData={ratesData} />
+							<div>
+								<div className="title_header mb-3 d-flex align-items-center">
+									<span>Купленные тарифы:</span>
+									<Shop className="mx-1 ml-auto" width={40} height={40} />
+									<span>{soledSubscriptions}</span>
+								</div>
+								<Chart keyword="chart1" items={items} ratesData={ratesData} />
+							</div>
 							<div className="rates_payment_info_inner">
 								<div className="rates_payment_info_inner_header">
 									<h1 className="rates_payment_info_inner_header_title dashboard_title mt-0">Общая сумма</h1>
@@ -248,41 +280,28 @@ const List = ({ history, location }) => {
 							</div>
 						</div>
 					</Panel>
-					<Panel className="dashboard_main_right payment_info mt-5">
-						<h1 className="title_header mb-3">Пополнение счета</h1>
-						<div className="d-flex justify-between">
-							<Chart keyword="chart2" items={items} />
-							<div className="payment_info_inner">
-								<div className="payment_info_inner_header">
-									<h1 className="payment_info_inner_header_title dashboard_title">Общая сумма</h1>
-									<p className="payment_info_inner_header_summ">
-										{Number(allSumm).toLocaleString("en-US", {
-											style: "currency",
-											currency: "UZS",
-											minimumFractionDigits: 0
-										})}
-									</p>
-								</div>
-								<div className="dashboard_table" id="dashboard_table">
-									<table className="table">
-										<tbody>
-											{items &&
-												get(items, "incomes", []).map((item, idx) => (
-													<Table
-														key={idx}
-														span
-														transactionDownIcon
-														spanColor={item.payment_method}
-														paymentProcent={item.procent}
-														paymentLogo={item.payment_method}
-														transaction={item.id}
-														summ={item.amount}
-													/>
-												))}
-										</tbody>
-									</table>
-								</div>
-							</div>
+
+					<Panel className="dashboard_main_right top_table mt-5">
+						<div className="title_header d-flex align-items-center">
+							Топ оплаты <MoneyTransaction width={40} height={40} className="ml-2" />
+						</div>
+
+						<div className="dashboard_table" id="dashboard_table">
+							<table className="table">
+								<tbody>
+									{items &&
+										get(items, "topTransactions", []).map((item, idx) => (
+											<Table
+												key={idx}
+												contact
+												contactId={item.transaction_id}
+												contactPhone={item.user}
+												summ={item.amount}
+												time={moment.unix(item.created_at).format("DD.MM.YYYY / HH:mm:ss")}
+											/>
+										))}
+								</tbody>
+							</table>
 						</div>
 					</Panel>
 				</div>

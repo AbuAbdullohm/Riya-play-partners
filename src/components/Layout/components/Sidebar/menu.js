@@ -7,6 +7,7 @@ export const menu = [
 		access: ["admin", "moderator", "super_admin"],
 		submenu: [
 			{ id: "films", title: "Фильмы", link: "/films", icon: "play-circle", lang: false },
+			{ id: "series", title: "Серии", link: "/series", icon: "tv", lang: false, access: ["admin", "moderator", "super_admin"] },
 			{ id: "types", title: "Типы", link: "/types", icon: "type", lang: false, access: ["admin"] },
 			{ id: "categories", title: "Категории", link: "/categories", icon: "list", lang: false, access: ["admin"] },
 			{ id: "seasons", title: "Сезоны", link: "/seasons", icon: "cast", lang: false, access: ["admin"] },
@@ -16,21 +17,19 @@ export const menu = [
 			{ id: "actors", title: "Актеры", link: "/actors", icon: "users", lang: false, access: ["admin", "moderator", "super_admin"] }
 		]
 	},
-	{ id: "series", title: "Серии", link: "/series", icon: "tv", lang: false, access: ["admin", "moderator", "super_admin"] },
-	{ id: "review", title: "Отзывы", link: "/review", icon: "message-square", lang: false, access: ["moderator", "super_admin", "admin", "redactor"] },
+	{ id: "spisalice", title: "Специалист", link: "/spisalice", icon: "user", access: ["admin", "super_admin"] },
 	{
 		id: "users",
 		title: "Пользователи",
 		icon: "users",
 		access: ["admin", "super_admin"],
 		submenu: [
-			{ id: "spisalice", title: "Специалист", link: "/spisalice", icon: "user", access: ["admin", "super_admin"] },
 			{ id: "foreingUser", title: "Иностранный пользователь", link: "/foreign-user", icon: "user-x", access: ["admin", "moderator", "super_admin"] },
 
 			{ id: "contact", title: "Пользователи", link: "/users", icon: "user-x", access: ["admin", "moderator", "super_admin"] }
 		]
 	},
-
+	{ id: "review", title: "Отзывы", link: "/review", icon: "message-square", lang: false, access: ["moderator", "super_admin", "admin", "redactor"] },
 	{ id: "rates", title: "Тариф", link: "/rates", icon: "hard-drive", lang: false, access: ["super_admin", "bookkeeping"] },
 	{ id: "version", title: "Версия", link: "/version", icon: "smartphone", lang: false, access: ["super_admin", "bookkeeping"] },
 	{ id: "promo-code", title: "Промокод", link: "/promo-code", icon: "gift", lang: false, access: ["super_admin"] },

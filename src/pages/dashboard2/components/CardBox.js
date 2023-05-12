@@ -1,13 +1,14 @@
 import React from "react";
 import { Panel } from "components";
-export default function CardBox({ img, total, transaction, title }) {
+
+export default function CardBox({ Icon, total, transaction, title }) {
 	return (
 		<Panel className="dashboard_cardBox">
-			<img src={img} alt="" />
+			<Icon />
 			<p className="dashboard_title">{title}</p>
 			<p className="dashboard_result">
 				{total
-					? String(total).replace(/(.)(?=(\d{3})+$)/g, "$1,")
+					? total
 					: Number(transaction).toLocaleString("en-US", {
 							style: "currency",
 							currency: "UZS",

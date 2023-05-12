@@ -18,7 +18,7 @@ interface ILinkProps {
 	className?: string;
 }
 
-const className: string = "flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md";
+const className: string = "flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md mb-1";
 
 const links = [
 	{
@@ -97,17 +97,17 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 							<div className="p-2">
 								{links.map(link => (
 									<Typography.Link key={link.id} url={link.url} className={link.className}>
-										<Icon name={link.icon} className="w-4 h-4 mr-2 mb-1" />
+										<Icon name={link.icon} className="w-4 h-4 mr-2" />
 										{t(link.title)}
 									</Typography.Link>
 								))}
+								<div className="logout font-bold" onClick={() => setModal(true)}>
+									<Icon name="log-out" className="h-6 mr-2 mb-1" />
+									<div className="logout__title">{t("Выход")}</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div className="logout font-bold" onClick={() => setModal(true)}>
-					<Icon name="log-out" className="h-6 mr-2 mb-1" />
 				</div>
 			</div>
 		</>

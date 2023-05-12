@@ -2,6 +2,23 @@
 
 /*! tailwindcss v2.1.2 | MIT License | https://tailwindcss.com*/
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+
+@font-face {
+	font-family: "Exo 2";
+	src: url("../fonts/Exo/Exo2-Italic.woff2") format("woff2"), url("../fonts/Exo/Exo2-Italic.woff") format("woff");
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Exo 2";
+	src: url("../fonts/Exo/Exo2-Regular.woff2") format("woff2"), url("../fonts/Exo/Exo2-Regular.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
 html {
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
@@ -12,7 +29,20 @@ html {
 
 body {
 	margin: 0;
-	font-family: system-ui, "-apple-system", Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p,
+div {
+	font-family: "Exo 2";
+	font-weight: 400;
+	font-style: normal;
 }
 
 body::-webkit-scrollbar-track {

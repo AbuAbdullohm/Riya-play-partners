@@ -26,6 +26,21 @@ export default function Table({
 			<td>
 				{span && <div className={`${spanColor} span`}></div>}
 				{rates}
+				{paymentLogo && paymentLogo === "payme" ? (
+					<img src={payme} alt="" />
+				) : paymentLogo === "apelsin" ? (
+					<img src={apelsin} alt="apelsin" style={{ minWidth: "70px", maxWidth: "80px" }} />
+				) : paymentLogo === "paynet" ? (
+					<img src={paynet} alt="paynet" style={{ minWidth: "80px", maxWidth: "80px" }} />
+				) : paymentLogo === "click" ? (
+					<img src={click} alt="click" style={{ minWidth: "65px", height: "25px", maxWidth: "80px" }} />
+				) : paymentLogo === "apelsin_frame" ? (
+					<div className="d-flex align-center">
+						<img src={apelsin} alt="apelsin_frame" style={{ minWidth: "70px", maxWidth: "80px", marginRight: "5px" }} /> frame
+					</div>
+				) : (
+					""
+				)}
 				{contact && (
 					<div className="contact">
 						<img src={ContactUser} alt="" />
@@ -35,28 +50,8 @@ export default function Table({
 						</div>
 					</div>
 				)}
-				{paymentProcent && paymentProcent}
 			</td>
-			{paymentLogo && (
-				<td>
-					{paymentLogo === "payme" ? (
-						<img src={payme} alt="" />
-					) : paymentLogo === "apelsin" ? (
-						<img src={apelsin} alt="apelsin" style={{ minWidth: "70px", maxWidth: "80px" }} />
-					) : paymentLogo === "paynet" ? (
-						<img src={paynet} alt="paynet" style={{ minWidth: "80px", maxWidth: "80px" }} />
-					) : paymentLogo === "click" ? (
-						<img src={click} alt="click" style={{ minWidth: "65px", height: "25px", maxWidth: "80px" }} />
-					) : paymentLogo === "apelsin_frame" ? (
-						<div className="d-flex align-center">
-							<img src={apelsin} alt="apelsin_frame" style={{ minWidth: "70px", maxWidth: "80px", marginRight: "5px" }} /> frame
-						</div>
-					) : (
-						""
-					)}
-				</td>
-			)}
-
+			<td>{paymentProcent && paymentProcent}</td>
 			{time && <td className="dashboard_time">{time}</td>}
 			{procent && <td>{procent}</td>}
 			{transactionDownIcon ? (

@@ -170,7 +170,12 @@ function debounce(callBack, nameTask, duration = 1000) {
 	tasks[nameTask] = setTimeout(callBack, duration);
 }
 
+function formatCurrency(sum) {
+	return String(sum).replace(/(.)(?=(\d{3})+$)/g, "$1,");
+}
+
 export default {
+	formatCurrency,
 	formatDate,
 	stringToCode,
 	isEnableLang,

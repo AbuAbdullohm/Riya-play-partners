@@ -9,6 +9,8 @@ import Actions from "store/actions";
 import { storage } from "services";
 import { useDispatch } from "react-redux";
 
+import { ReactComponent as RiyaPlayLogo } from "assets/images/bektv.svg";
+
 const Login = ({ history }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
@@ -24,8 +26,11 @@ const Login = ({ history }) => {
 	return (
 		<div className="login__page">
 			<div className="container sm:px-10">
-				<Grid.Row cols={2} className="login__page--container">
-					<div className="login__page--left d-flex flex-col">
+				<Grid.Row cols={12} className="login__page--container">
+					<div className="login__page--left d-flex flex-col ml-auto mr-auto">
+						<div className="logo">
+							<RiyaPlayLogo />
+						</div>
 						<h4 className="login__page--title">Добро пожаловать</h4>
 						{/*<p className="login__page--info">Мы всегда рады помочь вам по работе в электронном*/}
 						{/*	автоматизированном системе обработки заявок по услугам Агентствы продвижения экспорта*/}
@@ -78,7 +83,7 @@ const Login = ({ history }) => {
 											placeholder={t("Введите пароль")}
 											label="Ключ авторизации"
 											containerClassName="mt-10"
-											extra={<img src={require("assets/images/icons/key.svg")} alt="" />}
+											password={true}
 										/>
 										<div className="intro-x mt-5 text-left">
 											<Button.Default
@@ -97,21 +102,6 @@ const Login = ({ history }) => {
 								);
 							}}
 						</EntityForm.Default>
-					</div>
-					<div className="login__page--right">
-						<div className="login__page--modal">
-							<div className="login__page--abs-1">
-								<img src={require("assets/images/icons/shield.svg")} alt="" />
-							</div>
-							<img src={require("assets/images/icons/shield.svg")} alt="" />
-							<h5>
-								Bek TV
-								{/* {t("Ўзбекистон Республикаси Инвестициялар ва ташқи савдо вазирлиги")} */}
-							</h5>
-							<a href="http://bektv.uz/" target="_blank" rel="noreferrer noopener">
-								www.bektv.uz
-							</a>
-						</div>
 					</div>
 				</Grid.Row>
 			</div>

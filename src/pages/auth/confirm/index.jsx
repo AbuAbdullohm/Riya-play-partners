@@ -10,6 +10,8 @@ import { storage } from "services";
 import Actions from "store/actions";
 import { useDispatch } from "react-redux";
 
+import { ReactComponent as RiyaPlayLogo } from "assets/images/bektv.svg";
+
 const Confirm = ({ history }) => {
 	const { code } = useParams();
 	const { t } = useTranslation();
@@ -27,8 +29,11 @@ const Confirm = ({ history }) => {
 	return (
 		<div className="login__page">
 			<div className="container sm:px-10">
-				<Grid.Row cols={2} className="login__page--container">
-					<div className="login__page--left d-flex flex-col">
+				<Grid.Row cols={12} className="login__page--container">
+					<div className="login__page--left d-flex flex-col mr-auto ml-auto">
+						<div className="logo">
+							<RiyaPlayLogo />
+						</div>
 						<h4 className="login__page--title">Введите код</h4>
 						<p className="login__page--info">
 							Мы отправили вам код в виде СМС на ваше номерт телефона который было указано в профиле, пожалуйтста введите код для входа в систему
@@ -72,7 +77,7 @@ const Confirm = ({ history }) => {
 											placeholder={t("Введите пароль")}
 											label="Код авторизации"
 											containerClassName="mt-10"
-											extra={<img src={require("assets/images/icons/key.svg")} alt="" />}
+											password={true}
 										/>
 										<div className="intro-x mt-5 text-left">
 											<Button.Default
@@ -104,18 +109,6 @@ const Confirm = ({ history }) => {
 								);
 							}}
 						</EntityForm.Default>
-					</div>
-					<div className="login__page--right">
-						<div className="login__page--modal">
-							<div className="login__page--abs-1">
-								<img src={require("assets/images/icons/shield.svg")} alt="" />
-							</div>
-							<img src={require("assets/images/icons/shield.svg")} alt="" />
-							<h5>{t("Bektv")}</h5>
-							<a href="http://bektv.uz" target="_blank" rel="noreferrer noopener">
-								www.bektv.uz
-							</a>
-						</div>
 					</div>
 				</Grid.Row>
 			</div>
