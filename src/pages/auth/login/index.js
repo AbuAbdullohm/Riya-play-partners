@@ -48,9 +48,14 @@ const Login = ({ history }) => {
 								}
 							}}
 							onError={error => {
-								notification(get(error, "errorMessage"), {
-									type: "danger"
-								});
+								notification(
+									error.errorMessage
+										? get(error, "errorMessage")
+										: get(error, "errorData.password[0]") + `<hr style="opacity: 0;" class="mb-2"/>${t("admin_panel_masul_hodim_raqami")}`,
+									{
+										type: "danger"
+									}
+								);
 							}}
 							fields={[
 								{

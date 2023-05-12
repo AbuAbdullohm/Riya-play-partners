@@ -8,6 +8,7 @@ import isArray from "lodash/isArray";
 import objectToFormData from "object-to-formdata";
 import PropTypes from "prop-types";
 import Actions from "../actions";
+import i18next from "i18next";
 
 const Main = ({ children, handleSubmit, submitForm, values, isSubmitting, setFieldValue, setFieldError, setFieldTouched, version }) => {
 	return (
@@ -78,15 +79,15 @@ const EnhacedForm = withFormik({
 			}
 
 			if (field.required) {
-				validationField = validationField.required("Required");
+				validationField = validationField.required(i18next.t("Обязательное поле"));
 			}
 
 			if (field.min) {
-				validationField = validationField.min(field.min, "Too Short!");
+				validationField = validationField.min(field.min, i18next.t("Too Short!"));
 			}
 
 			if (field.max) {
-				validationField = validationField.max(field.max, "Too Long!");
+				validationField = validationField.max(field.max, i18next.t("Too Long!"));
 			}
 
 			validationField = validationField.nullable();

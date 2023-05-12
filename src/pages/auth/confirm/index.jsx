@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Fields, Grid } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,65 @@ import Actions from "store/actions";
 import { useDispatch } from "react-redux";
 
 import { ReactComponent as RiyaPlayLogo } from "assets/images/bektv.svg";
+
+function ConfirmInput(props) {
+	const [value, setValue] = useState("");
+
+	function changeFocus(e, index) {
+		const eventValue = e.target.value;
+		const character = value.at(index);
+
+		if (eventValue) {
+			if (character) {
+				setValue(p => p.replace(character, eventValue));
+			} else {
+				setValue(p => p + eventValue);
+			}
+
+			const el = document.getElementById(`input-${index + 1}`);
+			if (el) el.focus();
+		}
+	}
+
+	useEffect(() => {
+		if (value.length === 4) {
+			props.form.setFieldValue("code", value);
+		}
+	}, [value]);
+
+	return (
+		<div className="d-flex align-items-center justify-content-between">
+			<input
+				id="input-0"
+				onChange={e => changeFocus(e, 0)}
+				className="form-control"
+				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				maxLength={1}
+			/>
+			<input
+				id="input-1"
+				onChange={e => changeFocus(e, 1)}
+				className="form-control"
+				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				maxLength={1}
+			/>
+			<input
+				id="input-2"
+				onChange={e => changeFocus(e, 2)}
+				className="form-control"
+				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				maxLength={1}
+			/>
+			<input
+				id="input-3"
+				onChange={e => changeFocus(e, 3)}
+				className="form-control"
+				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				maxLength={1}
+			/>
+		</div>
+	);
+}
 
 const Confirm = ({ history }) => {
 	const { code } = useParams();
@@ -70,7 +129,7 @@ const Confirm = ({ history }) => {
 								return (
 									<>
 										<Field
-											component={Fields.LoginInput}
+											component={ConfirmInput}
 											name="code"
 											type="password"
 											className="intro-x login__input block"
@@ -79,6 +138,7 @@ const Confirm = ({ history }) => {
 											containerClassName="mt-10"
 											password={true}
 										/>
+
 										<div className="intro-x mt-5 text-left">
 											<Button.Default
 												loading={isSubmitting}
