@@ -75,7 +75,7 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 				type="warning"
 			/>
 
-			<div className="side-nav__footer">
+			<div className="side-nav__footer primary">
 				<Link to={"/"} className="logo">
 					<Logo />
 				</Link>
@@ -93,7 +93,7 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 					</div>
 
 					<div className={`dropdown-menu${isVisible ? " show" : ""} w-54`}>
-						<div className="dropdown-menu__content box bg-theme-11 dark:bg-dark-6 text-white">
+						<div className="dropdown-menu__content box primary">
 							<div className="p-2">
 								{links.map(link => (
 									<Typography.Link key={link.id} url={link.url} className={link.className}>

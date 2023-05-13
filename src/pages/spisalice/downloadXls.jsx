@@ -70,7 +70,7 @@ const DownloadXls = ({ id }) => {
 			buttonType={"button"}
 			size="lg"
 			style={{ width: "100%" }}
-			className={`mb-2 ${downloadFile.length > 0 && "events-none"}`}
+			className={`${downloadFile.length > 0 && "events-none"}`}
 			onClick={() => downloadDoc(query)}>
 			<div className="d-flex align-center justify-content-between">
 				<DownloadIcon2 className="btn--icon" />

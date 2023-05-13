@@ -1,0 +1,103 @@
+@import "./variables";
+
+.primary {
+	background-color: $primary-bg !important;
+	color: $primary-color !important;
+
+	.side-menu:hover,
+	a:hover {
+		background-color: $primary-bg-hover !important;
+		color: $primary-color !important;
+	}
+
+	.logo:hover {
+		background: transparent !important;
+	}
+
+	.side-menu--active {
+		background-color: $primary-bg-hover !important;
+		border-color: $primary-border-color !important;
+		div {
+			color: $primary-color !important;
+		}
+	}
+	.side-menu__sub-open {
+		background-color: $primary-bg-hover !important;
+		li:hover a {
+			color: $primary-color-hover !important;
+		}
+	}
+}
+
+thead.primary {
+	th {
+		background-color: $primary-bg !important;
+		color: $primary-color !important;
+	}
+}
+
+.btn-primary {
+	background-color: $primary-bg !important;
+	border-color: $primary-border-color !important;
+	color: $primary-color !important;
+}
+
+.form-check-switch:checked {
+	border-color: $primary-border-color !important;
+	background-color: $primary-bg !important;
+}
+
+.dark {
+	.primary {
+		background-color: $dark-bg !important;
+		color: $dark-color !important;
+
+		.side-menu:hover,
+		a:hover {
+			background-color: $dark-bg-hover !important;
+			color: $dark-color !important;
+		}
+
+		.logo:hover {
+			background: transparent !important;
+		}
+
+		.side-menu--active {
+			background-color: $dark-bg-hover !important;
+			border-color: $dark-border-color !important;
+			div {
+				color: $dark-color !important;
+			}
+		}
+		.side-menu__sub-open {
+			background-color: $dark-bg-hover !important;
+			li:hover a {
+				color: $dark-color-hover !important;
+			}
+		}
+	}
+
+	thead.primary {
+		th {
+			background-color: $dark-bg !important;
+			color: $dark-color !important;
+		}
+	}
+
+	.btn-primary {
+		background-color: $dark-bg !important;
+		border-color: $dark-border-color !important;
+		color: $dark-color !important;
+	}
+
+	.form-check-switch:checked {
+		border-color: $dark-border-color !important;
+		background-color: $dark-bg !important;
+	}
+
+	.dark-mode-switcher__toggle {
+		&--active {
+			background-color: $dark-bg !important;
+		}
+	}
+}

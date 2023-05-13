@@ -97,7 +97,7 @@ const DownloadXls = () => {
 			buttonType={"button"}
 			size="lg"
 			style={{ width: "100%" }}
-			className={`mb-2 ${downloadFile.length > 0 && "events-none"}`}
+			className={`${downloadFile.length > 0 && "events-none"}`}
 			onClick={() => {
 				downloadDoc(query);
 			}}>

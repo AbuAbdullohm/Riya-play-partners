@@ -62,7 +62,7 @@ const TableComponent: FC<ITableProps> = ({
 				)}
 
 				<table className="table table-report">
-					<thead>
+					<thead className="primary">
 						<tr className="bg-gray-700 dark:bg-dark-1 text-white">
 							{columns.map((col, i) => (
 								<th
