@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { ReactComponent as RiyaPlayLogo } from "assets/images/bektv.svg";
 
 function ConfirmInput(props) {
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState(get(props, "field.value"));
 
 	function changeFocus(e, index) {
 		const eventValue = e.target.value;
@@ -21,7 +21,10 @@ function ConfirmInput(props) {
 
 		if (eventValue) {
 			if (character) {
-				setValue(p => p.replace(character, eventValue));
+				if (index > value.length - 1) return value;
+				const v = value.substring(0, index) + eventValue + value.substring(index + 1);
+
+				return setValue(v);
 			} else {
 				setValue(p => p + eventValue);
 			}
@@ -32,6 +35,7 @@ function ConfirmInput(props) {
 	}
 
 	useEffect(() => {
+		console.log(value);
 		if (value.length === 4) {
 			props.form.setFieldValue("code", value);
 		}
@@ -110,6 +114,7 @@ const Confirm = ({ history }) => {
 									history.push("/");
 								}
 							}}
+							onSubmit={() => {}}
 							onError={error => {
 								notification(get(error, "errorMessage"), {
 									type: "danger"

@@ -1,0 +1,11 @@
+#show {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	z-index: 1;
+	cursor: pointer;
+	svg {
+		width: 15px;
+		height: 15px;
+	}
+}

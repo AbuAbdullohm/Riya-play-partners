@@ -1,8 +1,9 @@
 import React from "react";
+import { get } from "lodash";
+
 import EntityForm from "modules/entity/forms";
 import Form from "./components/form";
 import { useNotification } from "hooks";
-import { get } from "lodash";
 import { Loader, Typography } from "components";
 
 const Create = ({ history }) => {
@@ -52,6 +53,12 @@ const Create = ({ history }) => {
 					required: true
 				},
 				{
+					name: "confirm-password",
+					required: true,
+					confirmPassword: true,
+					disabled: true
+				},
+				{
 					name: "full_name",
 					required: true
 				},
@@ -75,7 +82,7 @@ const Create = ({ history }) => {
 				{
 					name: "status",
 					required: true,
-					onSubmitValue: value => (value ? 10 : 1)
+					value: 10
 				},
 				{
 					name: "role",
@@ -92,7 +99,7 @@ const Create = ({ history }) => {
 					onSubmitValue: value => (value ? value.id : null)
 				}
 			]}>
-			{({ values, setFieldValue, isSubmitting }) => {
+			{({ values, setFieldValue, isSubmitting, setFieldError }) => {
 				return (
 					<>
 						{isSubmitting && <Loader />}
@@ -101,9 +108,11 @@ const Create = ({ history }) => {
 						</Typography.Heading>
 						<Form
 							{...{
+								setFieldError,
 								values,
 								setFieldValue,
-								isSubmitting
+								isSubmitting,
+								hideStatus: true
 							}}
 						/>
 					</>

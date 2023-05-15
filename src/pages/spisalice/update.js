@@ -1,9 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { get } from "lodash";
+
 import EntityForm from "modules/entity/forms";
 import EntityContainer from "modules/entity/containers";
-import { useDispatch } from "react-redux";
 import { useNotification } from "hooks";
-import { get } from "lodash";
 import Form from "./components/form";
 import { Loader, Typography } from "components";
 import Actions from "store/actions";
@@ -82,6 +83,12 @@ const Update = ({ history, match }) => {
 									onSubmitValue: value => value && value
 								},
 								{
+									name: "confirm-password",
+									required: true,
+									confirmPassword: true,
+									disabled: true
+								},
+								{
 									name: "phone",
 									required: true,
 									min: 12,
@@ -120,7 +127,7 @@ const Update = ({ history, match }) => {
 									value: get(item, "role") ? get(item, "role") : "admin"
 								}
 							]}>
-							{({ values, setFieldValue, isSubmitting }) => {
+							{({ values, setFieldValue, isSubmitting, setFieldError }) => {
 								return (
 									<>
 										<Typography.Heading type={5} className="intro-y mt-10 mb-5">
@@ -131,6 +138,7 @@ const Update = ({ history, match }) => {
 										) : (
 											<Form
 												{...{
+													setFieldError,
 													isUpdate: true,
 													isFetched,
 													values,

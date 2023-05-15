@@ -90,6 +90,10 @@ const EnhacedForm = withFormik({
 				validationField = validationField.max(field.max, i18next.t("Too Long!"));
 			}
 
+			if (field.confirmPassword) {
+				validationField = Yup.string().oneOf([Yup.ref("password"), null], "Пароли должны совпадать");
+			}
+
 			validationField = validationField.nullable();
 
 			validationFields[field.name] = validationField;

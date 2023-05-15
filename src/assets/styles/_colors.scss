@@ -43,8 +43,10 @@ thead.primary {
 }
 
 .form-check-switch:checked {
-	border-color: $primary-border-color !important;
-	background-color: $primary-bg !important;
+	background-color: $dark-bg !important;
+	&::before {
+		background-color: $primary-bg !important;
+	}
 }
 
 .dark {

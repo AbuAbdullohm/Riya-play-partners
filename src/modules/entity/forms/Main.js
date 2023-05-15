@@ -9,6 +9,7 @@ import objectToFormData from "object-to-formdata";
 import PropTypes from "prop-types";
 // import { notification } from "antd";
 import Actions from "../actions";
+import i18next from "i18next";
 
 const Main = ({ children, handleSubmit, submitForm, values, errors, isSubmitting, setFieldValue, setFieldError, setErrors, setFieldTouched, validateForm }) => (
 	<form onSubmit={handleSubmit} autoComplete={"false"}>
@@ -80,13 +81,12 @@ const EnhacedForm = withFormik({
 					break;
 				case "date":
 					validationField = Yup.date();
-					break;
 				default:
 					validationField = Yup.string().transform((_, input) => input != null && input.toString());
 			}
 
 			if (field.required) {
-				validationField = validationField.required("Required");
+				validationField = validationField.required(i18next.t("Обязательное поле"));
 			}
 
 			if (field.min) {
@@ -95,6 +95,10 @@ const EnhacedForm = withFormik({
 
 			if (field.max) {
 				validationField = validationField.max(field.max, "Too Long!");
+			}
+
+			if (field.confirmPassword) {
+				validationField = Yup.string().oneOf([Yup.ref("password"), null], "Пароли должны совпадать");
 			}
 
 			validationField = validationField.nullable();

@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import { Icon } from "components";
+import React, { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import "./style.scss";
 interface IFormProps {
 	touched: any;
 	errors: any;
@@ -54,6 +55,9 @@ const InputComponent: FC<IInputProps> = ({
 	...otherProps
 }): JSX.Element => {
 	const { t } = useTranslation();
+
+	const [show, setShow] = useState(false);
+
 	return (
 		<div className={`mb-5 relative`}>
 			{label && (
@@ -82,11 +86,15 @@ const InputComponent: FC<IInputProps> = ({
 					placeholder={t(placeholder)}
 					minLength={minLength}
 					maxLength={maxLength}
-					{...{ type }}
+					{...{ type: type === "password" ? (show ? "text" : "password") : type }}
 					{...field}
 					{...otherProps}
 				/>
-
+				{type === "password" ? (
+					<span id="show" onClick={() => setShow(!show)}>
+						<Icon name={show ? "eye" : "eye-off"} />
+					</span>
+				) : null}
 				{append && (
 					<div id={`input-group-${field.name}`} className="input-group-text">
 						{append}

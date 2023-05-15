@@ -11,6 +11,7 @@ const Profile = ({ history }) => {
 	const { t } = useTranslation();
 	const user = useSelector(state => get(state, "auth.data"));
 
+	console.log({ user });
 	return (
 		<EntityForm.Main
 			method={"put"}
@@ -31,21 +32,11 @@ const Profile = ({ history }) => {
 				},
 				{
 					name: "password_confirmation",
+					confirmPassword: true,
 					required: true
 				}
 			]}>
 			{({ isSubmitting, values, setFieldValue }) => {
-				function validate(stringValue) {
-					let value = stringValue;
-					let error;
-					if (!value) {
-						error = t("Важно");
-					} else if (values.password !== value) {
-						error = t("Не совпадает пароль");
-					}
-					return error;
-				}
-
 				return (
 					<Grid.Row gutter={10} gutterX={4} cols={12} className={"mb-10 align-stretch"}>
 						<Grid.Column lg={12}>
@@ -65,16 +56,28 @@ const Profile = ({ history }) => {
 								</h1>
 								<ul className="profile-list">
 									<li>
+										<strong>{t("Фото")}:</strong>
+										<img src={get(user, "image.link")} />
+									</li>
+									<li>
+										<strong>{t("Полное имя")}:</strong>
+										<p>{get(user, "full_name")}</p>
+									</li>
+									<li>
 										<strong>{t("Имя ползователь")}:</strong>
 										<p>{get(user, "username")}</p>
+									</li>
+									<li>
+										<strong>{t("Тел")}:</strong>
+										<p>{get(user, "phone")}</p>
 									</li>
 									<li>
 										<strong>{t("Почта")}:</strong>
 										<p>{get(user, "email")}</p>
 									</li>
 									<li>
-										<strong>{t("Тел")}:</strong>
-										<p>{get(user, "phone")}</p>
+										<strong>{t("Роль")}:</strong>
+										<p>{get(user, "role")}</p>
 									</li>
 
 									<li>
@@ -93,7 +96,6 @@ const Profile = ({ history }) => {
 									type="password"
 									placeholder="Повторите новый пароль"
 									label="Повторите новый пароль"
-									validate={validate}
 								/>
 								<div className="flex justify-end">
 									<Button.Default type="primary" buttonType="submit" loading={isSubmitting} className="ml-2">
