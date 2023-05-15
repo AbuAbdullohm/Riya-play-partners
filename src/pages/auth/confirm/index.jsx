@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Fields, Grid } from "components";
+import { Button, Grid } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import { useNotification } from "hooks";
 import EntityForm from "modules/entity/forms";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { storage } from "services";
 import Actions from "store/actions";
 import { useDispatch } from "react-redux";
@@ -35,7 +35,6 @@ function ConfirmInput(props) {
 	}
 
 	useEffect(() => {
-		console.log(value);
 		if (value.length === 4) {
 			props.form.setFieldValue("code", value);
 		}
@@ -76,10 +75,12 @@ function ConfirmInput(props) {
 }
 
 const Confirm = ({ history }) => {
-	const { code } = useParams();
+	const { state } = useLocation();
 	const { t } = useTranslation();
 	const { notification } = useNotification();
 	const dispatch = useDispatch();
+
+	const { phone } = state;
 
 	useEffect(() => {
 		document.body.className = "logins";
@@ -127,7 +128,7 @@ const Confirm = ({ history }) => {
 								},
 								{
 									name: "phone",
-									value: code
+									value: phone
 								}
 							]}>
 							{({ isSubmitting }) => {

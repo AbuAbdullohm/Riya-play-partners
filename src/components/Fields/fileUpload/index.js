@@ -4,7 +4,7 @@ import File from "./file";
 import SystemActions from "store/actions/system";
 import { useDispatch } from "react-redux";
 import { useDropzone } from "react-dropzone";
-import { Spinner } from "../../index";
+import { Loader } from "components";
 import { get } from "lodash";
 
 const Index = ({
@@ -102,7 +102,7 @@ const Index = ({
 					</div>
 				)}
 
-				{loading && <Spinner md position={"absolute"} />}
+				{loading && <Loader />}
 			</div>
 		</div>
 	);

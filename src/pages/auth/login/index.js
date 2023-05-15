@@ -10,8 +10,10 @@ import { storage } from "services";
 import { useDispatch } from "react-redux";
 
 import { ReactComponent as RiyaPlayLogo } from "assets/images/bektv.svg";
+import { useHistory } from "react-router";
 
-const Login = ({ history }) => {
+const Login = () => {
+	const history = useHistory();
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const { notification } = useNotification();
@@ -44,7 +46,12 @@ const Login = ({ history }) => {
 									storage.set("token", get(data, "success.token"));
 									dispatch(Actions.auth.Login.success(data));
 								} else if (get(data, "confirmation")) {
-									history.push(`/confirm/${get(data, "confirmation")}`);
+									history.push({
+										pathname: `/confirm`,
+										state: {
+											phone: get(data, "confirmation")
+										}
+									});
 								}
 							}}
 							onError={error => {

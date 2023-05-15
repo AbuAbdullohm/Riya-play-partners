@@ -88,7 +88,7 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 							</div>
 						</div>
 						<div className="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110">
-							<img alt="" src={get(profile, "photo") ? photo : DefaultPhoto} />
+							<img alt="" src={profile.photo ? photo : DefaultPhoto} />
 						</div>
 					</div>
 

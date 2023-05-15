@@ -57,7 +57,7 @@ const Profile = ({ history }) => {
 								<ul className="profile-list">
 									<li>
 										<strong>{t("Фото")}:</strong>
-										<img src={get(user, "image.link")} />
+										<img src={get(user, "image.link")} alt="profile img" />
 									</li>
 									<li>
 										<strong>{t("Полное имя")}:</strong>

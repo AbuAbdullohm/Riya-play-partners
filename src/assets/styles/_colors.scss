@@ -49,6 +49,12 @@ thead.primary {
 	}
 }
 
+button div {
+	path {
+		fill: $primary-border-color;
+	}
+}
+
 .dark {
 	.primary {
 		background-color: $dark-bg !important;

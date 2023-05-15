@@ -262,7 +262,7 @@ export default () => (
 					<Suspense fallback={""}>
 						<Switch>
 							<Route path="/" component={Login} exact />
-							<Route path="/confirm/:code" component={Confirm} exact />
+							<Route path="/confirm" component={Confirm} exact />
 							<Redirect from="*" to="/" />
 						</Switch>
 					</Suspense>
