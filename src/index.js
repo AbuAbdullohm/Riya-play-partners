@@ -12,7 +12,7 @@ import { Loader } from "components";
 
 import "./assets/styles/app.css";
 import "./assets/styles/custom.scss";
-// import "./assets/styles/_colors.scss";
+import "./assets/styles/_colors.scss";
 import "./assets/styles/bootstrap-grid.min.css";
 
 const store = configureStore();

@@ -14,6 +14,9 @@
 		background: transparent !important;
 	}
 
+	.side-menu {
+		border-bottom: 2px solid transparent;
+	}
 	.side-menu--active {
 		background-color: $primary-bg-hover !important;
 		border-color: $primary-border-color !important;
@@ -23,8 +26,13 @@
 	}
 	.side-menu__sub-open {
 		background-color: $primary-bg-hover !important;
+		li a {
+			border-bottom: 2px solid transparent;
+			border-radius: 10px;
+		}
 		li:hover a {
-			color: $primary-color-hover !important;
+			border-color: $primary-border-color;
+			color: $primary-color !important;
 		}
 	}
 }

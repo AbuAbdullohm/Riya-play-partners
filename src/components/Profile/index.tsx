@@ -3,12 +3,15 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { get, truncate } from "lodash";
 import { Icon, Modal, Typography } from "../";
+import Theme from "components/Layout/components/theme";
+
 import useOutsideClick from "../../hooks/useOutsideClick";
-import "./style.scss";
 import DefaultPhoto from "assets/images/user.svg";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "assets/images/bektv.svg";
+
+import "./style.scss";
 
 interface ILinkProps {
 	id: number;
@@ -27,6 +30,10 @@ const links = [
 		title: "Профиль",
 		icon: "user",
 		className: className
+	},
+	{
+		id: 2,
+		component: <Theme />
 	}
 	// {
 	// 	id: 2,
@@ -95,12 +102,16 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 					<div className={`dropdown-menu${isVisible ? " show" : ""} w-54`}>
 						<div className="dropdown-menu__content box primary">
 							<div className="p-2">
-								{links.map(link => (
-									<Typography.Link key={link.id} url={link.url} className={link.className}>
-										<Icon name={link.icon} className="w-4 h-4 mr-2" />
-										{t(link.title)}
-									</Typography.Link>
-								))}
+								{links.map(link =>
+									link.component ? (
+										link.component
+									) : (
+										<Typography.Link key={link.id} url={link.url} className={link.className}>
+											<Icon name={link.icon} className="w-4 h-4 mr-2" />
+											{t(link.title)}
+										</Typography.Link>
+									)
+								)}
 								<div className="logout font-bold" onClick={() => setModal(true)}>
 									<Icon name="log-out" className="h-6 mr-2 mb-1" />
 									<div className="logout__title">{t("Выход")}</div>

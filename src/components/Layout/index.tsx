@@ -3,7 +3,6 @@ import React from "react";
 import Profile from "components/Profile";
 import SideBar from "./components/Sidebar";
 import { menu } from "./components/Sidebar/menu";
-import Theme from "./components/theme";
 import "./style.scss";
 
 const Layout = (props: HTMLElement) => {
@@ -17,7 +16,6 @@ const Layout = (props: HTMLElement) => {
 					<div className="content">{children}</div>
 				</div>
 			</div>
-			<Theme />
 		</>
 	);
 };
