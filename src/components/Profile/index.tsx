@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "assets/images/bektv.svg";
 
 import "./style.scss";
+import { TimeCounter } from "../";
 
 interface ILinkProps {
 	id: number;
@@ -86,6 +87,8 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 				<Link to={"/"} className="logo">
 					<Logo />
 				</Link>
+
+				<TimeCounter />
 				<div className="profile-component intro-x dropdown w-8 h-8 cursor-pointer" ref={ref}>
 					<div className="profile-component__header" onClick={() => setIsVisible(!isVisible)}>
 						<div className="user border-theme-12 dark:border-dark-3 mr_10">

@@ -19,20 +19,21 @@
 	}
 	.side-menu--active {
 		background-color: $primary-bg-hover !important;
-		border-color: $primary-border-color !important;
+		border-color: transparent !important;
 		div {
 			color: $primary-color !important;
 		}
 	}
 	.side-menu__sub-open {
 		background-color: $primary-bg-hover !important;
-		li a {
-			border-bottom: 2px solid transparent;
-			border-radius: 10px;
+		li {
+			border-bottom: 0.5px solid transparent;
+			a {
+				border-radius: 10px;
+			}
 		}
-		li:hover a {
-			border-color: $primary-border-color;
-			color: $primary-color !important;
+		li:hover {
+			border-color: $primary-color !important;
 		}
 	}
 }
@@ -115,5 +116,8 @@ button div {
 		&--active {
 			background-color: $dark-bg !important;
 		}
+	}
+	.time-counter {
+		color: $dark-color;
 	}
 }

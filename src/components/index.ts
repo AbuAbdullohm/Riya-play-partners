@@ -36,7 +36,10 @@ import Search from "./Search";
 import EditableTable from "./EditableTable";
 import TracksList from "./TracksList";
 import NoData from "./NoData";
+import TimeCounter from "./TimeCounter";
+
 export {
+	TimeCounter,
 	LoadMoreVisible,
 	Skeleton,
 	Header,

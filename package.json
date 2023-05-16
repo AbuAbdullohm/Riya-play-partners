@@ -56,6 +56,8 @@
 		"react-scripts": "^2.1.5",
 		"react-select": "^4.3.1",
 		"react-select-async-paginate": "^0.3.10",
+		"react-timecode": "^1.2.0",
+		"react-timer-wrapper": "^0.4.1",
 		"react-transition-group": "^4.4.1",
 		"react-visibility-sensor": "^5.1.1",
 		"recompose": "^0.30.0",

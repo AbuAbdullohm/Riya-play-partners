@@ -1,0 +1,38 @@
+.time-counter {
+	color: black;
+	margin-right: auto;
+	font-size: 32px;
+	display: flex;
+	cursor: pointer;
+	div {
+		display: flex;
+		align-items: center;
+		margin-right: 20px;
+	}
+}
+
+.time-modal {
+	.modal-content {
+		border-radius: 50px;
+	}
+	.time-counter {
+		padding: 100px;
+		flex-direction: column;
+		cursor: auto;
+		div {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 100px;
+			font-size: 54px;
+		}
+		button {
+			display: flex;
+			align-items: center;
+			font-size: 24px;
+			svg {
+				margin-left: 10px;
+				fill: black;
+			}
+		}
+	}
+}
