@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { get, truncate } from "lodash";
@@ -107,7 +107,7 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 							<div className="p-2">
 								{links.map(link =>
 									link.component ? (
-										link.component
+										<Fragment key={link.id}>{link.component}</Fragment>
 									) : (
 										<Typography.Link key={link.id} url={link.url} className={link.className}>
 											<Icon name={link.icon} className="w-4 h-4 mr-2" />

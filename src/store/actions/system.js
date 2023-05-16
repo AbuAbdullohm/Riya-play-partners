@@ -9,6 +9,8 @@ const ChangeTheme = createRoutine("CHANGE_THEME");
 const GetRates = createRoutine("GET_RATES");
 const GetDownloadFile = createRoutine("GET_DOWNLOAD_FILE");
 const GetAddDay = createRoutine("GET_ADD_DAY");
+const WorkTime = createRoutine("WORK_TIME");
+
 export default {
 	ChangeLanguage,
 	Reset,
@@ -18,5 +20,6 @@ export default {
 	ChangeTheme,
 	GetRates,
 	GetDownloadFile,
-	GetAddDay
+	GetAddDay,
+	WorkTime
 };

@@ -7,7 +7,11 @@ const initialState = {
 	theme: null,
 	rates: [],
 	downloadFile: [],
-	addDay: []
+	addDay: [],
+	workTime: {
+		active: false,
+		time: 0
+	}
 };
 
 export default (state = initialState, action) => {
@@ -43,6 +47,9 @@ export default (state = initialState, action) => {
 		}
 		case systemActions.GetAddDay.SUCCESS: {
 			return { ...state, addDay: action.payload };
+		}
+		case systemActions.WorkTime.TRIGGER: {
+			return { ...state, workTime: action.payload };
 		}
 		default:
 			return state;
