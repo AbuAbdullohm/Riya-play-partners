@@ -2,17 +2,18 @@ import React, { FC, Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { get, truncate } from "lodash";
-import { Icon, Modal, Typography } from "../";
-import Theme from "components/Layout/components/theme";
-
-import useOutsideClick from "../../hooks/useOutsideClick";
-import DefaultPhoto from "assets/images/user.svg";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+
+import { Icon, Modal, Typography } from "../";
+import TimeCounter from "../TimeCounter";
+import useOutsideClick from "../../hooks/useOutsideClick";
+import Theme from "components/Layout/components/theme";
+
+import DefaultPhoto from "assets/images/user.svg";
 import { ReactComponent as Logo } from "assets/images/bektv.svg";
 
 import "./style.scss";
-import { TimeCounter } from "../";
 
 interface ILinkProps {
 	id: number;
@@ -88,7 +89,7 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 					<Logo />
 				</Link>
 
-				<TimeCounter />
+				{TimeCounter()}
 				<div className="profile-component intro-x dropdown w-8 h-8 cursor-pointer" ref={ref}>
 					<div className="profile-component__header" onClick={() => setIsVisible(!isVisible)}>
 						<div className="user border-theme-12 dark:border-dark-3 mr_10">
