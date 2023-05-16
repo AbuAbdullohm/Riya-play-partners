@@ -37,8 +37,8 @@ function TimeCounter() {
 	}
 
 	function updateTime() {
-		const time = document.querySelector(".time-counter span").innerHTML;
-		const [hour, minut, second] = time.split(":");
+		const timeEl = document.querySelector(".time-counter span").innerHTML;
+		const [hour, minut, second] = timeEl.split(":");
 
 		const hourToMmSecond = hour * 60 * 60 * 1000;
 		const minutToMmSecond = minut * 60 * 1000;
@@ -50,11 +50,7 @@ function TimeCounter() {
 			setModal(true);
 			setActive(false);
 			dispatch(SystemActions.WorkTime({ active: false, time: mmSecond }));
-		}
-
-		if (active) {
-			dispatch(SystemActions.WorkTime({ active: true, time: mmSecond }));
-		}
+		} else dispatch(SystemActions.WorkTime({ active: true, time: mmSecond }));
 	}
 
 	useEffect(() => {

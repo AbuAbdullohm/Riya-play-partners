@@ -36,6 +36,12 @@ class App extends Component {
 			document.documentElement.className = storage.get("theme");
 		}
 
+		const workTime = JSON.parse(storage.get("workTime"));
+
+		if (!workTime || Object.values(workTime).length === 0) {
+			storage.set("workTime", JSON.stringify({ active: false, time: 0 }));
+		}
+
 		if (storage.get("language")) {
 			ChangeLanguage(storage.get("language"));
 			i18next.changeLanguage(storage.get("language"));
