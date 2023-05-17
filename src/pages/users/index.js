@@ -13,6 +13,7 @@ import DownloadXls from "./downloadXls";
 import AddDay from "./components/AddDay";
 import "./style.scss";
 import { useSelector } from "react-redux";
+import DevicesModal from "./components/devicesModal";
 
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -33,6 +34,7 @@ const List = ({ history, location }) => {
 	const [view, setView] = useState(false);
 	const [addDay, setAddDay] = useState(false);
 	const [viewTransaction, setViewTransaction] = useState(false);
+	const [devicesModal, setDevicesModal] = useState(false);
 
 	const [infoModal, setInfoModal] = useState(false);
 	const onChange = page => {
@@ -86,6 +88,9 @@ const List = ({ history, location }) => {
 						Это действие сделано, теперь можно будет использовать его снова после завершения процесса в этом процессе
 					</div>
 				)}
+			</Modal.Default>
+			<Modal.Default size="md" toggle={devicesModal} setToggle={setDevicesModal}>
+				<DevicesModal modal={devicesModal} setModal={setDevicesModal} />
 			</Modal.Default>
 			<EntityContainer.All
 				entity="user"
@@ -313,6 +318,20 @@ const List = ({ history, location }) => {
 														<Icon name="eye" />
 													</Button.Outline>
 													// </Link>
+												);
+											}
+										},
+										{
+											className: "w-5",
+											render: (_, row) => {
+												return (
+													<Button.Outline
+														onClick={() => setDevicesModal(row)}
+														className="status-btn"
+														type="success"
+														tooltip={t("Устройства")}>
+														<Icon name="smartphone" />
+													</Button.Outline>
 												);
 											}
 										}

@@ -21,9 +21,15 @@ export default function DevicesModal({ modal, setModal }) {
 					user_id: user.id
 				}
 			}}>
-			{items => {
-				console.log(items);
-				return <div>CORS ERROR</div>;
+			{({ items }) => {
+				return items.map(item => {
+					return (
+						<div key={item.id}>
+							<div>{item.phone}</div>
+							<div>{item.user_agent}</div>
+						</div>
+					);
+				});
 			}}
 		</EntityContainer.All>
 	);
