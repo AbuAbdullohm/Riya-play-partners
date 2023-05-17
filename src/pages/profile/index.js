@@ -11,7 +11,6 @@ const Profile = ({ history }) => {
 	const { t } = useTranslation();
 	const user = useSelector(state => get(state, "auth.data"));
 
-	console.log({ user });
 	return (
 		<EntityForm.Main
 			method={"put"}

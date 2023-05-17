@@ -4,11 +4,6 @@ import { storage } from "services";
 import systemActions from "../actions/system";
 import { api, queryBuilder } from "services";
 
-function* WorkTime(action) {
-	storage.set("workTime", JSON.stringify(action.payload));
-	yield put(systemActions.WorkTime.success());
-}
-
 function* ChangeLanguage(action) {
 	storage.set("language", action.payload);
 	yield put(systemActions.ChangeLanguage.success());
@@ -96,7 +91,6 @@ export default function* root() {
 		takeLatest(systemActions.DeleteFile.TRIGGER, DeleteFile),
 		takeLatest(systemActions.GetRates.TRIGGER, GetRates),
 		takeLatest(systemActions.GetDownloadFile.TRIGGER, GetDownloadFile),
-		takeLatest(systemActions.GetAddDay.TRIGGER, GetAddDay),
-		takeLatest(systemActions.WorkTime.TRIGGER, WorkTime)
+		takeLatest(systemActions.GetAddDay.TRIGGER, GetAddDay)
 	]);
 }

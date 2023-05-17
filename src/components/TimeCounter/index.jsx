@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
 import Timer from "react-timer-wrapper";
 import Timecode from "react-timecode";
@@ -7,14 +6,12 @@ import Timecode from "react-timecode";
 import Modal from "components/Modal";
 import Button from "components/Button";
 import { Icon } from "components";
-import SystemActions from "store/actions/system";
 import { storage } from "services";
 import { ReactComponent as ReloadIcon } from "assets/images/icons/reload.svg";
 
 import "./style.scss";
 
 function TimeCounter() {
-	const dispatch = useDispatch();
 	const workTime = JSON.parse(storage.get("workTime"));
 	const oneDay = 24 * 60 * 60 * 1000;
 
@@ -33,7 +30,7 @@ function TimeCounter() {
 	function refreshTime() {
 		setModal(false);
 		setActive(true);
-		dispatch(SystemActions.WorkTime({ active: true, time: 0 }));
+		storage.set("workTime", JSON.stringify({ active: true, time: 0 }));
 	}
 
 	function updateTime() {
@@ -49,8 +46,8 @@ function TimeCounter() {
 		if (mmSecond >= oneDay) {
 			setModal(true);
 			setActive(false);
-			dispatch(SystemActions.WorkTime({ active: false, time: mmSecond }));
-		} else dispatch(SystemActions.WorkTime({ active: true, time: mmSecond }));
+			storage.set("workTime", JSON.stringify({ active: false, time: mmSecond }));
+		} else storage.set("workTime", JSON.stringify({ active: true, time: mmSecond }));
 	}
 
 	useEffect(() => {
@@ -76,8 +73,8 @@ function TimeCounter() {
 						duration={oneDay}
 						active={active}
 						time={workTime.time}
-						onStart={({ time }) => dispatch(SystemActions.WorkTime({ active: true, time }))}
-						onStop={({ time }) => dispatch(SystemActions.WorkTime({ active: false, time }))}>
+						onStart={({ time }) => storage.set("workTime", JSON.stringify({ active: true, time }))}
+						onStop={({ time }) => storage.set("workTime", JSON.stringify({ active: false, time }))}>
 						<Timecode format={"HH:mm:ss"} />
 					</Timer>
 
@@ -99,8 +96,8 @@ function TimeCounter() {
 					duration={oneDay}
 					active={active}
 					time={workTime.time}
-					onStart={({ time }) => dispatch(SystemActions.WorkTime({ active: true, time }))}
-					onStop={({ time }) => dispatch(SystemActions.WorkTime({ active: false, time }))}>
+					onStart={({ time }) => storage.set("workTime", JSON.stringify({ active: true, time }))}
+					onStop={({ time }) => storage.set("workTime", JSON.stringify({ active: false, time }))}>
 					<Timecode format={"HH:mm:ss"} />
 				</Timer>
 			</div>
