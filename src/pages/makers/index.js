@@ -66,7 +66,9 @@ const List = ({ history, location }) => {
 				params={{
 					sort: "-id",
 					extra: {
-						name: params.name ? params.name : ""
+						name: params.name ? params.name : "",
+						kinopoisk_id: params.kinopoisk_id,
+						external_type: params.external_type
 					},
 					filter: {
 						id: params.id ? params.id : ""

@@ -85,7 +85,7 @@ const Update = ({ location, history, match }) => {
 							params={{
 								include: "translations,files"
 							}}>
-							{({ isSubmitting, values, setFieldValue }) => {
+							{({ isSubmitting, values, setFieldValue, setErrors, errors }) => {
 								return (
 									<>
 										<Form
@@ -94,7 +94,9 @@ const Update = ({ location, history, match }) => {
 												values,
 												setFieldValue,
 												isSubmitting,
-												isUpdate: true
+												isUpdate: true,
+												setErrors,
+												errors
 											}}
 										/>
 									</>

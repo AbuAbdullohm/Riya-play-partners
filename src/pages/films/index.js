@@ -9,6 +9,7 @@ import get from "lodash/get";
 import qs from "qs";
 import { useNotification, useAccess } from "hooks";
 import FilmFilter from "./components/FilmFilter";
+import DownloadXls from "./components/downloadXls";
 
 const List = ({ history, location }) => {
 	const isAdmin = useAccess({ roles: ["admin"] });
@@ -124,7 +125,7 @@ const List = ({ history, location }) => {
 				version="v2"
 				primaryKey="id"
 				params={{
-					sort: "-id",
+					sort: params.sort || "-id",
 					limit: pageLimit,
 					include: "files,company,type,genres,categories,seasons,actors",
 					extra: {
@@ -144,6 +145,8 @@ const List = ({ history, location }) => {
 						paid: params.paid,
 						foreign_status: params.foreign_status,
 						status: params.status,
+						kinopoisk_id: params.kinopoisk_id,
+						external_type: params.external_type,
 						foreign_user_can_view: params.foreign_user_can_view && params.foreign_user_can_view
 					},
 					page: page || 1
@@ -156,8 +159,19 @@ const List = ({ history, location }) => {
 								buttonName="Добавить"
 								buttonClick={() => history.push(`/films/create`)}
 								filter={filter}
+								sort={"viewed"}
 								setFilter={setFilter}
 								hasFilter={true}
+								textLeft={
+									<div
+										onClick={() => {
+											// if (downloadFile.length > 0) {
+											// 	setInfoModal(!infoModal);
+											// }
+										}}>
+										<DownloadXls />
+									</div>
+								}
 								meta={meta}>
 								<Filter {...{ setFilter }} />
 							</Header>

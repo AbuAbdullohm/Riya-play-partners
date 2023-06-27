@@ -8,6 +8,7 @@ import useOutsideClick from "hooks/useOutsideClick";
 import { Button, Dropdown, Icon } from "..";
 
 import "./style.scss";
+import IconComponent from "components/Icon";
 
 const PageHeaderComponent = ({
 	title = "",
@@ -18,6 +19,7 @@ const PageHeaderComponent = ({
 	textLeft = false,
 	setFilter,
 	hasButton = true,
+	sort = false,
 	addDay = false,
 	hasFilter = false,
 	hasExport = false,
@@ -40,6 +42,7 @@ const PageHeaderComponent = ({
 
 	const { ref, isVisible, setIsVisible } = useOutsideClick();
 	const [name, setName] = useState();
+	const [sortIcon, setSortIcon] = useState("arrow-up");
 
 	const handleKeypress = e => {
 		if (e.key === "Enter") {
@@ -117,6 +120,24 @@ const PageHeaderComponent = ({
 					{meta && (
 						<div className="hidden lg:block mx-auto text-gray-600">
 							Отображение от {from} до {to < total ? to : total} из {total} записей
+						</div>
+					)}
+
+					{sort && (
+						<div>
+							<div
+								className="mr-2"
+								onClick={() => {
+									const values = qs.parse(history.location.search.replace("?", ""));
+									const haveSort = values.sort === sort;
+									setSortIcon(haveSort ? "arrow-up" : "arrow-down");
+									history.push({
+										...history.location,
+										search: qs.stringify({ ...values, sort: haveSort ? `-${sort}` : sort })
+									});
+								}}>
+								<IconComponent name={sortIcon} />
+							</div>
 						</div>
 					)}
 

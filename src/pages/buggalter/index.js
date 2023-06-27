@@ -16,6 +16,7 @@ import Paynet from "assets/images/paynet.svg";
 import Apelsin from "assets/images/uzum.svg";
 import Bektv from "assets/images/bektv.svg";
 import click from "assets/images/icons/icons-dashboard/click.svg";
+import upay from "assets/images/icons/icons-dashboard/upay.svg";
 
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -117,6 +118,8 @@ const List = ({ history, location }) => {
 													return <img src={Bektv} className="w-20 box-none" alt="" />;
 												} else if (value === "click") {
 													return <img src={click} className="box-none" style={{ width: "55px" }} alt="" />;
+												} else if (value === "upay") {
+													return <img src={upay} className="box-none" style={{ width: "75px" }} alt="" />;
 												} else if (value === "apelsin_frame") {
 													return (
 														<div className="d-flex align-center">

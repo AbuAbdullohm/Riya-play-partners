@@ -138,7 +138,7 @@ const dashboardCostumizeData = (data, setAllSumm, setRatesSum) => {
 
 	const summaIncomes = get(data, "incomes").reduce((total, count) => (total += Number(count.amount)), 0);
 	const procentsIncomes = get(data, "incomes").map(item => round((Number(item.amount) / summaIncomes) * 100, 1) + "%");
-	const colorIncomes = { apelsin: "#F25F2E", payme: "#33CCCC", paynet: "#00B427", click: "#3F8CFF", cash: "#333", apelsin_frame: "#83190b" };
+	const colorIncomes = { upay: "#ffdd2b", apelsin: "#F25F2E", payme: "#33CCCC", paynet: "#00B427", click: "#3F8CFF", cash: "#333", apelsin_frame: "#83190b" };
 	let newIncomes = data.incomes.map((item, idx) => {
 		return {
 			...item,

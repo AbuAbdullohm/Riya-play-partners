@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fields, Grid, Panel, Button, Modal, Icon } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
-import { helpers, api, queryBuilder } from "services";
+import { helpers, api, queryBuilder, constants } from "services";
 
 import CreateTag from "./create-tag";
 import CreateCompany from "./create-company";
@@ -27,32 +27,42 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 		setCreateCompanyModal(prev => !prev);
 	};
 
-	function checkId(e) {
-		const value = e.target.value;
+	function checkId(value, type) {
 		setFieldValue("kinopoisk_id", value);
 
-		if (value.length > 3) {
+		if (value && value.length > 3) {
 			debounce(
 				async () => {
-					const { data } = await api["requestv2"].get(
-						queryBuilder("/films", {
-							extra: {
-								kinopoisk_id: value
+					await api["requestv2"]
+						.get(
+							queryBuilder("/films", {
+								extra: {
+									kinopoisk_id: value,
+									external_type: type
+								}
+							})
+						)
+						.then(({ data }) => {
+							if (data.data && data.data.length > 0) {
+								setErrors({
+									...errors,
+									kinopoisk_id: "Этот ID уже существует на базе фильмов"
+								});
+								setTimeout(() => {
+									setFieldValue("kinopoisk_id", "");
+								}, 2000);
 							}
-						})
-					);
-					if (data.data && data.data.length > 0) {
-						setErrors({ ...errors, kinopoisk_id: "Этот ИД уже был" });
-						setTimeout(() => {
-							setFieldValue("kinopoisk_id", "");
-						}, 2000);
-					}
+						});
 				},
 				"fetch",
 				1000
 			);
 		}
 	}
+
+	useEffect(() => {
+		checkId(values.kinopoisk_id, values.external_type);
+	}, [values.kinopoisk_id, values.external_type]);
 
 	return (
 		<>
@@ -168,16 +178,31 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 								};
 							}}
 						/>
-
-						<Field
-							component={Fields.Input}
-							placeholder={t("Кинопоиск ид")}
-							size="large"
-							name="kinopoisk_id"
-							label={t("Кинопоиск ид")}
-							className="mb-24"
-							onChange={e => checkId(e)}
-						/>
+						<Grid.Row>
+							<Grid.Column lg={9}>
+								<Field
+									component={Fields.Input}
+									placeholder={t("Кинопоиск ид")}
+									size="large"
+									name="kinopoisk_id"
+									label={t("Кинопоиск ид")}
+									className="mb-24"
+								/>
+							</Grid.Column>
+							<Grid.Column lg={3}>
+								<Field
+									component={Fields.Select}
+									size="large"
+									name="external_type"
+									label={t("тип")}
+									placeholder={t("тип")}
+									className="mb-24"
+									optionLabel={"label"}
+									optionValue={"value"}
+									options={constants.externalTypes}
+								/>
+							</Grid.Column>
+						</Grid.Row>
 					</Panel>
 				</Grid.Column>
 

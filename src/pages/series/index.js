@@ -72,7 +72,7 @@ const List = ({ history, location }) => {
 				version="v2"
 				primaryKey="id"
 				params={{
-					sort: "-id",
+					sort: params.sort || "-id",
 					extra: {
 						name: params.name || "",
 						film_name: params.film_name || "",
@@ -91,6 +91,7 @@ const List = ({ history, location }) => {
 								buttonName="Добавить"
 								buttonClick={() => history.push(`/series/create`)}
 								meta={meta}
+								sort={"viewed"}
 								filter={filter}
 								setFilter={setFilter}
 								hasFilter={true}>

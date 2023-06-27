@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { Fields, Grid, Button } from "components";
 import EntityActions from "modules/entity/actions";
 import { get } from "lodash";
-import { helpers } from "services";
+import { helpers, constants } from "services";
 
 const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) => {
 	const dispatch = useDispatch();
@@ -52,6 +52,7 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 			})
 		);
 	};
+
 	const loadInvoicesCompany = id => {
 		dispatch(
 			EntityActions.LoadDefault.request({
@@ -117,6 +118,30 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 						onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
 						placeholder="Поиск по ID"
 						label="ID"
+					/>
+				</Grid.Column>
+				<Grid.Column xs={8} lg={8} xl={8}>
+					<Field
+						component={Fields.Input}
+						name="kinopoisk_id"
+						type="number"
+						min="0"
+						onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+						placeholder="Поиск по кинопоиск ID"
+						label="Кинопоиск ID"
+					/>
+				</Grid.Column>
+				<Grid.Column xs={4} lg={4} xl={4}>
+					<Field
+						component={Fields.Select}
+						size="large"
+						name="external_type"
+						label={t("тип")}
+						placeholder={t("тип")}
+						className="mb-24"
+						optionLabel={"label"}
+						optionValue={"value"}
+						options={constants.externalTypes}
 					/>
 				</Grid.Column>
 				<Grid.Column xs={12} lg={12} xl={12}>
@@ -312,6 +337,8 @@ const EnhancedForm = withFormik({
 			year: params.year || "",
 			name: params.name || "",
 			id: params.id || "",
+			kinopoisk_id: params.kinopoisk_id || "",
+			external_type: params.external_type,
 			category_id,
 			company_id,
 			actor_id,
@@ -336,6 +363,7 @@ const EnhancedForm = withFormik({
 			actor_id: values.actor_id ? values.actor_id.id : "",
 			enabled_watermark: values.enabled_watermark === true ? 1 : "",
 			recommended: values.recommended === true ? 1 : "",
+			external_type: values.external_type,
 			foreign_user_can_view: values.foreign_user_can_view === true ? 1 : "",
 			start:
 				values.start.length > 0

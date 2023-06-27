@@ -90,11 +90,12 @@ const Filter = ({ handleSubmit, t, history, setFilter, setFieldValue, values }) 
 						label="Способ оплаты"
 						optionLabel="name"
 						options={[
-							{ id: "from api", name: "Bek TV" },
+							{ id: "from api", name: "Riya Play" },
 							{ id: "payme", name: "Payme" },
-							{ id: "apelsin", name: "Apelsin" },
+							{ id: "apelsin", name: "Uzum" },
 							{ id: "paynet", name: "Paynet" },
-							{ id: "click", name: "Click" }
+							{ id: "click", name: "Click" },
+							{ id: "upay", name: "Upay" }
 						]}
 					/>
 				</Grid.Column>

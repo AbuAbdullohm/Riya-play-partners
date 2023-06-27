@@ -70,13 +70,13 @@ const Create = ({ history }) => {
 			params={{
 				include: "translations, files"
 			}}>
-			{({ isSubmitting, values, setFieldValue }) => {
+			{({ isSubmitting, values, setFieldValue, setErrors, errors }) => {
 				return (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
 							{t("Добавить актера")}
 						</Typography.Heading>
-						<Form {...{ isFetched: true, values, setFieldValue, isSubmitting }} />
+						<Form {...{ isFetched: true, values, setFieldValue, isSubmitting, setErrors, errors }} />
 					</>
 				);
 			}}

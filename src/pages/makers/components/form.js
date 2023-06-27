@@ -1,13 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { Fields, Grid, Panel, Button } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
+import { constants, api, queryBuilder, helpers } from "services";
 
-const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
+const { debounce } = helpers;
+
+const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErrors, errors }) => {
 	const { t } = useTranslation();
 	const history = useHistory();
+
+	function checkId(value, type) {
+		setFieldValue("kinopoisk_id", value);
+
+		if (value && value.length > 3) {
+			debounce(
+				async () => {
+					await api["requestv1"]
+						.get(
+							queryBuilder("/makers", {
+								extra: {
+									kinopoisk_id: value,
+									external_type: type
+								}
+							})
+						)
+						.then(({ data }) => {
+							if (data.data && data.data.length > 0) {
+								setErrors({
+									...errors,
+									kinopoisk_id: "Этот ID уже существует"
+								});
+								setTimeout(() => {
+									setFieldValue("kinopoisk_id", "");
+								}, 2000);
+							}
+						});
+				},
+				"fetch",
+				1000
+			);
+		}
+	}
+
+	useEffect(() => {
+		checkId(values.kinopoisk_id, values.external_type);
+	}, [values.kinopoisk_id, values.external_type]);
+
 	return (
 		<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
 			<Grid.Column xs={12} xl={8}>
@@ -39,6 +80,29 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 								rows={10}
 								label="Полный текст биографии (RU)"
 								placeholder="Введите полный текст биографии (RU)"
+							/>
+						</Grid.Column>
+						<Grid.Column lg={9}>
+							<Field
+								component={Fields.Input}
+								placeholder={t("Кинопоиск ид")}
+								size="large"
+								name="kinopoisk_id"
+								label={t("Кинопоиск ид")}
+								className="mb-24"
+							/>
+						</Grid.Column>
+						<Grid.Column lg={3}>
+							<Field
+								component={Fields.Select}
+								size="large"
+								name="external_type"
+								label={t("ID тип")}
+								placeholder={t("ID тип")}
+								className="mb-24"
+								optionLabel={"label"}
+								optionValue={"value"}
+								options={constants.externalTypes}
 							/>
 						</Grid.Column>
 					</Grid.Row>

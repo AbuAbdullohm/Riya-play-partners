@@ -235,6 +235,13 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => value
 								},
 								{
+									name: "external_type",
+									type: "number",
+									required: true,
+									value: get(item, "external_type"),
+									onSubmitValue: value => value
+								},
+								{
 									name: "gallery",
 									required: false,
 									value: Array.isArray(get(item, "gallery")) ? get(item, "gallery") : [],

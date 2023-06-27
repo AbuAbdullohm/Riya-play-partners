@@ -4,6 +4,7 @@ import payme from "assets/images/payme.svg";
 import paynet from "assets/images/paynet.svg";
 import apelsin from "assets/images/uzum.svg";
 import click from "assets/images/icons/icons-dashboard/click.svg";
+import upay from "assets/images/icons/icons-dashboard/upay.svg";
 import { Icon } from "components";
 
 export default function Table({
@@ -34,6 +35,8 @@ export default function Table({
 					<img src={paynet} alt="paynet" style={{ minWidth: "80px", maxWidth: "80px" }} />
 				) : paymentLogo === "click" ? (
 					<img src={click} alt="click" style={{ minWidth: "65px", height: "25px", maxWidth: "80px" }} />
+				) : paymentLogo === "upay" ? (
+					<img src={upay} alt="upay" style={{ minWidth: "55px", height: "35px", maxWidth: "80px" }} />
 				) : paymentLogo === "apelsin_frame" ? (
 					<div className="d-flex align-center">
 						<img src={apelsin} alt="apelsin_frame" style={{ minWidth: "70px", maxWidth: "80px", marginRight: "5px" }} /> frame

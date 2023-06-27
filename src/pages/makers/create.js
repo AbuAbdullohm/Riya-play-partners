@@ -66,13 +66,13 @@ const Create = ({ history }) => {
 					onSubmitValue: value => (value ? 1 : 0)
 				}
 			]}>
-			{({ isSubmitting, values, setFieldValue }) => {
+			{({ isSubmitting, values, setFieldValue, setErrors, errors }) => {
 				return (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
 							{t("Добавить режиссера")}
 						</Typography.Heading>
-						<Form {...{ isFetched: true, values, setFieldValue, isSubmitting }} />
+						<Form {...{ isFetched: true, values, setFieldValue, isSubmitting, setErrors, errors }} />
 					</>
 				);
 			}}

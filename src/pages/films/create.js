@@ -109,6 +109,12 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => value
 				},
 				{
+					name: "external_type",
+					type: "number",
+					required: true,
+					onSubmitValue: value => value
+				},
+				{
 					name: "country_id",
 					value: [],
 					required: true,

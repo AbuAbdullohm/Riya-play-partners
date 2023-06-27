@@ -5,13 +5,6 @@ import queryBuilder from "./queryBuilder";
 import storage from "./storage";
 import time from "./time";
 import helpers from "./helpers";
+import constants from "./constants";
 
-export {
-	api,
-	i18n,
-	sentry,
-	time,
-	storage,
-	queryBuilder,
-	helpers
-};
+export { api, i18n, sentry, time, storage, queryBuilder, helpers, constants };

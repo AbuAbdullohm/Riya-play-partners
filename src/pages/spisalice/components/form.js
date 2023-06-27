@@ -108,7 +108,7 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, setFieldError,
 						<Button.Default type="secondary" buttonType="button" onClick={() => history.goBack()}>
 							{t("Отменить")}
 						</Button.Default>
-						<Button.Default type="primary" buttonType="submit" loading={true} className="ml-2">
+						<Button.Default type="primary" buttonType="submit" loading={isSubmitting} className="ml-2">
 							{isUpdate ? t("Сохранить") : t("Добавить")}
 						</Button.Default>
 					</div>

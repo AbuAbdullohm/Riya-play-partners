@@ -252,3 +252,22 @@ html.dark {
 		}
 	}
 }
+
+.device-item {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	padding: 5px 10px;
+	span {
+		position: absolute;
+		right: 15px;
+		top: 5px;
+		cursor: pointer;
+	}
+	p {
+		margin-bottom: 10px;
+	}
+}
