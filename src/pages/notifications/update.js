@@ -22,7 +22,7 @@ const Update = ({ location, history, match }) => {
 			version="v2"
 			id={notification_id}
 			params={{
-				include: "translations,model"
+				include: "translations,model,image"
 			}}>
 			{({ item, isFetched }) => {
 				return (
@@ -68,7 +68,12 @@ const Update = ({ location, history, match }) => {
 									onSubmitValue: value => Number(value),
 									required: false
 								},
-
+								{
+									name: "image_id",
+									required: true,
+									value: get(item, "image") ? [get(item, "image", [])] : [],
+									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
+								},
 								{
 									name: "model_id",
 									type: dataRequired.type === 4 || dataRequired.type === 3 ? "string" : false,
@@ -96,7 +101,7 @@ const Update = ({ location, history, match }) => {
 								}
 							]}
 							params={{
-								include: "translations,model"
+								include: "translations,model,image"
 							}}>
 							{({ isSubmitting, values, setFieldValue, errors }) => {
 								setDataRequired(values);

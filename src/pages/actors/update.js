@@ -82,11 +82,6 @@ const Update = ({ location, history, match }) => {
 									name: "status",
 									value: get(item, "status") === 1,
 									onSubmitValue: value => (value ? 1 : 0)
-								},
-								{
-									name: "type",
-									value: get(item, "type") === 1,
-									onSubmitValue: value => (value ? 1 : null)
 								}
 							]}
 							params={{

@@ -1,53 +1,49 @@
 import React from "react";
-
 import EntityForm from "modules/entity/forms";
 import EntityContainer from "modules/entity/containers";
 import { Typography } from "components";
-import Form from "./components/form";
-
 import { useNotification } from "hooks";
 import { get } from "lodash";
 import { useTranslation } from "react-i18next";
-import qs from "query-string";
+import Form from "./components/form";
 
 const Update = ({ location, history, match }) => {
 	const { notification } = useNotification();
 	const { t } = useTranslation();
-	const query = qs.parse(location.search);
-	let { page } = query;
-
 	const { id } = match.params;
 
 	return (
 		<EntityContainer.One
-			entity="rates"
-			name={`rates`}
-			url={`/rates/${id}`}
+			entity="holder"
+			name={`holder-${id}`}
+			url={`/holder/${id}`}
 			primaryKey="id"
 			id={id}
+			version="v3"
 			params={{
-				include: "files,ratesPrices,translations,sort"
+				include: "logo"
 			}}>
 			{({ item, isFetched }) => {
 				return (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
-							{t("Изменить тариф")}
+							{t("Изменить правообладатель")}
 						</Typography.Heading>
-
 						<EntityForm.Main
 							method={"put"}
-							entity="rates"
-							name={`rates`}
-							url={`/rates/${get(item, "id")}`}
+							entity="holder"
+							name={`holder`}
+							url={`/holder/${get(item, "id")}`}
+							updateData={true}
 							primaryKey="id"
+							version="v3"
 							normalizeData={data => data}
-							id={id}
-							onSuccess={() => {
+							onSuccess={(data, resetForm) => {
+								resetForm();
 								notification("Успешно обновлено", {
 									type: "success"
 								});
-								history.push(`/rates?page=${page}`);
+								history.push(`/holder${location.search}`);
 							}}
 							onError={() => {
 								notification("Что-то пошло не так", {
@@ -56,63 +52,59 @@ const Update = ({ location, history, match }) => {
 							}}
 							fields={[
 								{
-									name: "sort",
-									required: false,
-									value: get(item, "sort")
+									name: "title_uz",
+									required: true,
+									value: get(item, "title_uz")
 								},
 								{
-									name: "name_uz",
+									name: "title_ru",
 									required: true,
-									value: get(item, "name_uz")
+									value: get(item, "title_ru")
+								},
+								{
+									name: "title_en",
+									required: true,
+									value: get(item, "title_en")
 								},
 								{
 									name: "description_uz",
+									required: true,
 									value: get(item, "description_uz")
 								},
 								{
-									name: "name_ru",
-									required: true,
-									value: get(item, "name_ru")
-								},
-								{
 									name: "description_ru",
+									required: true,
 									value: get(item, "description_ru")
 								},
 								{
-									name: "price",
-									value: get(item, "ratesPrices.price"),
-									onSubmitValue: value => Number(value),
-									required: true
+									name: "description_en",
+									required: true,
+									value: get(item, "description_en")
 								},
 								{
-									name: "days",
-									value: get(item, "ratesPrices.days"),
-									onSubmitValue: value => Number(value),
-									required: true
-								},
-								{
-									name: "is_foreign",
-									value: get(item, "is_foreign") === 1,
-									onSubmitValue: value => (value ? 1 : 0)
+									name: "logo_id",
+									required: true,
+									value: get(item, "logo") ? [get(item, "logo", [])] : [],
+									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 								},
 								{
 									name: "status",
 									value: get(item, "status") === 1,
 									onSubmitValue: value => (value ? 1 : 0)
 								}
-							]}
-							params={{
-								include: "translations,files,ratesPrices"
-							}}>
-							{({ isSubmitting, values, setFieldValue }) => {
+							]}>
+							{({ isSubmitting, values, setFieldValue, setErrors, errors }) => {
 								return (
 									<>
 										<Form
 											{...{
+												isFetched,
 												values,
 												setFieldValue,
 												isSubmitting,
-												isUpdate: true
+												isUpdate: true,
+												setErrors,
+												errors
 											}}
 										/>
 									</>

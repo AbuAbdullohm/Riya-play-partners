@@ -128,6 +128,12 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => (value ? value.id : null)
 				},
 				{
+					name: "holder_id",
+					required: true,
+					type: "object",
+					onSubmitValue: value => (value ? value.id : null)
+				},
+				{
 					name: "foreign_status",
 					value: true,
 					onSubmitValue: value => (value ? 1 : 0)
@@ -184,7 +190,7 @@ const Create = ({ history, location }) => {
 				}
 			]}
 			params={{
-				include: "files,actors,tags,categories,genres,type,season"
+				include: "files,actors,tags,categories,genres,type,season,holder"
 			}}>
 			{({ values, setFieldValue, handleSubmit, setFieldError, errors, setErrors }) => {
 				return (

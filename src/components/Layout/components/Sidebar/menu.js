@@ -98,6 +98,9 @@ export const menu = [
 		icon: "settings",
 		access: ["admin", "super_admin", "moderator"],
 		submenu: [
+			{ id: "channel", title: "Телеканалы", link: "/channel", icon: "tv", lang: false, access: ["admin", "super_admin"] },
+			{ id: "story-trailer", title: "Трейлер историй", link: "/story-trailer", icon: "play-circle", lang: false, access: ["admin", "super_admin"] },
+			{ id: "holder", title: "Правообладатель", link: "/holder", icon: "link", lang: false, access: ["admin", "super_admin"] },
 			{ id: "types", title: "Типы медиаконтента", link: "/types", icon: "type", lang: false, access: ["admin"] },
 			{ id: "categories", title: "Категории медиаконтента", link: "/categories", icon: "list", lang: false, access: ["admin"] },
 			{ id: "genres", title: "Жанры медиаконтента", link: "/genres", icon: "compass", lang: false, access: ["admin", "moderator", "super_admin"] },

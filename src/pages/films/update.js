@@ -220,6 +220,13 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => (value ? value.id : null)
 								},
 								{
+									name: "holder_id",
+									required: true,
+									type: "object",
+									value: get(item, "holder"),
+									onSubmitValue: value => (value ? value.id : null)
+								},
+								{
 									name: "maker_id",
 									type: "object",
 									required: false,
@@ -325,7 +332,7 @@ const Update = ({ location, history }) => {
 							]}
 							params={{
 								// extra: {_l: tabLang},
-								include: "translations,files,categories,year,actors,tags,genres,types,gallery,season"
+								include: "translations,files,categories,year,actors,tags,genres,types,gallery,season,holder"
 							}}>
 							{({ isSubmitting, values, setFieldValue, handleSubmit, setFieldError, errors, setErrors }) => {
 								setSeriesValue(values);

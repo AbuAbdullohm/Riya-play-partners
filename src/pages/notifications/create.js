@@ -34,7 +34,7 @@ const Create = ({ history }) => {
 				});
 			}}
 			params={{
-				include: "translations"
+				include: "translations,image"
 			}}
 			fields={[
 				{
@@ -55,6 +55,12 @@ const Create = ({ history }) => {
 					value: 3,
 					onSubmitValue: value => Number(value),
 					required: false
+				},
+				{
+					name: "image_id",
+					required: true,
+					value: [],
+					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 				},
 				{
 					name: "model_id",

@@ -1,27 +1,27 @@
 import React from "react";
-
 import EntityForm from "modules/entity/forms";
 import { Typography } from "components";
-import Form from "./components/form";
 import { useTranslation } from "react-i18next";
+import Form from "./components/form";
 import { useNotification } from "hooks";
+import { get } from "lodash";
 
 const Create = ({ history }) => {
-	const { notification } = useNotification();
 	const { t } = useTranslation();
+	const { notification } = useNotification();
 
 	return (
 		<EntityForm.Main
 			method="post"
-			entity="rates"
-			name={`rates`}
-			url="/rates"
-			prependData
+			entity="story-trailer"
+			name={`story-trailer`}
+			url="/story-trailer"
+			version="v3"
 			primaryKey="id"
 			normalizeData={data => data}
 			onSuccess={(data, resetForm) => {
 				resetForm();
-				history.push(`/rates`);
+				history.push(`/story-trailer`);
 				notification("Успешно добавлено", {
 					type: "success"
 				});
@@ -31,21 +31,9 @@ const Create = ({ history }) => {
 					type: "danger"
 				});
 			}}
-			params={{
-				include: "translations,files"
-			}}
 			fields={[
 				{
-					name: "sort",
-					required: false
-				},
-				{
 					name: "name_uz",
-					required: true
-				},
-				{
-					name: "description_uz",
-					value: "",
 					required: true
 				},
 				{
@@ -53,24 +41,32 @@ const Create = ({ history }) => {
 					required: true
 				},
 				{
+					name: "name_en",
+					required: true
+				},
+				{
+					name: "description_uz",
+					required: true
+				},
+				{
 					name: "description_ru",
-					value: "",
 					required: true
 				},
 				{
-					name: "price",
-					onSubmitValue: value => Number(value),
+					name: "description_en",
 					required: true
 				},
 				{
-					name: "days",
-					onSubmitValue: value => Number(value),
-					required: true
+					name: "poster_id",
+					value: [],
+					required: true,
+					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 				},
 				{
-					name: "is_foreign",
-					value: true,
-					onSubmitValue: value => (value ? 1 : 0)
+					name: "video_id",
+					value: [],
+					required: true,
+					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 				},
 				{
 					name: "status",
@@ -78,19 +74,13 @@ const Create = ({ history }) => {
 					onSubmitValue: value => (value ? 1 : 0)
 				}
 			]}>
-			{({ isSubmitting, values, setFieldValue }) => {
+			{({ isSubmitting, values, setFieldValue, setErrors, errors }) => {
 				return (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
-							{t("Создать тариф")}
+							{t("Добавить трейлер историй")}
 						</Typography.Heading>
-						<Form
-							{...{
-								values,
-								setFieldValue,
-								isSubmitting
-							}}
-						/>
+						<Form {...{ isFetched: true, values, setFieldValue, isSubmitting, setErrors, errors }} />
 					</>
 				);
 			}}

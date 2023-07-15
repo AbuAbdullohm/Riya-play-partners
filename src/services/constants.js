@@ -3,8 +3,17 @@ const externalTypes = [
 	{ label: "Riya Play", value: 2 }
 ];
 
+const channelTypes = [
+	{ label: "Новости", value: 1 },
+	{
+		label: "Фильм",
+		value: 2
+	}
+];
+
 const constants = {
-	externalTypes
+	externalTypes,
+	channelTypes
 };
 
 export default constants;

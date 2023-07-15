@@ -3,6 +3,7 @@ import { Fields, Grid, Panel, Button } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import { get } from "lodash";
 
 const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
 	const { t } = useTranslation();
@@ -11,6 +12,16 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
 		<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
 			<Grid.Column md={8} gutter={10}>
 				<Panel>
+					<Field
+						component={Fields.fileUpload}
+						name="image_id"
+						label="Изображение"
+						items={Array.isArray(get(values, "image_id")) ? get(values, "image_id") : [get(values, "image")]}
+						onChangeHandler={data => {
+							setFieldValue("image_id", data);
+						}}
+						multiple={false}
+					/>
 					<Field component={Fields.Input} name="title" type="text" placeholder="Введите загаловок" label="Заголовок" size="large" />
 					<Field component={Fields.Textarea} name="message" type="text" label="Описание" placeholder="Введите описание" />
 				</Panel>

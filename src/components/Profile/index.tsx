@@ -89,7 +89,7 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 					<Logo />
 				</Link>
 
-				{TimeCounter()}
+				{/* {TimeCounter()} */}
 
 				<div className="profile-component intro-x dropdown w-8 h-8 cursor-pointer" ref={ref}>
 					<div className="profile-component__header" onClick={() => setIsVisible(!isVisible)}>

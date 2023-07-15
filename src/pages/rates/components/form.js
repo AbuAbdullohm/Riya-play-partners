@@ -64,6 +64,17 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
 						<Field
 							className="mr-2"
 							component={Fields.Switch}
+							name="is_foreign"
+							label="Для иностранных пользователей"
+							onChange={() => setFieldValue("is_foreign", !values.is_foreign)}
+							checked={values.is_foreign}
+						/>
+					</div>
+
+					<div className="d-flex align-items-center">
+						<Field
+							className="mr-2"
+							component={Fields.Switch}
 							name="status"
 							label="Активный статус"
 							onChange={() => setFieldValue("status", !values.status)}

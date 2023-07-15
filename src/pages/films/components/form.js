@@ -295,6 +295,25 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 
 						<Field
 							component={Fields.AsyncSelect}
+							name="holder_id"
+							placeholder={t("Выберите правообладатель")}
+							label={t("Правообладатель")}
+							isClearable={true}
+							isSearchable={true}
+							isMulti={false}
+							loadOptionsUrl="/holder"
+							version="v3"
+							className="mb-24"
+							optionLabel={`title_${lang}`}
+							loadOptionsParams={title => {
+								return {
+									filter: { status: 1 },
+									extra: { title }
+								};
+							}}
+						/>
+						<Field
+							component={Fields.AsyncSelect}
 							name="categories"
 							placeholder={t("Выберите категорию")}
 							label={t("Категория")}

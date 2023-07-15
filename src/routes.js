@@ -110,6 +110,15 @@ const Dashboard = lazy(() => import("./pages/dashboard2"));
 const TasIX = lazy(() => import("./pages/TasIx"));
 const Company = lazy(() => import("./pages/Company"));
 const Banned = lazy(() => import("./pages/Banned"));
+const Channel = lazy(() => import("./pages/Channel"));
+const ChannelCreate = lazy(() => import("./pages/Channel/Create"));
+const ChannelUpdate = lazy(() => import("./pages/Channel/Update"));
+const StoryTrailer = lazy(() => import("./pages/StoryTrailer"));
+const StoryTrailerCreate = lazy(() => import("./pages/StoryTrailer/Create"));
+const StoryTrailerUpdate = lazy(() => import("./pages/StoryTrailer/Update"));
+const Holder = lazy(() => import("./pages/Holder"));
+const HolderCreate = lazy(() => import("./pages/Holder/Create"));
+const HolderUpdate = lazy(() => import("./pages/Holder/Update"));
 // const Dashboard2 = lazy(() => import("./pages/dashboard2"));
 const NotFound = lazy(() => import("./pages/not-found"));
 
@@ -217,6 +226,17 @@ const routes = [
 	{ path: "/version/update/:id", exact: true, component: VersionUpdate, access: ["super_admin", "admin"] },
 
 	{ path: "/dashboard", exact: true, component: Dashboard, access: ["super_admin"] },
+	{ path: "/channel", exact: true, component: Channel, access: ["super_admin", "admin"] },
+	{ path: "/channel/create", exact: true, component: ChannelCreate, access: ["super_admin", "admin"] },
+	{ path: "/channel/:id", exact: true, component: ChannelUpdate, access: ["super_admin", "admin"] },
+
+	{ path: "/story-trailer", exact: true, component: StoryTrailer, access: ["super_admin", "admin"] },
+	{ path: "/story-trailer/create", exact: true, component: StoryTrailerCreate, access: ["super_admin", "admin"] },
+	{ path: "/story-trailer/:id", exact: true, component: StoryTrailerUpdate, access: ["super_admin", "admin"] },
+
+	{ path: "/holder", exact: true, component: Holder, access: ["super_admin", "admin"] },
+	{ path: "/holder/create", exact: true, component: HolderCreate, access: ["super_admin", "admin"] },
+	{ path: "/holder/:id", exact: true, component: HolderUpdate, access: ["super_admin", "admin"] },
 	// { path: "/dashboard2", exact: true, component: Dashboard2, access: ["super_admin", "admin"] }
 
 	// { path: "/notifications/create", exact: true, component: NotificationsCreate },
