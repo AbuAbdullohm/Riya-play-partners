@@ -1,4 +1,5 @@
 import React from "react";
+import * as yup from "yup";
 
 import EntityForm from "modules/entity/forms";
 import { Typography } from "components";
@@ -37,7 +38,8 @@ const Create = ({ history }) => {
 			fields={[
 				{
 					name: "sort",
-					required: false
+					required: false,
+					onSubmitValue: value => (value ? 1 : 0)
 				},
 				{
 					name: "name_uz",
@@ -57,16 +59,7 @@ const Create = ({ history }) => {
 					value: "",
 					required: true
 				},
-				{
-					name: "price",
-					onSubmitValue: value => Number(value),
-					required: true
-				},
-				{
-					name: "days",
-					onSubmitValue: value => Number(value),
-					required: true
-				},
+
 				{
 					name: "is_foreign",
 					value: true,
@@ -76,6 +69,33 @@ const Create = ({ history }) => {
 					name: "status",
 					value: true,
 					onSubmitValue: value => (value ? 1 : 0)
+				},
+				{
+					name: "ratesPrices",
+					required: true,
+					type: "array",
+					value: [
+						{
+							days: 0,
+							price: 0,
+							device_count: 0
+						}
+					],
+					onSubmitValue: values =>
+						values.map(value => ({
+							days: value.days,
+							price: value.price,
+							device_count: value.device_count
+						})),
+
+					lazy: (validator, yup) =>
+						validator.of(
+							yup.object().shape({
+								days: yup.string().required("Обязательное поле"),
+								price: yup.string().required("Обязательное поле"),
+								device_count: yup.string().required("Обязательное поле")
+							})
+						)
 				}
 			]}>
 			{({ isSubmitting, values, setFieldValue }) => {

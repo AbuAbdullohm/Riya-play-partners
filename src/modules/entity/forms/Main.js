@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 // import { notification } from "antd";
 import Actions from "../actions";
 import i18next from "i18next";
+import { isFunction } from "lodash";
 
 const Main = ({ children, handleSubmit, submitForm, values, errors, isSubmitting, setFieldValue, setFieldError, setErrors, setFieldTouched, validateForm }) => (
 	<form onSubmit={handleSubmit} autoComplete={"false"}>
@@ -61,9 +62,11 @@ const EnhacedForm = withFormik({
 		let validationFields = {};
 
 		fields.forEach(field => {
-			let validationField;
+			const { lazy, type } = field;
 
-			switch (field.type) {
+			let validationField = {};
+
+			switch (type) {
 				case "string":
 					validationField = Yup.string().typeError("Must be a string");
 					break;
@@ -102,6 +105,10 @@ const EnhacedForm = withFormik({
 			}
 
 			validationField = validationField.nullable();
+
+			if (isFunction(lazy)) {
+				validationField = lazy(Yup[type](), Yup);
+			}
 
 			validationFields[field.name] = validationField;
 		});

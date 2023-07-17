@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import qs from "query-string";
-import { constants } from "services";
 import { useNotification } from "hooks";
 
 const Story = ({ history, location }) => {

@@ -4,7 +4,6 @@ import { Fields, Grid, Panel, Button, Loader } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
-import { constants } from "services";
 
 const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErrors, errors }) => {
 	const { t } = useTranslation();

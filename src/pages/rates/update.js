@@ -6,7 +6,7 @@ import { Typography } from "components";
 import Form from "./components/form";
 
 import { useNotification } from "hooks";
-import { get } from "lodash";
+import { get, isObject } from "lodash";
 import { useTranslation } from "react-i18next";
 import qs from "query-string";
 
@@ -28,7 +28,7 @@ const Update = ({ location, history, match }) => {
 			params={{
 				include: "files,ratesPrices,translations,sort"
 			}}>
-			{({ item, isFetched }) => {
+			{({ item }) => {
 				return (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
@@ -57,8 +57,9 @@ const Update = ({ location, history, match }) => {
 							fields={[
 								{
 									name: "sort",
+									value: get(item, "sort"),
 									required: false,
-									value: get(item, "sort")
+									onSubmitValue: value => (value ? 1 : 0)
 								},
 								{
 									name: "name_uz",
@@ -79,16 +80,27 @@ const Update = ({ location, history, match }) => {
 									value: get(item, "description_ru")
 								},
 								{
-									name: "price",
-									value: get(item, "ratesPrices.price"),
-									onSubmitValue: value => Number(value),
-									required: true
-								},
-								{
-									name: "days",
-									value: get(item, "ratesPrices.days"),
-									onSubmitValue: value => Number(value),
-									required: true
+									name: "ratesPrices",
+									required: true,
+									type: "array",
+									value: get(item, "ratesPrices"),
+									onSubmitValue: values => {
+										return values.map(value => ({
+											id: value.id,
+											days: value.days,
+											price: value.price,
+											device_count: value.device_count
+										}));
+									},
+
+									lazy: (validator, yup) =>
+										validator.of(
+											yup.object().shape({
+												days: yup.string().required("Обязательное поле"),
+												price: yup.string().required("Обязательное поле"),
+												device_count: yup.string().required("Обязательное поле")
+											})
+										)
 								},
 								{
 									name: "is_foreign",

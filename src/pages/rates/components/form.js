@@ -4,12 +4,15 @@ import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 import { helpers } from "services";
+import { isObject } from "lodash";
+
 const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
 	const { t } = useTranslation();
 	const history = useHistory();
+
 	return (
-		<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
-			<Grid.Column md={8} gutter={10}>
+		<Grid.Row gutter={10} gutterX={4} className={"mb-10 rates-form"}>
+			<Grid.Column md={12} gutter={10}>
 				<Panel>
 					<Grid.Row gutter={10} gutterX={4}>
 						<Grid.Column sm={6} gutter={10}>
@@ -21,33 +24,6 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
 							<Field component={Fields.Textarea} name="description_ru" type="text" label="Описание (РУ)" placeholder="Введите описание" />
 						</Grid.Column>
 					</Grid.Row>
-				</Panel>
-			</Grid.Column>
-
-			<Grid.Column md={4} gutter={10}>
-				<Panel>
-					<Field
-						component={Fields.Input}
-						name="price"
-						type="number"
-						onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
-						placeholder="Введите цену"
-						min="0"
-						label="Цена"
-						size="large"
-						className={"mb-1"}
-					/>
-					<Field
-						component={Fields.Input}
-						name="days"
-						onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
-						type="number"
-						placeholder="Введите дней"
-						min="0"
-						label="Дни"
-						size="large"
-						className={"mb-1"}
-					/>
 					<Field
 						component={Fields.Input}
 						name="sort"
@@ -81,7 +57,89 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
 							checked={values.status}
 						/>
 					</div>
+				</Panel>
+			</Grid.Column>
 
+			<Grid.Column md={12}>
+				<h1 className="title">Тарифные цены</h1>
+			</Grid.Column>
+
+			{values.ratesPrices &&
+				values.ratesPrices.map((item, i) => {
+					return (
+						<Grid.Column key={i} md={4} gutter={10} className="rate-column">
+							<Button.Outline
+								type="danger"
+								className="remove-btn"
+								onClick={() => {
+									setFieldValue(
+										"ratesPrices",
+										values.ratesPrices.filter((r, index) => index !== i)
+									);
+								}}>
+								x
+							</Button.Outline>
+
+							<Panel>
+								<Field
+									component={Fields.Input}
+									name={`ratesPrices[${i}].price`}
+									type="number"
+									onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+									placeholder="Введите цену"
+									min="0"
+									label="Цена"
+									size="large"
+									className={"mb-1"}
+								/>
+								<Field
+									component={Fields.Input}
+									name={`ratesPrices[${i}].days`}
+									onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+									type="number"
+									placeholder="Введите дней"
+									min="0"
+									label="Дни"
+									size="large"
+									className={"mb-1"}
+								/>
+
+								<Field
+									component={Fields.Input}
+									name={`ratesPrices[${i}].device_count`}
+									onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+									type="number"
+									placeholder="Введите кол-во"
+									min="0"
+									label="Количество устройств"
+									size="large"
+									className={"mb-1"}
+								/>
+							</Panel>
+						</Grid.Column>
+					);
+				})}
+
+			<Grid.Column md={4}>
+				<Button.Outline
+					style={{ width: "100%", height: "100%", minHeight: 200 }}
+					buttonType="button"
+					type="primary"
+					onClick={() => {
+						setFieldValue("ratesPrices", [
+							...values.ratesPrices,
+							{
+								days: 0,
+								price: 0,
+								device_count: 0
+							}
+						]);
+					}}>
+					+ Добавить
+				</Button.Outline>
+			</Grid.Column>
+			<Grid.Column md={12}>
+				<Panel>
 					<div className="flex justify-end">
 						<Button.Default type="secondary" buttonType="button" onClick={() => history.goBack()}>
 							{t("Отменить")}

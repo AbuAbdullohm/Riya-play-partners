@@ -4,7 +4,6 @@ import { Typography } from "components";
 import { useTranslation } from "react-i18next";
 import Form from "./components/form";
 import { useNotification } from "hooks";
-import { get } from "lodash";
 
 const Create = ({ history }) => {
 	const { t } = useTranslation();

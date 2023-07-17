@@ -154,7 +154,7 @@ const List = ({ history, location }) => {
 										dataIndex: "ratesPrices",
 										render: value => (
 											<>
-												{Number(get(value, "price")).toLocaleString("en-US", {
+												{Number(get(value, "[0]price")).toLocaleString("en-US", {
 													style: "currency",
 													currency: "UZS",
 													minimumFractionDigits: 0
@@ -166,7 +166,7 @@ const List = ({ history, location }) => {
 										title: t("Дней"),
 										className: "w-4",
 										dataIndex: "ratesPrices",
-										render: value => <>{get(value, "days")}</>
+										render: value => <>{get(value, "[0]days")}</>
 									},
 									{
 										title: t("Сорт"),
