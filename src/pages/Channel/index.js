@@ -122,7 +122,7 @@ const Channel = ({ history, location }) => {
 									{
 										title: t("Категория"),
 										dataIndex: "category_id",
-										render: id => constants.channelTypes.find(({ value }) => id === value).label
+										render: id => id && constants.channelTypes.find(({ value }) => id === value).label
 									},
 									{
 										title: t("Статус"),

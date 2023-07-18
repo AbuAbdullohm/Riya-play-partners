@@ -271,3 +271,113 @@ html.dark {
 		margin-bottom: 10px;
 	}
 }
+
+.user_view {
+	.info {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 20px;
+		label {
+			color: #a0a0a0;
+			font-size: 16px;
+			margin-bottom: 5px;
+			font-weight: 700;
+		}
+		span {
+			color: black;
+			font-size: 20px;
+			font-weight: 500;
+			&.color-red {
+				color: #930000;
+			}
+			&.color-green {
+				color: #00ca2c;
+			}
+		}
+	}
+	.tabs-panel {
+		.preview {
+			padding: 0;
+			.nav {
+				.tab-pane__item {
+					padding: 15px 20px;
+					margin: 0;
+					color: #000000;
+					&.--active {
+						background-color: #faf9f9;
+						border-bottom-color: #000000;
+						border-width: 1px;
+					}
+				}
+			}
+			.tab-content {
+				padding: 15px;
+				.device-item {
+					display: flex;
+					align-items: center;
+					flex-direction: row;
+					padding: 12px;
+					margin-bottom: 15px;
+					p {
+						font-size: 12px;
+						margin-bottom: 0;
+						margin-right: 10px;
+						color: black;
+						&:first-child {
+							font-weight: 700;
+						}
+					}
+				}
+				.extra-day_box {
+					.extra-day {
+						margin: 0;
+						margin-bottom: 10px;
+					}
+				}
+				.viewTransaction_tab {
+					padding: 0;
+					font-size: 12px;
+					padding-bottom: 5px;
+					margin-bottom: 5px;
+					border-bottom-width: 1px;
+					justify-content: flex-start;
+				}
+				.table {
+					img {
+						width: 45px;
+						height: 45px;
+					}
+					tr {
+						td {
+							border-bottom: 1px solid #eee;
+							padding-bottom: 10px;
+						}
+						&:last-child {
+							td {
+								border-bottom: none;
+							}
+						}
+					}
+					.viewTransaction-box-way {
+						padding: 0;
+						justify-content: center;
+						p {
+							font-size: 16px;
+							color: #000000;
+						}
+						div {
+							font-size: 12px;
+							color: #000000;
+						}
+					}
+					.text-center {
+						vertical-align: middle;
+					}
+				}
+				.not-found {
+					padding: 15px 0;
+				}
+			}
+		}
+	}
+}

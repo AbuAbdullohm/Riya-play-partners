@@ -11,9 +11,29 @@ const channelTypes = [
 	}
 ];
 
+const DEVICE_ACTIVE = 10;
+const DEVICE_INACTIVE = 9;
+const DEVICE_DELETED = 0;
+
+const deviceStatus = [
+	{
+		label: "Активный",
+		value: DEVICE_ACTIVE
+	},
+	{
+		label: "Неактивный",
+		value: DEVICE_INACTIVE
+	},
+	{
+		label: "Удалено",
+		value: DEVICE_DELETED
+	}
+];
+
 const constants = {
 	externalTypes,
-	channelTypes
+	channelTypes,
+	deviceStatus
 };
 
 export default constants;

@@ -58,7 +58,7 @@ export default function DevicesModal({ modal, setModal }) {
 
 				return items.map(item => {
 					return (
-						<div className="device-item" key={item.id}>
+						<div className="device-item mb-10" key={item.id}>
 							<p>{item.phone}</p>
 							<p>{item.user_agent}</p>
 							<span onClick={() => kickDevice(item)}>x</span>

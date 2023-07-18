@@ -11,9 +11,10 @@ import BanModal from "./banModal";
 import ViewTransaction from "./viewTransaction";
 import DownloadXls from "./downloadXls";
 import AddDay from "./components/AddDay";
-import "./style.scss";
 import { useSelector } from "react-redux";
 import DevicesModal from "./components/devicesModal";
+import { Link } from "react-router-dom";
+import "./style.scss";
 
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -313,11 +314,15 @@ const List = ({ history, location }) => {
 											className: "w-5",
 											render: (_, row) => {
 												return (
-													// <Link to={`/user/${get(row, "id")}`}>
-													<Button.Outline className="status-btn" type="success" onClick={() => onView(row)}>
-														<Icon name="eye" />
-													</Button.Outline>
-													// </Link>
+													<Link to={`/users/${get(row, "id")}`}>
+														<Button.Outline
+															className="status-btn"
+															type="success"
+															//  onClick={() => onView(row)}
+														>
+															<Icon name="eye" />
+														</Button.Outline>
+													</Link>
 												);
 											}
 										},
