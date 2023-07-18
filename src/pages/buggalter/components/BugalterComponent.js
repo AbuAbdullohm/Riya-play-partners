@@ -11,11 +11,13 @@ import Payme from "assets/images/payme.svg";
 import Apelsin from "assets/images/uzum.svg";
 import Paynet from "assets/images/paynet.svg";
 import Click from "assets/images/icons/icons-dashboard/click.svg";
+import Upay from "assets/images/icons/icons-dashboard/upay.svg";
 import moment from "moment";
 
 export default function BugalterComponent({ items, params }) {
 	const [statistics, setStatistics] = useState();
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(
 			Actions.LoadDefault.request({
@@ -50,6 +52,7 @@ export default function BugalterComponent({ items, params }) {
 	const payme = get(statistics, "payme");
 	const paynet = get(statistics, "paynet");
 	const click = get(statistics, "click");
+	const upay = get(statistics, "upay");
 
 	return (
 		<div>
@@ -111,10 +114,6 @@ export default function BugalterComponent({ items, params }) {
 
 				<div className="bugalter-box color4">
 					<div>
-						<h2 className="bugalter-box_4">
-							<span className="bugalter-box_span4"></span>
-							Метод оплаты
-						</h2>
 						<div className="bugalter-box_4_card">
 							<img src={Paynet} alt="" />
 
@@ -165,6 +164,19 @@ export default function BugalterComponent({ items, params }) {
 
 							<p className="bugalter-box_4_card_p2">
 								{Number(click || 0).toLocaleString("en-US", {
+									style: "currency",
+									currency: "UZS",
+									minimumFractionDigits: 0
+								})}
+							</p>
+						</div>
+						<div className="bugalter-box_4_card mb-0">
+							<div className="bugalter-box_4_card_img">
+								<img src={Upay} alt="" style={{ width: "70px" }} />
+							</div>
+
+							<p className="bugalter-box_4_card_p2">
+								{Number(upay || 0).toLocaleString("en-US", {
 									style: "currency",
 									currency: "UZS",
 									minimumFractionDigits: 0

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { get } from "lodash";
 import EntityContainer from "modules/entity/containers";
 import { useSelector } from "react-redux";
 import { helpers } from "services";
-import { Loader, Icon, Button } from "components";
+import { Loader, Button } from "components";
 
-import BektvBox from "assets/images/bektvbox.svg";
-import PaymeUser from "assets/images/paymeUser.svg";
-import ApelsinUser from "assets/images/apelsinUser.svg";
-import PaynetUser from "assets/images/paynetUser.png";
-import Click from "assets/images/click.png";
+import BektvBox from "assets/images/bektv.svg";
+import PaymeUser from "assets/images/payme.svg";
+import ApelsinUser from "assets/images/uzum.svg";
+import PaynetUser from "assets/images/paynet.svg";
+import Click from "assets/images/icons/icons-dashboard/click.svg";
 
 export default function UserTransaction({ user }) {
 	const ratesData = useSelector(state => state.system.rates);
@@ -110,7 +110,7 @@ export default function UserTransaction({ user }) {
 																					: item.payment_method === "payme"
 																					? "Payme"
 																					: item.payment_method === "apelsin"
-																					? "Apelsin"
+																					? "Uzum"
 																					: item.payment_method === "paynet"
 																					? "Paynet"
 																					: item.payment_method === "click"
