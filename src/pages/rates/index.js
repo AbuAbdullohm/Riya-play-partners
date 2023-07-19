@@ -154,6 +154,7 @@ const List = ({ history, location }) => {
 										dataIndex: "ratesPrices",
 										render: value => (
 											<>
+												{console.log(value)}
 												{Number(get(value, "[0]price")).toLocaleString("en-US", {
 													style: "currency",
 													currency: "UZS",

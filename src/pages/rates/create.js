@@ -59,7 +59,12 @@ const Create = ({ history }) => {
 					value: "",
 					required: true
 				},
-
+				{
+					name: "holder_id",
+					required: true,
+					type: "object",
+					onSubmitValue: value => (value ? value.id : null)
+				},
 				{
 					name: "is_foreign",
 					value: true,

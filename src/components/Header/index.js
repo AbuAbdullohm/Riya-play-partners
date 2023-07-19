@@ -19,7 +19,10 @@ const PageHeaderComponent = ({
 	textLeft = false,
 	setFilter,
 	hasButton = true,
-	sort = false,
+	sort = {
+		value: false,
+		title: ""
+	},
 	addDay = false,
 	hasFilter = false,
 	hasExport = false,
@@ -123,23 +126,24 @@ const PageHeaderComponent = ({
 						</div>
 					)}
 
-					{sort && (
+					{sort.value ? (
 						<div>
-							<div
+							<Button.Default
 								className="mr-2"
 								onClick={() => {
 									const values = qs.parse(history.location.search.replace("?", ""));
-									const haveSort = values.sort === sort;
+									const haveSort = values.sort === sort.value;
 									setSortIcon(haveSort ? "arrow-up" : "arrow-down");
 									history.push({
 										...history.location,
-										search: qs.stringify({ ...values, sort: haveSort ? `-${sort}` : sort })
+										search: qs.stringify({ ...values, sort: haveSort ? `-${sort.value}` : sort.value })
 									});
 								}}>
-								<IconComponent name={sortIcon} />
-							</div>
+								<span className="mr-1">{sort.title}</span>
+								<IconComponent name={sortIcon} size={18} />
+							</Button.Default>
 						</div>
-					)}
+					) : null}
 
 					<div className="flex items-center">
 						{filterDay && <>{filterDay}</>}

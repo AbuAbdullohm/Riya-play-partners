@@ -80,6 +80,13 @@ const Update = ({ location, history, match }) => {
 									value: get(item, "description_ru")
 								},
 								{
+									name: "holder_id",
+									required: true,
+									type: "object",
+									value: get(item, "holder"),
+									onSubmitValue: value => (value ? value.id : null)
+								},
+								{
 									name: "ratesPrices",
 									required: true,
 									type: "array",

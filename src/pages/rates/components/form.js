@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import { helpers } from "services";
 import { isObject } from "lodash";
 
-const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
+const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru" }) => {
 	const { t } = useTranslation();
 	const history = useHistory();
 
@@ -34,6 +34,25 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values }) => {
 						label="Сорт"
 						size="large"
 						className={"mb-2"}
+					/>
+					<Field
+						component={Fields.AsyncSelect}
+						name="holder_id"
+						placeholder={t("Выберите правообладатель")}
+						label={t("Правообладатель")}
+						isClearable={true}
+						isSearchable={true}
+						isMulti={false}
+						loadOptionsUrl="/holder"
+						version="v3"
+						className="mb-24"
+						optionLabel={`title_${lang}`}
+						loadOptionsParams={title => {
+							return {
+								filter: { status: 1 },
+								extra: { title }
+							};
+						}}
 					/>
 
 					<div className="d-flex align-items-center">

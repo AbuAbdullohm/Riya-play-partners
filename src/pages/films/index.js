@@ -127,7 +127,7 @@ const List = ({ history, location }) => {
 				params={{
 					sort: params.sort || "-id",
 					limit: pageLimit,
-					include: "files,company,type,genres,categories,seasons,actors",
+					include: "files,company,type,genres,categories,seasons,actors,holder.logo",
 					extra: {
 						category_id: params.category_id,
 						company_id: params.company_id,
@@ -159,7 +159,10 @@ const List = ({ history, location }) => {
 								buttonName="Добавить"
 								buttonClick={() => history.push(`/films/create`)}
 								filter={filter}
-								sort={"viewed"}
+								sort={{
+									title: "По просмотрам",
+									value: "viewed"
+								}}
 								setFilter={setFilter}
 								hasFilter={true}
 								textLeft={
@@ -224,7 +227,12 @@ const List = ({ history, location }) => {
 										dataIndex: "type",
 										render: type => get(type, "name_ru", "")
 									},
-
+									// {
+									// 	title: t("Правообладатель"),
+									// 	className: "text-center",
+									// 	dataIndex: "holder",
+									// 	render: value => <>{value && value.id}</>
+									// },
 									{
 										title: t("Количество просмотров"),
 										className: "text-center",

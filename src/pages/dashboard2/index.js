@@ -18,6 +18,7 @@ import { ReactComponent as ContactIcon } from "assets/images/icons/icons-dashboa
 import { ReactComponent as MoneyTransaction } from "assets/images/icons/icons-dashboard/moneyTranzaksion.svg";
 import { ReactComponent as Karmang } from "assets/images/icons/icons-dashboard/karman.svg";
 import { ReactComponent as Shop } from "assets/images/icons/icons-dashboard/shop.svg";
+import { ReactComponent as SMS } from "assets/images/icons/icons-dashboard/sms.svg";
 
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -121,6 +122,7 @@ const List = ({ history, location }) => {
 
 	const transactionsCount = get(items, "incomes", []).reduce((total, count) => (total += count.id), 0);
 	const usersCount = String(get(items, "usersCount", 0));
+	const sms = get(items, "sms");
 
 	if (!loading) return <Loader />;
 
@@ -183,20 +185,20 @@ const List = ({ history, location }) => {
 				<Panel className="dashboard_main_left">
 					<div className="title_header d-flex align-items-center mb-3">
 						<span className="mr-2">Клиенты</span>
-						<Karmang width={40} height={40} className="mr-2 ml-auto" /> {discountTransactions}
 					</div>
+
+					<CardBox Icon={Karmang} total={discountTransactions} title="В кошельке" />
 					<CardBox Icon={ContactIcon} total={usersCount} title="Пользователи" />
 					<CardBox Icon={MoneyTransaction} total={transactionsCount} title="Количество транзакций" />
 					<CardBox Icon={Shop} total={soledSubscriptions} title="Купленные тарифы" />
+					<CardBox Icon={SMS} total={sms} title="Использованные SMS-сообщения" />
 				</Panel>
 
 				<div style={{ zIndex: "1" }}>
 					<Panel className="dashboard_main_right payment_info">
 						<div className="d-flex justify-between">
 							<div>
-								<div className="title_header mb-3 d-flex align-items-center">
-									Пополнение счета <Karmang width={40} height={40} className="ml-2" />
-								</div>
+								<div className="title_header mb-3 d-flex align-items-center mr-2">Пополнение счета</div>
 
 								<Chart keyword="chart2" items={items} />
 							</div>
@@ -238,8 +240,8 @@ const List = ({ history, location }) => {
 						<div className="d-flex justify-between">
 							<div>
 								<div className="title_header mb-3 d-flex align-items-center">
-									<span>Купленные тарифы:</span>
-									<Shop className="mx-1 ml-auto" width={40} height={40} />
+									<span className="mr-2">Купленные тарифы:</span>
+
 									<span>{soledSubscriptions}</span>
 								</div>
 								<Chart keyword="chart1" items={items} ratesData={ratesData} />
@@ -282,9 +284,7 @@ const List = ({ history, location }) => {
 					</Panel>
 
 					<Panel className="dashboard_main_right top_table mt-5">
-						<div className="title_header d-flex align-items-center">
-							Топ оплаты <MoneyTransaction width={40} height={40} className="ml-2" />
-						</div>
+						<div className="title_header d-flex align-items-center mr-2">Топ оплаты</div>
 
 						<div className="dashboard_table" id="dashboard_table">
 							<table className="table">
