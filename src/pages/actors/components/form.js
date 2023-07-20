@@ -21,7 +21,7 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 					await api["requestv1"]
 						.get(
 							queryBuilder("/actors", {
-								extra: {
+								filter: {
 									kinopoisk_id: value,
 									external_type: type
 								}
