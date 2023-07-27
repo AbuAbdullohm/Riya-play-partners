@@ -6,9 +6,9 @@ const token = storage.get("token");
 const initialState = {
 	isFetched: true,
 	isAuthenticated: !!token,
-	data: {},
+	data: {}
 	// token: ""
-	token: "JWEOoc6STR0VPKZsWruK4txN6cRMbLo9" // for dev
+	// token: "JWEOoc6STR0VPKZsWruK4txN6cRMbLo9" // for dev
 };
 
 export default (state = initialState, action) => {
