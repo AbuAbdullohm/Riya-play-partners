@@ -4,6 +4,8 @@ import { Field, Form, withFormik } from "formik";
 import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Fields, Grid, Button } from "../../../components";
+import { constants } from "services";
+
 const Filter = ({ handleSubmit, t, history, setFilter }) => {
 	const clearForm = () => {
 		setFilter(false);
@@ -11,17 +13,45 @@ const Filter = ({ handleSubmit, t, history, setFilter }) => {
 			search: qs.stringify({}, { encode: false })
 		});
 	};
+
 	return (
 		<Form>
 			<Grid.Row gutterY={0} className="mt-5">
 				<Grid.Column xs={12} lg={12} xl={12}>
-					<Field component={Fields.Input} name="subsidy" placeholder="Поиск по субсидиям" label="Субсидия" />
+					<Field component={Fields.Input} name="name" placeholder="Поиск по Загаловок" label="Загаловок" />
 				</Grid.Column>
 				<Grid.Column xs={12} lg={12} xl={12}>
-					<Field component={Fields.Input} name="percent" placeholder="Поиск по процент" label="Процент" />
+					<Field
+						component={Fields.Select}
+						name="type"
+						size="small"
+						placeholder="Поиск по тип"
+						label="Тип"
+						optionLabel={"label"}
+						optionValue={"value"}
+						options={constants.notificationTypes}
+					/>
 				</Grid.Column>
 				<Grid.Column xs={12} lg={12} xl={12}>
-					<Field component={Fields.Input} name="limit" placeholder="Поиск по лимит" label="Лимит" />
+					<Field
+						component={Fields.Select}
+						name="status"
+						size="small"
+						placeholder="Поиск по статус"
+						label="Статус"
+						optionLabel={"label"}
+						optionValue={"value"}
+						options={[
+							{
+								label: "Активный",
+								value: 1
+							},
+							{
+								label: "Неактивный",
+								value: 0
+							}
+						]}
+					/>
 				</Grid.Column>
 			</Grid.Row>
 			<Grid.Row>
@@ -44,19 +74,23 @@ const EnhancedForm = withFormik({
 		const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 
 		return {
-			subsidy: params.subsidy || "",
-			percent: params.percent || "",
-			limit: params.limit || ""
+			name: params.name || "",
+			type: params.type || "",
+			status: params.status || ""
 		};
 	},
 	handleSubmit: (values, { props: { location, history, lang, setFilter } }) => {
 		values = {
-			...values
+			...values,
+			name: values.name,
+			type: values.type,
+			status: values.status
 		};
 		const query = qs.parse(location.search);
 
 		values = Object.keys({ ...query, ...values }).reduce((prev, curr) => (values[curr] ? { ...prev, [curr]: values[curr] } : { ...prev }), {});
 		setFilter(false);
+
 		history.push({
 			search: qs.stringify(values, { encode: false })
 		});

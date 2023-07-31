@@ -45,7 +45,27 @@ const deviceTypes = [
 	}
 ];
 
+const notificationTypes = [
+	{
+		label: "Новости",
+		value: 1
+	},
+	{
+		label: "Фильмы",
+		value: 2
+	},
+	{
+		label: "Уведомление",
+		value: 3
+	},
+	{
+		label: "По тарифу",
+		value: 4
+	}
+];
+
 const constants = {
+	notificationTypes,
 	deviceTypes,
 	externalTypes,
 	channelTypes,

@@ -21,6 +21,7 @@ const List = ({ history, location }) => {
 	const [modal, setModal] = useState(false);
 	const [loadingDelete, setLoadingDelete] = useState(false);
 	const [view, setView] = useState(false);
+	const [filter, setFilter] = useState(false);
 	const [viewData, setViewData] = useState();
 	const onDeleteHandler = menuId => {
 		setModal(true);
@@ -123,7 +124,8 @@ const List = ({ history, location }) => {
 					extra: { name: params.name ? params.name : "" },
 					filter: {
 						status: params.status,
-						rates: params.rates ? params.rates.split("/")[0] : null
+						rates: params.rates ? params.rates.split("/")[0] : null,
+						type: params.type
 					},
 					limit: pageLimit ? pageLimit : 10,
 					include: "translations,model",
@@ -132,8 +134,15 @@ const List = ({ history, location }) => {
 				{({ items, isFetched, meta }) => {
 					return (
 						<>
-							<Header title="Уведомления" buttonName="Добавить" buttonClick={() => history.push(`/notifications/create`)} meta={meta}>
-								<Filter />
+							<Header
+								title="Уведомления"
+								buttonName="Добавить"
+								buttonClick={() => history.push(`/notifications/create`)}
+								meta={meta}
+								filter={filter}
+								setFilter={setFilter}
+								hasFilter={true}>
+								<Filter {...{ setFilter }} />
 							</Header>
 
 							<Table

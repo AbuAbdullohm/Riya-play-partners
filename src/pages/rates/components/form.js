@@ -15,6 +15,9 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru" }) =>
 			<Grid.Column md={12} gutter={10}>
 				<Panel>
 					<Grid.Row gutter={10} gutterX={4}>
+						{/* <Grid.Column>
+							<Field component={Fields.fileUpload} name={""} />
+						</Grid.Column> */}
 						<Grid.Column sm={6} gutter={10}>
 							<Field component={Fields.Input} name="name_uz" type="text" placeholder="Введите загаловок" label="Заголовок (УЗ)" size="large" />
 							<Field component={Fields.Textarea} name="description_uz" type="text" label="Описание (УЗ)" placeholder="Введите описание" />
