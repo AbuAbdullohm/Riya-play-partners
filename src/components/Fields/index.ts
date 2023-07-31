@@ -10,9 +10,11 @@ import Upload from "./upload";
 import fileUpload from "./fileUpload";
 import DatePicker from "./datepicker";
 import Radio from "./radio";
+import Radios from "./radios";
 import CreatableTagSelect from "./creatableTagSelect";
 import NewDatePicker from "./NewDatePicker";
 import MaskInput from "./inputs/mask-input/MaskInput";
+
 export default {
 	Checkbox,
 	Switch,
@@ -27,6 +29,7 @@ export default {
 	NewDatePicker,
 	LoginInput,
 	Radio,
+	Radios,
 	CreatableTagSelect,
 	MaskInput
 };

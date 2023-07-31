@@ -26,7 +26,7 @@ const Update = ({ location, history, match }) => {
 			primaryKey="id"
 			id={id}
 			params={{
-				include: "files,ratesPrices,translations,sort"
+				include: "files,ratesPrices,translations,sort,holder"
 			}}>
 			{({ item }) => {
 				return (
@@ -90,13 +90,16 @@ const Update = ({ location, history, match }) => {
 									name: "ratesPrices",
 									required: true,
 									type: "array",
-									value: get(item, "ratesPrices"),
+									value: get(item, "ratesPrices")
+										? get(item, "ratesPrices").map(i => ({ ...i, top: i.top ? 1 : 0, device_count: i.device_count || 0 }))
+										: [],
 									onSubmitValue: values => {
 										return values.map(value => ({
 											id: value.id,
 											days: value.days,
 											price: value.price,
-											device_count: value.device_count
+											device_count: value.device_count,
+											top: value.top ? 1 : 0
 										}));
 									},
 

@@ -78,6 +78,10 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 		}
 	}
 
+	const checkedDeviceType = constants.deviceTypes.find(d => {
+		return values[`visible_${d.value}`];
+	});
+
 	useEffect(() => {
 		if (values.kinopoisk_id && values.external_type) checkId(values.kinopoisk_id, values.external_type);
 	}, [values.kinopoisk_id, values.external_type]);
@@ -312,7 +316,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								<Icon name="plus" />
 							</Button.Outline>
 						</div>
-
 						<Field
 							component={Fields.AsyncSelect}
 							name="holder_id"
@@ -350,7 +353,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								};
 							}}
 						/>
-
 						<div className="films-form-tag">
 							{!createModal && (
 								<Field
@@ -387,6 +389,22 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 						</div>
 
 						<Field
+							checked={checkedDeviceType ? checkedDeviceType.value : 0}
+							component={Fields.Radios}
+							id={"visible"}
+							label={"Смотреть на"}
+							options={constants.deviceTypes}
+							onChange={event => {
+								const value = event.target.value;
+								constants.deviceTypes.map(option => {
+									if (value === option.value) {
+										setFieldValue(`visible_${value}`, 1);
+									} else setFieldValue(`visible_${option.value}`, 0);
+								});
+							}}
+						/>
+
+						<Field
 							component={Fields.AsyncSelect}
 							name="genres"
 							placeholder={t("Выберите жанры")}
@@ -405,7 +423,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								};
 							}}
 						/>
-
 						<Field
 							component={Fields.AsyncSelect}
 							name="type"
@@ -424,7 +441,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								};
 							}}
 						/>
-
 						<div className="d-flex justify-content-between">
 							<Field
 								checked={Number(values.paid) === true}
@@ -464,7 +480,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 							label={t("Иностранные пользователи")}
 							size="large"
 						/> */}
-
 						<Field
 							className="mr-2"
 							component={Fields.Switch}
@@ -474,7 +489,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 							onChange={() => setFieldValue("foreign_user_can_view", !values.foreign_user_can_view)}
 							checked={values.foreign_user_can_view}
 						/>
-
 						<Field
 							className="mr-2"
 							component={Fields.Switch}
@@ -492,7 +506,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 							onChange={() => setFieldValue("status", !values.status)}
 							checked={values.status}
 						/>
-
 						<Button.Default type="primary" buttonType="button" disabled={isSubmitting} onClick={() => handleSubmit()} loading={isSubmitting}>
 							{isUpdate ? t("Сохранить") : t("Добавить")}
 						</Button.Default>

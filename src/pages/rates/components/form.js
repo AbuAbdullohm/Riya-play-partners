@@ -134,6 +134,15 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru" }) =>
 									size="large"
 									className={"mb-1"}
 								/>
+								<Field
+									component={Fields.Checkbox}
+									name={`ratesPrices[${i}].top`}
+									onChange={e => setFieldValue(`ratesPrices[${i}].top`, e.target.checked)}
+									label="Топ"
+									min="0"
+									size="large"
+									className={"mb-1"}
+								/>
 							</Panel>
 						</Grid.Column>
 					);

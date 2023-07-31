@@ -184,6 +184,18 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => Number(value.id)
 				},
 				{
+					name: "visible_web",
+					onSubmitValue: value => (value ? 1 : 0)
+				},
+				{
+					name: "visible_tv",
+					onSubmitValue: value => (value ? 1 : 0)
+				},
+				{
+					name: "visible_mobile",
+					onSubmitValue: value => (value ? 1 : 0)
+				},
+				{
 					name: "genres",
 					required: true,
 					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], [])

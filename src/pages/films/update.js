@@ -319,6 +319,22 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => Number(value.id)
 								},
 								{
+									name: "visible_web",
+									value: get(item, "visible_web") ? 1 : 0,
+									onSubmitValue: value => value
+								},
+								{
+									name: "visible_tv",
+									value: get(item, "visible_tv") ? 1 : 0,
+									onSubmitValue: value => value
+								},
+								{
+									name: "visible_mobile",
+									value: get(item, "visible_mobile") ? 1 : 0,
+									onSubmitValue: value => value
+								},
+
+								{
 									name: "genres",
 									required: true,
 									value: get(item, "genres") ? get(item, "genres") : [],

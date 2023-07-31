@@ -30,7 +30,23 @@ const deviceStatus = [
 	}
 ];
 
+const deviceTypes = [
+	{
+		label: "Web",
+		value: "web"
+	},
+	{
+		label: "TV",
+		value: "tv"
+	},
+	{
+		label: "Mobile",
+		value: "mobile"
+	}
+];
+
 const constants = {
+	deviceTypes,
 	externalTypes,
 	channelTypes,
 	deviceStatus

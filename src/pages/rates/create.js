@@ -83,14 +83,16 @@ const Create = ({ history }) => {
 						{
 							days: 0,
 							price: 0,
-							device_count: 0
+							device_count: 0,
+							top: 0
 						}
 					],
 					onSubmitValue: values =>
 						values.map(value => ({
 							days: value.days,
 							price: value.price,
-							device_count: value.device_count
+							device_count: value.device_count,
+							top: value.top ? 1 : 0
 						})),
 
 					lazy: (validator, yup) =>
