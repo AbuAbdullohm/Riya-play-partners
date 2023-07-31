@@ -44,18 +44,27 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 						)
 						.then(({ data }) => {
 							if (data.data && data.data.length > 0) {
-								// if (id) {
-								// 	const item = data.data.find(film => film.id === id);
-								// 	if (!item)
-								// 		setErrors({
-								// 			...errors,
-								// 			kinopoisk_id: "Этот ID уже существует на базе фильмов"
-								// 		});
-								// } else
-								setErrors({
-									...errors,
-									kinopoisk_id: "Этот ID уже существует на базе фильмов"
-								});
+								if (id) {
+									const item = data.data.find(film => film.id === id);
+									if (!item) {
+										setErrors({
+											...errors,
+											kinopoisk_id: "Этот ID уже существует на базе фильмов"
+										});
+										setTimeout(() => {
+											setFieldValue("kinopoisk_id", "");
+										}, 1000);
+									}
+								} else {
+									setErrors({
+										...errors,
+										kinopoisk_id: "Этот ID уже существует на базе фильмов"
+									});
+
+									setTimeout(() => {
+										setFieldValue("kinopoisk_id", "");
+									}, 1000);
+								}
 							}
 						});
 				},
@@ -184,16 +193,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 							}}
 						/>
 						<Grid.Row>
-							<Grid.Column lg={9}>
-								<Field
-									component={Fields.Input}
-									placeholder={t("Кинопоиск ид")}
-									size="large"
-									name="kinopoisk_id"
-									label={t("Кинопоиск ид")}
-									className="mb-24"
-								/>
-							</Grid.Column>
 							<Grid.Column lg={3}>
 								<Field
 									component={Fields.Select}
@@ -205,6 +204,17 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 									optionLabel={"label"}
 									optionValue={"value"}
 									options={constants.externalTypes}
+								/>
+							</Grid.Column>
+							<Grid.Column lg={9}>
+								<Field
+									disabled={values.external_type ? false : true}
+									component={Fields.Input}
+									placeholder={t("Кинопоиск ид")}
+									size="large"
+									name="kinopoisk_id"
+									label={t("Кинопоиск ид")}
+									className="mb-24"
 								/>
 							</Grid.Column>
 						</Grid.Row>
