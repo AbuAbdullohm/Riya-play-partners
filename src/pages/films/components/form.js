@@ -14,6 +14,7 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 	const { t } = useTranslation();
 	const [createModal, setCreateModal] = useState(false);
 	const [createCompanyModal, setCreateCompanyModal] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const createTag = e => {
 		e.preventDefault();
@@ -28,6 +29,7 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 	};
 
 	function checkId(value, type) {
+		setLoading(true);
 		setFieldValue("kinopoisk_id", value);
 
 		if (value && value.length > 3) {
@@ -45,27 +47,29 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 						.then(({ data }) => {
 							if (data.data && data.data.length > 0) {
 								if (id) {
-									const item = data.data.find(film => film.id === id);
+									const item = data.data.find(film => film.id === parseInt(id));
 									if (!item) {
 										setErrors({
 											...errors,
 											kinopoisk_id: "Этот ID уже существует на базе фильмов"
 										});
+										setLoading(false);
 										setTimeout(() => {
 											setFieldValue("kinopoisk_id", "");
 										}, 1000);
-									}
+									} else setLoading(false);
 								} else {
 									setErrors({
 										...errors,
 										kinopoisk_id: "Этот ID уже существует на базе фильмов"
 									});
 
+									setLoading(false);
 									setTimeout(() => {
 										setFieldValue("kinopoisk_id", "");
 									}, 1000);
 								}
-							}
+							} else setLoading(false);
 						});
 				},
 				"fetch",
@@ -208,6 +212,7 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 							</Grid.Column>
 							<Grid.Column lg={9}>
 								<Field
+									append={<div>{loading ? "Loading..." : ""}</div>}
 									disabled={values.external_type ? false : true}
 									component={Fields.Input}
 									placeholder={t("Кинопоиск ид")}
