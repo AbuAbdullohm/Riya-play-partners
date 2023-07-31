@@ -10,7 +10,7 @@ import CreateCompany from "./create-company";
 
 const { debounce } = helpers;
 
-const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", handleSubmit, errors, setErrors }) => {
+const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", handleSubmit, errors, setErrors }) => {
 	const { t } = useTranslation();
 	const [createModal, setCreateModal] = useState(false);
 	const [createCompanyModal, setCreateCompanyModal] = useState(false);
@@ -44,13 +44,18 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 						)
 						.then(({ data }) => {
 							if (data.data && data.data.length > 0) {
+								// if (id) {
+								// 	const item = data.data.find(film => film.id === id);
+								// 	if (!item)
+								// 		setErrors({
+								// 			...errors,
+								// 			kinopoisk_id: "Этот ID уже существует на базе фильмов"
+								// 		});
+								// } else
 								setErrors({
 									...errors,
 									kinopoisk_id: "Этот ID уже существует на базе фильмов"
 								});
-								setTimeout(() => {
-									setFieldValue("kinopoisk_id", "");
-								}, 2000);
 							}
 						});
 				},
@@ -61,7 +66,7 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru", hand
 	}
 
 	useEffect(() => {
-		checkId(values.kinopoisk_id, values.external_type);
+		if (values.kinopoisk_id && values.external_type) checkId(values.kinopoisk_id, values.external_type);
 	}, [values.kinopoisk_id, values.external_type]);
 
 	return (

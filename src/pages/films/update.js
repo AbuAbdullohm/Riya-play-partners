@@ -237,7 +237,6 @@ const Update = ({ location, history }) => {
 									name: "kinopoisk_id",
 									type: "string",
 									required: true,
-									min: 4,
 									value: get(item, "kinopoisk_id"),
 									onSubmitValue: value => value
 								},
@@ -340,6 +339,7 @@ const Update = ({ location, history }) => {
 									<>
 										<Form
 											{...{
+												id,
 												setFieldError,
 												isFetched,
 												values,

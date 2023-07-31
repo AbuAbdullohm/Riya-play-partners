@@ -165,16 +165,7 @@ const List = ({ history, location }) => {
 								}}
 								setFilter={setFilter}
 								hasFilter={true}
-								textLeft={
-									<div
-										onClick={() => {
-											// if (downloadFile.length > 0) {
-											// 	setInfoModal(!infoModal);
-											// }
-										}}>
-										<DownloadXls />
-									</div>
-								}
+								textLeft={<DownloadXls />}
 								meta={meta}>
 								<Filter {...{ setFilter }} />
 							</Header>

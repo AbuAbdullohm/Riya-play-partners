@@ -8,6 +8,7 @@ import get from "lodash/get";
 import qs from "query-string";
 import { useNotification } from "hooks";
 import Filter from "./components/filter";
+import DownloadXls from "./components/downloadXls";
 
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -87,6 +88,7 @@ const List = ({ history, location }) => {
 								meta={meta}
 								filter={filter}
 								setFilter={setFilter}
+								textLeft={<DownloadXls />}
 								hasFilter={true}>
 								<Filter {...{ setFilter }} />
 							</Header>

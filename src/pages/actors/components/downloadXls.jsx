@@ -21,26 +21,9 @@ const DownloadXls = () => {
 	const location = useLocation();
 	const query = qs.parse(location.search, { ignoreQueryPrefix: true });
 	let t = new Date().getTime();
-
-	const extraList = [
-		"role",
-		"phone",
-		"name",
-		"balance",
-		"promoCode",
-		"tariff_id",
-		"last_subscribe",
-		"balance_filter",
-		"sort",
-		"status",
-		"id",
-		"subscribe_type",
-		"is_active",
-		"is_active1",
-		"is_active2"
-	];
-
+	const extraList = ["name", "id", "kinopoisk_id", "external_type"];
 	let extra = {};
+
 	for (const key in query) {
 		if (Object.hasOwnProperty.call(query, key)) {
 			if (extraList.includes(key)) {
@@ -51,15 +34,14 @@ const DownloadXls = () => {
 			// }
 		}
 	}
-	const urlLoad = queryBuilder(`${config.API_ROOT_V2}/reports/report-films`, {
+
+	const urlLoad = queryBuilder(`${config.API_ROOT_V2}/reports/report-actors`, {
 		extra: {
 			...extra,
-			subscribe_finish_date_start: (query.rates_finish || []).length > 0 ? query.rates_finish[0] : null,
-			subscribe_finish_date_end: (query.rates_finish || []).length > 0 ? query.rates_finish[1] : null,
-			subscribe_got_date_end: (query.rates_start || []).length > 0 ? query.rates_start[1] : null,
-			subscribe_got_date_start: (query.rates_start || []).length > 0 ? query.rates_start[0] : null,
-			user_created_start: (query.user_created || []).length > 0 ? query.user_created[0] : null,
-			user_created_end: (query.user_created || []).length > 0 ? query.user_created[1] : null,
+			name: query.name,
+			id: query.id,
+			kinopoisk_id: query.kinopoisk_id,
+			external_type: query.external_type,
 			t
 		}
 	});
