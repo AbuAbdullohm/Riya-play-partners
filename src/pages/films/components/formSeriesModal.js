@@ -3,9 +3,16 @@ import get from "lodash/get";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import { Fields, Button, Grid, TracksList } from "components";
-import { helpers } from "services";
+import { helpers, api, queryBuilder } from "services";
+
 const Form = ({ isUpdate, lang = "ru", setFieldValue, values, item = {} }) => {
 	const { t } = useTranslation();
+
+	const onDeleteHandler = async (id, files) => {
+		const screenshot = values.screenshots.find(s => s.id === id);
+		setFieldValue("screenshots", files);
+		await api["requestv3"].delete(queryBuilder("/screenshots/" + screenshot.screenshot_id));
+	};
 
 	return (
 		<>
@@ -37,6 +44,7 @@ const Form = ({ isUpdate, lang = "ru", setFieldValue, values, item = {} }) => {
 						label={t("Скриншоты")}
 						limit={10}
 						items={get(values, "screenshots")}
+						onDeleteHandler={onDeleteHandler}
 						onChangeHandler={data => {
 							setFieldValue("screenshots", data);
 						}}

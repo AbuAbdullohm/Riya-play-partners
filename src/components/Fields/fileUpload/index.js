@@ -12,6 +12,7 @@ const Index = ({
 	onlyOneType = "",
 	multiple = false,
 	onChangeHandler = () => {},
+	onDeleteHandler = () => {},
 	limit = 1,
 	items = [],
 	label = "",
@@ -48,7 +49,9 @@ const Index = ({
 
 	const deleteHandler = file => {
 		const id = get(file, "id");
+
 		const newItems = items.filter(item => item.id !== file.id);
+		onDeleteHandler(id, newItems);
 		// onChangeHandler(newItems);
 		const cb = {
 			success: uploadedFiles => {
