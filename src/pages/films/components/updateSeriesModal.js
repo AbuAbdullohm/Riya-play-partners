@@ -78,7 +78,9 @@ const UpdateSeriesModal = ({ item, selected, showUpdateModal, updateSeries = () 
 				},
 				{
 					name: "screenshots",
-					value: Array.isArray(get(selected, "screenshots")) ? get(selected, "screenshots").reduce((pv, cv) => [...pv, ...cv.file], []) : [],
+					value: Array.isArray(get(selected, "screenshots"))
+						? [...new Map(get(selected, "screenshots").map(item => [item["file_id"], item])).values()].reduce((pv, cv) => [...pv, ...cv.file], [])
+						: [],
 					onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id + ""], []) : [])
 				},
 				{

@@ -35,6 +35,7 @@ const Form = ({ isUpdate, lang = "ru", setFieldValue, values, item = {} }) => {
 						name="screenshots"
 						multiple={true}
 						label={t("Скриншоты")}
+						limit={10}
 						items={get(values, "screenshots")}
 						onChangeHandler={data => {
 							setFieldValue("screenshots", data);
