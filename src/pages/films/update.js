@@ -206,12 +206,6 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 								},
 								{
-									name: "screenshots",
-									required: true,
-									value: Array.isArray(get(item, "screenshots")) ? get(item, "screenshots") : [],
-									onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id + ""], []) : [])
-								},
-								{
 									name: "country_id",
 									type: "object",
 									required: true,
@@ -415,7 +409,7 @@ const Update = ({ location, history }) => {
 										film_id: id
 									},
 									limit: pageLimit,
-									include: "translations,files,film,season,track",
+									include: "translations,files,film,season,track,screenshots.file",
 									page: page || 1
 								}}>
 								{({ items, isFetched, meta }) => (

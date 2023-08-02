@@ -70,6 +70,12 @@ const CreateSeriesModal = ({ item, showCreateModal, updateSeries, canUpdate, set
 					onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id], []).join(",") : null)
 				},
 				{
+					required: true,
+					name: "screenshots",
+					value: [],
+					onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id + ""], []) : [])
+				},
+				{
 					name: "film_id",
 					value: Number(id)
 				},

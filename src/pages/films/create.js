@@ -76,12 +76,6 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 				},
 				{
-					required: true,
-					name: "screenshots",
-					value: [],
-					onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id + ""], []) : [])
-				},
-				{
 					required: false,
 					name: "gallery",
 					value: [],

@@ -77,6 +77,11 @@ const UpdateSeriesModal = ({ item, selected, showUpdateModal, updateSeries = () 
 					onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id], []).join(",") : "")
 				},
 				{
+					name: "screenshots",
+					value: Array.isArray(get(selected, "screenshots")) ? get(selected, "screenshots").reduce((pv, cv) => [...pv, ...cv.file], []) : [],
+					onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id + ""], []) : [])
+				},
+				{
 					name: "film_id",
 					value: get(selected, "film"),
 					required: true,
@@ -103,7 +108,7 @@ const UpdateSeriesModal = ({ item, selected, showUpdateModal, updateSeries = () 
 			]}
 			params={{
 				sort: "id",
-				include: "translations,files,track,film,season"
+				include: "translations,files,track,film,season,screenshots"
 			}}>
 			{({ isSubmitting, values, setFieldValue }) => {
 				return isSubmitting ? <Loader /> : <ModalForm {...{ item, values, setFieldValue, isUpdate: true }} />;

@@ -29,6 +29,19 @@ const Form = ({ isUpdate, lang = "ru", setFieldValue, values, item = {} }) => {
 					/>
 				</Grid.Column>
 
+				<Grid.Column lg={12}>
+					<Field
+						component={Fields.fileUpload}
+						name="screenshots"
+						multiple={true}
+						label={t("Скриншоты")}
+						items={get(values, "screenshots")}
+						onChangeHandler={data => {
+							setFieldValue("screenshots", data);
+						}}
+					/>
+				</Grid.Column>
+
 				<Grid.Column lg={4}>
 					<Field
 						component={Fields.Input}

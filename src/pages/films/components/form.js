@@ -151,16 +151,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								setFieldValue("gallery", data);
 							}}
 						/>
-						<Field
-							component={Fields.fileUpload}
-							name="screenshots"
-							multiple={true}
-							label={t("Скриншоты")}
-							items={get(values, "screenshots")}
-							onChangeHandler={data => {
-								setFieldValue("screenshots", data);
-							}}
-						/>
 
 						<Field
 							component={Fields.fileUpload}
