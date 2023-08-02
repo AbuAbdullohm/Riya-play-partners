@@ -71,6 +71,12 @@ const Create = ({ history }) => {
 					onSubmitValue: value => value && value
 				},
 				{
+					name: "rates_id",
+					required: true,
+					type: "array",
+					onSubmitValue: value => (value ? value.map(v => v.id) : null)
+				},
+				{
 					type: "string",
 					name: "expire_at",
 					onSubmitValue: value => (value ? value : null)

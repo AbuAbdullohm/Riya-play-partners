@@ -19,6 +19,7 @@ const AdvertisingCreate = lazy(() => import("./pages/advertising/create"));
 const AdvertisingUpdate = lazy(() => import("./pages/advertising/update"));
 
 const Series = lazy(() => import("./pages/series"));
+const SeriesStats = lazy(() => import("./pages/seriesStats"));
 const SeriesCreate = lazy(() => import("./pages/series/create"));
 const SeriesUpdate = lazy(() => import("./pages/series/update"));
 
@@ -62,6 +63,7 @@ const Review = lazy(() => import("./pages/review"));
 const Translation = lazy(() => import("./pages/translations"));
 
 const Films = lazy(() => import("./pages/films"));
+const FilmsStats = lazy(() => import("./pages/filmsStats"));
 const FilmsCreate = lazy(() => import("./pages/films/create"));
 const FilmsUpdate = lazy(() => import("./pages/films/update"));
 
@@ -106,6 +108,10 @@ const Version = lazy(() => import("./pages/version"));
 const VersionCreate = lazy(() => import("./pages/version/create"));
 const VersionUpdate = lazy(() => import("./pages/version/update"));
 
+const PaymentMethods = lazy(() => import("./pages/payment-methods"));
+const PaymentMethodsCreate = lazy(() => import("./pages/payment-methods/create"));
+const PaymentMethodsUpdate = lazy(() => import("./pages/payment-methods/update"));
+
 const Dashboard = lazy(() => import("./pages/dashboard2"));
 const TasIX = lazy(() => import("./pages/TasIx"));
 const Company = lazy(() => import("./pages/Company"));
@@ -121,6 +127,7 @@ const HolderCreate = lazy(() => import("./pages/Holder/Create"));
 const HolderUpdate = lazy(() => import("./pages/Holder/Update"));
 // const Dashboard2 = lazy(() => import("./pages/dashboard2"));
 const NotFound = lazy(() => import("./pages/not-found"));
+const Icons = lazy(() => import("components/TestIcons"));
 
 const routes = [
 	{ path: "/*", exact: true, component: Loader, access: ["loader"] },
@@ -128,8 +135,10 @@ const routes = [
 	{ path: "/", exact: true, component: Films, access: ["admin", "moderator"] },
 	{ path: "/", exact: true, component: Review, access: ["redactor"] },
 	{ path: "/", exact: true, component: Buggalter, access: ["bookkeeping"] },
+	{ path: "/icons", exact: true, component: Icons, access: ["super_admin", "admin"] },
 
 	{ path: "/films", exact: true, component: Films, access: ["super_admin", "admin", "moderator"] },
+	{ path: "/films/stats", exact: true, component: FilmsStats, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/films/create", exact: true, component: FilmsCreate, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/films/update/:id", exact: true, component: FilmsUpdate, access: ["super_admin", "admin", "moderator"] },
 
@@ -143,6 +152,7 @@ const routes = [
 	{ path: "/logout", exact: true, component: Logout, access: ["super_admin", "admin", "moderator", "bookkeeping", "redactor"] },
 
 	{ path: "/series", exact: true, component: Series, access: ["super_admin", "admin", "moderator"] },
+	{ path: "/series/stats", exact: true, component: SeriesStats, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/series/create", exact: true, component: SeriesCreate, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/series/update/:id", exact: true, component: SeriesUpdate, access: ["super_admin", "admin", "moderator"] },
 
@@ -224,6 +234,10 @@ const routes = [
 	{ path: "/version", exact: true, component: Version, access: ["super_admin", "admin"] },
 	{ path: "/version/create", exact: true, component: VersionCreate, access: ["super_admin", "admin"] },
 	{ path: "/version/update/:id", exact: true, component: VersionUpdate, access: ["super_admin", "admin"] },
+
+	{ path: "/payment-methods", exact: true, component: PaymentMethods, access: ["super_admin", "admin"] },
+	{ path: "/payment-methods/create", exact: true, component: PaymentMethodsCreate, access: ["super_admin", "admin"] },
+	{ path: "/payment-methods/:id", exact: true, component: PaymentMethodsUpdate, access: ["super_admin", "admin"] },
 
 	{ path: "/dashboard", exact: true, component: Dashboard, access: ["super_admin"] },
 	{ path: "/channel", exact: true, component: Channel, access: ["super_admin", "admin"] },

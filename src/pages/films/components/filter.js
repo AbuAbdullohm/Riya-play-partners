@@ -203,6 +203,18 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue }) 
 						}}
 					/>
 				</Grid.Column>
+				<Grid.Column xs={12} lg={12} xl={12}>
+					<Field
+						component={Fields.Select}
+						name="visible"
+						placeholder={t("Выберите платформа")}
+						label={t("Платформа")}
+						className="mb-24"
+						optionLabel={`label`}
+						optionValue={`value`}
+						options={constants.deviceTypes}
+					/>
+				</Grid.Column>
 
 				<Grid.Column xs={12} lg={12} xl={12}>
 					<Field
@@ -333,6 +345,7 @@ const EnhancedForm = withFormik({
 			: null;
 
 		return {
+			visible: params.visible || "",
 			type: params.type || "",
 			year: params.year || "",
 			name: params.name || "",
@@ -357,6 +370,7 @@ const EnhancedForm = withFormik({
 
 		values = {
 			...values,
+			visible: values.visible,
 			id: values.id ? values.id : "",
 			category_id: values.category_id ? values.category_id.id : "",
 			company_id: values.company_id ? values.company_id.id : "",

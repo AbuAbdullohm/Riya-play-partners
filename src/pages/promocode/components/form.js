@@ -4,9 +4,11 @@ import { Fields, Grid, Panel, Button } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import { helpers } from "services";
+
 const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 	const { t } = useTranslation();
 	const history = useHistory();
+
 	return (
 		<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
 			<Grid.Column xs={12} xl={8}>
@@ -53,6 +55,25 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 						placeholder="Введите число копии"
 						label="Число копии"
 						min="0"
+					/>
+					<Field
+						component={Fields.AsyncSelect}
+						name="rates_id"
+						placeholder="Виберите Тарифы"
+						label="Тарифы"
+						isClearable
+						hasMore
+						version="v1"
+						isSearchable
+						isMulti={true}
+						loadOptionsUrl="/rates"
+						optionLabel={`name_ru`}
+						loadOptionsParams={search => {
+							return {
+								extra: { name: search },
+								filter: { status: 1 }
+							};
+						}}
 					/>
 				</Panel>
 			</Grid.Column>

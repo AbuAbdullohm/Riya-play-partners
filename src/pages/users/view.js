@@ -13,6 +13,7 @@ const View = ({ viewDataModal: data, view }) => {
 	const [balance, setBalance] = useState();
 	const [viewDataModal, setViewDataModal] = useState();
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		if (view === false) {
 			setBalance(null);

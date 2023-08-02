@@ -103,6 +103,13 @@
 		border-collapse: separate;
 		border-spacing: 0 1em;
 		padding-right: 15px;
+
+		.table_tr .viewTransaction-box {
+			svg {
+				border-radius: 10px !important;
+				overflow: hidden !important;
+			}
+		}
 		thead {
 			tr {
 				th {
@@ -295,6 +302,7 @@ html.dark {
 			}
 		}
 	}
+
 	.tabs-panel {
 		.preview {
 			padding: 0;
@@ -312,6 +320,7 @@ html.dark {
 			}
 			.tab-content {
 				padding: 15px;
+				min-height: 660px;
 				.device-item {
 					display: flex;
 					align-items: center;
@@ -325,6 +334,10 @@ html.dark {
 						color: black;
 						&:first-child {
 							font-weight: 700;
+						}
+						&:last-child {
+							margin-left: auto;
+							cursor: pointer;
 						}
 					}
 				}
@@ -378,6 +391,35 @@ html.dark {
 					padding: 15px 0;
 				}
 			}
+		}
+	}
+	.update-btn {
+		background: #3f57ab !important;
+		color: #fff !important;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+	}
+
+	.total {
+		div {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.replenishment {
+			color: #009229;
+			border-bottom: 1px solid #eeeeee;
+			padding-bottom: 10px;
+		}
+		.buying {
+			color: #ac0000;
+			padding-top: 10px;
+		}
+		span {
+			font-size: 20px;
 		}
 	}
 }

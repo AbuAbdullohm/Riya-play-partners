@@ -133,12 +133,6 @@ const List = ({ history, location }) => {
 										render: value => <>{get(value, "name_ru", "Кинофильм")}</>
 									},
 									{
-										title: t("Количество просмотров"),
-										className: "text-center",
-										dataIndex: "viewed",
-										render: value => <>{value ? value : 0}</>
-									},
-									{
 										title: t("Статус"),
 										dataIndex: "status",
 										className: "w-8",

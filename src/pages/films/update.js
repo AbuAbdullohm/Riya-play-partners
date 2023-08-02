@@ -130,7 +130,7 @@ const Update = ({ location, history }) => {
 			version="v2"
 			primaryKey="id"
 			id={id}
-			params={{ include: "translations,files,actors,thriller,tags,categories,paid,country,maker,date,type,gallery,genres,season" }}>
+			params={{ include: "translations,files,actors,thriller,tags,categories,paid,country,maker,date,type,gallery,genres,season,screenshots" }}>
 			{({ item, isFetched }) => {
 				return isFetched ? (
 					<>
@@ -204,6 +204,12 @@ const Update = ({ location, history }) => {
 									required: true,
 									value: Array.isArray(get(item, "files")) ? get(item, "files") : [],
 									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
+								},
+								{
+									name: "screenshots",
+									required: true,
+									value: Array.isArray(get(item, "screenshots")) ? get(item, "screenshots") : [],
+									onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id], []).join(",") : [])
 								},
 								{
 									name: "country_id",

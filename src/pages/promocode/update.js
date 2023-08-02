@@ -19,7 +19,7 @@ const Update = ({ location, history, match }) => {
 			primaryKey="id"
 			id={id}
 			params={{
-				include: "copy"
+				include: "copy,rates"
 			}}>
 			{({ item, isFetched }) => {
 				return (
@@ -77,6 +77,13 @@ const Update = ({ location, history, match }) => {
 									name: "users_count",
 									value: get(item, "users_count", null),
 									onSubmitValue: value => (value ? value * 1 : null)
+								},
+								{
+									name: "rates_id",
+									required: true,
+									type: "array",
+									value: get(item, "rates"),
+									onSubmitValue: value => (value ? value.map(v => v.id) : null)
 								},
 								{
 									name: "expire_of",

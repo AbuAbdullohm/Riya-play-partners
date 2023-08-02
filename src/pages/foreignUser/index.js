@@ -179,31 +179,6 @@ const List = ({ history, location }) => {
 											render: value => <>{value}</>
 										},
 										{
-											title: t("Фото"),
-											dataIndex: "files",
-											className: "text-center",
-											render: value => (
-												<div className="flex justify-center">
-													<Avatar src={get(value, "[0].thumbnails.small.src")} />
-												</div>
-											)
-										},
-										{
-											title: t("Логин"),
-											dataIndex: "username",
-											render: (value, row) => (
-												<>
-													{value}
-													{row.is_provider === 1 && (
-														<Tag color={"blue"} className={"ml-10"}>
-															{get(row, "	.title", "-")}
-														</Tag>
-													)}
-												</>
-											)
-										},
-
-										{
 											title: t("Полное имя"),
 											dataIndex: "full_name",
 											render: value => <>{value}</>
@@ -244,49 +219,6 @@ const List = ({ history, location }) => {
 												return <>{currPromocodeName ? get(currPromocodeName, "title_ru") : "Не активирован"}</>;
 											}
 										},
-
-										{
-											title: t("Дата регистрации"),
-											dataIndex: "created_at",
-											render: value => {
-												return <>{helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss")}</>;
-											}
-										},
-										{
-											title: t("Завершение тарифа"),
-											dataIndex: "subscribe_date",
-											render: value => {
-												return <>{value ? helpers.formatDate(value * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
-											}
-										},
-
-										{
-											title: t("Завершение бан"),
-											dataIndex: "banned",
-											render: value => {
-												return <>{value ? helpers.formatDate(value.banned_until * 1000, "DD.MM.YYYY / HH:mm:ss") : "-"}</>;
-											}
-										},
-										{
-											title: t("Использование"),
-											dataIndex: "status",
-											render: (_, row) => {
-												const bannedStatus = get(row, "banned.status");
-												return (
-													<>{bannedStatus === 1 ? <Tag color={"red"}>Заблокированный</Tag> : <Tag color={"green"}>Разрешено</Tag>}</>
-												);
-											}
-										},
-										{
-											title: t("Прокомментировать"),
-											render: (_, row) => {
-												const bannedStatus = get(row, "banned.status");
-												return (
-													<>{bannedStatus === 2 ? <Tag color={"red"}>Заблокированный</Tag> : <Tag color={"green"}>Разрешено</Tag>}</>
-												);
-											}
-										},
-
 										{
 											className: "w-5",
 											render: (_, row) => {

@@ -6,9 +6,11 @@ import { helpers } from "services";
 import EntityContainer from "modules/entity/containers";
 import { Table, Pagination, Header } from "components";
 import Filter from "./components/filter";
+import { Icon, Modal } from "components";
 import "./components/style.scss";
 import DownloadXls from "./downloadXls";
 import BugalterComponent from "./components/BugalterComponent";
+import CancelTransactionModal from "./components/CancelTransactionModal";
 import { useSelector } from "react-redux";
 
 import Payme from "assets/images/payme.svg";
@@ -18,12 +20,19 @@ import Bektv from "assets/images/bektv.svg";
 import click from "assets/images/icons/icons-dashboard/click.svg";
 import upay from "assets/images/icons/icons-dashboard/upay.svg";
 
+const isCancelled = row => {
+	const methods = ["payme", "click", "upay", "paynet", "apelsin"];
+	return methods.find(m => m === row.payment_method);
+};
+
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 	const ratesData = useSelector(state => state.system.rates);
 	const { t } = useTranslation();
 	const { page, pageLimit } = params;
 	const [filter, setFilter] = useState(false);
+	const [actionView, setActionView] = useState(false);
+	const [modal, setModal] = useState(false);
 
 	const onChange = page => {
 		const search = { ...params, page: page + 1 };
@@ -35,6 +44,15 @@ const List = ({ history, location }) => {
 
 	return (
 		<>
+			<Modal.Default size="md" toggle={modal} setToggle={setModal}>
+				<CancelTransactionModal
+					itemId={actionView}
+					onClose={() => {
+						setActionView(false);
+						setModal(false);
+					}}
+				/>
+			</Modal.Default>
 			<EntityContainer.All
 				entity="transactions"
 				name="all"
@@ -107,6 +125,7 @@ const List = ({ history, location }) => {
 										{
 											title: t("Оплата и продажа"),
 											dataIndex: "payment_method",
+											className: "position-relative",
 											render: value => {
 												if (value === "payme") {
 													return <img src={Payme} className="box-none" alt="" />;
@@ -119,7 +138,20 @@ const List = ({ history, location }) => {
 												} else if (value === "click") {
 													return <img src={click} className="box-none" style={{ width: "55px" }} alt="" />;
 												} else if (value === "upay") {
-													return <img src={upay} className="box-none" style={{ width: "75px" }} alt="" />;
+													return (
+														<img
+															src={upay}
+															className="box-none"
+															style={{
+																position: "absolute",
+																top: 0,
+																left: 10,
+																bottom: 0,
+																height: 40
+															}}
+															alt=""
+														/>
+													);
 												} else if (value === "apelsin_frame") {
 													return (
 														<div className="d-flex align-center">
@@ -156,6 +188,39 @@ const List = ({ history, location }) => {
 											render: value => {
 												const foundTariff = value ? ratesData.find(item => item.id === value.trip_id) : null;
 												return <>{foundTariff ? get(foundTariff, "name_ru") : "Пополнение счета"}</>;
+											}
+										},
+										{
+											title: "",
+											dataIndex: "transaction_id",
+											isClickable: true,
+											render: (id, row) => {
+												if (isCancelled(row))
+													return (
+														<div className="actions">
+															<Icon
+																className="cursor-pointer"
+																name="more-vertical"
+																onClick={() => {
+																	if (id !== actionView) setActionView(id);
+																	else setActionView(false);
+																}}
+															/>
+															<div
+																className={`actions_content ${
+																	actionView === id ? "actions_content--visible" : "actions_content--hidden"
+																}`}>
+																<button
+																	className="btn btn-default text-red"
+																	onClick={() => {
+																		setModal(true);
+																		setActionView(id);
+																	}}>
+																	{t("Отменит")}
+																</button>
+															</div>
+														</div>
+													);
 											}
 										}
 									]}

@@ -37,6 +37,11 @@ const Create = ({ history }) => {
 			}}
 			fields={[
 				{
+					name: "logo",
+					required: true,
+					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
+				},
+				{
 					name: "sort",
 					required: false,
 					onSubmitValue: value => (value ? 1 : 0)
@@ -62,8 +67,8 @@ const Create = ({ history }) => {
 				{
 					name: "holder_id",
 					required: true,
-					type: "object",
-					onSubmitValue: value => (value ? value.id : null)
+					type: "array",
+					onSubmitValue: value => (value ? value.map(v => v.id) : null)
 				},
 				{
 					name: "is_foreign",

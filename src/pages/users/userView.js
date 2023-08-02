@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EntityContainer from "modules/entity/containers";
 import { useParams } from "react-router";
 import { get } from "lodash";
+import Actions from "modules/entity/actions";
 import { Grid, Panel, Loader, Tabs } from "components";
 import { time, helpers, constants } from "services";
 import api from "services/api";
@@ -9,6 +10,7 @@ import queryBuilder from "services/queryBuilder";
 import { useNotification } from "hooks";
 import "./style.scss";
 import UserTransaction from "./components/userTransaction";
+import { useDispatch } from "react-redux";
 
 const { formatCurrency } = helpers;
 
@@ -16,6 +18,9 @@ export default function User() {
 	const { id } = useParams();
 	const [activeTab, setActiveTab] = useState("device");
 	const { notification } = useNotification();
+	const [button, setButton] = useState(false);
+	const [balance, setBalance] = useState();
+	const dispatch = useDispatch();
 
 	function kickDevice(item) {
 		api["requestv1"]
@@ -37,6 +42,25 @@ export default function User() {
 				});
 			});
 	}
+
+	useEffect(() => {
+		if (!id) setBalance(null);
+
+		if (button) {
+			dispatch(
+				Actions.LoadDefault.request({
+					url: `/user/balance/${id}`,
+					cb: {
+						success: data => {
+							setButton(!button);
+							setBalance(data);
+						},
+						error: error => console.log(error)
+					}
+				})
+			);
+		}
+	}, [button, id]);
 
 	return (
 		<EntityContainer.One
@@ -117,7 +141,18 @@ export default function User() {
 												<Grid.Column md={4}>
 													<div className="info">
 														<label>Баланс:</label>
-														<span>{"UZS " + formatCurrency(get(item, "userBalance"))}</span>
+														{/* <span>{"UZS " + formatCurrency(get(item, "userBalance"))}</span> */}
+														{balance
+															? Number(balance).toLocaleString("en-US", {
+																	style: "currency",
+																	currency: "UZS",
+																	minimumFractionDigits: 0
+															  })
+															: Number(get(item, "userBalance")).toLocaleString("en-US", {
+																	style: "currency",
+																	currency: "UZS",
+																	minimumFractionDigits: 0
+															  })}
 													</div>
 												</Grid.Column>
 											</Grid.Row>
@@ -227,6 +262,28 @@ export default function User() {
 													</div>
 												</Grid.Column>
 											</Grid.Row>
+
+											{/* Update data */}
+											<Grid.Row>
+												<Grid.Column>
+													<button className="update-btn btn btn-primary" onClick={() => setButton(!button)}>
+														Обновить данные
+													</button>
+												</Grid.Column>
+											</Grid.Row>
+										</Panel>
+
+										<Panel className="mt-10">
+											<div className="total">
+												<div className="replenishment">
+													<span>Пополнение</span>
+													<span>+ UZS 0</span>
+												</div>
+												<div className="buying">
+													<span>Покупка тарифов</span>
+													<span>- UZS 0</span>
+												</div>
+											</div>
 										</Panel>
 									</Grid.Column>
 
@@ -250,7 +307,7 @@ export default function User() {
 															<div className="device-item" key={item.id}>
 																<p>{item.device_name}</p>
 																<p>{time.to(item.created_at, "DD.MM.YYYY / HH:mm:ss")}</p>
-																<span onClick={() => kickDevice(item)}>x</span>
+																<p onClick={() => kickDevice(item)}>x</p>
 															</div>
 														);
 													})}

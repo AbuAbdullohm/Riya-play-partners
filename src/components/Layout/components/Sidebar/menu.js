@@ -2,7 +2,7 @@ export const menu = [
 	{ id: "dashboard", title: "Статистика", link: "/", icon: "home", lang: false, access: ["super_admin"] },
 	{
 		id: "buggalter",
-		title: "Бухгалтерский учет",
+		title: "Бухгалтерия",
 		link: "/buggalter",
 		icon: "printer",
 		lang: false,
@@ -44,6 +44,16 @@ export const menu = [
 			}
 		]
 	},
+	{
+		id: "stats",
+		icon: "film",
+		title: "Медиа статистика",
+		access: ["admin", "moderator", "super_admin"],
+		submenu: [
+			{ id: "films", title: "Фильмы", link: "/films/stats", icon: "play-circle", lang: false },
+			{ id: "series", title: "Серия (эпизоды)", link: "/series/stats", icon: "tv", lang: false, access: ["admin", "moderator", "super_admin"] }
+		]
+	},
 
 	{
 		id: "ads",
@@ -83,7 +93,7 @@ export const menu = [
 	},
 	{
 		id: "plans",
-		title: "Премиум-подписки",
+		title: "Подписки",
 		icon: "hard-drive",
 		access: ["super_admin", "bookkeeping"],
 		submenu: [
@@ -94,7 +104,7 @@ export const menu = [
 	},
 	{
 		id: "settings-media-content",
-		title: "Настройки медиаконтента",
+		title: "Медиа настройки",
 		icon: "settings",
 		access: ["admin", "super_admin", "moderator"],
 		submenu: [
@@ -126,6 +136,14 @@ export const menu = [
 		icon: "settings",
 		access: ["admin", "moderator", "super_admin"],
 		submenu: [
+			{
+				id: "payment-methods",
+				link: "/payment-methods",
+				title: "Способ оплаты",
+				icon: "dollar-sign",
+				lang: false,
+				access: ["super_admin", "bookkeeping"]
+			},
 			{ id: "version", title: "Версия", link: "/version", icon: "smartphone", lang: false, access: ["super_admin", "bookkeeping"] },
 			{ id: "pages", title: "Страницы", link: "/pages", icon: "link", lang: true, access: ["super_admin"] },
 			{

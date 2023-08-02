@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import "./style.scss";
@@ -17,6 +17,7 @@ interface IColumnProps {
 interface ITableProps {
 	items: [];
 	rowKey?: string;
+	actions?: boolean | ReactNode;
 	columns: IColumnProps[];
 	isFetched?: boolean;
 	emptyUiText?: string;
@@ -33,6 +34,7 @@ const TableComponent: FC<ITableProps> = ({
 	items = [],
 	rowKey = "id",
 	columns = [],
+	actions = false,
 	isFetched = false,
 	hasEdit = true,
 	editAction,
@@ -48,6 +50,7 @@ const TableComponent: FC<ITableProps> = ({
 		!isFetched && "--loading",
 		className && className
 	);
+
 	const { t } = useTranslation();
 
 	return (
@@ -74,6 +77,7 @@ const TableComponent: FC<ITableProps> = ({
 									{get(col, "title")}
 								</th>
 							))}
+							{actions ? <th className={`whitespace-nowrap`}></th> : null}
 							{(hasEdit || hasDelete) && <th className="whitespace-nowrap" />}
 						</tr>
 					</thead>

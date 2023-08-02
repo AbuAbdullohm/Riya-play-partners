@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import { helpers } from "services";
 import { Loader, Button } from "components";
 
-import BektvBox from "assets/images/bektv.svg";
-import PaymeUser from "assets/images/payme.svg";
-import ApelsinUser from "assets/images/uzum.svg";
-import PaynetUser from "assets/images/paynet.svg";
-import Click from "assets/images/icons/icons-dashboard/click.svg";
+import { ReactComponent as RiyaPlay } from "assets/images/icons/riya.svg";
+import { ReactComponent as Payme } from "assets/images/icons/payme.svg";
+import { ReactComponent as Uzum } from "assets/images/icons/uzum.svg";
+import { ReactComponent as Paynet } from "assets/images/icons/paynet.svg";
+import { ReactComponent as Click } from "assets/images/icons/click.svg";
 
 export default function UserTransaction({ user }) {
 	const ratesData = useSelector(state => state.system.rates);
@@ -77,32 +77,20 @@ export default function UserTransaction({ user }) {
 															<tr className="table_tr">
 																<td>
 																	<div className="viewTransaction-box">
-																		<img
-																			src={
-																				item.payment_method === "payme"
-																					? PaymeUser
-																					: item.payment_method === "From Api"
-																					? BektvBox
-																					: item.payment_method === "apelsin"
-																					? ApelsinUser
-																					: item.payment_method === "paynet"
-																					? PaynetUser
-																					: item.payment_method === "click"
-																					? Click
-																					: ""
-																			}
-																			alt={
-																				item.payment_method === "payme"
-																					? "Payme"
-																					: item.payment_method === "From Api"
-																					? "From Api"
-																					: item.payment_method === "apelsin"
-																					? "apelsin"
-																					: item.payment_method === "paynet"
-																					? "paynet"
-																					: ""
-																			}
-																		/>
+																		{item.payment_method === "payme" ? (
+																			<Payme />
+																		) : item.payment_method === "From Api" ? (
+																			<RiyaPlay />
+																		) : item.payment_method === "apelsin" ? (
+																			<Uzum />
+																		) : item.payment_method === "paynet" ? (
+																			<Paynet />
+																		) : item.payment_method === "click" ? (
+																			<Click />
+																		) : (
+																			""
+																		)}
+
 																		<div className="viewTransaction-box-way">
 																			<p className="viewText mb-0">
 																				{rates

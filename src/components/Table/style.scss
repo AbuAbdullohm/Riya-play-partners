@@ -19,3 +19,46 @@
 .dark .table-overlay {
 	background: rgba(195, 207, 241, 0.2);
 }
+
+table {
+	tr {
+		box-shadow: 20px 3px 20px rgba(0, 0, 0, 0.043137254901960784);
+	}
+	td {
+		box-shadow: none !important;
+	}
+}
+
+.position-relative {
+	position: relative;
+}
+
+.actions {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	&_content {
+		width: 150px;
+		position: absolute;
+		top: 25px;
+		right: 0;
+		background-color: #fff;
+		padding: 10px;
+		box-shadow: 0 10px 20px #ccc;
+		border-radius: 5px;
+		user-select: none;
+		&--visible {
+			display: flex;
+		}
+		&--hidden {
+			display: none;
+		}
+	}
+	button {
+		width: 100%;
+		&.text-red {
+			color: red;
+		}
+	}
+}

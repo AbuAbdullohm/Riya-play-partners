@@ -26,7 +26,7 @@ const Update = ({ location, history, match }) => {
 			primaryKey="id"
 			id={id}
 			params={{
-				include: "files,ratesPrices,translations,sort,holder"
+				include: "files,ratesPrices,translations,sort,holders"
 			}}>
 			{({ item }) => {
 				return (
@@ -56,6 +56,12 @@ const Update = ({ location, history, match }) => {
 							}}
 							fields={[
 								{
+									name: "logo",
+									required: true,
+									value: get(item, "files") ? get(item, "files", []) : [],
+									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
+								},
+								{
 									name: "sort",
 									value: get(item, "sort"),
 									required: false,
@@ -82,9 +88,9 @@ const Update = ({ location, history, match }) => {
 								{
 									name: "holder_id",
 									required: true,
-									type: "object",
-									value: get(item, "holder"),
-									onSubmitValue: value => (value ? value.id : null)
+									type: "array",
+									value: get(item, "holders"),
+									onSubmitValue: value => (value ? value.map(v => v.id) : null)
 								},
 								{
 									name: "ratesPrices",
@@ -126,7 +132,7 @@ const Update = ({ location, history, match }) => {
 							params={{
 								include: "translations,files,ratesPrices"
 							}}>
-							{({ isSubmitting, values, setFieldValue }) => {
+							{({ isSubmitting, values, setFieldValue, errors }) => {
 								return (
 									<>
 										<Form

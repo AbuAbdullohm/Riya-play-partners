@@ -27,6 +27,12 @@ const List = ({ history, location }) => {
 	const [loadingDelete, setLoadingDelete] = useState(false);
 	const [filmFilter, setFilmFilter] = useState(false);
 
+	const visible = {};
+
+	if (params.visible) {
+		visible[`visible_${params.visible}`] = 1;
+	}
+
 	const onDeleteHandler = menuId => {
 		setModal(true);
 		setSelected(menuId);
@@ -137,6 +143,7 @@ const List = ({ history, location }) => {
 						actor_id: params.actor_id
 					},
 					filter: {
+						...visible,
 						type: params.type,
 						year: params.year,
 						recommended: params.recommended ? 1 : "",
@@ -159,10 +166,6 @@ const List = ({ history, location }) => {
 								buttonName="Добавить"
 								buttonClick={() => history.push(`/films/create`)}
 								filter={filter}
-								sort={{
-									title: "По просмотрам",
-									value: "viewed"
-								}}
 								setFilter={setFilter}
 								hasFilter={true}
 								textLeft={<DownloadXls />}
@@ -186,7 +189,6 @@ const List = ({ history, location }) => {
 										className: "w-4 text-center",
 										render: value => <>{value}</>
 									},
-
 									{
 										title: t("Фото"),
 										dataIndex: "files",
@@ -224,12 +226,6 @@ const List = ({ history, location }) => {
 									// 	dataIndex: "holder",
 									// 	render: value => <>{value && value.id}</>
 									// },
-									{
-										title: t("Количество просмотров"),
-										className: "text-center",
-										dataIndex: "viewed",
-										render: value => <>{value && value}</>
-									},
 									{
 										title: t("Смотреть за границей"),
 										dataIndex: "foreign_status",
