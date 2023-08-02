@@ -325,21 +325,21 @@ const List = ({ history, location }) => {
 													</Link>
 												);
 											}
-										},
-										{
-											className: "w-5",
-											render: (_, row) => {
-												return (
-													<Button.Outline
-														onClick={() => setDevicesModal(row)}
-														className="status-btn"
-														type="success"
-														tooltip={t("Устройства")}>
-														<Icon name="smartphone" />
-													</Button.Outline>
-												);
-											}
 										}
+										// {
+										// 	className: "w-5",
+										// 	render: (_, row) => {
+										// 		return (
+										// 			<Button.Outline
+										// 				onClick={() => setDevicesModal(row)}
+										// 				className="status-btn"
+										// 				type="success"
+										// 				tooltip={t("Устройства")}>
+										// 				<Icon name="smartphone" />
+										// 			</Button.Outline>
+										// 		);
+										// 	}
+										// }
 									]}
 									dataSource={items}
 								/>

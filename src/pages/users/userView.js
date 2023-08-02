@@ -273,7 +273,7 @@ export default function User() {
 											</Grid.Row>
 										</Panel>
 
-										<Panel className="mt-10">
+										{/* <Panel className="mt-10">
 											<div className="total">
 												<div className="replenishment">
 													<span>Пополнение</span>
@@ -284,7 +284,7 @@ export default function User() {
 													<span>- UZS 0</span>
 												</div>
 											</div>
-										</Panel>
+										</Panel> */}
 									</Grid.Column>
 
 									<Grid.Column xl={4}>
