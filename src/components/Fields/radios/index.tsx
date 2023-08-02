@@ -27,9 +27,9 @@ const RadioButtons: FC<IRadioButtonProps> = ({ options, id, label, checked, clas
 		<>
 			<label>{label}</label>
 			<div className="d-flex align-items-center mb-5">
-				{options.map(({ label, value }) => {
+				{options.map(({ label, value }, index) => {
 					return (
-						<div className={classNames}>
+						<div className={classNames} key={index}>
 							<input
 								id={value}
 								name={id}

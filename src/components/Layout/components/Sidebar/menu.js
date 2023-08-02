@@ -137,8 +137,8 @@ export const menu = [
 		access: ["admin", "moderator", "super_admin"],
 		submenu: [
 			{
-				id: "payment-methods",
-				link: "/payment-methods",
+				id: "payment-method",
+				link: "/payment-method",
 				title: "Способ оплаты",
 				icon: "dollar-sign",
 				lang: false,

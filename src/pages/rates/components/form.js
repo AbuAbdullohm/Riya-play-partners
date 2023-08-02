@@ -48,7 +48,7 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru" }) =>
 					/>
 					<Field
 						component={Fields.AsyncSelect}
-						name="holder_id"
+						name="holders"
 						placeholder={t("Выберите правообладатель")}
 						label={t("Правообладатель")}
 						isClearable={true}

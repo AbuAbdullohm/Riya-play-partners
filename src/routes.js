@@ -235,9 +235,9 @@ const routes = [
 	{ path: "/version/create", exact: true, component: VersionCreate, access: ["super_admin", "admin"] },
 	{ path: "/version/update/:id", exact: true, component: VersionUpdate, access: ["super_admin", "admin"] },
 
-	{ path: "/payment-methods", exact: true, component: PaymentMethods, access: ["super_admin", "admin"] },
-	{ path: "/payment-methods/create", exact: true, component: PaymentMethodsCreate, access: ["super_admin", "admin"] },
-	{ path: "/payment-methods/:id", exact: true, component: PaymentMethodsUpdate, access: ["super_admin", "admin"] },
+	{ path: "/payment-method", exact: true, component: PaymentMethods, access: ["super_admin", "admin"] },
+	{ path: "/payment-method/create", exact: true, component: PaymentMethodsCreate, access: ["super_admin", "admin"] },
+	{ path: "/payment-method/update/:id", exact: true, component: PaymentMethodsUpdate, access: ["super_admin", "admin"] },
 
 	{ path: "/dashboard", exact: true, component: Dashboard, access: ["super_admin"] },
 	{ path: "/channel", exact: true, component: Channel, access: ["super_admin", "admin"] },

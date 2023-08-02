@@ -209,7 +209,7 @@ const Update = ({ location, history }) => {
 									name: "screenshots",
 									required: true,
 									value: Array.isArray(get(item, "screenshots")) ? get(item, "screenshots") : [],
-									onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id], []).join(",") : [])
+									onSubmitValue: value => (value ? value.reduce((prev, curr) => [...prev, curr.id + ""], []) : [])
 								},
 								{
 									name: "country_id",

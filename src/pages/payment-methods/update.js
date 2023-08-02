@@ -18,7 +18,7 @@ const Update = ({ location, history, match }) => {
 	const updateState = data => {
 		dispatch(
 			Actions.entities.Update.success({
-				entity: "payment-methods",
+				entity: "payment-method",
 				entityId: id,
 				data
 			})
@@ -27,14 +27,14 @@ const Update = ({ location, history, match }) => {
 
 	return (
 		<EntityContainer.One
-			entity="payment-methods"
-			name={`payment-methods-${id}`}
-			version="v2"
-			url={`/payment-methods/${id}`}
+			entity="payment-method"
+			name={`payment-method-${id}`}
+			version="v3"
+			url={`/payment-method/${id}`}
 			primaryKey="id"
 			id={id}
 			params={{
-				include: "files"
+				include: "logo"
 			}}>
 			{({ item, isFetched }) => {
 				return isFetched ? (
@@ -45,16 +45,16 @@ const Update = ({ location, history, match }) => {
 
 						<EntityForm.Main
 							method={"put"}
-							entity="payment-methods"
-							name={"payment-methods"}
-							version="v2"
-							url={`/payment-methods/${get(item, "id")}`}
+							entity="payment-method"
+							name={"payment-method"}
+							version="v3"
+							url={`/payment-method/${get(item, "id")}`}
 							updateData={true}
 							primaryKey="id"
 							normalizeData={data => data}
 							onSuccess={(data, resetForm) => {
 								updateState(data);
-								history.push("/payment-methods");
+								history.push("/payment-method");
 								notification("Успешно добавлено", {
 									type: "success"
 								});
@@ -66,26 +66,48 @@ const Update = ({ location, history, match }) => {
 							}}
 							fields={[
 								{
-									name: "title",
+									name: "name_uz",
 									required: true,
-									value: get(item, "title")
+									value: get(item, "name_uz")
+								},
+								{
+									name: "name_ru",
+									required: true,
+									value: get(item, "name_ru")
+								},
+								{
+									name: "name_en",
+									required: true,
+									value: get(item, "name_en")
 								},
 
 								{
-									name: "description",
+									name: "description_uz",
 									required: true,
-									value: get(item, "description")
+									value: get(item, "description_uz")
+								},
+
+								{
+									name: "description_ru",
+									required: true,
+									value: get(item, "description_ru")
+								},
+
+								{
+									name: "description_en",
+									required: true,
+									value: get(item, "description_en")
 								},
 								{
-									name: "photo_id",
+									name: "logo_id",
 									required: true,
-									value: get(item, "files") ? get(item, "files", []) : [],
+									value: get(item, "logo") ? [get(item, "logo", [])] : [],
 									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 								},
 								{
-									name: "slug",
-									value: get(item, "slug"),
-									required: true
+									name: "is_redirectable",
+									value: get(item, "is_redirectable"),
+									onSubmitValue: value => (value ? 1 : 0)
 								},
 								{
 									name: "status",
@@ -95,7 +117,7 @@ const Update = ({ location, history, match }) => {
 							]}
 							params={{
 								sort: "id",
-								include: "files"
+								include: "logo"
 							}}>
 							{({ isSubmitting, values, setFieldValue, setFieldTouched, validateForm }) => {
 								return (

@@ -4,11 +4,12 @@ import { Fields, Grid, Panel, Button } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
-import { helpers } from "services";
+import { isArray } from "lodash";
 
 const Form = ({ isFetched, setFieldTouched, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", validateForm = () => {} }) => {
 	const { t } = useTranslation();
 	const history = useHistory();
+	const logo = get(values, "logo_id");
 
 	return (
 		<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
@@ -18,29 +19,68 @@ const Form = ({ isFetched, setFieldTouched, isUpdate, isSubmitting, setFieldValu
 						<Grid.Column lg={12}>
 							<Field
 								component={Fields.fileUpload}
-								name="photo"
+								name="logo_id"
 								label="Фото"
 								version="v1"
-								items={get(values, "photo")}
+								items={logo ? (Array.isArray(logo) ? logo : [logo]) : []}
 								onChangeHandler={data => {
-									setFieldValue("photo", data);
+									setFieldValue("logo_id", data);
 								}}
 								multiple={false}
 							/>
 						</Grid.Column>
-						<Grid.Column lg={12}>
-							<Field component={Fields.Input} name="title" type="text" placeholder="Введите заголовок" label="Имя" size="large" />
+						<Grid.Column lg={4}>
+							<Field component={Fields.Input} name="name_uz" type="text" placeholder="Введите заголовок (UZ)" label="Имя (UZ)" size="large" />
+						</Grid.Column>
+						<Grid.Column lg={4}>
+							<Field component={Fields.Input} name="name_ru" type="text" placeholder="Введите заголовок (RU)" label="Имя (RU)" size="large" />
+						</Grid.Column>
+						<Grid.Column lg={4}>
+							<Field component={Fields.Input} name="name_en" type="text" placeholder="Введите заголовок (EN)" label="Имя (EN)" size="large" />
 						</Grid.Column>
 						<Grid.Column lg={12}>
-							<Field component={Fields.Input} name="description" type="text" placeholder="Введите описание" label="Описание" size="large" />
+							<Field
+								component={Fields.Input}
+								name="description_uz"
+								type="text"
+								placeholder="Введите описание (UZ)"
+								label="Описание (UZ)"
+								size="large"
+							/>
+						</Grid.Column>
+						<Grid.Column lg={12}>
+							<Field
+								component={Fields.Input}
+								name="description_ru"
+								type="text"
+								placeholder="Введите описание (RU)"
+								label="Описание (RU)"
+								size="large"
+							/>
+						</Grid.Column>
+						<Grid.Column lg={12}>
+							<Field
+								component={Fields.Input}
+								name="description_en"
+								type="text"
+								placeholder="Введите описание (EN)"
+								label="Описание (EN)"
+								size="large"
+							/>
 						</Grid.Column>
 					</Grid.Row>
 				</Panel>
 			</Grid.Column>
 			<Grid.Column xs={12} xl={4}>
 				<Panel className="mt-5">
-					<Field component={Fields.Input} name="slug" type="text" label="URL" placeholder="Введите URL" size="large" />
-
+					<Field
+						component={Fields.Switch}
+						name="is_redirectable"
+						label="Перенаправляется"
+						onChange={() => {
+							setFieldValue("is_redirectable", !values.is_redirectable);
+						}}
+					/>
 					<Field
 						component={Fields.Switch}
 						name="status"

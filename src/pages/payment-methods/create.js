@@ -4,7 +4,6 @@ import { Typography } from "components";
 import { useTranslation } from "react-i18next";
 import Form from "./components/form";
 import { useNotification } from "hooks";
-import { get } from "lodash";
 
 const Create = ({ history, location }) => {
 	const { t } = useTranslation();
@@ -13,16 +12,16 @@ const Create = ({ history, location }) => {
 	return (
 		<EntityForm.Main
 			method="post"
-			entity="payment-methods"
-			name={`payment-methods`}
-			url="/payment-methods"
-			version="v2"
+			entity="payment-method"
+			name={`payment-method`}
+			url="/payment-method"
+			version="v3"
 			prependData
 			primaryKey="id"
 			normalizeData={data => data}
 			onSuccess={(data, resetForm) => {
 				resetForm();
-				history.push(`/payment-methods`);
+				history.push(`/payment-method`);
 				notification("Успешно добавлено", {
 					type: "success"
 				});
@@ -34,25 +33,43 @@ const Create = ({ history, location }) => {
 			}}
 			fields={[
 				{
-					name: "photo_id",
-					value: [],
+					name: "name_uz",
+					required: true
+				},
+				{
+					name: "name_ru",
+					required: true
+				},
+				{
+					name: "name_en",
+					required: true
+				},
+
+				{
+					name: "description_uz",
+					required: true
+				},
+
+				{
+					name: "description_ru",
+					required: true
+				},
+
+				{
+					name: "description_en",
+					required: true
+				},
+				{
+					name: "logo_id",
+					required: true,
 					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 				},
 				{
-					name: "title",
-					required: true
-				},
-				{
-					name: "description",
-					required: true
-				},
-				{
-					name: "slug",
-					required: false
+					name: "is_redirectable",
+					onSubmitValue: value => (value ? 1 : 0)
 				},
 				{
 					name: "status",
-					value: true,
 					onSubmitValue: value => (value ? 1 : 0)
 				}
 			]}

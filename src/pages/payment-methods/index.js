@@ -8,7 +8,6 @@ import get from "lodash/get";
 import qs from "qs";
 import { useNotification } from "hooks";
 import Filter from "./components/filter";
-import FilmFilter from "./components/SeriesFilter";
 
 const List = ({ history, location }) => {
 	const dispatch = useDispatch();
@@ -34,11 +33,11 @@ const List = ({ history, location }) => {
 		dispatch(
 			Actions.Form.request({
 				method: "put",
-				entity: "payment-methods",
-				name: "payment-methods",
+				entity: "payment-method",
+				name: "payment-method",
 				version: "v2",
 				id: id,
-				url: `/payment-methods/${id}`,
+				url: `/payment-method/${id}`,
 				updateData: true,
 				primaryKey: "id",
 				normalizeData: data => data,
@@ -62,14 +61,11 @@ const List = ({ history, location }) => {
 
 	return (
 		<>
-			<Modal.Default exitBtn size="xl" header={`Название фильма: ${get(film, "name_ru")}`} toggle={seriesFilter} setToggle={setSeriesFilter}>
-				<FilmFilter {...{ film, seriesFilter }} />
-			</Modal.Default>
 			<EntityContainer.All
-				entity="payment-methods"
-				name={`payment-methods`}
-				url="/payment-methods"
-				version="v2"
+				entity="payment-method"
+				name={`payment-method`}
+				url="/payment-method"
+				version="v3"
 				primaryKey="id"
 				params={{
 					sort: params.sort || "-id",
@@ -80,7 +76,7 @@ const List = ({ history, location }) => {
 						end: (params.start || []).length > 0 ? params.start[1] : null
 					},
 					limit: pageLimit,
-					include: "translations,files,film,season",
+					include: "logo",
 					page: page || 1
 				}}>
 				{({ items, isFetched, meta }) => {
@@ -89,7 +85,7 @@ const List = ({ history, location }) => {
 							<Header
 								title="Серии"
 								buttonName="Добавить"
-								buttonClick={() => history.push(`/payment-methods/create`)}
+								buttonClick={() => history.push(`/payment-method/create`)}
 								meta={meta}
 								sort={"viewed"}
 								filter={filter}
@@ -103,7 +99,7 @@ const List = ({ history, location }) => {
 								rowKey="id"
 								className="mt-5"
 								emptyUiText="Список пусто"
-								editAction={value => history.push(`/payment-methods/update/${value.id}${page ? `?page=${page}` : ""}`)}
+								editAction={value => history.push(`/payment-method/update/${value.id}${page ? `?page=${page}` : ""}`)}
 								columns={[
 									{
 										title: t("ID"),
@@ -113,13 +109,38 @@ const List = ({ history, location }) => {
 									},
 									{
 										title: t("Фото"),
-										dataIndex: "files",
+										dataIndex: "logo",
 										className: "w-8 text-center",
-										render: value => <Avatar isRectangle isProduct src={get(value, "[0].thumbnails.small.src")} />
+										render: value => <Avatar isRectangle isProduct src={get(value, "thumbnails.small.src")} />
 									},
 									{
-										title: t("Заголовок"),
+										title: t("Заголовок (uz)"),
+										dataIndex: "name_uz",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Заголовок (ru)"),
 										dataIndex: "name_ru",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Заголовок (en)"),
+										dataIndex: "name_en",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Описание (uz)"),
+										dataIndex: "name_uz",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Описание (ru)"),
+										dataIndex: "name_ru",
+										render: value => <>{value}</>
+									},
+									{
+										title: t("Описание (en)"),
+										dataIndex: "name_en",
 										render: value => <>{value}</>
 									},
 									{
@@ -128,49 +149,6 @@ const List = ({ history, location }) => {
 										className: "w-8",
 										render: value => {
 											return <div>{value === 1 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</div>;
-										}
-									},
-									{
-										className: "w-5",
-										render: (_, row) => {
-											return (
-												<Button.Outline
-													className="status-btn"
-													type="success"
-													tooltip={t("Активный")}
-													onClick={() => {
-														setFilm(row);
-														setSeriesFilter(!seriesFilter);
-													}}>
-													<Icon name="eye" />
-												</Button.Outline>
-											);
-										}
-									},
-									{
-										className: "w-5",
-										render: (_, row) => {
-											const status = get(row, "status");
-
-											return status === 0 ? (
-												<Button.Outline
-													className="status-btn"
-													type="success"
-													tooltip={t("Активный")}
-													onClick={() => {
-														updateAction(get(row, "id"), "activate");
-													}}>
-													<Icon name="power" />
-												</Button.Outline>
-											) : (
-												<Button.Outline
-													className="status-btn"
-													type="danger"
-													tooltip={t("Неактивный")}
-													onClick={() => updateAction(get(row, "id"), "deactivate")}>
-													<Icon name="power" />
-												</Button.Outline>
-											);
 										}
 									}
 								]}

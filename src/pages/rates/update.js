@@ -86,7 +86,7 @@ const Update = ({ location, history, match }) => {
 									value: get(item, "description_ru")
 								},
 								{
-									name: "holder_id",
+									name: "holders",
 									required: true,
 									type: "array",
 									value: get(item, "holders"),
