@@ -142,17 +142,19 @@ export default function User() {
 													<div className="info">
 														<label>Баланс:</label>
 														{/* <span>{"UZS " + formatCurrency(get(item, "userBalance"))}</span> */}
-														{balance
-															? Number(balance).toLocaleString("en-US", {
-																	style: "currency",
-																	currency: "UZS",
-																	minimumFractionDigits: 0
-															  })
-															: Number(get(item, "userBalance")).toLocaleString("en-US", {
-																	style: "currency",
-																	currency: "UZS",
-																	minimumFractionDigits: 0
-															  })}
+														<span>
+															{balance
+																? Number(balance).toLocaleString("en-US", {
+																		style: "currency",
+																		currency: "UZS",
+																		minimumFractionDigits: 0
+																  })
+																: Number(get(item, "userBalance")).toLocaleString("en-US", {
+																		style: "currency",
+																		currency: "UZS",
+																		minimumFractionDigits: 0
+																  })}
+														</span>
 													</div>
 												</Grid.Column>
 											</Grid.Row>
