@@ -194,6 +194,9 @@ foreignObject {
 					.payment_info_inner {
 						&_header {
 							text-align: right;
+							display: flex;
+							align-items: flex-start;
+							justify-content: space-between;
 							&_title {
 								margin-top: 0;
 							}
@@ -204,6 +207,9 @@ foreignObject {
 								line-height: 32px;
 								color: #081735;
 								margin-bottom: 10px;
+								&.first {
+									text-align: left;
+								}
 							}
 						}
 
@@ -230,6 +236,9 @@ foreignObject {
 			&.rates_payment_info {
 				.rates_payment_info_inner {
 					&_header {
+						display: flex;
+						align-items: flex-start;
+						justify-content: space-between;
 						text-align: right;
 						&_title {
 							margin-top: 0;
@@ -241,6 +250,9 @@ foreignObject {
 							line-height: 32px;
 							color: #081735;
 							margin-bottom: 10px;
+							&.first {
+								text-align: left;
+							}
 						}
 					}
 				}

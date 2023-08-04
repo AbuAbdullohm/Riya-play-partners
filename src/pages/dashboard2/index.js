@@ -183,10 +183,6 @@ const List = ({ history, location }) => {
 
 			<div className="dashboard_main">
 				<Panel className="dashboard_main_left">
-					<div className="title_header d-flex align-items-center mb-3">
-						<span className="mr-2">Клиенты</span>
-					</div>
-
 					<CardBox Icon={Karmang} total={discountTransactions} title="В кошельке" />
 					<CardBox Icon={ContactIcon} total={usersCount} title="Пользователи" />
 					<CardBox Icon={MoneyTransaction} total={transactionsCount} title="Количество транзакций" />
@@ -198,20 +194,26 @@ const List = ({ history, location }) => {
 					<Panel className="dashboard_main_right payment_info">
 						<div className="d-flex justify-between">
 							<div>
-								<div className="title_header mb-3 d-flex align-items-center mr-2">Пополнение счета</div>
-
 								<Chart keyword="chart2" items={items} />
 							</div>
 							<div className="payment_info_inner">
 								<div className="payment_info_inner_header">
-									<h1 className="payment_info_inner_header_title dashboard_title">Общая сумма</h1>
-									<p className="payment_info_inner_header_summ">
-										{Number(allSumm).toLocaleString("en-US", {
-											style: "currency",
-											currency: "UZS",
-											minimumFractionDigits: 0
-										})}
-									</p>
+									<div>
+										<div className="payment_info_inner_header_title dashboard_title">Пополнение счета</div>
+										<p className="payment_info_inner_header_summ first">
+											{items && get(items, "incomes", []).reduce((pv, cv) => (pv += parseInt(cv.id)), 0)}
+										</p>
+									</div>
+									<div>
+										<h1 className="payment_info_inner_header_title dashboard_title">Общая сумма</h1>
+										<p className="payment_info_inner_header_summ">
+											{Number(allSumm).toLocaleString("en-US", {
+												style: "currency",
+												currency: "UZS",
+												minimumFractionDigits: 0
+											})}
+										</p>
+									</div>
 								</div>
 								<div className="dashboard_table" id="dashboard_table">
 									<table className="table">
@@ -239,23 +241,24 @@ const List = ({ history, location }) => {
 					<Panel className="dashboard_main_right rates_payment_info mt-5">
 						<div className="d-flex justify-between">
 							<div>
-								<div className="title_header mb-3 d-flex align-items-center">
-									<span className="mr-2">Купленные тарифы:</span>
-
-									<span>{soledSubscriptions}</span>
-								</div>
 								<Chart keyword="chart1" items={items} ratesData={ratesData} />
 							</div>
 							<div className="rates_payment_info_inner">
 								<div className="rates_payment_info_inner_header">
-									<h1 className="rates_payment_info_inner_header_title dashboard_title mt-0">Общая сумма</h1>
-									<p className="rates_payment_info_inner_header_summ">
-										{Number(ratesSum).toLocaleString("en-US", {
-											style: "currency",
-											currency: "UZS",
-											minimumFractionDigits: 0
-										})}
-									</p>
+									<div>
+										<h1 className="rates_payment_info_inner_header_title dashboard_title mt-0">Купленные тарифы:</h1>
+										<p className="rates_payment_info_inner_header_summ first">{soledSubscriptions}</p>
+									</div>
+									<div>
+										<h1 className="rates_payment_info_inner_header_title dashboard_title mt-0">Общая сумма</h1>
+										<p className="rates_payment_info_inner_header_summ">
+											{Number(ratesSum).toLocaleString("en-US", {
+												style: "currency",
+												currency: "UZS",
+												minimumFractionDigits: 0
+											})}
+										</p>
+									</div>
 								</div>
 
 								<div className="dashboard_table" id="dashboard_table">
