@@ -37,7 +37,7 @@ const Index = ({
 				onChangeHandler([...items, ...Object.values(uploadedFiles)]);
 			},
 			failure: err => {
-				console.log(err);
+				console.log({ err });
 			},
 			finally: () => {
 				setLoading(false);

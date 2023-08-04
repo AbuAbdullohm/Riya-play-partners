@@ -92,7 +92,7 @@ const Story = ({ history, location }) => {
 				{({ items, isFetched, meta }) => {
 					return (
 						<div className="mt-5">
-							<Header title={t("Трейлер историй")} buttonName="Добавить" buttonClick={() => history.push("/story-trailer/create")} meta={meta} />
+							<Header title={t("Видео сторис")} buttonName="Добавить" buttonClick={() => history.push("/story-trailer/create")} meta={meta} />
 							<Table
 								items={items}
 								isFetched={isFetched}

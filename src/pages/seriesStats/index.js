@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Button, Header, Icon, Pagination, Table, Tag, Modal } from "components";
+import { Avatar, Header, Pagination, Table, Modal } from "components";
 import EntityContainer from "modules/entity/containers";
 import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";

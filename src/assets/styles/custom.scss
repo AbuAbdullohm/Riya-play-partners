@@ -8,10 +8,20 @@ body {
 }
 
 .side-nav {
+	transition: 0.3s;
 	.mt-10.list {
 		margin-top: 3.5rem !important;
 		li {
 			cursor: pointer;
+		}
+	}
+	&.opened {
+		width: 250px;
+	}
+	&.closed {
+		width: 105px;
+		.side-menu__sub-icon {
+			display: none;
 		}
 	}
 }

@@ -79,6 +79,10 @@ const Rates = lazy(() => import("./pages/rates"));
 const RatesCreate = lazy(() => import("./pages/rates/create"));
 const RatesUpdate = lazy(() => import("./pages/rates/update"));
 
+const Days = lazy(() => import("./pages/days"));
+const DaysCreate = lazy(() => import("./pages/days/create"));
+const DaysUpdate = lazy(() => import("./pages/rates/update"));
+
 const Notifications = lazy(() => import("./pages/notifications"));
 const NotificationsCreate = lazy(() => import("./pages/notifications/create"));
 const NotificationsUpdate = lazy(() => import("./pages/notifications/update"));
@@ -207,6 +211,10 @@ const routes = [
 	{ path: "/rates", exact: true, component: Rates, access: ["super_admin", "admin", "moderator", "bookkeeping"] },
 	{ path: "/rates/create", exact: true, component: RatesCreate, access: ["super_admin", "admin", "moderator", "bookkeeping"] },
 	{ path: "/rates/update/:id", exact: true, component: RatesUpdate, access: ["super_admin", "admin", "moderator", "bookkeeping"] },
+
+	{ path: "/days", exact: true, component: Days, access: ["super_admin", "admin", "moderator", "bookkeeping"] },
+	{ path: "/days/create", exact: true, component: DaysCreate, access: ["super_admin", "admin", "moderator", "bookkeeping"] },
+	{ path: "/days/update/:id", exact: true, component: DaysUpdate, access: ["super_admin", "admin", "moderator", "bookkeeping"] },
 
 	{ path: "/notifications", exact: true, component: Notifications, access: ["super_admin", "admin"] },
 	{ path: "/notifications/create", exact: true, component: NotificationsCreate, access: ["super_admin", "admin"] },

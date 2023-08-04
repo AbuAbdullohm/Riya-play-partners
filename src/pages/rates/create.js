@@ -1,5 +1,4 @@
 import React from "react";
-import * as yup from "yup";
 
 import EntityForm from "modules/entity/forms";
 import { Typography } from "components";

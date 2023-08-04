@@ -56,6 +56,8 @@ const List = ({ history, location }) => {
 			setView(true);
 		}, 100);
 	};
+	console.log(onView);
+
 	const onViewTransaction = value => {
 		setViewTransaction(true);
 		setTransactionData(value);

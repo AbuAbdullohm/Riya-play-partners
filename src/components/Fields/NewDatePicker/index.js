@@ -46,6 +46,7 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 									value.map(item =>
 										moment(item)
 											.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+											.utc(true)
 											.unix()
 									)
 								);

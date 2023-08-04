@@ -54,7 +54,7 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 						name="video_id"
 						label="Видео"
 						isDoc={true}
-						onlyOneType={".jpeg,.jpg,.svg,.png,.doc,.docx,.xls,.xlsx,.mp4"}
+						onlyOneType={".jpeg,.jpg,.svg,.png,.mp4"}
 						items={Array.isArray(get(values, "video_id")) ? get(values, "video_id") : [get(values, "video")]}
 						onChangeHandler={data => {
 							setFieldValue("video_id", data);

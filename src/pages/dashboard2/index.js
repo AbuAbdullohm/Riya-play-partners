@@ -191,7 +191,7 @@ const List = ({ history, location }) => {
 					<CardBox Icon={ContactIcon} total={usersCount} title="Пользователи" />
 					<CardBox Icon={MoneyTransaction} total={transactionsCount} title="Количество транзакций" />
 					<CardBox Icon={Shop} total={soledSubscriptions} title="Купленные тарифы" />
-					<CardBox Icon={SMS} total={sms} title="Использованные SMS-сообщения" />
+					<CardBox Icon={SMS} total={sms || 1} title="Использованные SMS-сообщения" />
 				</Panel>
 
 				<div style={{ zIndex: "1" }}>

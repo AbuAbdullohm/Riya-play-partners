@@ -68,7 +68,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 	};
 
 	return (
-		<nav className="side-nav primary">
+		<nav className="side-nav primary opened">
 			{/* <div className="side-nav__header">
 				<div className="intro-x dropdown">
 					<div className="dropdown-toggle notification notification--bullet cursor-pointer">

@@ -12,10 +12,17 @@
 	justify-content: flex-end;
 
 	.logo {
-		margin-right: auto;
-		svg {
-			width: calc(250px - (1.25rem * 2));
-			height: calc(72px - 2rem);
+		&.large {
+			svg {
+				width: calc(250px - 20px);
+				height: calc(72px - 2rem);
+			}
+		}
+		&.small {
+			padding: 0 20px;
+			svg {
+				height: 40px;
+			}
 		}
 	}
 	.intro-x {
@@ -69,6 +76,39 @@
 		cursor: pointer;
 		svg {
 			margin-bottom: 0;
+		}
+	}
+}
+
+.side-nav__arrow {
+	margin-right: auto;
+	margin-left: 20px;
+	cursor: pointer;
+	&--opened {
+		animation-name: rotateOpen;
+		animation-duration: 0.3s;
+		animation-fill-mode: forwards;
+		@keyframes rotateOpen {
+			0% {
+				transform: rotate(0);
+			}
+			100% {
+				transform: rotate(180deg);
+			}
+		}
+	}
+	&--closed {
+		animation-name: rotateClose;
+		animation-duration: 0.3s;
+		animation-fill-mode: forwards;
+		transform: rotate(180deg);
+		@keyframes rotateClose {
+			0% {
+				transform: rotate(180deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
 		}
 	}
 }

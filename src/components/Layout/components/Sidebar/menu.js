@@ -9,24 +9,6 @@ export const menu = [
 		access: ["bookkeeping", "super_admin"]
 	},
 	{
-		id: "users",
-		title: "Пользователи",
-		icon: "users",
-		access: ["admin", "super_admin"],
-		submenu: [
-			{ id: "foreingUser", title: "Глобальные", link: "/foreign-user", icon: "user-x", access: ["admin", "moderator", "super_admin"] },
-
-			{ id: "contact", title: "Локальные", link: "/users", icon: "user-x", access: ["admin", "moderator", "super_admin"] }
-		]
-	},
-	{
-		id: "spisalice",
-		title: "Специалисты",
-		icon: "user",
-		access: ["admin", "super_admin"],
-		submenu: [{ link: "/spisalice", id: "spisalice", lang: false, title: "Специалисты Riya Play", icon: "user", access: ["admin", "super_admin"] }]
-	},
-	{
 		id: "films",
 		icon: "film",
 		title: "Медиаконтент",
@@ -34,14 +16,7 @@ export const menu = [
 		submenu: [
 			{ id: "films", title: "Фильмы", link: "/films", icon: "play-circle", lang: false },
 			{ id: "series", title: "Серия (эпизоды)", link: "/series", icon: "tv", lang: false, access: ["admin", "moderator", "super_admin"] },
-			{
-				id: "review",
-				title: "Комментарии",
-				link: "/review",
-				icon: "message-square",
-				lang: false,
-				access: ["moderator", "super_admin", "admin", "redactor"]
-			}
+			{ id: "story-trailer", title: "Видео сторис", link: "/story-trailer", icon: "play-circle", lang: false, access: ["admin", "super_admin"] }
 		]
 	},
 	{
@@ -52,6 +27,23 @@ export const menu = [
 		submenu: [
 			{ id: "films", title: "Фильмы", link: "/films/stats", icon: "play-circle", lang: false },
 			{ id: "series", title: "Серия (эпизоды)", link: "/series/stats", icon: "tv", lang: false, access: ["admin", "moderator", "super_admin"] }
+		]
+	},
+	{
+		id: "users",
+		title: "Пользователи",
+		icon: "users",
+		access: ["admin", "super_admin"],
+		submenu: [
+			{ id: "foreingUser", title: "Глобальные", link: "/foreign-user", icon: "user-x", access: ["admin", "moderator", "super_admin"] },
+			{ id: "contact", title: "Локальные", link: "/users", icon: "user-x", access: ["admin", "moderator", "super_admin"] },
+			{
+				id: "spisalice",
+				link: "/spisalice",
+				title: "Специалисты",
+				icon: "user",
+				access: ["admin", "super_admin"]
+			}
 		]
 	},
 
@@ -99,7 +91,7 @@ export const menu = [
 		submenu: [
 			{ id: "rates", title: "Тариф", link: "/rates", icon: "hard-drive", lang: false, access: ["super_admin", "bookkeeping"] },
 			{ id: "promo-code", title: "Промокод", link: "/promo-code", icon: "gift", lang: false, access: ["super_admin"] },
-			{ id: "premium-status", title: "Дни премиум-статуса", link: "/rates", icon: "gift", lang: false, access: ["super_admin"] }
+			{ id: "premium-status", title: "Дни премиум", link: "/days", icon: "gift", lang: false, access: ["super_admin"] }
 		]
 	},
 	{
@@ -109,7 +101,6 @@ export const menu = [
 		access: ["admin", "super_admin", "moderator"],
 		submenu: [
 			{ id: "channel", title: "Телеканалы", link: "/channel", icon: "tv", lang: false, access: ["admin", "super_admin"] },
-			{ id: "story-trailer", title: "Трейлер историй", link: "/story-trailer", icon: "play-circle", lang: false, access: ["admin", "super_admin"] },
 			{ id: "holder", title: "Правообладатель", link: "/holder", icon: "link", lang: false, access: ["admin", "super_admin"] },
 			{ id: "types", title: "Типы медиаконтента", link: "/types", icon: "type", lang: false, access: ["admin"] },
 			{ id: "categories", title: "Категории медиаконтента", link: "/categories", icon: "list", lang: false, access: ["admin"] },

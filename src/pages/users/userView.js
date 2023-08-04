@@ -12,8 +12,6 @@ import "./style.scss";
 import UserTransaction from "./components/userTransaction";
 import { useDispatch } from "react-redux";
 
-const { formatCurrency } = helpers;
-
 export default function User() {
 	const { id } = useParams();
 	const [activeTab, setActiveTab] = useState("device");
@@ -96,7 +94,7 @@ export default function User() {
 							if (!isFetched) return <Loader />;
 
 							const [device] = items;
-							const status = constants.deviceStatus.find(({ value }) => value === get(device, "status"));
+							const status = constants.deviceStatus.find(({ value }) => value === get(item, "status"));
 
 							return (
 								<Grid.Row gutter={10} gutterX={4} className={"mt-10 user_view"}>

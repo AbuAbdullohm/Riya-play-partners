@@ -6,12 +6,13 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 import { Icon, Modal, Typography } from "../";
-import TimeCounter from "../TimeCounter";
+// import TimeCounter from "../TimeCounter";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import Theme from "components/Layout/components/theme";
 
 import DefaultPhoto from "assets/images/user.svg";
 import { ReactComponent as Logo } from "assets/images/bektv.svg";
+import { ReactComponent as Logo2 } from "assets/images/icons/short-logo.svg";
 
 import "./style.scss";
 
@@ -67,6 +68,18 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 	const { ref, isVisible, setIsVisible } = useOutsideClick();
 	const profile = useSelector((state: any) => state.auth.data);
 	const photo = get(profile, "image.thumbnails.normal.src");
+	const [collapsed, setCollapsed] = useState(false);
+
+	function collapse() {
+		const sidebar = document.querySelector(".side-nav");
+		if (sidebar!.className.includes("opened")) {
+			sidebar!.setAttribute("class", sidebar!.className.replace("opened", "closed"));
+			setCollapsed(true);
+		} else {
+			sidebar!.setAttribute("class", sidebar!.className.replace("closed", "opened"));
+			setCollapsed(false);
+		}
+	}
 
 	return (
 		<>
@@ -85,9 +98,13 @@ const ProfileComponent: FC<{}> = (): JSX.Element => {
 			/>
 
 			<div className="side-nav__footer primary">
-				<Link to={"/"} className="logo">
-					<Logo />
+				<Link to={"/"} className={`logo ${collapsed ? "small" : "large"}`}>
+					{collapsed ? <Logo2 /> : <Logo />}
 				</Link>
+
+				<div className={`side-nav__arrow ${collapsed ? "side-nav__arrow--closed" : "side-nav__arrow--opened"}`} onClick={collapse}>
+					<Icon name="chevron-right" />
+				</div>
 
 				{/* {TimeCounter()} */}
 
