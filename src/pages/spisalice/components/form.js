@@ -37,14 +37,14 @@ const Form = ({ id, isFetched, isUpdate, isSubmitting, setFieldValue, setFieldEr
 	}
 
 	return (
-		<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
+		<Grid.Row gutter={10} gutterX={4} className={"spisalice mb-10"}>
 			<Grid.Column xs={12} xl={3}>
 				<Panel>
 					<Field
 						component={Fields.fileUpload}
 						name="photo"
 						label="Фото"
-						items={Array.isArray(get(values, "photo")) ? get(values, "photo") : null}
+						items={Array.isArray(get(values, "photo")) ? get(values, "photo") : []}
 						onChangeHandler={data => {
 							setFieldValue("photo", data);
 						}}

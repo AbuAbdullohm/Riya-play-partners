@@ -32,7 +32,7 @@ const Update = ({ history, match }) => {
 			version="v2"
 			id={id}
 			params={{
-				include: "department,roles",
+				include: "department,roles,files",
 				extra: {
 					append: "prev_id,next_id"
 				}
