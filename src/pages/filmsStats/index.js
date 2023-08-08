@@ -7,19 +7,18 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import qs from "qs";
-import { useNotification, useAccess } from "hooks";
+import { useNotification } from "hooks";
 import FilmFilter from "./components/FilmFilter";
 import DownloadXls from "./components/downloadXls";
 
 const List = ({ history, location }) => {
-	const isAdmin = useAccess({ roles: ["admin"] });
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 	const { page = 1, pageLimit } = params;
 	const { notification } = useNotification();
-	const [selected, setSelected] = useState();
-	const [film, setFilm] = useState();
+	const [selected] = useState();
+	const [film] = useState();
 
 	// boolean state
 	const [filter, setFilter] = useState(false);

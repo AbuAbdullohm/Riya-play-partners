@@ -51,6 +51,8 @@ const List = ({ history, location }) => {
 		setView(true);
 		setIdModal(value);
 	};
+	console.log(onView);
+
 	const onViewTransaction = value => {
 		setViewTransaction(true);
 		setIdModal(value);

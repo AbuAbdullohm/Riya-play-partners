@@ -18,7 +18,7 @@ export default function Donut({ items, keyword, ratesData }) {
 				return rates ? rates.name_ru : "-";
 			});
 		} else if (keyword === "chart2") {
-			return get(items, "incomes", []).map(item => item.payment_method);
+			return get(items, "incomes", []).map(item => item.payment_method.toUpperCase());
 		}
 	};
 

@@ -85,25 +85,25 @@ export default function DaysForm({ data, history }) {
 					required: true,
 					value: [
 						{
-							["10-10-2020"]: {
+							"10-10-2020": {
 								people: 55,
 								extra_day: 1
 							}
 						},
 						{
-							["11-10-2020"]: {
+							"11-10-2020": {
 								people: 55,
 								extra_day: 1
 							}
 						},
 						{
-							["12-10-2020"]: {
+							"12-10-2020": {
 								people: 55,
 								extra_day: 1
 							}
 						},
 						{
-							["13-10-2020"]: {
+							"13-10-2020": {
 								people: 55,
 								extra_day: 1
 							}

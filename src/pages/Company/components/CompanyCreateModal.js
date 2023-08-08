@@ -5,6 +5,7 @@ import { Field } from "formik";
 import { Fields, Button } from "components";
 import { useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
+import { get } from "lodash";
 
 export default function CompanyCreateModal({ modal, setModal }) {
 	const { notification } = useNotification();
@@ -41,6 +42,12 @@ export default function CompanyCreateModal({ modal, setModal }) {
 					required: true
 				},
 				{
+					name: "files",
+					type: "array",
+					value: get(value, "files") ? [get(value, "files", [])] : [],
+					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
+				},
+				{
 					name: "slug",
 					value: value ? value.slug : null,
 					required: true
@@ -55,6 +62,18 @@ export default function CompanyCreateModal({ modal, setModal }) {
 			{({ values, setFieldValue, isSubmitting }) => {
 				return (
 					<div className="row">
+						<div className="col-12">
+							<Field
+								component={Fields.fileUpload}
+								name="files"
+								label="Фото"
+								items={Array.isArray(get(values, "files")) ? get(values, "files") : [get(values, "files")]}
+								onChangeHandler={data => {
+									setFieldValue("files", data);
+								}}
+								multiple={false}
+							/>
+						</div>
 						<div className="col-12">
 							<Field component={Fields.Input} name="title" type="text" placeholder="Введите названия" label="Названия" />
 						</div>

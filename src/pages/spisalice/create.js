@@ -82,7 +82,8 @@ const Create = ({ history }) => {
 				{
 					name: "status",
 					required: true,
-					value: 10
+					value: 10,
+					onSubmitValue: v => (v ? 10 : 1)
 				},
 				{
 					name: "role",
@@ -111,8 +112,8 @@ const Create = ({ history }) => {
 								setFieldError,
 								values,
 								setFieldValue,
-								isSubmitting,
-								hideStatus: true
+								isSubmitting
+								// hideStatus: true
 							}}
 						/>
 					</>

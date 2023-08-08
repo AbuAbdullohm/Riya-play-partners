@@ -79,32 +79,6 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 			</Grid.Column>
 			<Grid.Column xs={12} xl={4}>
 				<Panel className="mt-5">
-					<Grid.Row cols={12} className="mb-5">
-						<Grid.Column xs={12} lg={6}>
-							<Fields.Radio
-								value={1}
-								id="type-1"
-								label="Дни"
-								name="type-1"
-								checked={values.type === 1}
-								borderColor="dark-gray"
-								onChange={e => {
-									setFieldValue("type", Number(e.target.value));
-								}}
-							/>
-						</Grid.Column>
-						<Grid.Column xs={12} lg={6}>
-							<Fields.Radio
-								value={2}
-								id="type-2"
-								name="type-2"
-								label="Месяцы"
-								borderColor="dark-gray"
-								checked={values.type === 2}
-								onChange={e => setFieldValue("type", Number(e.target.value))}
-							/>
-						</Grid.Column>
-					</Grid.Row>
 					<Field
 						component={Fields.InputMask}
 						name="expire_of"
@@ -127,6 +101,20 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 						}}
 					/>
 					<p style={{ marginTop: -10, marginBottom: 30 }}>{t("Оставьте пустым, чтобы быть неограниченным!")}</p>
+
+					<Field
+						component={Fields.NewDatePicker}
+						label="Дата регистрации пользователей"
+						type="range"
+						name="start_at"
+						isClearable={true}
+						clearButton={true}
+						minDate={new Date()}
+						onChange={value => {
+							setFieldValue("start_at", value);
+							setFieldValue("end_at", value);
+						}}
+					/>
 					<Field
 						component={Fields.Switch}
 						name="status"

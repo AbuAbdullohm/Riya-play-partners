@@ -219,18 +219,20 @@ const List = ({ history, location }) => {
 									<table className="table">
 										<tbody>
 											{items &&
-												get(items, "incomes", []).map((item, idx) => (
-													<Table
-														key={idx}
-														span
-														transactionDownIcon
-														spanColor={item.payment_method}
-														paymentProcent={item.procent}
-														paymentLogo={item.payment_method}
-														transaction={item.id}
-														summ={item.amount}
-													/>
-												))}
+												get(items, "incomes", [])
+													.sort((a, b) => parseInt(b.amount) - parseInt(a.amount))
+													.map((item, idx) => (
+														<Table
+															key={idx}
+															index={idx}
+															transactionDownIcon
+															spanColor={item.payment_method}
+															paymentProcent={item.procent}
+															paymentLogo={item.payment_method}
+															transaction={item.id}
+															summ={item.amount}
+														/>
+													))}
 										</tbody>
 									</table>
 								</div>
@@ -265,20 +267,23 @@ const List = ({ history, location }) => {
 									<table className="table">
 										<tbody>
 											{items &&
-												get(items, "expenses", []).map((item, idx) => {
-													const invoice_rates = ratesData ? ratesData.find(rates => rates.id === item.invoice_id) : [];
-													return (
-														<Table
-															key={idx}
-															rates={invoice_rates ? invoice_rates.name_ru : "-"}
-															procent={item.procent}
-															span
-															spanColor={item.color}
-															transaction={item.id}
-															summ={item.amount}
-														/>
-													);
-												})}
+												get(items, "expenses", [])
+													.sort((a, b) => parseInt(b.amount) - parseInt(a.amount))
+													.map((item, idx) => {
+														const invoice_rates = ratesData ? ratesData.find(rates => rates.id === item.invoice_id) : [];
+														return (
+															<Table
+																key={idx}
+																index={idx}
+																rates={invoice_rates ? invoice_rates.name_ru : "-"}
+																procent={item.procent}
+																span
+																spanColor={item.color}
+																transaction={item.id}
+																summ={item.amount}
+															/>
+														);
+													})}
 										</tbody>
 									</table>
 								</div>

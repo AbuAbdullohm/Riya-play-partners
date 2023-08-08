@@ -138,6 +138,7 @@ const Update = ({ history, match }) => {
 										) : (
 											<Form
 												{...{
+													id,
 													setFieldError,
 													isUpdate: true,
 													isFetched,

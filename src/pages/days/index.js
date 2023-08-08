@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Pagination, Modal, Header, Tag, Button, Icon } from "components";
+import { Table, Pagination, Modal, Header, Tag } from "components";
 import EntityContainer from "modules/entity/containers";
 import Filter from "./components/filter";
 import Actions from "modules/entity/actions";
@@ -60,36 +60,6 @@ const List = ({ history, location }) => {
 	const onChange = page => {
 		const search = { ...params, page: page + 1 };
 		history.push({ search: qs.stringify(search) });
-	};
-
-	const updateAction = (id, type) => {
-		const status = type === "activate" ? 1 : 0;
-		dispatch(
-			Actions.Form.request({
-				method: "put",
-				entity: "rates",
-				name: "rates",
-				id: id,
-				url: `/rates/${id}`,
-				updateData: true,
-				primaryKey: "id",
-				normalizeData: data => data,
-				cb: {
-					success: () => {
-						notification(type === "activate" ? t("Успешно активирован") : t("Успешно деактивирован"), {
-							type: "success"
-						});
-					},
-					error: () => {
-						notification(t("Успешно удалена"), {
-							type: "success"
-						});
-					},
-					finally: () => {}
-				},
-				values: { status }
-			})
-		);
 	};
 
 	return (

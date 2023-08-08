@@ -1,16 +1,40 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { Fields, Grid, Panel, Button } from "components";
+import { Fields, Grid, Panel, Button, Loader, Icon } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
-import { useAccess } from "hooks";
-import { helpers } from "services";
+import { useAccess, useNotification } from "hooks";
+import { helpers, api, queryBuilder, time } from "services";
+import EntityContainer from "modules/entity/containers";
+import "../style.scss";
 
-const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, setFieldError, values, lang, hideStatus = false }) => {
+const Form = ({ id, isFetched, isUpdate, isSubmitting, setFieldValue, setFieldError, values, lang, hideStatus = false }) => {
 	const { t } = useTranslation();
 	const history = useHistory();
+	const { notification } = useNotification();
 	const isAdmin = useAccess({ roles: ["admin"] });
+
+	function kickDevice(item) {
+		api["requestv1"]
+			.delete(
+				queryBuilder("/user/kick-device", {
+					extra: {
+						token_id: item.id
+					}
+				})
+			)
+			.then(() => {
+				notification("Успешно", {
+					type: "success"
+				});
+			})
+			.catch(() => {
+				notification("Что-то пошло не так", {
+					type: "danger"
+				});
+			});
+	}
 
 	return (
 		<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
@@ -27,6 +51,39 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, setFieldError,
 						multiple={false}
 					/>
 				</Panel>
+				{id ? (
+					<EntityContainer.All
+						entity="/user/devices"
+						name="/user/devices"
+						url="/user/devices"
+						version="v1"
+						dataKey={"items"}
+						params={{
+							sort: "-id",
+							extra: {
+								page: 1,
+								limit: 50,
+								user_id: id
+							}
+						}}>
+						{({ isFetched, items }) => {
+							if (!isFetched) return <Loader />;
+							return items.map(item => {
+								return (
+									<div className="device-item" key={item.id}>
+										<div>
+											<p>{item.device_name}</p>
+											<p>{time.to(item.created_at, "DD.MM.YYYY / HH:mm:ss")}</p>
+										</div>
+										<p className="close" onClick={() => kickDevice(item)}>
+											<Icon name="x" />
+										</p>
+									</div>
+								);
+							});
+						}}
+					</EntityContainer.All>
+				) : null}
 			</Grid.Column>
 			<Grid.Column xs={12} xl={9}>
 				<Panel>

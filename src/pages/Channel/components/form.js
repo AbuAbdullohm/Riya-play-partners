@@ -26,6 +26,9 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 						<Grid.Column xs={4} xl={4}>
 							<Field component={Fields.Input} name="name_en" type="text" placeholder="Введите имя" label="Имя (EN)" />
 						</Grid.Column>
+						<Grid.Column xs={12} xl={12}>
+							<Field component={Fields.Input} name="stream" type="text" placeholder="Введите телеканал" label="Телеканал" />
+						</Grid.Column>
 						<Grid.Column xs={6} xl={6}>
 							<Field
 								component={Fields.Select}
@@ -42,7 +45,25 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 							/>
 						</Grid.Column>
 						<Grid.Column xs={6} xl={6}>
-							<Field component={Fields.Input} name="stream" type="text" placeholder="Введите телеканал" label="Телеканал" />
+							<Field
+								component={Fields.AsyncSelect}
+								name="tags"
+								placeholder={t("Выберите формат")}
+								label="Формат"
+								isClearable
+								hasMore
+								isSearchable
+								loadOptionsUrl="/tags"
+								className="mb-24 mr-2"
+								isMulti
+								optionLabel={`title_ru`}
+								loadOptionsParams={search => {
+									return {
+										extra: { title: search },
+										filter: { status: 1 }
+									};
+								}}
+							/>
 						</Grid.Column>
 					</Grid.Row>
 				</Panel>
@@ -58,6 +79,16 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 							setFieldValue("logo_id", data);
 						}}
 						multiple={false}
+					/>
+
+					<Field
+						checked={Number(values.paid) === true}
+						component={Fields.Checkbox}
+						className="mb-5"
+						name="paid"
+						onChange={e => setFieldValue("paid", e.target.checked)}
+						label={t("Платный")}
+						size="large"
 					/>
 
 					<div className="d-flex justify-between">

@@ -10,7 +10,7 @@ import DaysForm from "./components/daysForm";
 const Create = ({ history }) => {
 	const { notification } = useNotification();
 	const { t } = useTranslation();
-	const [data, setData] = useState(null);
+	const [data] = useState(null);
 
 	return (
 		<>

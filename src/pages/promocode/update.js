@@ -61,7 +61,7 @@ const Update = ({ location, history, match }) => {
 
 								{
 									name: "type",
-									value: get(item, "type"),
+									value: 1,
 									required: true
 								},
 								{
@@ -98,6 +98,18 @@ const Update = ({ location, history, match }) => {
 									onSubmitValue: value => value && value
 								},
 								{
+									name: "start_at",
+									type: "number",
+									value: get(item, "start_at"),
+									onSubmitValue: value => (value[0] ? value[0] : null)
+								},
+								{
+									name: "end_at",
+									type: "number",
+									value: get(item, "end_at"),
+									onSubmitValue: value => (value[1] ? value[1] : null)
+								},
+								{
 									name: "status",
 									value: get(item, "status") === 1,
 									onSubmitValue: value => (value ? 1 : 0),
@@ -107,7 +119,8 @@ const Update = ({ location, history, match }) => {
 							params={{
 								include: "translations,expire_of"
 							}}>
-							{({ isSubmitting, values, setFieldValue }) => {
+							{({ isSubmitting, values, setFieldValue, errors }) => {
+								console.log(errors);
 								return (
 									<>
 										<Form

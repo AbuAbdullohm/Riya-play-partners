@@ -32,7 +32,7 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 		setLoading(true);
 		setFieldValue("kinopoisk_id", value);
 
-		if (value && value.length > 3) {
+		if (value) {
 			debounce(
 				async () => {
 					await api["requestv2"]
@@ -291,12 +291,13 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 							{!createCompanyModal && (
 								<Field
 									component={Fields.AsyncSelect}
-									name="company_id"
+									name="companies"
 									placeholder={t("Выберите компания")}
 									label={t("Компания")}
 									isClearable
 									isSearchable
 									hasMore
+									isMulti={true}
 									loadOptionsUrl="/company"
 									className="mb-24 mr-2"
 									optionLabel={`title`}
@@ -389,19 +390,28 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 						</div>
 
 						<Field
-							checked={checkedDeviceType ? checkedDeviceType.value : 0}
-							component={Fields.Radios}
-							id={"visible"}
-							label={"Смотреть на"}
-							options={constants.deviceTypes}
-							onChange={event => {
-								const value = event.target.value;
-								constants.deviceTypes.map(option => {
-									if (value === option.value) {
-										setFieldValue(`visible_${value}`, 1);
-									} else setFieldValue(`visible_${option.value}`, 0);
-								});
-							}}
+							className="mr-2"
+							component={Fields.Switch}
+							name="visible_web"
+							label="Смотреть на Web"
+							onChange={() => setFieldValue("visible_web", !values.visible_web)}
+							checked={values.visible_web}
+						/>
+						<Field
+							className="mr-2"
+							component={Fields.Switch}
+							name="visible_tv"
+							label="Смотреть на TV"
+							onChange={() => setFieldValue("visible_tv", !values.visible_tv)}
+							checked={values.visible_tv}
+						/>
+						<Field
+							className="mr-2"
+							component={Fields.Switch}
+							name="visible_mobile"
+							label="Смотреть на Mobile"
+							onChange={() => setFieldValue("visible_mobile", !values.visible_mobile)}
+							checked={values.visible_mobile}
 						/>
 
 						<Field

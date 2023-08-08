@@ -1,15 +1,40 @@
 import React from "react";
-
-import { Fields, Panel, Button, Grid, Typography, Icon, Tag } from "components";
-import EntityForm from "modules/entity/forms";
-import { Field } from "formik";
-import { get } from "lodash";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { Field } from "formik";
+import { useTranslation } from "react-i18next";
+import { get } from "lodash";
+import EntityContainer from "modules/entity/containers";
+import { Fields, Panel, Button, Grid, Typography, Icon, Tag, Loader } from "components";
+import EntityForm from "modules/entity/forms";
+import { time, api, queryBuilder } from "services";
+import { useNotification } from "hooks";
+import "./style.scss";
 
 const Profile = ({ history }) => {
 	const { t } = useTranslation();
+	const { notification } = useNotification();
 	const user = useSelector(state => get(state, "auth.data"));
+
+	function kickDevice(item) {
+		api["requestv1"]
+			.delete(
+				queryBuilder("/user/kick-device", {
+					extra: {
+						token_id: item.id
+					}
+				})
+			)
+			.then(() => {
+				notification("Успешно", {
+					type: "success"
+				});
+			})
+			.catch(() => {
+				notification("Что-то пошло не так", {
+					type: "danger"
+				});
+			});
+	}
 
 	return (
 		<EntityForm.Main
@@ -56,7 +81,7 @@ const Profile = ({ history }) => {
 								<ul className="profile-list">
 									<li>
 										<strong>{t("Фото")}:</strong>
-										<img src={get(user, "image.link")} alt="profile img" />
+										<img src={get(user, "image.link")} alt="profile img" width={100} height={100} />
 									</li>
 									<li>
 										<strong>{t("Полное имя")}:</strong>
@@ -85,9 +110,8 @@ const Profile = ({ history }) => {
 									</li>
 								</ul>
 							</Panel>
-						</Grid.Column>
-						<Grid.Column md={6} xl={4}>
-							<Panel>
+
+							<Panel className="mt-5">
 								<Field component={Fields.Input} name="password" type="password" placeholder={t("Введите новый пароль")} label="Новый пароль" />
 								<Field
 									component={Fields.Input}
@@ -102,6 +126,39 @@ const Profile = ({ history }) => {
 									</Button.Default>
 								</div>
 							</Panel>
+						</Grid.Column>
+						<Grid.Column md={6} xl={4}>
+							<EntityContainer.All
+								entity="/user/devices"
+								name="/user/devices"
+								url="/user/devices"
+								version="v1"
+								dataKey={"items"}
+								params={{
+									sort: "-id",
+									extra: {
+										page: 1,
+										limit: 50,
+										user_id: get(user, "id")
+									}
+								}}>
+								{({ isFetched, items }) => {
+									if (!isFetched) return <Loader />;
+									return items.map(item => {
+										return (
+											<div className="device-item" key={item.id}>
+												<div>
+													<p>{item.device_name}</p>
+													<p>{time.to(item.created_at, "DD.MM.YYYY / HH:mm:ss")}</p>
+												</div>
+												<p className="close" onClick={() => kickDevice(item)}>
+													<Icon name="x" />
+												</p>
+											</div>
+										);
+									});
+								}}
+							</EntityContainer.All>
 						</Grid.Column>
 					</Grid.Row>
 				);

@@ -6,8 +6,10 @@ import apelsin from "assets/images/uzum.svg";
 import click from "assets/images/icons/icons-dashboard/click.svg";
 import upay from "assets/images/icons/icons-dashboard/upay.svg";
 import { Icon } from "components";
+import { ReactComponent as Top } from "assets/images/icons/top.svg";
 
 export default function Table({
+	index,
 	rates,
 	span,
 	spanColor,
@@ -54,9 +56,31 @@ export default function Table({
 					</div>
 				)}
 			</td>
-			<td>{paymentProcent && paymentProcent}</td>
+			{paymentProcent && (
+				<td>
+					<div className="d-flex align-items-center">
+						{paymentProcent}
+						{index === 0 ? (
+							<span className="ml-1">
+								<Top />
+							</span>
+						) : null}
+					</div>
+				</td>
+			)}
 			{time && <td className="dashboard_time">{time}</td>}
-			{procent && <td>{procent}</td>}
+			{procent && (
+				<td>
+					<div className="d-flex align-items-center">
+						{procent}
+						{index === 0 ? (
+							<span className="ml-1">
+								<Top />
+							</span>
+						) : null}
+					</div>
+				</td>
+			)}
 			{transactionDownIcon ? (
 				<td className="d-flex align-center text-green">
 					<Icon name="arrow-down" size={17} strokeColor="#83bf6e" /> {transaction}

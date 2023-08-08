@@ -1,0 +1,21 @@
+.device-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 3px 20px rgba(0, 0, 0, 0.043137254901960784);
+	padding: 20px;
+	margin-bottom: 10px;
+	p {
+		margin-bottom: 0;
+		font-size: 16px;
+	}
+	p:first-child {
+		margin-bottom: 5px;
+	}
+	.close {
+		cursor: pointer;
+	}
+}

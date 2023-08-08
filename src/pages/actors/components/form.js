@@ -15,7 +15,7 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 	function checkId(value, type) {
 		setFieldValue("kinopoisk_id", value);
 
-		if (value && value.length > 3) {
+		if (value) {
 			debounce(
 				async () => {
 					await api["requestv1"]

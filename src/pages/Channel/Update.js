@@ -83,6 +83,17 @@ const Update = ({ location, history, match }) => {
 									value: get(item, "category_id")
 								},
 								{
+									name: "tags",
+									required: true,
+									value: get(item, "tags") ? get(item, "tags") : [],
+									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id ? curr.id : curr.id], [])
+								},
+								{
+									name: "paid",
+									value: get(item, "paid") === 1 ? 1 : 0,
+									onSubmitValue: value => (value ? 1 : 0)
+								},
+								{
 									name: "status",
 									value: get(item, "status") === 1,
 									onSubmitValue: value => (value ? 1 : 0)

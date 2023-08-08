@@ -130,7 +130,9 @@ const Update = ({ location, history }) => {
 			version="v2"
 			primaryKey="id"
 			id={id}
-			params={{ include: "translations,files,actors,thriller,tags,categories,paid,country,maker,date,type,gallery,genres,season,screenshots" }}>
+			params={{
+				include: "translations,files,actors,thriller,tags,categories,paid,country,maker,date,type,gallery,genres,season,screenshots,company,holder"
+			}}>
 			{({ item, isFetched }) => {
 				return isFetched ? (
 					<>
@@ -213,11 +215,11 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => (value ? value.id : null)
 								},
 								{
-									name: "company_id",
+									name: "companies",
 									required: true,
-									type: "object",
+									type: "array",
 									value: get(item, "company"),
-									onSubmitValue: value => (value ? value.id : null)
+									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], [])
 								},
 								{
 									name: "holder_id",
@@ -321,17 +323,17 @@ const Update = ({ location, history }) => {
 								{
 									name: "visible_web",
 									value: get(item, "visible_web") ? 1 : 0,
-									onSubmitValue: value => value
+									onSubmitValue: value => (value ? 1 : 0)
 								},
 								{
 									name: "visible_tv",
 									value: get(item, "visible_tv") ? 1 : 0,
-									onSubmitValue: value => value
+									onSubmitValue: value => (value ? 1 : 0)
 								},
 								{
 									name: "visible_mobile",
 									value: get(item, "visible_mobile") ? 1 : 0,
-									onSubmitValue: value => value
+									onSubmitValue: value => (value ? 1 : 0)
 								},
 
 								{

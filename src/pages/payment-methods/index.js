@@ -1,24 +1,17 @@
 import React, { useState } from "react";
-import { Avatar, Button, Header, Icon, Pagination, Table, Tag, Modal } from "components";
+import { Avatar, Header, Pagination, Table, Tag } from "components";
 import EntityContainer from "modules/entity/containers";
-import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import qs from "qs";
-import { useNotification } from "hooks";
 import Filter from "./components/filter";
 
 const List = ({ history, location }) => {
-	const dispatch = useDispatch();
 	const { t } = useTranslation();
-	const { notification } = useNotification();
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 	const { page, pageLimit } = params;
-	const [film, setFilm] = useState();
 	// boolean state
 	const [filter, setFilter] = useState(false);
-	const [seriesFilter, setSeriesFilter] = useState(false);
 
 	const onChange = page => {
 		const search = { ...params, page: page + 1 };
@@ -26,37 +19,6 @@ const List = ({ history, location }) => {
 		history.push({
 			search: qs.stringify(search)
 		});
-	};
-
-	const updateAction = (id, type) => {
-		const status = type === "activate" ? 1 : 0;
-		dispatch(
-			Actions.Form.request({
-				method: "put",
-				entity: "payment-method",
-				name: "payment-method",
-				version: "v2",
-				id: id,
-				url: `/payment-method/${id}`,
-				updateData: true,
-				primaryKey: "id",
-				normalizeData: data => data,
-				cb: {
-					success: () => {
-						notification(type === "activate" ? t("Успешно активирован") : t("Успешно деактивирован"), {
-							type: "success"
-						});
-					},
-					error: () => {
-						notification(t("Успешно удалена"), {
-							type: "success"
-						});
-					},
-					finally: () => {}
-				},
-				values: { status }
-			})
-		);
 	};
 
 	return (

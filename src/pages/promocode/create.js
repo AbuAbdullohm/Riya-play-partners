@@ -71,6 +71,16 @@ const Create = ({ history }) => {
 					onSubmitValue: value => value && value
 				},
 				{
+					name: "start_at",
+					type: "number",
+					onSubmitValue: value => (value[0] ? value[0] : null)
+				},
+				{
+					name: "end_at",
+					type: "number",
+					onSubmitValue: value => (value[1] ? value[1] : null)
+				},
+				{
 					name: "rates_id",
 					required: true,
 					type: "array",

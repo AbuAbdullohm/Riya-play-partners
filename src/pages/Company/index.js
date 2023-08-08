@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Pagination, Modal, Header, Tag } from "components";
+import { Table, Pagination, Modal, Header, Tag, Avatar } from "components";
 import EntityContainer from "modules/entity/containers";
 import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";
@@ -92,6 +92,7 @@ const Company = ({ history, location }) => {
 				params={{
 					sort: "-id",
 					limit: pageLimit,
+					include: "files",
 					page: page ? page : 1
 				}}>
 				{({ items, isFetched, meta }) => {
@@ -112,6 +113,14 @@ const Company = ({ history, location }) => {
 										dataIndex: "id",
 										className: "w-4",
 										render: value => value
+									},
+									{
+										title: t("Логотип"),
+										dataIndex: "files",
+										className: "w-4",
+										render: value => {
+											return <Avatar isRectangle src={get(value, "[0].thumbnails.small.src")} />;
+										}
 									},
 									{
 										title: t("Название"),

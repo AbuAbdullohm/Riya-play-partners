@@ -137,12 +137,11 @@ const List = ({ history, location }) => {
 								isFetched={isFetched}
 								rowKey="id"
 								className="mt-5"
-								hasEdit={false}
 								hasDelete={false}
 								emptyUiText="Список пусто"
 								// editIcon={<Icon name="eye" className="w-5 h-5 mr-1" />}
 								// deleteAction={value => deleteAction(value.id)}
-								// editAction={value => history.push(`/promo-code/update/${value.id}`)}
+								editAction={value => history.push(`/promo-code/update/${value.id}`)}
 								columns={[
 									{
 										title: t("ID"),

@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import { Avatar, Header, Pagination, Table, Modal } from "components";
 import EntityContainer from "modules/entity/containers";
-import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import qs from "qs";
-import { useNotification } from "hooks";
 import Filter from "./components/filter";
 import FilmFilter from "./components/SeriesFilter";
 
 const List = ({ history, location }) => {
-	const dispatch = useDispatch();
 	const { t } = useTranslation();
-	const { notification } = useNotification();
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 	const { page, pageLimit } = params;
-	const [film, setFilm] = useState();
+	const [film] = useState();
 	// boolean state
 	const [filter, setFilter] = useState(false);
 	const [seriesFilter, setSeriesFilter] = useState(false);
@@ -27,37 +22,6 @@ const List = ({ history, location }) => {
 		history.push({
 			search: qs.stringify(search)
 		});
-	};
-
-	const updateAction = (id, type) => {
-		const status = type === "activate" ? 1 : 0;
-		dispatch(
-			Actions.Form.request({
-				method: "put",
-				entity: "series",
-				name: "series",
-				version: "v2",
-				id: id,
-				url: `/series/${id}`,
-				updateData: true,
-				primaryKey: "id",
-				normalizeData: data => data,
-				cb: {
-					success: () => {
-						notification(type === "activate" ? t("Успешно активирован") : t("Успешно деактивирован"), {
-							type: "success"
-						});
-					},
-					error: () => {
-						notification(t("Успешно удалена"), {
-							type: "success"
-						});
-					},
-					finally: () => {}
-				},
-				values: { status }
-			})
-		);
 	};
 
 	return (

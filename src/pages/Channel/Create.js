@@ -61,6 +61,17 @@ const Create = ({ history }) => {
 					required: true
 				},
 				{
+					name: "tags",
+					value: [],
+					required: true,
+					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], [])
+				},
+				{
+					name: "paid",
+					value: 0,
+					onSubmitValue: value => (value ? 1 : 0)
+				},
+				{
 					name: "status",
 					value: true,
 					onSubmitValue: value => (value ? 1 : 0)

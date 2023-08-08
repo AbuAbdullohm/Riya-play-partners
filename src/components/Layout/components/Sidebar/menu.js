@@ -42,7 +42,7 @@ export const menu = [
 				link: "/spisalice",
 				title: "Специалисты",
 				icon: "user",
-				access: ["admin", "super_admin"]
+				access: ["super_admin"]
 			}
 		]
 	},

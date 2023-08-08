@@ -221,9 +221,9 @@ const routes = [
 	{ path: "/notifications/update/:notification_id", exact: true, component: NotificationsUpdate, access: ["super_admin", "admin"] },
 
 	{ path: "/reason-for-blocking-user", exact: true, component: ReasonForBlocking, access: ["super_admin", "admin", "moderator"] },
-	{ path: "/spisalice", exact: true, component: Spisalice, access: ["super_admin", "admin", "moderator"] },
-	{ path: "/spisalice/create", exact: true, component: SpisaliceCreate, access: ["super_admin", "admin", "moderator"] },
-	{ path: "/spisalice/update/:id", exact: true, component: SpisaliceUpdate, access: ["super_admin", "admin", "moderator"] },
+	{ path: "/spisalice", exact: true, component: Spisalice, access: ["super_admin"] },
+	{ path: "/spisalice/create", exact: true, component: SpisaliceCreate, access: ["super_admin"] },
+	{ path: "/spisalice/update/:id", exact: true, component: SpisaliceUpdate, access: ["super_admin"] },
 	{ path: "/logs", exact: true, component: Logs, access: ["super_admin", "admin", "moderator"] },
 
 	{ path: "/buggalter", exact: true, component: Buggalter, access: ["super_admin", "bookkeeping"] },

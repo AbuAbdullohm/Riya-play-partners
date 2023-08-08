@@ -122,10 +122,10 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => (value ? value.id : null)
 				},
 				{
-					name: "company_id",
+					name: "companies",
 					required: true,
-					type: "object",
-					onSubmitValue: value => (value ? value.id : null)
+					type: "array",
+					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], [])
 				},
 				{
 					name: "holder_id",

@@ -46,28 +46,42 @@ function ConfirmInput(props) {
 				id="input-0"
 				onChange={e => changeFocus(e, 0)}
 				className="form-control"
-				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				style={{ width: "15%", height: 65, fontSize: 32, textAlign: "center" }}
 				maxLength={1}
 			/>
 			<input
 				id="input-1"
 				onChange={e => changeFocus(e, 1)}
 				className="form-control"
-				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				style={{ width: "15%", height: 65, fontSize: 32, textAlign: "center" }}
 				maxLength={1}
 			/>
 			<input
 				id="input-2"
 				onChange={e => changeFocus(e, 2)}
 				className="form-control"
-				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				style={{ width: "15%", height: 65, fontSize: 32, textAlign: "center" }}
 				maxLength={1}
 			/>
 			<input
 				id="input-3"
 				onChange={e => changeFocus(e, 3)}
 				className="form-control"
-				style={{ width: "22%", height: 70, fontSize: 32, textAlign: "center" }}
+				style={{ width: "15%", height: 65, fontSize: 32, textAlign: "center" }}
+				maxLength={1}
+			/>
+			<input
+				id="input-4"
+				onChange={e => changeFocus(e, 4)}
+				className="form-control"
+				style={{ width: "15%", height: 65, fontSize: 32, textAlign: "center" }}
+				maxLength={1}
+			/>
+			<input
+				id="input-5"
+				onChange={e => changeFocus(e, 5)}
+				className="form-control"
+				style={{ width: "15%", height: 65, fontSize: 32, textAlign: "center" }}
 				maxLength={1}
 			/>
 		</div>
