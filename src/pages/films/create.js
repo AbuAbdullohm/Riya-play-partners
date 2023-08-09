@@ -109,6 +109,18 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => value
 				},
 				{
+					name: "kinopoisk_rating",
+					required: true,
+					type: "string",
+					onSubmitValue: value => value
+				},
+				{
+					name: "imdb_rating",
+					required: true,
+					type: "string",
+					onSubmitValue: value => value
+				},
+				{
 					name: "external_type",
 					type: "number",
 					required: true,
@@ -177,6 +189,11 @@ const Create = ({ history, location }) => {
 					value: [],
 					required: true,
 					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], [])
+				},
+				{
+					name: "age_limit",
+					required: true,
+					onSubmitValue: value => value
 				},
 				{
 					name: "type",

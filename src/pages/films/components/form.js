@@ -227,6 +227,30 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								/>
 							</Grid.Column>
 						</Grid.Row>
+						<Grid.Row>
+							<Grid.Column lg={6}>
+								<Field
+									component={Fields.Input}
+									name="kinopoisk_rating"
+									type="number"
+									onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+									label={t("Кинопоиск рейтинг")}
+									placeholder={t("Кинопоиск рейтинг")}
+									size="large"
+								/>
+							</Grid.Column>
+							<Grid.Column lg={6}>
+								<Field
+									component={Fields.Input}
+									name="imdb_rating"
+									type="number"
+									onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+									label={t("IMDB рейтинг")}
+									placeholder={t("IMDB рейтинг")}
+									size="large"
+								/>
+							</Grid.Column>
+						</Grid.Row>
 					</Panel>
 				</Grid.Column>
 
@@ -388,6 +412,17 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								<Icon name="plus" />
 							</Button.Outline>
 						</div>
+
+						<Field
+							component={Fields.Input}
+							name="age_limit"
+							type="number"
+							step="1"
+							onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+							label={t("Возрастное ограничение")}
+							placeholder={t("Возрастное ограничение")}
+							size="large"
+						/>
 
 						<Field
 							className="mr-2"

@@ -243,6 +243,20 @@ const Update = ({ location, history }) => {
 									onSubmitValue: value => value
 								},
 								{
+									name: "kinopoisk_rating",
+									required: true,
+									type: "string",
+									value: get(item, "kinopoisk_rating", ""),
+									onSubmitValue: value => value
+								},
+								{
+									name: "imdb_rating",
+									required: true,
+									type: "string",
+									value: get(item, "imdb_rating", ""),
+									onSubmitValue: value => value
+								},
+								{
 									name: "external_type",
 									type: "number",
 									required: true,
@@ -313,6 +327,13 @@ const Update = ({ location, history }) => {
 									required: true,
 									value: get(item, "tags") ? get(item, "tags") : [],
 									onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id ? curr.id : curr.id], [])
+								},
+								{
+									name: "age_limit",
+									required: true,
+									type: "string",
+									value: get(item, "age_limit", ""),
+									onSubmitValue: value => value
 								},
 								{
 									name: "type",
