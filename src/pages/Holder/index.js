@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Pagination, Modal, Header, Tag } from "components";
+import { Table, Pagination, Modal, Header, Tag, Avatar } from "components";
 import EntityContainer from "modules/entity/containers";
 import Actions from "modules/entity/actions";
 import { useTranslation } from "react-i18next";
@@ -107,6 +107,14 @@ const Holder = ({ history, location }) => {
 										dataIndex: "id",
 										className: "w-4",
 										render: value => value
+									},
+									{
+										title: t("Логотип"),
+										dataIndex: "logo",
+										className: "w-4",
+										render: value => {
+											return <Avatar isRectangle src={get(value, "thumbnails.small.src")} />;
+										}
 									},
 									{
 										title: t("Название"),
