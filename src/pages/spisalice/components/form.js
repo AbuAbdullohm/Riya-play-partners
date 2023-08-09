@@ -109,15 +109,7 @@ const Form = ({ id, isFetched, isUpdate, isSubmitting, setFieldValue, setFieldEr
 						</Grid.Column>
 
 						<Grid.Column xs={12} xl={6}>
-							<Field
-								component={Fields.Input}
-								name="password"
-								type="password"
-								min="0"
-								onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
-								placeholder="Пароль"
-								label="Введите пароль"
-							/>
+							<Field component={Fields.Input} name="password" type="password" min="0" placeholder="Пароль" label="Введите пароль" />
 						</Grid.Column>
 						<Grid.Column xs={12} xl={6}>
 							<Field
@@ -125,7 +117,6 @@ const Form = ({ id, isFetched, isUpdate, isSubmitting, setFieldValue, setFieldEr
 								name="confirm-password"
 								type="password"
 								min="0"
-								onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
 								placeholder="Повторите пароль"
 								label="Повторите пароль"
 							/>

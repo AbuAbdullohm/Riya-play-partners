@@ -31,7 +31,6 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, lang }
 								type="number"
 								min="0"
 								maxLength={4}
-								onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
 								placeholder="Пароль"
 								label="Введите пароль"
 							/>
