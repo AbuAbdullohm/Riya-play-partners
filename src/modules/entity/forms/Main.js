@@ -84,6 +84,7 @@ const EnhacedForm = withFormik({
 					break;
 				case "date":
 					validationField = Yup.date();
+					break;
 				default:
 					validationField = Yup.string().transform((_, input) => input != null && input.toString());
 			}

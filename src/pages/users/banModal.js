@@ -49,8 +49,8 @@ const BanModal = ({ setCreateModal, setCanUpdate, blockButtonData }) => {
 						<Field
 							component={Fields.AsyncSelect}
 							name="reason_id"
-							placeholder="Виберите Причины"
-							label="Причины"
+							placeholder="Причина блокировки:"
+							label="Причина блокировки:"
 							isClearable
 							hasMore
 							isSearchable
@@ -66,7 +66,7 @@ const BanModal = ({ setCreateModal, setCanUpdate, blockButtonData }) => {
 							component={Fields.NewDatePicker}
 							name="banned_until"
 							isClearable={true}
-							label="Дата окончания"
+							label="Дата и время авто разблокировки:"
 							onChange={value => {
 								setFieldValue("banned_until", value);
 							}}

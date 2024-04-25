@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Pagination, Modal, Header, Tag, Button, Icon } from "components";
+import { Table, Pagination, Modal, Header, Tag, Button, Icon, Avatar } from "components";
 import EntityContainer from "modules/entity/containers";
 import Filter from "./components/filter";
 import Actions from "modules/entity/actions";
@@ -9,6 +9,7 @@ import get from "lodash/get";
 import qs from "qs";
 import { useNotification } from "hooks";
 import View from "./components/view";
+import { time } from "services";
 
 const List = ({ history, location }) => {
 	const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -121,14 +122,15 @@ const List = ({ history, location }) => {
 				primaryKey="notification_id"
 				params={{
 					sort: "-notification_id",
-					extra: { name: params.name ? params.name : "" },
+					extra: { title: params.title ? params.title : "" },
 					filter: {
 						status: params.status,
 						rates: params.rates ? params.rates.split("/")[0] : null,
+						date: params.date,
 						type: params.type
 					},
 					limit: pageLimit ? pageLimit : 10,
-					include: "translations,model",
+					include: "translations,model,usersCount,image",
 					page: page || 1
 				}}>
 				{({ items, isFetched, meta }) => {
@@ -151,7 +153,7 @@ const List = ({ history, location }) => {
 								rowKey="notification_id"
 								className="mt-5"
 								hasEdit={true}
-								editAction={value => history.push(`/notifications/update/${value.id}`)}
+								// editAction={value => history.push(`/notifications/update/${value.id}`)}
 								emptyUiText="Список пусто"
 								deleteAction={value => onDeleteHandler(value.notification_id)}
 								columns={[
@@ -162,10 +164,26 @@ const List = ({ history, location }) => {
 										render: value => <>{value}</>
 									},
 									{
+										title: t("Фото"),
+										dataIndex: "image",
+										className: "w-8",
+										render: value => {
+											return <Avatar isProduct src={get(value, "thumbnails.small.src")} />;
+										}
+									},
+									{
 										title: t("Загаловок"),
 										dataIndex: "title",
 										render: value => {
-											return <>{value}</>;
+											return <div className="notification-title">{value}</div>;
+										}
+									},
+
+									{
+										title: t("Сообщение"),
+										dataIndex: "message",
+										render: value => {
+											return <div className="notification-message">{value}</div>;
 										}
 									},
 									{
@@ -176,11 +194,9 @@ const List = ({ history, location }) => {
 										)
 									},
 									{
-										title: t("Перенаправление"),
-										dataIndex: "model",
-										render: (value, row) => (
-											<>{get(row, "type") === 1 ? get(row, "model.title") : get(row, "type") === 2 ? get(row, "model.name_ru") : "-"}</>
-										)
+										title: t("Дата создания"),
+										dataIndex: "date",
+										render: value => (value ? time.to(value) : "")
 									},
 									{
 										title: t("Статус"),

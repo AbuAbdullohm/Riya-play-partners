@@ -3,7 +3,7 @@
 	width: 100%;
 	min-width: 220px;
 	border-radius: 4px;
-	// border: 1px solid #ccc;
+	z-index: 10;
 	input {
 		padding: 0.5rem 0.75rem;
 		width: 100%;
@@ -36,8 +36,6 @@
 
 		.react-datepicker__navigation--previous {
 			outline: none;
-			.react-datepicker__navigation-icon--previous {
-			}
 		}
 		.react-datepicker__today-button {
 			background-color: #1d5d90;
@@ -71,10 +69,6 @@
 					color: transparent !important;
 				}
 				.react-datepicker__header__dropdown--select {
-					position: absolute;
-
-					top: 7px;
-					left: 38px;
 					.react-datepicker__month-dropdown-container--select {
 						.react-datepicker__month-select {
 							border-radius: 5px;
@@ -116,9 +110,14 @@ html.dark {
 
 .datepickerClose {
 	position: absolute;
-	right: 20px;
-	top: 8px;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
 	cursor: pointer;
 	padding: 1px 5px;
-	font-size: 20px;
+	z-index: 20;
+	svg {
+		width: 16px;
+		height: 16px;
+	}
 }

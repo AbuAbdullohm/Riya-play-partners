@@ -27,6 +27,19 @@ body {
 			display: none;
 		}
 	}
+	@media (max-width: 1280px) {
+		&.opened {
+			width: 105px;
+		}
+		&__arrow {
+			opacity: 0;
+		}
+	}
+	@media (max-width: 768px) {
+		&.opened {
+			width: 50px;
+		}
+	}
 }
 
 @media (max-width: 767px) {

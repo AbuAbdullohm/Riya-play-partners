@@ -167,9 +167,9 @@ const List = ({ history, location }) => {
 									// items={items.filter(item => item.id !== 17)}
 									items={items}
 									rowKey="id"
-									hasEdit={true}
 									className="mt-5"
 									hasDelete={false}
+									hasEdit={true}
 									editAction={value => history.push(`/foreign-user/update/${value.id}`)}
 									isFetched={isFetched}
 									columns={[
@@ -205,19 +205,19 @@ const List = ({ history, location }) => {
 											)
 										},
 										{
-											title: t("Тариф"),
+											title: t("Названия тарифа"),
 											dataIndex: "currentTariff",
 											render: value => {
 												const currRatesName = get(value, "ratesPrice.rate");
-												return <>{currRatesName ? currRatesName.name_ru : "Не активирован"}</>;
+												return <>{currRatesName ? currRatesName.name_ru : "Нет активный подписки"}</>;
 											}
 										},
 										{
-											title: t("Промокод"),
+											title: t("Названия промокода"),
 											dataIndex: "currentPromocode",
 											render: value => {
 												const currPromocodeName = get(value, "promoCode");
-												return <>{currPromocodeName ? get(currPromocodeName, "title_ru") : "Не активирован"}</>;
+												return <>{currPromocodeName ? get(currPromocodeName, "title_ru") : "Промокод не активирован"}</>;
 											}
 										},
 										{

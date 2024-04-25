@@ -14,6 +14,7 @@ import AddDay from "./components/AddDay";
 import { useSelector } from "react-redux";
 import DevicesModal from "./components/devicesModal";
 import { Link } from "react-router-dom";
+import { helpers } from "services";
 import "./style.scss";
 
 const List = ({ history, location }) => {
@@ -115,16 +116,23 @@ const List = ({ history, location }) => {
 						balance: params.balance || "",
 						promoCode: params.promoCode ? params.promoCode : "",
 						tariff_id: params.ratesId && params.ratesId,
+						rate_id: params.rate_id && params.rate_id,
 						last_subscribe: params.last_subscribe ? params.last_subscribe : "",
 						balance_filter: params.balance_filter || "",
+						incomplate: params.incomplate || "",
 						subscribe_finish_date_start: (params.rates_finish || []).length > 0 ? params.rates_finish[0] : null,
 						subscribe_finish_date_end: (params.rates_finish || []).length > 0 ? params.rates_finish[1] : null,
 						sort: "-id",
+						subscribe_expired_start: (params.rate_expired || []).length > 0 ? params.rate_expired[1] : null,
+						subscribe_expired_end: (params.rate_expired || []).length > 0 ? params.rate_expired[1] : null,
 						subscribe_got_date_end: (params.rates_start || []).length > 0 ? params.rates_start[1] : null,
 						subscribe_got_date_start: (params.rates_start || []).length > 0 ? params.rates_start[0] : null,
+						promocode_expired_start: (params.promocode_expired || []).length > 0 ? params.promocode_expired[0] : null,
+						promocode_expired_end: (params.promocode_expired || []).length > 0 ? params.promocode_expired[0] : null,
 						user_created_start: (params.user_created || []).length > 0 ? params.user_created[0] : null,
 						user_created_end: (params.user_created || []).length > 0 ? params.user_created[1] : null,
 						status: params.status ? params.status : "",
+						sex: params.sex ? params.sex : "",
 						id: params.id ? params.id : "",
 						subscribe_type: params.subscribe_type ? params.subscribe_type : "",
 						is_active: params.subscribe_type ? params.is_active || "" : null,
@@ -167,10 +175,10 @@ const List = ({ history, location }) => {
 									// items={items.filter(item => item.id !== 32677)}
 									items={items}
 									rowKey="id"
-									hasEdit={true}
 									className="mt-5"
 									hasDelete={false}
-									editAction={value => history.push(`/users/update/${value.id}`)}
+									hasEdit={false}
+									// editAction={value => history.push(`/users/update/${value.id}`)}
 									isFetched={isFetched}
 									columns={[
 										{
@@ -188,7 +196,7 @@ const List = ({ history, location }) => {
 										{
 											title: t("Телефон"),
 											dataIndex: "phone",
-											render: value => <>{value && value}</>
+											render: value => <>{value && helpers.formatPhoneNumber(value)}</>
 										},
 
 										{
@@ -206,19 +214,19 @@ const List = ({ history, location }) => {
 											)
 										},
 										{
-											title: t("Тариф"),
+											title: t("Названия тарифа"),
 											dataIndex: "currentTariff",
 											render: value => {
 												const currRatesName = get(value, "ratesPrice.rate");
-												return <>{currRatesName ? get(currRatesName, "name_ru") : "Не активирован"}</>;
+												return <>{currRatesName ? get(currRatesName, "name_ru") : "Нет активный подписки"}</>;
 											}
 										},
 										{
-											title: t("Промокод"),
+											title: t("Названия промокода"),
 											dataIndex: "currentPromocode",
 											render: value => {
 												const currPromocodeName = get(value, "promoCode");
-												return <>{currPromocodeName ? get(currPromocodeName, "code") : "Не активирован"}</>;
+												return <>{currPromocodeName ? get(currPromocodeName, "code") : "Промокод не активирован"}</>;
 											}
 										},
 										// {

@@ -24,7 +24,7 @@ const SeriesCreate = lazy(() => import("./pages/series/create"));
 const SeriesUpdate = lazy(() => import("./pages/series/update"));
 
 const Users = lazy(() => import("./pages/users"));
-const UserView = lazy(() => import("./pages/users/userView"));
+const UserView = lazy(() => import("./pages/userView"));
 // const UsersCreate = lazy(() => import("./pages/users/create"));
 const UsersUpdate = lazy(() => import("./pages/users/update"));
 
@@ -64,6 +64,7 @@ const Translation = lazy(() => import("./pages/translations"));
 
 const Films = lazy(() => import("./pages/films"));
 const FilmsStats = lazy(() => import("./pages/filmsStats"));
+const FilmView = lazy(() => import("./pages/filmView"));
 const FilmsCreate = lazy(() => import("./pages/films/create"));
 const FilmsUpdate = lazy(() => import("./pages/films/update"));
 
@@ -143,6 +144,7 @@ const routes = [
 
 	{ path: "/films", exact: true, component: Films, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/films/stats", exact: true, component: FilmsStats, access: ["super_admin", "admin", "moderator"] },
+	{ path: "/films/:id", exact: true, component: FilmView, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/films/create", exact: true, component: FilmsCreate, access: ["super_admin", "admin", "moderator"] },
 	{ path: "/films/update/:id", exact: true, component: FilmsUpdate, access: ["super_admin", "admin", "moderator"] },
 

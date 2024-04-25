@@ -7,12 +7,16 @@ import qs from "qs";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Icon } from "components";
 
 const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = false, isClearable = false, form, field, clearButton, ...props }) => {
+	const { t } = useTranslation();
 	const setFieldValue = get(form, "setFieldValue");
 	const fieldName = get(field, "name");
 	const fieldValue = get(field, "value");
 	const history = useHistory();
+	const { touched, errors } = form;
 
 	// let start_years = new Date().getFullYear() - 100;
 	// let end_years = new Date().getFullYear() + 100;
@@ -23,6 +27,7 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 			search: qs.stringify({}, { encode: false })
 		});
 	};
+	console.log(clearButton);
 
 	return (
 		<div className="mb-5">
@@ -31,7 +36,7 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 				{type === "range" ? (
 					<>
 						<DatePicker
-							className="newDataPicker form-control"
+							className={`newDataPicker form-control ${touched[field.name] && errors[field.name] && "border-theme-24"}`}
 							selectsRange={true}
 							dateFormat="dd/MM/yyyy"
 							showYearDropdown
@@ -46,7 +51,7 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 									value.map(item =>
 										moment(item)
 											.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
-											.utc(true)
+											.utc(false)
 											.unix()
 									)
 								);
@@ -69,7 +74,7 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 									clearForm();
 									// data(null);
 								}}>
-								x
+								<Icon name="x" />
 							</span>
 						) : (
 							get(field, "value").length > 0 &&
@@ -79,7 +84,7 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 									onClick={() => {
 										setFieldValue(fieldName, []);
 									}}>
-									x
+									<Icon name="x" />
 								</span>
 							)
 						)}
@@ -101,6 +106,7 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 								);
 							}}
 							dateFormat="dd/MM/yyyy"
+							className={touched[field.name] && errors[field.name] && "border-theme-24"}
 							{...props}
 						/>
 
@@ -167,6 +173,12 @@ const NewDatePicker = ({ onChange, data, label, placeholder, type, isToday = fal
 					// 	)}
 					// 	{...otherProps}
 					// />
+				)}
+
+				{touched[field.name] && errors[field.name] && (
+					<div className="text-theme-24 absolute left-0">
+						<span>{t(errors[field.name])}</span>
+					</div>
 				)}
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 import React from "react";
 import EntityForm from "modules/entity/forms";
 import EntityContainer from "modules/entity/containers";
-import { Typography } from "components";
+import { Typography, Grid } from "components";
 import { useNotification } from "hooks";
 import { get } from "lodash";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,14 @@ const Update = ({ location, history, match }) => {
 				return (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
-							{t("Изменить промокод")}
+							<Grid.Row>
+								<Grid.Column xs={12} xl={8}>
+									{t("Изменить промокод")}
+								</Grid.Column>
+								<Grid.Column xs={12} xl={4}>
+									<h1>Сортировка группы пользователей</h1>
+								</Grid.Column>
+							</Grid.Row>
 						</Typography.Heading>
 						<EntityForm.Main
 							method={"put"}
@@ -93,9 +100,10 @@ const Update = ({ location, history, match }) => {
 								},
 								{
 									name: "expire_at",
-									type: "string",
+									type: "number",
+									required: true,
 									value: get(item, "expire_at"),
-									onSubmitValue: value => value && value
+									onSubmitValue: value => (value ? value : null)
 								},
 								{
 									name: "start_at",
@@ -108,19 +116,12 @@ const Update = ({ location, history, match }) => {
 									type: "number",
 									value: get(item, "end_at"),
 									onSubmitValue: value => (value[1] ? value[1] : null)
-								},
-								{
-									name: "status",
-									value: get(item, "status") === 1,
-									onSubmitValue: value => (value ? 1 : 0),
-									required: true
 								}
 							]}
 							params={{
 								include: "translations,expire_of"
 							}}>
 							{({ isSubmitting, values, setFieldValue, errors }) => {
-								console.log(errors);
 								return (
 									<>
 										<Form

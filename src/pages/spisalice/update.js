@@ -79,7 +79,7 @@ const Update = ({ history, match }) => {
 								},
 								{
 									name: "password",
-									value: get(item, "code"),
+									value: get(item, "password"),
 									onSubmitValue: value => value && value
 								},
 								{

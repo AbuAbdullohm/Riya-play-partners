@@ -18,7 +18,7 @@ const Filter = ({ handleSubmit, t, history, setFilter }) => {
 		<Form>
 			<Grid.Row gutterY={0} className="mt-5">
 				<Grid.Column xs={12} lg={12} xl={12}>
-					<Field component={Fields.Input} name="name" placeholder="Поиск по Загаловок" label="Загаловок" />
+					<Field component={Fields.Input} name="title" placeholder="Поиск по Загаловок" label="Загаловок" />
 				</Grid.Column>
 				<Grid.Column xs={12} lg={12} xl={12}>
 					<Field
@@ -34,6 +34,18 @@ const Filter = ({ handleSubmit, t, history, setFilter }) => {
 				</Grid.Column>
 				<Grid.Column xs={12} lg={12} xl={12}>
 					<Field
+						component={Fields.NewDatePicker}
+						name="date"
+						label="Дата"
+						onChange={value => {
+							history.push({
+								search: qs.stringify({ date: value, ...qs.parse(history.location.search, { ignoreQueryPrefix: true }) }, { encode: false })
+							});
+						}}
+					/>
+				</Grid.Column>
+				<Grid.Column xs={12} lg={12} xl={12}>
+					<Field
 						component={Fields.Select}
 						name="status"
 						size="small"
@@ -44,11 +56,11 @@ const Filter = ({ handleSubmit, t, history, setFilter }) => {
 						options={[
 							{
 								label: "Активный",
-								value: 1
+								value: "1"
 							},
 							{
 								label: "Неактивный",
-								value: 0
+								value: "0"
 							}
 						]}
 					/>
@@ -74,15 +86,17 @@ const EnhancedForm = withFormik({
 		const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 
 		return {
-			name: params.name || "",
+			title: params.title || "",
+			date: params.date || "",
 			type: params.type || "",
-			status: params.status || ""
+			status: params.status
 		};
 	},
 	handleSubmit: (values, { props: { location, history, lang, setFilter } }) => {
 		values = {
 			...values,
-			name: values.name,
+			title: values.title,
+			date: values.date,
 			type: values.type,
 			status: values.status
 		};

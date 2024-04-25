@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 import { helpers } from "services";
 import { Loader, Icon } from "components";
 
-import BektvBox from "assets/images/bektvbox.svg";
-import PaymeUser from "assets/images/paymeUser.svg";
-import ApelsinUser from "assets/images/apelsinUser.svg";
-import PaynetUser from "assets/images/paynetUser.png";
+import { ReactComponent as RiyaPlay } from "assets/images/icons/riya.svg";
+import { ReactComponent as Payme } from "assets/images/icons/payme.svg";
+import { ReactComponent as Uzum } from "assets/images/icons/uzum.svg";
+import { ReactComponent as Paynet } from "assets/images/icons/paynet.svg";
+import { ReactComponent as Click } from "assets/images/icons/click.svg";
 
 const ViewTransaction = ({ idModal, viewTransaction }) => {
 	const [trnData, setTrnData] = useState();
@@ -83,31 +84,19 @@ const ViewTransaction = ({ idModal, viewTransaction }) => {
 																				<tr>
 																					<td>
 																						<div className="viewTransaction-box">
-																							<img
-																								src={
-																									item.payment_method === "payme"
-																										? PaymeUser
-																										: item.payment_method === "From Api"
-																										? BektvBox
-																										: item.payment_method === "apelsin"
-																										? ApelsinUser
-																										: item.payment_method === "paynet"
-																										? PaynetUser
-																										: ""
-																								}
-																								alt={
-																									item.payment_method === "payme"
-																										? "Payme"
-																										: item.payment_method === "From Api"
-																										? "From Api"
-																										: item.payment_method === "apelsin"
-																										? "apelsin"
-																										: item.payment_method === "paynet"
-																										? "paynet"
-																										: ""
-																								}
-																								style={{ width: "70px" }}
-																							/>
+																							{item.payment_method === "payme" ? (
+																								<Payme />
+																							) : item.payment_method === "From Api" ? (
+																								<RiyaPlay />
+																							) : item.payment_method === "apelsin" ? (
+																								<Uzum />
+																							) : item.payment_method === "paynet" ? (
+																								<Paynet />
+																							) : item.payment_method === "click" ? (
+																								<Click />
+																							) : (
+																								""
+																							)}
 																							<div className="viewTransaction-box-way">
 																								<p className="viewText mb-0">
 																									{rates
@@ -152,12 +141,6 @@ const ViewTransaction = ({ idModal, viewTransaction }) => {
 																							</div>
 																						</div>
 																					</td>
-																				</tr>
-
-																				<tr className="viewTransaction-box-line">
-																					<td></td>
-																					<td></td>
-																					<td></td>
 																				</tr>
 																			</React.Fragment>
 																		);

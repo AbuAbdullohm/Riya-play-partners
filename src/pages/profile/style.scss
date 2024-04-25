@@ -9,11 +9,11 @@
 	padding: 20px;
 	margin-bottom: 10px;
 	p {
-		margin-bottom: 0;
 		font-size: 16px;
-	}
-	p:first-child {
 		margin-bottom: 5px;
+	}
+	p:last-child {
+		margin-bottom: 0;
 	}
 	.close {
 		cursor: pointer;

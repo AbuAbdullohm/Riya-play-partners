@@ -202,21 +202,29 @@ const List = ({ history, location }) => {
 																className="cursor-pointer"
 																name="more-vertical"
 																onClick={() => {
-																	if (id !== actionView) setActionView(id);
-																	else setActionView(false);
+																	if (id !== actionView) {
+																		setActionView(id);
+																		setTimeout(() => {
+																			document.getElementById("cancel_btn").focus();
+																		}, 500);
+																	} else setActionView(false);
 																}}
 															/>
 															<div
+																tabIndex={0}
+																id="actions_content"
 																className={`actions_content ${
 																	actionView === id ? "actions_content--visible" : "actions_content--hidden"
 																}`}>
 																<button
+																	id="cancel_btn"
 																	className="btn btn-default text-red"
+																	onBlur={() => setActionView(false)}
 																	onClick={() => {
 																		setModal(true);
 																		setActionView(id);
 																	}}>
-																	{t("Отменит")}
+																	{t("Отменить платеж")}
 																</button>
 															</div>
 														</div>

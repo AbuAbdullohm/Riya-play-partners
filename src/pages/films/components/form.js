@@ -78,10 +78,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 		}
 	}
 
-	const checkedDeviceType = constants.deviceTypes.find(d => {
-		return values[`visible_${d.value}`];
-	});
-
 	useEffect(() => {
 		if (values.kinopoisk_id && values.external_type) checkId(values.kinopoisk_id, values.external_type);
 	}, [values.kinopoisk_id, values.external_type]);
@@ -206,8 +202,8 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 									component={Fields.Select}
 									size="large"
 									name="external_type"
-									label={t("тип")}
-									placeholder={t("тип")}
+									label={t("Тип медиа ID")}
+									placeholder={t("Тип медиа ID")}
 									className="mb-24"
 									optionLabel={"label"}
 									optionValue={"value"}
@@ -219,10 +215,10 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 									append={<div>{loading ? "Loading..." : ""}</div>}
 									disabled={values.external_type ? false : true}
 									component={Fields.Input}
-									placeholder={t("Кинопоиск ид")}
+									placeholder={t("Медиа ID")}
 									size="large"
 									name="kinopoisk_id"
-									label={t("Кинопоиск ид")}
+									label={t("Медиа ID")}
 									className="mb-24"
 								/>
 							</Grid.Column>
@@ -232,8 +228,7 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								<Field
 									component={Fields.Input}
 									name="kinopoisk_rating"
-									type="number"
-									onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+									type="text"
 									label={t("Кинопоиск рейтинг")}
 									placeholder={t("Кинопоиск рейтинг")}
 									size="large"
@@ -243,8 +238,7 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 								<Field
 									component={Fields.Input}
 									name="imdb_rating"
-									type="number"
-									onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+									type="text"
 									label={t("IMDB рейтинг")}
 									placeholder={t("IMDB рейтинг")}
 									size="large"
@@ -332,14 +326,6 @@ const Form = ({ id, isUpdate, isSubmitting, setFieldValue, values, lang = "ru", 
 									}}
 								/>
 							)}
-							<Button.Outline
-								type="success"
-								buttonType="button"
-								size="sm"
-								style={{ width: createCompanyModal ? "100%" : "auto" }}
-								onClick={e => createCompany(e)}>
-								<Icon name="plus" />
-							</Button.Outline>
 						</div>
 						<Field
 							component={Fields.AsyncSelect}

@@ -60,7 +60,7 @@ const Profile = ({ history }) => {
 					required: true
 				}
 			]}>
-			{({ isSubmitting, values, setFieldValue }) => {
+			{({ isSubmitting }) => {
 				return (
 					<Grid.Row gutter={10} gutterX={4} cols={12} className={"mb-10 align-stretch"}>
 						<Grid.Column lg={12}>
@@ -150,6 +150,7 @@ const Profile = ({ history }) => {
 												<div>
 													<p>{item.device_name}</p>
 													<p>{time.to(item.created_at, "DD.MM.YYYY / HH:mm:ss")}</p>
+													<p>{item.user_ip}</p>
 												</div>
 												<p className="close" onClick={() => kickDevice(item)}>
 													<Icon name="x" />

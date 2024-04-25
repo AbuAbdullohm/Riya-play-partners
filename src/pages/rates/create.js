@@ -71,7 +71,7 @@ const Create = ({ history }) => {
 				},
 				{
 					name: "is_foreign",
-					value: true,
+					value: false,
 					onSubmitValue: value => (value ? 1 : 0)
 				},
 				{
@@ -88,7 +88,8 @@ const Create = ({ history }) => {
 							days: 0,
 							price: 0,
 							device_count: 0,
-							top: 0
+							top: 0,
+							main: 0
 						}
 					],
 					onSubmitValue: values =>
@@ -96,7 +97,8 @@ const Create = ({ history }) => {
 							days: value.days,
 							price: value.price,
 							device_count: value.device_count,
-							top: value.top ? 1 : 0
+							top: value.top ? 1 : 0,
+							main: value.main ? 1 : 0
 						})),
 
 					lazy: (validator, yup) =>

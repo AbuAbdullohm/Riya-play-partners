@@ -97,7 +97,12 @@ const Update = ({ location, history, match }) => {
 									required: true,
 									type: "array",
 									value: get(item, "ratesPrices")
-										? get(item, "ratesPrices").map(i => ({ ...i, top: i.top ? 1 : 0, device_count: i.device_count || 0 }))
+										? get(item, "ratesPrices").map(i => ({
+												...i,
+												top: i.top ? 1 : 0,
+												main: i.main ? 1 : 0,
+												device_count: i.device_count || 0
+										  }))
 										: [],
 									onSubmitValue: values => {
 										return values.map(value => ({
@@ -105,7 +110,8 @@ const Update = ({ location, history, match }) => {
 											days: value.days,
 											price: value.price,
 											device_count: value.device_count,
-											top: value.top ? 1 : 0
+											top: value.top ? 1 : 0,
+											main: value.main ? 1 : 0
 										}));
 									},
 

@@ -66,14 +66,26 @@ const Update = ({ history, match }) => {
 							params={{}}
 							fields={[
 								{
-									name: "username",
-									required: true,
-									value: get(item, "username")
-								},
-								{
 									name: "full_name",
 									required: true,
 									value: get(item, "full_name")
+								},
+								{
+									name: "birth_date",
+									required: true,
+
+									value: get(item, "birth_date")
+								},
+								{
+									name: "sex",
+									required: true,
+									value: get(item, "sex")
+								},
+								{
+									name: "country",
+									required: true,
+									value: get(item, "country"),
+									onSubmitValue: value => get(value, "value")
 								},
 								{
 									name: "code",

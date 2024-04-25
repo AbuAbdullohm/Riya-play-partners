@@ -92,7 +92,7 @@ const Company = ({ history, location }) => {
 				params={{
 					sort: "-id",
 					limit: pageLimit,
-					include: "files",
+					include: "files0",
 					page: page ? page : 1
 				}}>
 				{({ items, isFetched, meta }) => {
@@ -116,7 +116,7 @@ const Company = ({ history, location }) => {
 									},
 									{
 										title: t("Логотип"),
-										dataIndex: "files",
+										dataIndex: "files0",
 										className: "w-4",
 										render: value => {
 											return <Avatar isRectangle src={get(value, "[0].thumbnails.small.src")} />;

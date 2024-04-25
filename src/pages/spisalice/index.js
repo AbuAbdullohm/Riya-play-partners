@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
@@ -186,6 +187,22 @@ const List = ({ history, location }) => {
 											className: "w-100",
 											render: value => {
 												return <>{value === 10 ? <Tag color={"green"}>Активный</Tag> : <Tag color={"red"}>Неактивный</Tag>}</>;
+											}
+										},
+										{
+											className: "w-5",
+											render: (_, row) => {
+												return (
+													<Link to={`/users/${get(row, "id")}`}>
+														<Button.Outline
+															className="status-btn"
+															type="success"
+															//  onClick={() => onView(row)}
+														>
+															<Icon name="eye" />
+														</Button.Outline>
+													</Link>
+												);
 											}
 										},
 										{

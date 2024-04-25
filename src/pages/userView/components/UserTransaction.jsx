@@ -11,11 +11,13 @@ import { ReactComponent as Uzum } from "assets/images/icons/uzum.svg";
 import { ReactComponent as Paynet } from "assets/images/icons/paynet.svg";
 import { ReactComponent as Click } from "assets/images/icons/click.svg";
 
-export default function UserTransaction({ user }) {
+export default function UserTransaction({ activeTab, user }) {
 	const ratesData = useSelector(state => state.system.rates);
 
 	const [trnType, setTrnType] = useState(null);
 	const [perPage, setPerPage] = useState(1);
+
+	if (activeTab !== "transaction") return "";
 
 	return (
 		<EntityContainer.All

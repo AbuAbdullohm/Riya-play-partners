@@ -110,6 +110,11 @@ const Update = ({ location, history, match }) => {
 									onSubmitValue: value => (value ? 1 : 0)
 								},
 								{
+									name: "url",
+									value: get(item, "url"),
+									onSubmitValue: value => value
+								},
+								{
 									name: "status",
 									value: get(item, "status") === 1,
 									onSubmitValue: value => (value ? 1 : 0)

@@ -154,6 +154,15 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru" }) =>
 									size="large"
 									className={"mb-1"}
 								/>
+								<Field
+									component={Fields.Checkbox}
+									name={`ratesPrices[${i}].main`}
+									onChange={e => setFieldValue(`ratesPrices[${i}].main`, e.target.checked)}
+									label="Городна главной странице"
+									min="0"
+									size="large"
+									className={"mb-1"}
+								/>
 							</Panel>
 						</Grid.Column>
 					);
@@ -170,7 +179,8 @@ const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang = "ru" }) =>
 							{
 								days: 0,
 								price: 0,
-								device_count: 0
+								device_count: 0,
+								main: 0
 							}
 						]);
 					}}>

@@ -1,6 +1,6 @@
 import React from "react";
 import EntityForm from "modules/entity/forms";
-import { Typography } from "components";
+import { Typography, Grid } from "components";
 import { useTranslation } from "react-i18next";
 import Form from "./components/form";
 import { useNotification } from "hooks";
@@ -71,6 +71,23 @@ const Create = ({ history }) => {
 					onSubmitValue: value => value && value
 				},
 				{
+					name: "rates_id",
+					required: true,
+					type: "array",
+					onSubmitValue: value => (value ? value.map(v => v.id) : null)
+				},
+				{
+					name: "expire_at",
+					type: "number",
+					required: true,
+					onSubmitValue: value => (value ? value : null)
+				},
+				{
+					name: "status",
+					value: true,
+					onSubmitValue: value => (value ? 1 : 0)
+				},
+				{
 					name: "start_at",
 					type: "number",
 					onSubmitValue: value => (value[0] ? value[0] : null)
@@ -79,29 +96,20 @@ const Create = ({ history }) => {
 					name: "end_at",
 					type: "number",
 					onSubmitValue: value => (value[1] ? value[1] : null)
-				},
-				{
-					name: "rates_id",
-					required: true,
-					type: "array",
-					onSubmitValue: value => (value ? value.map(v => v.id) : null)
-				},
-				{
-					type: "string",
-					name: "expire_at",
-					onSubmitValue: value => (value ? value : null)
-				},
-				{
-					name: "status",
-					value: true,
-					onSubmitValue: value => (value ? 1 : 0)
 				}
 			]}>
 			{({ isSubmitting, values, setFieldValue }) => {
 				return (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
-							{t("Создать промокод")}
+							<Grid.Row>
+								<Grid.Column xs={12} xl={8}>
+									{t("Создать промокод")}
+								</Grid.Column>
+								<Grid.Column xs={12} xl={4}>
+									<h1>Сортировка группы пользователей</h1>
+								</Grid.Column>
+							</Grid.Row>
 						</Typography.Heading>
 						<Form {...{ isFetched: true, values, setFieldValue, isSubmitting }} />
 					</>

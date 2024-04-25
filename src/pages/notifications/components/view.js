@@ -1,7 +1,8 @@
 import React from "react";
 import { get } from "lodash";
-import { helpers } from "services";
+import { helpers, time } from "services";
 import "./style.scss";
+
 export default function View({ viewData }) {
 	const getViewType = value => {
 		if (get(value, "type") === 4) {
@@ -46,13 +47,24 @@ export default function View({ viewData }) {
 		<div className="notification-view">
 			<div className="notification-view-inner">
 				<p>Заголовок</p>
-				<p className="notification-view-inner_info">{get(viewData, "title") ? get(viewData, "title") : "----"}</p>
+				<p className="notification-view-inner_info">{get(viewData, "title") ? get(viewData, "title") : "-"}</p>
 
 				<p className="mt-3">Описание</p>
-				<p className="notification-view-inner_info">{get(viewData, "message") ? get(viewData, "message") : "----"}</p>
+				<p className="notification-view-inner_info">{get(viewData, "message") ? get(viewData, "message") : "-"}</p>
 
 				<p className="mt-3">Тип: {getViewTypeTitle(get(viewData, "type"))}</p>
-				<div className="notification-view-inner_info">{getViewType(viewData) ? getViewType(viewData) : "---"}</div>
+				<div className="notification-view-inner_info">{getViewType(viewData) ? getViewType(viewData) : "-"}</div>
+
+				<p className="mt-3">Перенаправление:</p>
+				<div className="notification-view-inner_info">
+					{get(viewData, "type") === 1 ? get(viewData, "model.title", "-") : get(viewData, "type") === 2 ? get(viewData, "model.name_ru", "-") : "-"}
+				</div>
+
+				<p className="mt-3">Дата создания:</p>
+				<div className="notification-view-inner_info">{get(viewData, "date") ? time.to(get(viewData, "date"), "DD.MM.YYYY HH:mm") : "-"}</div>
+
+				<p className="mt-3">Кол-во отправленных пользователей:</p>
+				<div className="notification-view-inner_info">{get(viewData, "usersCount") ? get(viewData, "usersCount", "-") : "-"}</div>
 			</div>
 		</div>
 	);

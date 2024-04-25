@@ -15069,7 +15069,7 @@ html body {
 
 .wrapper:before {
 	content: "";
-	width: 95%;
+	width: 100%;
 	z-index: -1;
 	transform: translatey(35px);
 	-webkit-animation: intro-wrapper-animation 0.4s ease-in-out 0.33333s;
@@ -15087,7 +15087,7 @@ html body {
 	margin-top: -1rem;
 	height: 100%;
 	--tw-bg-opacity: 1;
-	background-color: rgba(43, 66, 134, var(--tw-bg-opacity));
+	background-color: #fff;
 	opacity: 0;
 }
 
@@ -16596,4 +16596,3 @@ html body {
 	pointer-events: none;
 	opacity: 0.5;
 }
-

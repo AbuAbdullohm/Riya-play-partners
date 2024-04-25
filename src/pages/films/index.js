@@ -10,6 +10,8 @@ import qs from "qs";
 import { useNotification, useAccess } from "hooks";
 import FilmFilter from "./components/FilmFilter";
 import DownloadXls from "./components/downloadXls";
+import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 
 const List = ({ history, location }) => {
 	const isAdmin = useAccess({ roles: ["admin"] });
@@ -135,25 +137,38 @@ const List = ({ history, location }) => {
 					limit: pageLimit,
 					include: "files,company,type,genres,categories,seasons,actors,holder.logo",
 					extra: {
+						name: params.name,
+						actor_id: params.actor_id,
+						maker_id: params.maker_id,
 						category_id: params.category_id,
 						company_id: params.company_id,
-						name: params.name,
 						start: (params.start || []).length > 0 ? params.start[0] : null,
-						end: (params.start || []).length > 0 ? params.start[1] : null,
-						actor_id: params.actor_id
+						end: (params.start || []).length > 0 ? params.start[1] : null
 					},
 					filter: {
 						...visible,
+						id: params.id,
+						external_type: params.external_type,
+						kinopoisk_id: params.kinopoisk_id,
+						holder_id: params.holder_id,
 						type: params.type,
 						year: params.year,
+						country_id: params.country_id,
+						genres: params.genres,
+						age_limit: params.age_limit,
+						kinopoisk_rating: params.kinopoisk_rating,
+						imdb_rating: params.imdb_rating,
+						riyaplay_rating: params.riyaplay_rating,
+						thriller: params.thriller,
+						visible_web: params.visible_web,
+						visible_tv: params.visible_tv,
+						visible_mobile: params.visible_mobile,
+						tariff: params.tariff,
 						recommended: params.recommended ? 1 : "",
 						enabled_watermark: params.enabled_watermark ? 1 : "",
-						id: params.id,
 						paid: params.paid,
 						foreign_status: params.foreign_status,
 						status: params.status,
-						kinopoisk_id: params.kinopoisk_id,
-						external_type: params.external_type,
 						foreign_user_can_view: params.foreign_user_can_view && params.foreign_user_can_view
 					},
 					page: page || 1
@@ -162,7 +177,7 @@ const List = ({ history, location }) => {
 					return (
 						<>
 							<Header
-								title="Список филмы"
+								title="Список альбомы"
 								buttonName="Добавить"
 								buttonClick={() => history.push(`/films/create`)}
 								filter={filter}
@@ -270,18 +285,22 @@ const List = ({ history, location }) => {
 									},
 									{
 										className: "w-5",
-										render: (_, row) => {
+										dataIndex: "id",
+										render: (id, row) => {
 											return (
-												<Button.Outline
-													className="status-btn"
-													type="success"
-													tooltip={t("Статистика фильмов")}
-													onClick={() => {
-														setFilmFilter(!filmFilter);
-														setFilm(row);
-													}}>
-													<Icon name="eye" />
-												</Button.Outline>
+												<Link to={`/films/${id}`}>
+													<Button.Outline
+														className="status-btn"
+														type="success"
+														// tooltip={t("Статистика фильмов")}
+														// onClick={() => {
+														// setFilmFilter(!filmFilter);
+														// setFilm(row);
+														// }}
+													>
+														<Icon name="eye" />
+													</Button.Outline>
+												</Link>
 											);
 										}
 									}

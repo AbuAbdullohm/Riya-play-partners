@@ -124,7 +124,7 @@ const CkeditorField = ({ placeholder, label, className, field, form: { errors, s
 				}}
 			/>
 
-			{touched[field.name] && errors[field.name] && <div className="ant-form-explain">{errors[field.name]}</div>}
+			{touched[field.name] && errors[field.name] && <div className="text-theme-24 ant-form-explain">{errors[field.name]}</div>}
 		</div>
 	);
 };

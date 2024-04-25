@@ -39,7 +39,7 @@ const Form = ({ isFetched, setFieldTouched, isUpdate, isSubmitting, setFieldValu
 						</Grid.Column>
 						<Grid.Column lg={12}>
 							<Field
-								component={Fields.Input}
+								component={Fields.Textarea}
 								name="description_uz"
 								type="text"
 								placeholder="Введите описание (UZ)"
@@ -49,7 +49,7 @@ const Form = ({ isFetched, setFieldTouched, isUpdate, isSubmitting, setFieldValu
 						</Grid.Column>
 						<Grid.Column lg={12}>
 							<Field
-								component={Fields.Input}
+								component={Fields.Textarea}
 								name="description_ru"
 								type="text"
 								placeholder="Введите описание (RU)"
@@ -59,7 +59,7 @@ const Form = ({ isFetched, setFieldTouched, isUpdate, isSubmitting, setFieldValu
 						</Grid.Column>
 						<Grid.Column lg={12}>
 							<Field
-								component={Fields.Input}
+								component={Fields.Textarea}
 								name="description_en"
 								type="text"
 								placeholder="Введите описание (EN)"
@@ -80,6 +80,7 @@ const Form = ({ isFetched, setFieldTouched, isUpdate, isSubmitting, setFieldValu
 							setFieldValue("is_redirectable", !values.is_redirectable);
 						}}
 					/>
+					{values.is_redirectable ? <Field component={Fields.Input} name="url" label="URL-адрес" placeholder="URL-адрес" /> : null}
 					<Field
 						component={Fields.Switch}
 						name="status"

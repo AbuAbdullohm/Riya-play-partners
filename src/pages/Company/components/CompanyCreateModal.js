@@ -44,7 +44,7 @@ export default function CompanyCreateModal({ modal, setModal }) {
 				{
 					name: "files",
 					type: "array",
-					value: get(value, "files") ? [get(value, "files", [])] : [],
+					value: get(value, "files0") ? [get(value, "files0", [])] : [],
 					onSubmitValue: value => value && value.reduce((prev, curr) => [...prev, curr.id], []).join(",")
 				},
 				{

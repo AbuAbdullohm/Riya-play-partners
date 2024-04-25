@@ -95,8 +95,8 @@ const List = ({ history, location }) => {
 				},
 				params: {
 					extra: {
-						start: (params.start || []).length > 0 ? params.start[0] : null,
-						end: (params.start || []).length > 0 ? params.start[1] : null
+						start: get(params, "start[0]") ? params.start[0] : null,
+						end: get(params, "start[1]") ? params.start[1] : null
 					}
 				}
 			})
@@ -117,7 +117,7 @@ const List = ({ history, location }) => {
 		);
 	}, [filterValue, location.search]);
 
-	const soledSubscriptions = helpers.formatCurrency(get(items, "expenses", []).reduce((total, count) => (total += count.id), 0));
+	const soledSubscriptions = get(items, "expenses", []).reduce((total, count) => (total += count.id), 0);
 	const discountTransactions = helpers.formatCurrency(transaction && Number(transaction.comming) - Number(transaction.expanse));
 
 	const transactionsCount = get(items, "incomes", []).reduce((total, count) => (total += count.id), 0);
@@ -146,11 +146,18 @@ const List = ({ history, location }) => {
 											type="range"
 											data={items}
 											maxDate={new Date()}
-											clearButton={true}
-											isClearable={true}
 											label="Дата"
+											clearButton={true}
 											onChange={value => {
-												setFieldValue("start", value);
+												if (value[0] || value[1]) {
+													setFieldValue("start", value);
+												} else {
+													setFieldValue("start", []);
+													history.push({
+														search: qs.stringify({ start: [] }, { encode: false })
+													});
+													handleSubmit();
+												}
 											}}
 										/>
 										{values.start.length > 0 && values.start[0] !== null && (
@@ -159,15 +166,10 @@ const List = ({ history, location }) => {
 													className="mr-0"
 													onClick={() => {
 														setFilterValue(!filterValue);
-														if (values.start.length > 0) {
-															history.push({
-																search: qs.stringify(
-																	{ start: [...values.start.slice(0, 1), values.start[1] + 86399] },
-																	{ encode: false }
-																)
-															});
-															handleSubmit();
-														}
+														history.push({
+															search: qs.stringify({ start: [values.start[0], values.start[1] + 86399] }, { encode: false })
+														});
+														handleSubmit();
 													}}>
 													Смотреть
 												</Button.Default>

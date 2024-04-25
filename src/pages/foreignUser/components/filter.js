@@ -185,10 +185,10 @@ const Filter = ({ handleSubmit, t, history, setFilter, values, setFieldValue, fi
 								loadOptionsUrl="/promo-code"
 								className="mb-24"
 								optionLabel={`title_ru`}
-								loadOptionsParams={title_ru => {
+								loadOptionsParams={title => {
 									return {
 										// filter: { status: 1 },
-										extra: { title_ru }
+										extra: { title }
 									};
 								}}
 							/>

@@ -133,6 +133,15 @@
 	}
 }
 
+.actions {
+	button {
+		white-space: nowrap;
+		&:focus {
+			--tw-ring-offset-shadow: 0;
+		}
+	}
+}
+
 .viewDate {
 	display: inline-block;
 	padding: 8px 10px;

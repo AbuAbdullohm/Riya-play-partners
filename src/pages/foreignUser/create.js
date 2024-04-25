@@ -40,10 +40,6 @@ const Create = ({ history }) => {
 			params={{}}
 			fields={[
 				{
-					name: "username",
-					required: true
-				},
-				{
 					name: "password",
 					min: 4,
 					max: 4,
@@ -53,6 +49,22 @@ const Create = ({ history }) => {
 				{
 					name: "full_name",
 					required: true
+				},
+				{
+					name: "birth_date",
+					required: true,
+					type: "number"
+				},
+				{
+					name: "sex",
+					required: true,
+					type: "object"
+				},
+				{
+					name: "country",
+					required: true,
+					type: "object",
+					onSubmitValue: value => get(value, "value")
 				},
 				{
 					name: "foreign_user",

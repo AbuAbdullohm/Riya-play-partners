@@ -110,13 +110,11 @@ const Create = ({ history, location }) => {
 				},
 				{
 					name: "kinopoisk_rating",
-					required: true,
 					type: "string",
 					onSubmitValue: value => value
 				},
 				{
 					name: "imdb_rating",
-					required: true,
 					type: "string",
 					onSubmitValue: value => value
 				},
@@ -225,7 +223,7 @@ const Create = ({ history, location }) => {
 				return (
 					<Fragment>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
-							Создание фильма
+							Создание альбом
 						</Typography.Heading>
 
 						<Form {...{ values, setFieldValue, isFetched: true, handleSubmit, setFieldError, errors, setErrors }} lang={lang} />

@@ -75,15 +75,11 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 							};
 						}}
 					/>
-				</Panel>
-			</Grid.Column>
-			<Grid.Column xs={12} xl={4}>
-				<Panel className="mt-5">
 					<Field
 						component={Fields.InputMask}
 						name="expire_of"
 						size="large"
-						label={`${values.type === 1 ? "Дни" : "Месяцы"}`}
+						label={`${values.type === 1 ? "Дни действия после активации" : "Месяцы"}`}
 						placeholder={`Ввыдите ${values.type === 1 ? "Дни" : "Месяцы"}`}
 						mask=""
 						format="###"
@@ -92,7 +88,7 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 
 					<Field
 						component={Fields.NewDatePicker}
-						label="Дата окончания"
+						label="Дата окончания действительности"
 						name="expire_at"
 						isClearable={true}
 						minDate={new Date()}
@@ -100,8 +96,18 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 							setFieldValue("expire_at", value);
 						}}
 					/>
-					<p style={{ marginTop: -10, marginBottom: 30 }}>{t("Оставьте пустым, чтобы быть неограниченным!")}</p>
-
+					<Field
+						component={Fields.Switch}
+						name="status"
+						label="Статус"
+						onChange={() => {
+							setFieldValue("status", !values.status);
+						}}
+					/>
+				</Panel>
+			</Grid.Column>
+			<Grid.Column xs={12} xl={4}>
+				<Panel className="mt-5">
 					<Field
 						component={Fields.NewDatePicker}
 						label="Дата регистрации пользователей"
@@ -115,14 +121,7 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values }) => {
 							setFieldValue("end_at", value);
 						}}
 					/>
-					<Field
-						component={Fields.Switch}
-						name="status"
-						label="Статус"
-						onChange={() => {
-							setFieldValue("status", !values.status);
-						}}
-					/>
+
 					<div className="flex justify-end">
 						<Button.Default type="secondary" buttonType="button" onClick={() => history.goBack()}>
 							{t("Отменить")}

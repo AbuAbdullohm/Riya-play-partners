@@ -69,6 +69,10 @@ const Create = ({ history, location }) => {
 					onSubmitValue: value => (value ? 1 : 0)
 				},
 				{
+					name: "url",
+					onSubmitValue: value => value
+				},
+				{
 					name: "status",
 					onSubmitValue: value => (value ? 1 : 0)
 				}

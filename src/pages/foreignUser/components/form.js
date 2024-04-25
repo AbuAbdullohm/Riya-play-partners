@@ -4,10 +4,12 @@ import { Fields, Grid, Panel, Button } from "components";
 import { Field } from "formik";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
-import { helpers } from "services";
-const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, lang }) => {
+import { helpers, constants } from "services";
+
+const Form = ({ isUpdate, isSubmitting, setFieldValue, values, lang }) => {
 	const { t } = useTranslation();
 	const history = useHistory();
+
 	// const checkNumber = text => {
 	// 	if (text.keyCode !== 8) {
 	// 		if ("0123456789".indexOf(text.key) === -1) {
@@ -22,7 +24,15 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, lang }
 				<Panel className="mt-5">
 					<Grid.Row gutter={10} gutterX={4} className={"mb-10"}>
 						<Grid.Column xs={12} xl={6}>
-							<Field component={Fields.Input} name="username" type="text" placeholder="Введите имя" label="Имя пользователя" />
+							<Field
+								component={Fields.MaskInput}
+								name="phone"
+								label="Номер телефона"
+								mask="\9\98 22 999 99 99"
+								onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
+								placeholder={`Ввыдите номер телефона`}
+								style={{ width: "100%" }}
+							/>
 						</Grid.Column>
 						<Grid.Column xs={12} xl={6}>
 							<Field
@@ -40,13 +50,45 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, lang }
 						</Grid.Column>
 						<Grid.Column xs={12} xl={6}>
 							<Field
-								component={Fields.MaskInput}
-								name="phone"
-								label="Номер телефона"
-								mask="\9\98 22 999 99 99"
-								onKeyDown={e => helpers.onKeyDownInvalidChars(e)}
-								placeholder={`Ввыдите номер телефона`}
-								style={{ width: "100%" }}
+								component={Fields.NewDatePicker}
+								name="birth_date"
+								placeholder="Дата рождения"
+								label="Дата рождения"
+								onChange={e => setFieldValue("birth_date", e)}
+							/>
+						</Grid.Column>
+						<Grid.Column xs={12} xl={6}>
+							<Field
+								component={Fields.Select}
+								name="sex"
+								placeholder="Пол пользователя"
+								label="Пол пользователя"
+								optionValue="value"
+								optionLabel="label"
+								isClearable={true}
+								options={[
+									{
+										label: "Мужской",
+										value: "1"
+									},
+									{
+										label: "Женский",
+										value: "2"
+									}
+								]}
+							/>
+						</Grid.Column>
+						<Grid.Column xs={12} xl={6}>
+							<Field
+								component={Fields.Select}
+								name="country"
+								placeholder="Страна"
+								label="Страна"
+								optionValue="code"
+								optionLabel="name"
+								isSearchable={true}
+								isClearable={true}
+								options={constants.countries}
 							/>
 						</Grid.Column>
 					</Grid.Row>

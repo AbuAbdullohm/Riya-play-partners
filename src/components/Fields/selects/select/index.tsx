@@ -151,7 +151,7 @@ const SelectComponent: FC<ISelectProps> = (props): JSX.Element => {
 
 	return (
 		<div className={classes}>
-			{label && <div className="form-field-select__label">{t(label)}</div>}
+			{label && <label className="form-label">{t(label)}</label>}
 			<SimpleValue
 				id={field.name}
 				name={field.name}

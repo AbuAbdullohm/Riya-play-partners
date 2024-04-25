@@ -35,7 +35,7 @@ function ConfirmInput(props) {
 	}
 
 	useEffect(() => {
-		if (value.length === 4) {
+		if (value.length === 6) {
 			props.form.setFieldValue("code", value);
 		}
 	}, [value]);

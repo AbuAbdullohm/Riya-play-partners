@@ -16,14 +16,6 @@ import { ReactComponent as Logo2 } from "assets/images/icons/short-logo.svg";
 
 import "./style.scss";
 
-interface ILinkProps {
-	id: number;
-	url: string;
-	title: string;
-	icon?: string;
-	className?: string;
-}
-
 const className: string = "flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md mb-1";
 
 const links = [

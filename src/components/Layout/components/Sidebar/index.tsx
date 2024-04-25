@@ -52,18 +52,18 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 		dispatch(Actions.GetRates());
 	}, [auth]);
 
-	const admin = menu.filter(m => m.access.includes("admin"));
-	const super_admin = menu.filter(m => m.access.includes("super_admin"));
-	const moderator = menu.filter(m => m.access.includes("moderator"));
-	const bookkeeping = menu.filter(m => m.access.includes("bookkeeping"));
-	const redactor = menu.filter(m => m.access.includes("redactor"));
+	const admin = (menu: any) => menu.filter((m: any) => m.access.includes("admin"));
+	const super_admin = (menu: any) => menu.filter((m: any) => m.access.includes("super_admin"));
+	const moderator = (menu: any) => menu.filter((m: any) => m.access.includes("moderator"));
+	const bookkeeping = (menu: any) => menu.filter((m: any) => m.access.includes("bookkeeping"));
+	const redactor = (menu: any) => menu.filter((m: any) => m.access.includes("redactor"));
 
-	const getAccess = (role: string) => {
-		if (role === "admin") return admin;
-		else if (role === "super_admin") return super_admin;
-		else if (role === "bookkeeping") return bookkeeping;
-		else if (role === "redactor") return redactor;
-		else if (role === "moderator") return moderator;
+	const getAccess = (role: string, menu: any) => {
+		if (role === "admin") return admin(menu);
+		else if (role === "super_admin") return super_admin(menu);
+		else if (role === "bookkeeping") return bookkeeping(menu);
+		else if (role === "redactor") return redactor(menu);
+		else if (role === "moderator") return moderator(menu);
 		else return [];
 	};
 
@@ -81,7 +81,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 				<Loader color="#fff" />
 			) : (
 				<ul className="mt-10 list" ref={ref}>
-					{getAccess(get(user, "role", "")).map((m: any, i: number) => {
+					{getAccess(get(user, "role", ""), menu).map((m: any, i: number) => {
 						if (get(m, "submenu")) {
 							return (
 								<li key={get(m, "id")}>
@@ -99,7 +99,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 										</div>
 									</div>
 									<ul className={isVisible === get(m, "id") ? "side-menu__sub-open" : ""}>
-										{get(m, "submenu", []).map((sm: any) => (
+										{getAccess(get(user, "role", ""), get(m, "submenu", [])).map((sm: any) => (
 											<li key={get(sm, "id")}>
 												<NavLink
 													key={get(sm, "id")}

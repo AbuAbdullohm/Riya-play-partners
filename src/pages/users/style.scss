@@ -102,12 +102,14 @@
 	.table {
 		border-collapse: separate;
 		border-spacing: 0 1em;
-		padding-right: 15px;
+		padding-right: 0;
 
-		.table_tr .viewTransaction-box {
-			svg {
-				border-radius: 10px !important;
-				overflow: hidden !important;
+		.table_tr {
+			.viewTransaction-box {
+				svg {
+					border-radius: 10px !important;
+					overflow: hidden !important;
+				}
 			}
 		}
 		thead {
@@ -123,10 +125,13 @@
 		tbody {
 			tr {
 				td {
-					padding: 0;
-					vertical-align: top;
+					padding: 10px !important;
+					vertical-align: middle;
 					border-bottom: 1px solid #ccc;
-					padding-bottom: 15px;
+					padding-bottom: 0;
+					.viewText {
+						margin-bottom: 0;
+					}
 
 					.viewTransaction-p {
 						font-style: normal;
@@ -184,7 +189,6 @@
 }
 
 .extra-day_box {
-	max-height: 350px;
 	overflow-y: scroll;
 }
 
@@ -301,16 +305,47 @@ html.dark {
 				color: #00ca2c;
 			}
 		}
+		.balance {
+			display: flex;
+			align-items: center;
+			.update-btn {
+				cursor: pointer;
+				margin-left: 10px;
+				font-size: 12px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: normal;
+				transform: rotateY(180deg);
+			}
+			.rotated {
+				animation-name: rotate-button;
+				animation-duration: 2s;
+				animation-iteration-count: infinite;
+			}
+			@keyframes rotate-button {
+				0% {
+					transform: rotateZ(0deg) rotateY(180deg);
+				}
+				100% {
+					transform: rotateZ(360deg) rotateY(180deg);
+				}
+			}
+		}
 	}
 
 	.tabs-panel {
 		.preview {
 			padding: 0;
 			.nav {
+				overflow: auto;
+				&::-webkit-scrollbar {
+					height: 0;
+				}
 				.tab-pane__item {
 					padding: 15px 20px;
 					margin: 0;
 					color: #000000;
+					white-space: nowrap;
 					&.--active {
 						background-color: #faf9f9;
 						border-bottom-color: #000000;
@@ -320,7 +355,9 @@ html.dark {
 			}
 			.tab-content {
 				padding: 15px;
-				min-height: 660px;
+				height: 660px;
+				overflow: auto;
+
 				.device-item {
 					display: flex;
 					align-items: center;
@@ -338,6 +375,11 @@ html.dark {
 						&:last-child {
 							margin-left: auto;
 							cursor: pointer;
+							color: red;
+							svg {
+								width: 15px;
+								height: 15px;
+							}
 						}
 					}
 				}
@@ -345,6 +387,20 @@ html.dark {
 					.extra-day {
 						margin: 0;
 						margin-bottom: 10px;
+					}
+					&.promocode {
+						.extra-day {
+							div {
+								border-bottom: 1px solid #94cff2;
+								padding-bottom: 5px;
+								margin-bottom: 5px;
+								&:last-child {
+									border-bottom: none;
+									padding-bottom: 0;
+									margin-bottom: 0;
+								}
+							}
+						}
 					}
 				}
 				.viewTransaction_tab {
@@ -392,14 +448,6 @@ html.dark {
 				}
 			}
 		}
-	}
-	.update-btn {
-		background: #3f57ab !important;
-		color: #fff !important;
-		font-size: 20px;
-		font-style: normal;
-		font-weight: 500;
-		line-height: normal;
 	}
 
 	.total {

@@ -137,7 +137,7 @@ const Update = ({ location, history }) => {
 				return isFetched ? (
 					<>
 						<Typography.Heading type={5} className="intro-y mt-10 mb-5">
-							{t("Изменить фильм")}
+							{t("Изменить альбом")}
 						</Typography.Heading>
 
 						<EntityForm.Main
@@ -244,14 +244,12 @@ const Update = ({ location, history }) => {
 								},
 								{
 									name: "kinopoisk_rating",
-									required: true,
 									type: "string",
 									value: get(item, "kinopoisk_rating", ""),
 									onSubmitValue: value => value
 								},
 								{
 									name: "imdb_rating",
-									required: true,
 									type: "string",
 									value: get(item, "imdb_rating", ""),
 									onSubmitValue: value => value

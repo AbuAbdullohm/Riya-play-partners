@@ -174,7 +174,17 @@ function formatCurrency(sum) {
 	return String(sum).replace(/(.)(?=(\d{3})+$)/g, "$1,");
 }
 
+function formatPhoneNumber(phone) {
+	console.log(phone.length);
+	if (phone.length === 12) {
+		return "+" + phone.slice(0, 3) + " (" + phone.slice(3, 5) + ") " + phone.slice(5, 8) + "-" + phone.slice(8, 10) + "-" + phone.slice(10, 12);
+	} else if (phone.length === 9) {
+		return "+998 (" + phone.slice(0, 2) + ") " + phone.slice(2, 5) + "-" + phone.slice(5, 7) + "-" + phone.slice(7, 9);
+	}
+}
+
 export default {
+	formatPhoneNumber,
 	formatCurrency,
 	formatDate,
 	stringToCode,

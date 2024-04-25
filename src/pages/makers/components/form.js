@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Fields, Grid, Panel, Button } from "components";
 import { Field } from "formik";
@@ -9,10 +9,12 @@ import { constants, api, queryBuilder, helpers } from "services";
 const { debounce } = helpers;
 
 const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErrors, errors }) => {
+	const [loading, setLoading] = useState(false);
 	const { t } = useTranslation();
 	const history = useHistory();
 
 	function checkId(value, type) {
+		setLoading(true);
 		setFieldValue("kinopoisk_id", value);
 
 		if (value) {
@@ -37,6 +39,8 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 									setFieldValue("kinopoisk_id", "");
 								}, 2000);
 							}
+
+							setLoading(false);
 						});
 				},
 				"fetch",
@@ -82,27 +86,30 @@ const Form = ({ isFetched, isUpdate, isSubmitting, setFieldValue, values, setErr
 								placeholder="Введите полный текст биографии (RU)"
 							/>
 						</Grid.Column>
-						<Grid.Column lg={9}>
-							<Field
-								component={Fields.Input}
-								placeholder={t("Кинопоиск ид")}
-								size="large"
-								name="kinopoisk_id"
-								label={t("Кинопоиск ид")}
-								className="mb-24"
-							/>
-						</Grid.Column>
+
 						<Grid.Column lg={3}>
 							<Field
 								component={Fields.Select}
 								size="large"
 								name="external_type"
-								label={t("ID тип")}
-								placeholder={t("ID тип")}
+								label={t("Тип медиа ID")}
+								placeholder={t("Тип медиа ID")}
 								className="mb-24"
 								optionLabel={"label"}
 								optionValue={"value"}
 								options={constants.externalTypes}
+							/>
+						</Grid.Column>
+						<Grid.Column lg={9}>
+							<Field
+								append={<div>{loading ? "Loading..." : ""}</div>}
+								disabled={values.external_type ? false : true}
+								component={Fields.Input}
+								placeholder={t("Медиа ID")}
+								size="large"
+								name="kinopoisk_id"
+								label={t("Медиа ID")}
+								className="mb-24"
 							/>
 						</Grid.Column>
 					</Grid.Row>
