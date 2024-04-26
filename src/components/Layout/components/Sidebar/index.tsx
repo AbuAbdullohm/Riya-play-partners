@@ -10,19 +10,19 @@ import useOutsideClick from "hooks/useOutsideClick";
 import Actions from "store/actions/system";
 import { Loader } from "components";
 
-interface ISubmenu {
-	id: string;
-	title: string;
-	link: string;
-	icon?: string;
-}
+// interface ISubmenu {
+// 	id: string;
+// 	title: string;
+// 	link: string;
+// 	icon?: string;
+// }
 
 interface IMenu {
 	id: string;
 	title: string;
 	link?: string;
 	icon?: string;
-	submenu?: ISubmenu[];
+	// submenu?: ISubmenu[];
 }
 
 export interface ISideBar {
@@ -57,6 +57,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 	const moderator = (menu: any) => menu.filter((m: any) => m.access.includes("moderator"));
 	const bookkeeping = (menu: any) => menu.filter((m: any) => m.access.includes("bookkeeping"));
 	const redactor = (menu: any) => menu.filter((m: any) => m.access.includes("redactor"));
+	const partner = (menu: any) => menu.filter((m: any) => m.access.includes("partner"));
 
 	const getAccess = (role: string, menu: any) => {
 		if (role === "admin") return admin(menu);
@@ -64,6 +65,7 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 		else if (role === "bookkeeping") return bookkeeping(menu);
 		else if (role === "redactor") return redactor(menu);
 		else if (role === "moderator") return moderator(menu);
+		else if(role === 'partner') return partner(menu)
 		else return [];
 	};
 
@@ -81,42 +83,42 @@ const Sidebar: FC<ISideBar> = (props): JSX.Element => {
 				<Loader color="#fff" />
 			) : (
 				<ul className="mt-10 list" ref={ref}>
-					{getAccess(get(user, "role", ""), menu).map((m: any, i: number) => {
-						if (get(m, "submenu")) {
-							return (
-								<li key={get(m, "id")}>
-									<div
-										className={`side-menu cursor-pointer${"/" + currPath === get(m, "link") ? " side-menu--active" : ""}`}
-										onClick={() => toggleSubmenu(get(m, "id"))}>
-										<div className="side-menu__icon">
-											<Icon name={get(m, "icon")} />
-										</div>
-										<div className="side-menu__title">
-											{t(get(m, "title"))}
-											<div className={`side-menu__sub-icon${isVisible === get(m, "id") ? " transform rotate-180" : ""}`}>
-												<Icon name="chevron-down" />
-											</div>
-										</div>
-									</div>
-									<ul className={isVisible === get(m, "id") ? "side-menu__sub-open" : ""}>
-										{getAccess(get(user, "role", ""), get(m, "submenu", [])).map((sm: any) => (
-											<li key={get(sm, "id")}>
-												<NavLink
-													key={get(sm, "id")}
-													to={`${get(sm, "link")}${get(sm, "lang") ? `?lang=ru` : ""}`}
-													className={`side-menu ${pathname === get(sm, "link") ? "side-menu--active" : ""}`}>
-													<div className="side-menu__icon mr-2">
-														<Icon name={get(sm, "icon")} />
-													</div>
+					{getAccess('partner', menu).map((m: any, i: number) => {
+						// if (get(m, "submenu")) {
+						// 	return (
+						// 		<li key={get(m, "id")}>
+						// 			<div
+						// 				className={`side-menu cursor-pointer${"/" + currPath === get(m, "link") ? " side-menu--active" : ""}`}
+						// 				onClick={() => toggleSubmenu(get(m, "id"))}>
+						// 				<div className="side-menu__icon">
+						// 					<Icon name={get(m, "icon")} />
+						// 				</div>
+						// 				<div className="side-menu__title">
+						// 					{t(get(m, "title"))}
+						// 					<div className={`side-menu__sub-icon${isVisible === get(m, "id") ? " transform rotate-180" : ""}`}>
+						// 						<Icon name="chevron-down" />
+						// 					</div>
+						// 				</div>
+						// 			</div>
+						// 			<ul className={isVisible === get(m, "id") ? "side-menu__sub-open" : ""}>
+						// 				{getAccess(get(user, "role", ""), get(m, "submenu", [])).map((sm: any) => (
+						// 					<li key={get(sm, "id")}>
+						// 						<NavLink
+						// 							key={get(sm, "id")}
+						// 							to={`${get(sm, "link")}${get(sm, "lang") ? `?lang=ru` : ""}`}
+						// 							className={`side-menu ${pathname === get(sm, "link") ? "side-menu--active" : ""}`}>
+						// 							<div className="side-menu__icon mr-2">
+						// 								<Icon name={get(sm, "icon")} />
+						// 							</div>
 
-													<div className="side-menu__title">{t(get(sm, "title"))}</div>
-												</NavLink>
-											</li>
-										))}
-									</ul>
-								</li>
-							);
-						} else
+						// 							<div className="side-menu__title">{t(get(sm, "title"))}</div>
+						// 						</NavLink>
+						// 					</li>
+						// 				))}
+						// 			</ul>
+						// 		</li>
+						// 	);
+						// } else
 							return (
 								<li key={get(m, "id")}>
 									<NavLink

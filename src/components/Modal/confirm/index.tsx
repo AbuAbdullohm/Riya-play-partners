@@ -35,7 +35,7 @@ const getConfirmType = (type: string, t: any, title: string | ReactNode) => {
 			return (
 				<div className="p-5 text-center">
 					<div className="my-5">
-						<span className="monition_modal">!</span>
+						<span className="monition_modal">!123</span>
 					</div>
 					<div className="text-gray-600 mt-2">{title && title}</div>
 					<div>{t("Этот процесс нельзя отменить")}</div>

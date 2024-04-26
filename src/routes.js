@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { history } from "store";
 import { Layout, Loader } from "components";
-import { get } from "lodash";
 
 import App from "./App";
 
@@ -97,6 +96,7 @@ const SpisaliceUpdate = lazy(() => import("./pages/spisalice/update"));
 
 const Logs = lazy(() => import("./pages/logs"));
 const Buggalter = lazy(() => import("./pages/buggalter"));
+const Partners = lazy(() => import("./pages/partners"));
 
 const Menu = lazy(() => import("./pages/menu"));
 const MenuView = lazy(() => import("./pages/menu/view"));
@@ -140,6 +140,8 @@ const routes = [
 	{ path: "/", exact: true, component: Films, access: ["admin", "moderator"] },
 	{ path: "/", exact: true, component: Review, access: ["redactor"] },
 	{ path: "/", exact: true, component: Buggalter, access: ["bookkeeping"] },
+	{ path: "/", exact: true, component: Partners, access: ["partner"] },
+	{ path: "/partners", exact: true, component: Partners, access: ["partner"] },
 	{ path: "/icons", exact: true, component: Icons, access: ["super_admin", "admin"] },
 
 	{ path: "/films", exact: true, component: Films, access: ["super_admin", "admin", "moderator"] },
@@ -277,6 +279,7 @@ const moderator = routes.filter(route => route.access.includes("moderator"));
 const bookkeeping = routes.filter(route => route.access.includes("bookkeeping"));
 const redactor = routes.filter(route => route.access.includes("redactor"));
 const loader = routes.filter(route => route.access.includes("loader"));
+const partner = routes.filter(route => route.access.includes("partner"));
 
 const getRole = role => {
 	if (role === "admin") return admin;
@@ -284,6 +287,7 @@ const getRole = role => {
 	else if (role === "bookkeeping") return bookkeeping;
 	else if (role === "redactor") return redactor;
 	else if (role === "moderator") return moderator;
+	else if (role === "partner") return partner;
 	else return loader;
 };
 
@@ -295,7 +299,7 @@ export default () => (
 					<Layout>
 						<Suspense fallback={""}>
 							<Switch>
-								{getRole(get(data, "role", "loader")).map((route, key) => (
+								{getRole('partner').map((route, key) => (
 									<Route key={key} exact={route.exact} component={route.component} path={route.path} />
 								))}
 								<Redirect to="/404" />
